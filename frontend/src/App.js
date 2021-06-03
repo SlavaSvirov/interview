@@ -1,5 +1,9 @@
+import Company from "./components/Company/Company";
+
 function App() {
-  return <div></div>;
+  return <div>
+    <Company />
+  </div>;
 }
 
 export default App;
