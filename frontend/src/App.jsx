@@ -32,6 +32,14 @@ function App() {
     <div className="container">
       <MainPage />
       <hr />
+      <div className="d-flex sort">
+        <div className="letter-sort">А-я</div>
+        <div>Зарплата</div>
+        <div>Рейтинг</div>
+        <div>
+          <select></select>
+        </div>
+      </div>
       {data.map((review) => {
         return <Reviews key={review.author} review={review} />;
       })}
