@@ -32,7 +32,7 @@ const Sort = ({ onSort }) => {
       <div className="sort-item" data-name="rating" onClick={(e) => onSort(e)}>
         Рейтинг
       </div>
-      <div>
+      {/* <div>
         <Select
           showSearch
           style={{ width: 200 }}
@@ -50,7 +50,7 @@ const Sort = ({ onSort }) => {
           <Option value="lucy">Lucy</Option>
           <Option value="tom">Tom</Option>
         </Select>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -59,6 +59,10 @@ const Reviews = ({ review }) => {
             <span>{review.author}</span>
             <span>{moment().fromNow()}</span>
           </div>
+          <div>
+            <span>{review.created}</span>
+          </div>
+          <span>{review.rating}</span>
           <div className="companyName">
             Название компании: {review.companyName}
           </div>

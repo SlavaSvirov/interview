@@ -76,11 +76,17 @@ const mockData = [
 
 function App() {
   const [data, setData] = useState(mockData);
+  const [isSorted, setisSorted] = useState(false);
+
   const handleSort = (e) => {
     const field = e.target.dataset.name;
-    setData((prev) => {
-      return [...prev].sort((a, b) => a[field] - b[field]);
+    const direction = isSorted ? -1 : 1;
+    const sortedData = data.sort((a, b) => {
+      if (a[field] === b[field]) return 0;
+      return a[field] > b[field] ? direction : -direction;
     });
+    setData([...sortedData]);
+    setisSorted(!isSorted);
   };
   return (
     <div>
@@ -100,11 +106,9 @@ function App() {
             <Company />
           </Route>
 
-
           <Route exact path="/">
             <MainPage data={data} onSort={handleSort} />
           </Route>
-
 
           <Route exact path="/profile">
             <PrivateOffice />
