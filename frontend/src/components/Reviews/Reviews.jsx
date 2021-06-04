@@ -8,6 +8,11 @@ import {
   LikeFilled,
 } from '@ant-design/icons';
 
+// const review = {
+//   author : 'TestUser',
+
+// }
+
 const Reviews = ({ review }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
@@ -44,6 +49,7 @@ const Reviews = ({ review }) => {
   ];
 
   return (
+
     <>
       <div className="d-flex">
         <div className="avatar">
@@ -79,6 +85,7 @@ const Reviews = ({ review }) => {
         }
       />
     </>
+
   );
 };
 
