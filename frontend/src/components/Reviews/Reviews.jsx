@@ -75,7 +75,7 @@ const Reviews = ({ review }) => {
           </div>
         </div>
       </div>
-      <Comment
+      {/* <Comment
         className="bla"
         actions={actions}
         author={<a>{review.author}</a>}
@@ -86,7 +86,7 @@ const Reviews = ({ review }) => {
             <span>{moment().fromNow()}</span>
           </Tooltip>
         }
-      />
+      /> */}
     </>
   );
 };
