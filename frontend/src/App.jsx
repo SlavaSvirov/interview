@@ -92,19 +92,17 @@ function App() {
     setisSorted(!isSorted);
   };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch('http://localhost:3001/user/checkAuth', {
-      credentials: 'include'
-    })
-      .then(res => {
-        if (res.status === 200) {
-          dispatch(registerAC())
-        }
-      })
-  }, [])
-
+      credentials: 'include',
+    }).then((res) => {
+      if (res.status === 200) {
+        dispatch(registerAC());
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -127,7 +125,7 @@ function App() {
           <Route exact path="/">
             <MainPage data={data} onSort={handleSort} />
           </Route>
-          
+
           <PrivateRoute exact path="/profile">
             <PrivateOffice />
             <ProfileInfo data={data} />
@@ -137,8 +135,7 @@ function App() {
             <PrivateOffice />
 
             <ProfileInfo onSort={handleSort} data={data} />
-          </Route>
-
+          </Route>*/}
 
           <Route exact path="/profile/addReview">
             <AddReview />

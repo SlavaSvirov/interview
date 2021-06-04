@@ -93,49 +93,45 @@ const AddReview = () => {
 
   return (
     <div>
-
-      
-<Title  level={2}>Создай новый отзыв!</Title>
-<Divider></Divider>
-    <Form
-      name="validate_other"
-      {...formItemLayout}
-      onFinish={onFinish}
-      initialValues={{
-        'input-number': 3,
-        'checkbox-group': ['A', 'B'],
-        rate: 3.5,
-      }}
-    >
-      
-      <Form.Item
-        name="select-multiple"
-        label="Название компании"
-        rules={[
-          {
-            required: true,
-            message: 'Пожалуйста, введи название компании!',
-            type: 'array',
-          },
-        ]}
+      <Title level={2}>Создай новый отзыв!</Title>
+      <Divider></Divider>
+      <Form
+        name="validate_other"
+        {...formItemLayout}
+        onFinish={onFinish}
+        initialValues={{
+          'input-number': 3,
+          'checkbox-group': ['A', 'B'],
+          rate: 3.5,
+        }}
       >
-        
-        <Select mode="multiple" placeholder="Введи название компании">
-          <Option value="red">Яндекс</Option>
-          <Option value="green">OZON</Option>
-          <Option value="blue">Стартап</Option>
-        </Select>
-      </Form.Item>
+        <Form.Item
+          name="select-multiple"
+          label="Название компании"
+          rules={[
+            {
+              required: true,
+              message: 'Пожалуйста, введи название компании!',
+              type: 'array',
+            },
+          ]}
+        >
+          <Select mode="multiple" placeholder="Введи название компании">
+            <Option value="red">Яндекс</Option>
+            <Option value="green">OZON</Option>
+            <Option value="blue">Стартап</Option>
+          </Select>
+        </Form.Item>
 
-      <Form.Item label="Направление"
-      rules={[
-        {
-          required: true,
-          message: 'Please select your country!',
-        },
-      ]}
-
-      >
+        <Form.Item
+          label="Направление"
+          rules={[
+            {
+              required: true,
+              message: 'Please select your country!',
+            },
+          ]}
+        ></Form.Item>
         <Form.Item
           name="select-multiple"
           label="Название компании"
