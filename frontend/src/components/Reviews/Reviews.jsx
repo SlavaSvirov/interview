@@ -8,6 +8,11 @@ import {
   LikeFilled,
 } from '@ant-design/icons';
 
+// const review = {
+//   author : 'TestUser',
+
+// }
+
 const Reviews = ({ review }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
@@ -46,9 +51,9 @@ const Reviews = ({ review }) => {
   return (
     <Comment
       actions={actions}
-      author={<a>{review.author}</a>}
-      avatar={<Avatar src={review.avatar} alt="Han Solo" />}
-      content={<p>{review.review}</p>}
+      // author={<a>{review.author}</a>}
+      // avatar={<Avatar src={review.avatar} alt="Han Solo" />}
+      // content={<p>{review.review}</p>}
       datetime={
         <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
           <span>{moment().fromNow()}</span>
