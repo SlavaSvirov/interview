@@ -52,7 +52,10 @@ const CustomAutoComplete = () => {
         width: 1300,
         margin: 50,
       }}
-      options={options}
+      options={[{ value: 'yandex' }, { value: 'rambler' }]}
+      filterOption={(inputValue, option) =>
+        option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+      }
       onSelect={onSelect}
       onSearch={handleSearch}
     >
