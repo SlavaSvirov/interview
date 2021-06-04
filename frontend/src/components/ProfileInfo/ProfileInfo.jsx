@@ -1,7 +1,8 @@
 import Reviews from '../Reviews/Reviews';
+import Sort from '../Sort/Sort';
 import UploadPhoto from '../UploadPhoto/UploadPhoto';
 
-function ProfileInfo({ data }) {
+function ProfileInfo({ data, onSort }) {
   return (
     <div>
       <div>
@@ -17,9 +18,10 @@ function ProfileInfo({ data }) {
         </form>
       </div>
       <div>
+        <Sort onSort={onSort} />
         Мои последние отзывы :
         {data.map((review) => {
-          return <Reviews review={review} />;
+          return <Reviews key={review.author} review={review} />;
         })}
       </div>
     </div>
