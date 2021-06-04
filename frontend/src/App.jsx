@@ -62,8 +62,6 @@ function App() {
 
 
 
-          <Route exact path="/">
-            <MainPage data={data} />
 
           <Route exact path="/profile">
             <PrivateOffice/>
@@ -77,14 +75,12 @@ function App() {
           </Route>
           
 
-          <Route exact path="/">
-            <MainPage data={data} />
+          
 
           <Route exact path="/profile"></Route>
 
           <Route exact path="/">
-            <MainPage />
-
+            <MainPage data={data} />
           </Route>
 
           <Route>
