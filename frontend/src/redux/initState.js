@@ -1,11 +1,13 @@
 
 const initState = {
+
   reviews: [],
   user: {
     name: '',
     isAuth: false
   },
   companys: []
+
 }
 
 
