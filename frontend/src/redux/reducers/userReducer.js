@@ -14,4 +14,4 @@ function userReducer(state = initState.user, action) {
   }
 }
 
-export default userReducer
+export default userReducer;
