@@ -1,19 +1,16 @@
-
-
-
-import React from "react";
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageNotFound from './components/404/404';
-import AddReview from "./components/AddReview/AddReview";
+import AddReview from './components/AddReview/AddReview';
 import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 import MainPage from './components/MainPage/MainPage';
-import PrivateOffice from "./components/PrivateOffice/PrivateOffice";
-import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
-
+import PrivateOffice from './components/PrivateOffice/PrivateOffice';
+import ProfileInfo from './components/ProfileInfo/ProfileInfo';
+import Company from './components/Company/Company';
 import Register from './components/Register/Register';
 
-const data = [
+const myData = [
   {
     author: 'Han Solo',
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
@@ -40,8 +37,8 @@ const data = [
   },
 ];
 
-
 function App() {
+  const [data, setData] = useState(myData);
   return (
     <div>
       <Router>
@@ -56,45 +53,34 @@ function App() {
             <Register />
           </Route>
 
-          <Route exact path="/company"></Route>
-
-
+          <Route exact path="/company">
+            <Company />
+          </Route>
 
           <Route exact path="/">
             <MainPage data={data} />
           </Route>
-            
 
           <Route exact path="/profile">
-            <PrivateOffice/>
-            <ProfileInfo/>
+            <PrivateOffice />
+            <ProfileInfo data={data} />
           </Route>
-
-         
 
           <Route exact path="/profile/addReview">
-            <AddReview/>
+            <AddReview />
           </Route>
-          
 
           <Route exact path="/">
             <MainPage data={data} />
           </Route>
-
-
-          
-
-          
 
           <Route>
             <PageNotFound />
           </Route>
-
         </Switch>
       </Router>
     </div>
   );
-
 }
 
 export default App;

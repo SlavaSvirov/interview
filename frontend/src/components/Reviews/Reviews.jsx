@@ -49,7 +49,6 @@ const Reviews = ({ review }) => {
   ];
 
   return (
-
     <>
       <div className="d-flex">
         <div className="avatar">
@@ -85,7 +84,6 @@ const Reviews = ({ review }) => {
         }
       />
     </>
-
   );
 };
 
