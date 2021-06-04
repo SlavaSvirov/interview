@@ -1,39 +1,62 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const express = require('express')
+const morgan = require('morgan')
+const cors = require('cors')
+const sessions = require('express-session')
+const MongoStore = require('connect-mongo')
+const userRouter = require('./routes/userRouter')
+const dbConnect = require('./config/dbCOnnect')
+const { dbConnectionURL } = require('./config/dbConfig')
+const User = require('./database/models/user')
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const app = express()
+const PORT = 3001
+const secretKey = 'f7f5f20ccbe470b80c02610b8c99c44f8ac4cd74abb7ef28ce8d4d2f89713f8b5f1f235f8bb3b7e9d4686f08339b595cdf53eefa77a2520f95331cd6c649589f'
+dbConnect()
 
-const app = express();
+
+app.set('view engine', 'hbs')
+app.set('cookieName', 'connect-sid')
 
 
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}))
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(sessions({
+  name: app.get('cookieName'),
+  secret: secretKey,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: dbConnectionURL,
+  }),
+  cookie: {
+    httpOnly: true,
+  },
+}))
+app.use(morgan('dev'))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
-app.use('/', indexRouter);
-app.use('/', usersRouter);
+app.use(async (req, res, next) => {
+  const userID = req.session?.user?.id
+  if (userID) {
+    const currentUser = await User.findById(userID)
+    if (currentUser) {
+      res.locals.password = currentUser.password
+      res.locals.name = currentUser.name
+      res.locals.email = currentUser.email
+    }
+  }
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
+  next()
+})
 
-// error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use('/user', userRouter)
 
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
+app.listen(PORT, () => {
+  console.log('NI');
+})
 
-module.exports = app;
+
