@@ -1,0 +1,13 @@
+.header .burger {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .burger ul {
+  display: flex;
+  list-style: none;
+}
+
+.header .burger ul li:not(:first-child) {
+  margin:  0 0 0 15px;
+}
