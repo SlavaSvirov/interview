@@ -60,9 +60,7 @@ function App() {
 
 
 
-          <Route exact path="/">
-            <MainPage data={data} />
-          </Route>
+         
             
 
           <Route exact path="/profile">
