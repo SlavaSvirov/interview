@@ -8,10 +8,7 @@ import {
   LikeFilled,
 } from '@ant-design/icons';
 
-// const review = {
-//   author : 'TestUser',
 
-// }
 
 const Reviews = ({ review }) => {
   const [likes, setLikes] = useState(0);
