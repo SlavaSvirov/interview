@@ -100,9 +100,11 @@ function App() {
             <Company />
           </Route>
 
+
           <Route exact path="/">
             <MainPage data={data} onSort={handleSort} />
           </Route>
+
 
           <Route exact path="/profile">
             <PrivateOffice />
