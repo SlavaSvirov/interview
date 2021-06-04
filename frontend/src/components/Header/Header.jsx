@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
+import style from './header.module.css'
 
 function Header() {
   return (
-    <section>
-      <nav className="burger">
+    <section className={style.header}>
+      <nav className={style.burger}>
         <Link to="/">
-          <span className="logo">LOGO</span>
+          <span className={style.logo}>LOGO</span>
         </Link>
-        <div className="secondBurger">
+        <div className={style.secondBurger}>
           <ul>
             <li>
               <Link to="/company">Company</Link>
@@ -17,7 +18,7 @@ function Header() {
             </li>
           </ul>
         </div>
-        <div className="thirdBurger">
+        <div className={style.thirdBurger}>
           <ul>
             <li>
               <Link to="/login">Log In</Link>

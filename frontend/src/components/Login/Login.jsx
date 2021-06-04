@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import style from './login.module.css'
 
 function Login() {
   return (
-    <section>
-      <div>
-        <p>LOGO</p>
-        <div>
+    <section className={style.sectionLogin}>
+      <div className={style.login}>
+        <p className={style.logo}>LOGO</p>
+        <div className={style.loginInputs}>
           <label>Email</label>
           <input name='email' />
 
@@ -15,8 +16,7 @@ function Login() {
           <button>Log In</button>
         </div>
         <div>
-          <p>If you don't have a account,
-            you can <Link to='/register'>create</Link>
+          <p className={style.loginText}>Don't you have account? <Link to='/register'>Registration</Link>
           </p>
         </div>
       </div>
