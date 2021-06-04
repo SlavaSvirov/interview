@@ -1,7 +1,17 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 import style from './header.module.css'
+import { logoutAC } from '../../redux/actionCreators/userAC';
 
 function Header() {
+  
+  const dispatch = useDispatch()
+
+const logOutHandler = () => {
+  dispatch(logoutAC())
+}
+
+  
   return (
     <section className={style.header}>
       <nav className={style.burger}>
@@ -24,7 +34,7 @@ function Header() {
               <Link to="/login">Log In</Link>
             </li>
             <li>
-              <Link to="/logout">Log Out</Link>
+              <Link to='/' onClick={() =>logOutHandler()}>Log Out</Link>
             </li>
             <li>
               <Link to="/profile">Profile</Link>
