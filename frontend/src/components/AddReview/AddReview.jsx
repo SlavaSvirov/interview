@@ -1,8 +1,21 @@
 import { Avatar } from 'antd';
 import { AntDesignOutlined } from '@ant-design/icons';
 
-import {Form,Select,InputNumber, Divider, Input,  Switch,Radio,Slider,Button, Upload,Rate,Checkbox,Row, Col,} from 'antd';
+import {Form,Select,InputNumber, Divider, Input,  Switch,Radio,Slider,Button, Upload,Rate,Checkbox,Row, Col, Typography} from 'antd';
 import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+import { FrownOutlined, MehOutlined, SmileOutlined} from '@ant-design/icons';
+
+
+const { Title } = Typography;
+
+const customIcons = {
+  1: <FrownOutlined />,
+  2: <FrownOutlined />,
+  3: <MehOutlined />,
+  4: <SmileOutlined />,
+  5: <SmileOutlined />,
+};
+
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
@@ -23,6 +36,42 @@ const normFile = (e) => {
   return e && e.fileList;
 };
 
+// =================================Для загрузки файлов==================================
+
+const props = {
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  onChange({ file, fileList }) {
+    if (file.status !== 'uploading') {
+      console.log(file, fileList);
+    }
+  },
+  defaultFileList: [
+    {
+      uid: '1',
+      name: 'xxx.png',
+      status: 'done',
+      response: 'Server Error 500', // custom error message to show
+      url: 'http://www.baidu.com/xxx.png',
+    },
+    {
+      uid: '2',
+      name: 'yyy.png',
+      status: 'done',
+      url: 'http://www.baidu.com/yyy.png',
+    },
+    {
+      uid: '3',
+      name: 'zzz.png',
+      status: 'error',
+      response: 'Server Error 500', // custom error message to show
+      url: 'http://www.baidu.com/zzz.png',
+    },
+  ],
+};
+
+// ===================================== Компонент ADDREVIEW =======================================
+
+
 const AddReview = () => {
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -30,7 +79,9 @@ const AddReview = () => {
 
   return (
     <div>
-<h2>Создай новый отзыв!</h2>
+      
+<Title  level={2}>Создай новый отзыв!</Title>
+<Divider></Divider>
     <Form
       name="validate_other"
       {...formItemLayout}
@@ -103,7 +154,7 @@ const AddReview = () => {
             70: '140000',
             80: '160000',
             90: '180000',
-            100: '190000', 
+            100: 'Читер', 
           }}
         />
       </Form.Item>
@@ -129,7 +180,7 @@ const AddReview = () => {
 
 
       <Form.Item name="rate" label="Общая оценка">
-        <Rate />
+    <Rate defaultValue={3} character={({ index }) => customIcons[index + 1]} />
       </Form.Item>
 
       <Form.Item
@@ -137,10 +188,15 @@ const AddReview = () => {
         label="Загрузить файлы с собеседования"
         valuePropName="fileList"
         getValueFromEvent={normFile}
+
       >
-        <Upload name="logo" action="/upload.do" listType="picture">
+        {/* <Upload name="logo" action="/upload.do" listType="picture">
           <Button icon={<UploadOutlined />}>Click to upload</Button>
-        </Upload>
+        </Upload> */}
+<Upload {...props}>
+    <Button icon={<UploadOutlined />}>Upload</Button>
+  </Upload>
+
       </Form.Item>
 
     
@@ -168,115 +224,3 @@ const AddReview = () => {
 
 export default AddReview
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // <label htmlFor="">Имя :</label>
-  // <h3>TESTUSER</h3>
-  // <label htmlFor="">Email :</label>
-  // <h3>pppp@ppp.ru</h3>
-
-  // <Avatar
-  //   size={{
-  //     xxl: 100,
-  //   }}
-  //   icon={<AntDesignOutlined />}
-  // />
-  // <div>
-  // <input type="file" />
-  // </div>

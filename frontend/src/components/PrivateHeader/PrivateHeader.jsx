@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 function PrivateHeader () {
@@ -8,9 +9,14 @@ function PrivateHeader () {
   return (
     <div>
       <ul>
+      <Link to='/profile'>
         <li> Личная информация</li>
-        <li> Мои отзывы</li>
+        </Link>
+
+      
+        <Link to='/profile/addReview'>
         <li> Добавить отзыв</li>
+    </Link>
       </ul>
     </div>
   )
