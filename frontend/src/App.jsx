@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageNotFound from './components/404/404';
@@ -9,7 +9,10 @@ import MainPage from './components/MainPage/MainPage';
 import PrivateOffice from './components/PrivateOffice/PrivateOffice';
 import ProfileInfo from './components/ProfileInfo/ProfileInfo';
 import Company from './components/Company/Company';
-import Register from './components/Register/Register';
+import Register from './components/User/Register/Register';
+import { useDispatch } from 'react-redux';
+import { registerAC } from './redux/actionCreators/userAC';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const mockData = [
   {
@@ -88,6 +91,21 @@ function App() {
     setData([...sortedData]);
     setisSorted(!isSorted);
   };
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    fetch('http://localhost:3001/user/checkAuth', {
+      credentials: 'include'
+    })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch(registerAC())
+        }
+      })
+  }, [])
+
+
   return (
     <div>
       <Router>
@@ -109,11 +127,16 @@ function App() {
           <Route exact path="/">
             <MainPage data={data} onSort={handleSort} />
           </Route>
-
-          <Route exact path="/profile">
+          
+          <PrivateRoute exact path="/profile">
             <PrivateOffice />
             <ProfileInfo data={data} />
-          </Route>
+          </PrivateRoute>
+
+          {/* <Route exact path="/profile">
+            <PrivateOffice />
+            <ProfileInfo data={data} />
+          </Route> */}
 
           <Route exact path="/profile/addReview">
             <AddReview />
