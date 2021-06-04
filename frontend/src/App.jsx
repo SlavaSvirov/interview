@@ -1,5 +1,6 @@
 
 
+
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageNotFound from './components/404/404';
@@ -9,6 +10,7 @@ import Login from './components/Login/Login';
 import MainPage from './components/MainPage/MainPage';
 import PrivateOffice from "./components/PrivateOffice/PrivateOffice";
 import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
+
 import Register from './components/Register/Register';
 
 const data = [
@@ -56,6 +58,11 @@ function App() {
 
           <Route exact path="/company"></Route>
 
+
+
+          <Route exact path="/">
+            <MainPage data={data} />
+
           <Route exact path="/profile">
             <PrivateOffice/>
             <ProfileInfo/>
@@ -76,6 +83,7 @@ function App() {
           <Route exact path="/">
             <MainPage />
 
+
           </Route>
 
           <Route>
@@ -85,6 +93,7 @@ function App() {
       </Router>
     </div>
   );
+
 }
 
 export default App;
