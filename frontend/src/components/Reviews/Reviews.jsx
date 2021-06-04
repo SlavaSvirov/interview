@@ -46,7 +46,6 @@ const Reviews = ({ review }) => {
   ];
 
   return (
-
     <>
       <div className="d-flex">
         <div className="avatar">
@@ -57,6 +56,10 @@ const Reviews = ({ review }) => {
             <span>{review.author}</span>
             <span>{moment().fromNow()}</span>
           </div>
+          <div>
+            <span>{review.created}</span>
+          </div>
+          <span>{review.rating}</span>
           <div className="companyName">
             Название компании: {review.companyName}
           </div>
@@ -69,7 +72,7 @@ const Reviews = ({ review }) => {
           </div>
         </div>
       </div>
-      <Comment
+      {/* <Comment
         className="bla"
         actions={actions}
         author={<a>{review.author}</a>}
@@ -80,9 +83,8 @@ const Reviews = ({ review }) => {
             <span>{moment().fromNow()}</span>
           </Tooltip>
         }
-      />
+      /> */}
     </>
-
   );
 };
 
