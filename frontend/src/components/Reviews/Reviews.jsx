@@ -56,8 +56,7 @@ const Reviews = ({ review }) => {
         </div>
         <div className="main">
           <div className="author d-flex">
-            <span>{review.author}</span>
-            <span>{moment().fromNow()}</span>
+            <span>{review.author}</span> <span>{moment().fromNow()}</span>
           </div>
           <div>
             <span>{review.created}</span>
@@ -69,7 +68,6 @@ const Reviews = ({ review }) => {
           <div>ЗП: {review.salary}</div>
           <div>Собеседовал: {review.interviewee}</div>
           <div>Вопросы на собеседовании: {review.questions}</div>
-          <div>Собеседовал: {review.interviewee}</div>
           <div className="content">
             <p>{review.review}</p>
           </div>
