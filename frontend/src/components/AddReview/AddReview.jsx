@@ -99,7 +99,7 @@ const AddReview = () => {
         rules={[
           {
             required: true,
-            message: 'Please select your favourite colors!',
+            message: 'Пожалуйста, введи название компании!',
             type: 'array',
           },
         ]}
