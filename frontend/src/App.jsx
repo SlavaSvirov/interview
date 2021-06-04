@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageNotFound from './components/404/404';
@@ -37,6 +38,7 @@ const data = [
   },
 ];
 
+
 function App() {
   return (
     <div>
@@ -68,6 +70,12 @@ function App() {
 
           <Route exact path="/">
             <MainPage data={data} />
+
+          <Route exact path="/profile"></Route>
+
+          <Route exact path="/">
+            <MainPage />
+
           </Route>
 
           <Route>
