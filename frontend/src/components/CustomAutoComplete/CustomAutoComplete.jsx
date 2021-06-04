@@ -50,7 +50,7 @@ const CustomAutoComplete = () => {
       dropdownMatchSelectWidth={252}
       style={{
         width: 1300,
-        marginTop: 50,
+        margin: 50,
       }}
       options={options}
       onSelect={onSelect}

@@ -8,6 +8,11 @@ import {
   LikeFilled,
 } from '@ant-design/icons';
 
+// const review = {
+//   author : 'TestUser',
+
+// }
+
 const Reviews = ({ review }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
@@ -44,17 +49,43 @@ const Reviews = ({ review }) => {
   ];
 
   return (
-    <Comment
-      actions={actions}
-      author={<a>{review.author}</a>}
-      avatar={<Avatar src={review.avatar} alt="Han Solo" />}
-      content={<p>{review.review}</p>}
-      datetime={
-        <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-          <span>{moment().fromNow()}</span>
-        </Tooltip>
-      }
-    />
+
+    <>
+      <div className="d-flex">
+        <div className="avatar">
+          <Avatar src={review.avatar} size={64} />
+        </div>
+        <div className="main">
+          <div className="author d-flex">
+            <span>{review.author}</span>
+            <span>{moment().fromNow()}</span>
+          </div>
+          <div className="companyName">
+            Название компании: {review.companyName}
+          </div>
+          <div>ЗП: {review.salary}</div>
+          <div>Собеседовал: {review.interviewee}</div>
+          <div>Вопросы на собеседовании: {review.questions}</div>
+          <div>Собеседовал: {review.interviewee}</div>
+          <div className="content">
+            <p>{review.review}</p>
+          </div>
+        </div>
+      </div>
+      <Comment
+        className="bla"
+        actions={actions}
+        author={<a>{review.author}</a>}
+        avatar={<Avatar src={review.avatar} alt="Han Solo" />}
+        content={<p>{review.review}</p>}
+        datetime={
+          <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
+            <span>{moment().fromNow()}</span>
+          </Tooltip>
+        }
+      />
+    </>
+
   );
 };
 
