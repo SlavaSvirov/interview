@@ -1,6 +1,5 @@
-import { Avatar } from 'antd';
-import { AntDesignOutlined } from '@ant-design/icons';
-
+// import { Avatar } from 'antd';
+// import { AntDesignOutlined } from '@ant-design/icons';
 import {
   Form,
   Select,
@@ -18,11 +17,13 @@ import {
   Col,
   Typography,
 } from 'antd';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+//import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
-const { Title } = Typography;
+import querystring from 'querystring';
+import React, { useState } from "react";
 
+const { Title } = Typography;
 const customIcons = {
   1: <FrownOutlined />,
   2: <FrownOutlined />,
@@ -88,11 +89,97 @@ const AddReview = () => {
     }
   };
 
+
+
+  const { Option } = Select;
+  const noLogo = "../../../public/imgLogo/1.jpg"
+  let timeout;
+  let currentValue;
+
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState(undefined);
+
+  function fetch(value, callback) {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+    currentValue = value;
+
+    function fake() {
+      const str = querystring.encode({
+        code: 'utf-8',
+        q: value,
+      });
+      console.log(str);
+      axios.post("/word", { str })
+        .then(response => response.data)
+        .then(d => {
+          console.log(d);
+          if (currentValue === value) {
+            const result = d;
+            const data = [];
+            result?.map((elem) => {
+              let logoValid;
+              if (elem.companyLogo) {
+                let arrFromObjLogo = Object.values(elem.companyLogo);
+                let logoValidArr = arrFromObjLogo.filter(elem => elem !== "null");
+                logoValid = logoValidArr[0]
+              }
+              else { logoValid = noLogo }
+              console.log(logoValid);
+              data.push({
+                value: elem.companyId,
+                logo: logoValid,
+                text: elem.companyName,
+              });
+            });
+            callback(data);
+          }
+        });
+    }
+    timeout = setTimeout(fake, 300);
+  }
+
+  const handleSearch = (value) => {
+    if (value) {
+      fetch(value, data => setData(data));
+    } else {
+      setData([]);
+    }
+  };
+
+  const handleChange = (value) => {
+    setValue(value);
+  };
+
+
   return (
     <>
       <Title level={2}>Создай новый отзыв!</Title>
       <Divider></Divider>
-
+      <Select
+        showSearch
+        value={value}
+        placeholder="input search text"
+        style={{ width: 200 }}
+        defaultActiveFirstOption={false}
+        showArrow={false}
+        filterOption={false}
+        onSearch={handleSearch}
+        onChange={handleChange}
+        notFoundContent={null}
+      >
+        {data.map(d => <Option key={d.value}>
+          <div>
+            <img alt={d.value}
+              src={d.logo}
+              width="30px" height="30px" />
+            {d.text}
+          </div>
+        </Option>)
+        }
+      </Select>
       <Form
         name="validate_other"
         {...formItemLayout}
