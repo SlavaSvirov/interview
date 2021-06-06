@@ -4,7 +4,15 @@ import AutoComplete from '../CustomAutoComplete/CustomAutoComplete';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 
+
+
 const MainPage = ({ data, onSort }) => {
+
+ 
+
+
+
+
   return (
     <div>
       <AutoComplete />

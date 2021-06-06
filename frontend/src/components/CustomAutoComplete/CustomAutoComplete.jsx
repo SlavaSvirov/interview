@@ -1,63 +1,62 @@
 import { Input, AutoComplete } from 'antd';
-import React, { useState } from 'react';
-function getRandomInt(max, min = 0) {
-  return Math.floor(Math.random() * (max - min + 1)) + min; // eslint-disable-line no-mixed-operators
-}
-const searchResult = (query) =>
-  new Array(getRandomInt(5))
-    .join('.')
-    .split('.')
-    .map((_, idx) => {
-      const category = `${query}${idx}`;
-      return {
-        value: category,
-        label: (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <span>
-              Found {query} on{' '}
-              <a
-                href={`https://s.taobao.com/search?q=${query}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {category}
-              </a>
-            </span>
-            <span>{getRandomInt(200, 100)} results</span>
-          </div>
-        ),
-      };
-    });
+import React, { useState, useEffect } from 'react';
+import {useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
+import {getAllFetch} from '../../redux/actions/companyAC'
+import { BrowserRouter as Router, Switch, Route,Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { Select, Form } from 'antd';
+
+const { Option } = Select;
+
+
 
 const CustomAutoComplete = () => {
-  const [options, setOptions] = useState([]);
+  let history = useHistory();
+  const [input, setInput] = useState('')
+  console.log(input);
+  const dispatch = useDispatch()
+  const companies = useSelector(state => state.companys)
+console.log(companies);
 
-  const handleSearch = (value) => {
-    setOptions(value ? searchResult(value) : []);
-  };
+  
+  useEffect(() => {
+    const foundedCompany = companies?.find(x => x._id === input)
+    if (foundedCompany) {
 
-  const onSelect = (value) => {
-    console.log('onSelect', value);
-  };
+      history.push(`/company`);
+    }
+    console.log(companies)
+console.log(input);
+  },[input])
+  
+  
+  
+  
+  
+  function onSearch(val) {
+    console.log('search:', val);
+        dispatch(getAllFetch(val))
 
-  return (
-    <AutoComplete
-      dropdownMatchSelectWidth={252}
-      style={{
-        width: 1300,
-        margin: 50,
-      }}
-      options={options}
-      onSelect={onSelect}
-      onSearch={handleSearch}
-    >
-      <Input.Search size="large" placeholder="input here" enterButton />
-    </AutoComplete>
-  );
-};
+  }
+
+  
+ return (
+<Select
+    showSearch
+    style={{ width: 500 }}
+    placeholder="Select company"
+    optionFilterProp="children"
+    onChange={(value) => setInput(value)}
+    onSearch={onSearch}
+    
+  >
+    {companies.length ? companies.map((sel,indx) => <Option  key={indx}  value={sel._id}>{sel.company}</Option>)  : <Option value="jack">Ничего не найдено</Option>}
+     
+    
+    
+  </Select>
+ )
+
+  }
 export default CustomAutoComplete;
