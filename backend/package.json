@@ -15,17 +15,11 @@
     "express": "~4.16.1",
     "express-session": "^1.17.2",
     "http-errors": "~1.6.3",
-<<<<<<< HEAD
-    "jade": "^1.9.2",
-    "mongoose": "^5.12.13",
-    "morgan": "~1.9.1"
-=======
     "jade": "^0.31.2",
     "mongoose": "^5.12.12"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7"
->>>>>>> origin/feature
   }
 }

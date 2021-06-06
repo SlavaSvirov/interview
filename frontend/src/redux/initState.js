@@ -1,10 +1,7 @@
-
 const initState = {
-  reviews : [],
-  users : '',
-  companys : []
-}
+  reviews: [],
+  user: { name: "", isAuth: false },
+  companys: [],
+};
 
-
-
-module.export = initState
+export default initState;
