@@ -1,34 +1,47 @@
-#!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
+const express = require("express");
+const mongoose = require('mongoose')
+const CompanyModel = require("../database/models/testCompany");
 
-var app = require('../app');
+
+
+ const app = express();
+
+
 var debug = require('debug')('backend:server');
 var http = require('http');
+const cors = require("cors");
 
-/**
- * Get port from environment and store in Express.
- */
+
 
 var port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
+
 
 var server = http.createServer(app);
-
+app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+
+
+ app.post("/", async (req, res) => {
+  console.log('req.body',req.body.text);
+  const allCompanyFromServer = await CompanyModel.find({company : {$regex : req.body.text}})
+  console.log(allCompanyFromServer);
+  res.json(allCompanyFromServer);
+});
+
+server.listen(port, () => {
+  mongoose.connect('mongodb://localhost:27017/Interview', {useNewUrlParser: true, useUnifiedTopology: true});
+  console.log('ffffffffffffff')
+});
 server.on('error', onError);
 server.on('listening', onListening);
-
 /**
  * Normalize a port into a number, string, or false.
  */

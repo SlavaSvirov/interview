@@ -19,5 +19,5 @@ function reviewsReducer(state =[], action) {
   }
   
   
-  module.exports = reviewsReducer
+  export default reviewsReducer
   

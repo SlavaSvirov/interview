@@ -1,9 +1,6 @@
 const initState = {
   reviews: [],
-  user: {
-    name: '',
-    isAuth: false,
-  },
+  user: { name: "", isAuth: false },
   companys: [],
 };
 
