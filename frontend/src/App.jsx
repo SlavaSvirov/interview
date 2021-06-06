@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageNotFound from './components/404/404';
 import AddReview from './components/AddReview/AddReview';
 import Header from './components/Header/Header';
-import Login from './components/Login/Login';
+import Login from './components/User/Login/Login';
 import MainPage from './components/MainPage/MainPage';
 import PrivateOffice from './components/PrivateOffice/PrivateOffice';
 import ProfileInfo from './components/ProfileInfo/ProfileInfo';

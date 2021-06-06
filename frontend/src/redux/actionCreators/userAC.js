@@ -1,13 +1,12 @@
-import { AUTH, LOG_OUT, SAGA_REGISTER } from "../types/types"
+import { AUTH, LOG_OUT, SAGA_LOGIN, SAGA_REGISTER } from "../types/types"
 
 
-export const sagaRegisterAC = ({ email, password, name, telegram, surname }) => {
+export const sagaRegisterAC = ({ email, password, name, surname }) => {
   return {
     type: SAGA_REGISTER,
     payload: {
       name,
       surname,
-      telegram,
       email,
       password
     }
@@ -24,6 +23,24 @@ export const registerAC = (name = '') => {
   }
 }
 
+export const sagaLoginAC = ({ email, password }) => {
+  return {
+    type: SAGA_LOGIN,
+    payload: {
+      email,
+      password
+    }
+  }
+}
+
+export const loginAC = () => {
+  return {
+    type: AUTH,
+    payload: {
+      isAuth: true
+    }
+  }
+}
 
 export const logoutAC = () => async (dispatch) => {
   await fetch('http://localhost:3001/user/logout', {
