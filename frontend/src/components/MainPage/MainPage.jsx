@@ -4,24 +4,22 @@ import AutoComplete from '../CustomAutoComplete/CustomAutoComplete';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 
-
-
 const MainPage = ({ data, onSort }) => {
-
- 
-
-
-
+  console.log(data);
 
   return (
     <main className={styles.mainPageDiv}>
       <div className="container container-main">
-
         <div className={styles.mainPageText}>
           <h1>Lorem ipsum dolor sit amet.</h1>
-          <p className={styles.mainPageTitle}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae ipsa praesentium, veniam facere quas labore?</p>
+          <p className={styles.mainPageTitle}>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            ipsa praesentium, veniam facere quas labore?
+          </p>
           <div className={styles.mainPageBtn}>
-            <button><a href="#secondPage">Get Started</a></button>
+            <button>
+              <a href="#secondPage">Get Started</a>
+            </button>
           </div>
         </div>
 
@@ -57,15 +55,17 @@ const MainPage = ({ data, onSort }) => {
               </div>
             </div>
           </div>
-
         </div>
 
         <div className={styles.secondMainPage}>
-          <div className={styles.secondTitle} id='secondPage'>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam, eveniet.</p>
+          <div className={styles.secondTitle} id="secondPage">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam,
+              eveniet.
+            </p>
             <AutoComplete />
           </div>
-          <div className={styles.sortWrapper} id='sortWrapper'>
+          <div className={styles.sortWrapper} id="sortWrapper">
             <Sort onSort={onSort} />
           </div>
           {data?.map((review) => {

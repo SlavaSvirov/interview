@@ -10,7 +10,8 @@ router
   .get('/', async (req, res) => {
     // все последние отзывы юзера
     // Reviews.find()
-    let dbData = await reviewModel.find();
+    let dbData = await reviewModel.find().populate('author');
+    console.log(dbData);
     res.json(dbData);
   })
   .post('/', async (req, res) => {
@@ -30,8 +31,9 @@ router
       hrName: req.body.hrName,
       codFile: req.body.codFile,
       companyIdHH: req.body.companyIdHH,
+      image: `/img/${req.file.filename}`,
     });
-    console.log(dbData);
+    // console.log(dbData);
     return res.json(dbData);
   })
   .delete('/profile', (req, res) => {

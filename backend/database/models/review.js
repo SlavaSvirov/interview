@@ -8,7 +8,7 @@ const reviewSchema = Schema({
   likes: Number,
   rating: Number,
   setteled: Boolean,
-  file: String,
+  image: String,
   salary: Number,
   questions: String,
   impression: String,

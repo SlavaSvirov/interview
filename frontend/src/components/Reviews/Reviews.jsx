@@ -8,8 +8,6 @@ import {
   LikeFilled,
 } from '@ant-design/icons';
 
-
-
 const Reviews = ({ review }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
@@ -49,11 +47,11 @@ const Reviews = ({ review }) => {
     <>
       <div className="d-flex">
         <div className="avatar">
-          <Avatar src={review.avatar} size={64} />
+          <Avatar src={`http://localhost:3001/${review.image}`} size={64} />
         </div>
         <div className="main">
           <div className="author d-flex">
-            <span>{review.author}</span> <span>{moment().fromNow()}</span>
+            <span>{review.author.name}</span> <span>{moment().fromNow()}</span>
           </div>
           <div>
             <span>{review.created}</span>
@@ -70,18 +68,6 @@ const Reviews = ({ review }) => {
           </div>
         </div>
       </div>
-      {/* <Comment
-        className="bla"
-        actions={actions}
-        author={<a>{review.author}</a>}
-        avatar={<Avatar src={review.avatar} alt="Han Solo" />}
-        content={<p>{review.review}</p>}
-        datetime={
-          <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-            <span>{moment().fromNow()}</span>
-          </Tooltip>
-        }
-      /> */}
     </>
   );
 };

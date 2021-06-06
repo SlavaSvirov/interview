@@ -53,16 +53,26 @@ const normFile = (e) => {
 
 const AddReview = () => {
   const onFinish = async (values) => {
+    console.log(values.image.files[0]);
     console.log(values);
+    const formData = new FormData();
+
+    formData.append('companyName', values.companyName);
+    formData.append('direction', values.direction);
+    formData.append('position', values.position);
+    formData.append('salary', values.salary);
+    formData.append('setteled', values.setteled);
+    formData.append('rating', values.rating);
+    formData.append('questions', values.questions);
+    formData.append('hrName', values.hrName);
+    formData.append('impression', values.impression);
+    formData.append('image', values.image.files[0]);
+
     try {
       const response = await fetch('http://localhost:3001/review', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         credentials: 'include',
-        body: JSON.stringify(values),
-        file: values,
+        body: formData,
       });
       console.log(response);
       if (response.status === 200) {
@@ -86,7 +96,7 @@ const AddReview = () => {
       <Form
         name="validate_other"
         {...formItemLayout}
-        onFinish={onFinish}
+        onFinish={(e) => onFinish(e)}
         initialValues={{
           'input-number': 3,
           'checkbox-group': ['A', 'B'],
@@ -122,6 +132,9 @@ const AddReview = () => {
             <Option value="FullStack">FullStack</Option>
           </Select>
         </Form.Item>
+        <Form.Item name="position" label="Должность">
+          <Input placeholder="Писать сюда" />
+        </Form.Item>
         <Form.Item name="salary" label="Зарплата (рублей)">
           <Slider
             min={50000}
@@ -146,6 +159,7 @@ const AddReview = () => {
         <Form.Item name="hrName" label="Имя HR">
           <Input placeholder="Введи имя" />
         </Form.Item>
+
         <Form.Item name="questions" label="Вопросы с собеседования">
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
@@ -155,6 +169,7 @@ const AddReview = () => {
         <Form.Item name="impression" label="Общее впечатление о собеседовании">
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
+
         <Form.Item name="setteled" label="Чекни">
           <Radio.Group>
             <Radio value="true">Устроился</Radio>

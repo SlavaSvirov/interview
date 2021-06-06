@@ -10,75 +10,19 @@ import PrivateOffice from './components/PrivateOffice/PrivateOffice';
 import ProfileInfo from './components/ProfileInfo/ProfileInfo';
 import Company from './components/Company/Company';
 import Register from './components/User/Register/Register';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerAC } from './redux/actionCreators/userAC';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-
-const mockData = [
-  {
-    author: 'Han Solo',
-    salary: 100000,
-    companyName: 'Yandex',
-    direction: 'Frontend',
-    position: 'Front-end разработчик',
-    interviewee: 'Паша',
-    questions: 'Что такое массив?',
-    setteled: true,
-    created: 2,
-    rating: 4,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    review:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, culpa quibusdam. Similique rerum, quisquam delectus quidem autem molestias accusamus dolores omnis odit aspernatur ut laudantium magni iure deserunt, fugit fuga. Expedita minima debitis nam facilis ratione et eaque veritatis similique suscipit, quaerat alias unde quibusdam magnam! Perferendis in reiciendis quam nam, quis eius dolorum modi quaerat provident aspernatur accusamus libero.',
-  },
-  {
-    author: 'Bender',
-    salary: 80000,
-    companyName: 'Google',
-    direction: 'Frontend',
-    position: 'Front-end разработчик',
-    interviewee: 'Евгений',
-    questions: 'Что такое объект?',
-    hired: true,
-    rating: 2,
-    created: 1,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    review:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, culpa quibusdam. Similique rerum, quisquam delectus quidem autem molestias accusamus dolores omnis odit aspernatur ut laudantium magni iure deserunt, fugit fuga. Expedita minima debitis nam facilis ratione et eaque veritatis similique suscipit, quaerat alias unde quibusdam magnam! Perferendis in reiciendis quam nam, quis eius dolorum modi quaerat provident aspernatur accusamus libero.',
-  },
-  {
-    author: 'Bart',
-    salary: 20000,
-    companyName: 'Шаурма',
-    direction: 'Frontend',
-    position: 'Front-end разработчик',
-    interviewee: 'Катя',
-    questions: 'Чем отличается null и undefined',
-    hired: true,
-    created: 3,
-    rating: 3,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    review:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, culpa quibusdam. Similique rerum, quisquam delectus quidem autem molestias accusamus dolores omnis odit aspernatur ut laudantium magni iure deserunt, fugit fuga. Expedita minima debitis nam facilis ratione et eaque veritatis similique suscipit, quaerat alias unde quibusdam magnam! Perferendis in reiciendis quam nam, quis eius dolorum modi quaerat provident aspernatur accusamus libero.',
-  },
-  {
-    author: 'Kolya',
-    salary: 120000,
-    companyName: 'Sibur',
-    direction: 'Frontend',
-    position: 'Front-end разработчик',
-    interviewee: 'Коля',
-    questions: 'Что такое осень?',
-    hired: true,
-    created: 4,
-    rating: 5,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    review:
-      'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique, culpa quibusdam. Similique rerum, quisquam delectus quidem autem molestias accusamus dolores omnis odit aspernatur ut laudantium magni iure deserunt, fugit fuga. Expedita minima debitis nam facilis ratione et eaque veritatis similique suscipit, quaerat alias unde quibusdam magnam! Perferendis in reiciendis quam nam, quis eius dolorum modi quaerat provident aspernatur accusamus libero.',
-  },
-];
+import { getAllFetch } from './redux/actions/reviewsAC';
 
 function App() {
-  const [data, setData] = useState(mockData);
+  const data = useSelector((state) => state.reviews);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllFetch());
+  }, []);
+
   const [isSorted, setisSorted] = useState(false);
 
   const handleSort = (e) => {
@@ -88,11 +32,9 @@ function App() {
       if (a[field] === b[field]) return 0;
       return a[field] > b[field] ? direction : -direction;
     });
-    setData([...sortedData]);
+    // setData([...sortedData]);
     setisSorted(!isSorted);
   };
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch('http://localhost:3001/user/checkAuth', {
