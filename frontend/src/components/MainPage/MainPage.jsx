@@ -1,11 +1,18 @@
 import styles from './MainPage.module.css';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import AutoComplete from '../CustomAutoComplete/CustomAutoComplete';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllFetch } from '../../redux/actions/reviewsAC';
 
-const MainPage = ({ data, onSort }) => {
-  console.log(data);
+const MainPage = () => {
+  const data = useSelector((state) => state.reviews);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllFetch());
+  }, []);
 
   return (
     <main className={styles.mainPageDiv}>
@@ -66,10 +73,10 @@ const MainPage = ({ data, onSort }) => {
             <AutoComplete />
           </div>
           <div className={styles.sortWrapper} id="sortWrapper">
-            <Sort onSort={onSort} />
+            <Sort />
           </div>
           {data?.map((review) => {
-            return <Reviews key={review.author} review={review} />;
+            return <Reviews key={review._id} review={review} />;
           })}
         </div>
       </div>

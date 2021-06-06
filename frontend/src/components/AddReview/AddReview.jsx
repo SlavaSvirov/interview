@@ -1,26 +1,15 @@
-import { Avatar } from 'antd';
-import { AntDesignOutlined } from '@ant-design/icons';
-
 import {
   Form,
   Select,
-  InputNumber,
   Divider,
   Input,
-  Switch,
   Radio,
   Slider,
   Button,
-  Upload,
   Rate,
-  Checkbox,
-  Row,
-  Col,
   Typography,
 } from 'antd';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
-import axios from 'axios';
 const { Title } = Typography;
 
 const customIcons = {
@@ -53,8 +42,6 @@ const normFile = (e) => {
 
 const AddReview = () => {
   const onFinish = async (values) => {
-    console.log(values.image.files[0]);
-    console.log(values);
     const formData = new FormData();
 
     formData.append('companyName', values.companyName);

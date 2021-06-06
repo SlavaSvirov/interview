@@ -1,56 +1,39 @@
-import React from 'react';
-import { Select } from 'antd';
+import React, { useState } from 'react';
 import './Sort.css';
+import { useDispatch } from 'react-redux';
+import { sortReviews } from '../../redux/actions/reviewsAC';
 
-const { Option } = Select;
+const Sort = () => {
+  const dispatch = useDispatch();
+  const [isSorted, setisSorted] = useState(false);
 
-function onChange(value) {
-  console.log(`selected ${value}`);
-}
-
-function onBlur() {
-  console.log('blur');
-}
-
-function onFocus() {
-  console.log('focus');
-}
-
-function onSearch(val) {
-  console.log('search:', val);
-}
-
-const Sort = ({ onSort }) => {
+  const handleSort = (e, isSorted) => {
+    dispatch(sortReviews({ e, isSorted }));
+    setisSorted(!isSorted);
+  };
   return (
     <div className="sort d-flex justify-content-between">
-      <div className="sort-item" data-name="created" onClick={(e) => onSort(e)}>
+      <div
+        className="sort-item"
+        data-name="created"
+        onClick={(e) => handleSort(e, isSorted)}
+      >
         Дата создания
       </div>
-      <div className="sort-item" data-name="salary" onClick={(e) => onSort(e)}>
+      <div
+        className="sort-item"
+        data-name="salary"
+        onClick={(e) => handleSort(e, isSorted)}
+      >
         Зарплата
       </div>
-      <div className="sort-item" data-name="rating" onClick={(e) => onSort(e)}>
+      <div
+        className="sort-item"
+        data-name="rating"
+        onClick={(e) => handleSort(e, isSorted)}
+      >
         Рейтинг
       </div>
-      {/* <div>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder="Станция метро"
-          optionFilterProp="children"
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="tom">Tom</Option>
-        </Select>
-      </div> */}
     </div>
   );
 };

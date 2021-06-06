@@ -1,5 +1,5 @@
 import React, { createElement, useState } from 'react';
-import { Comment, Tooltip, Avatar } from 'antd';
+import { Tooltip, Avatar } from 'antd';
 import moment from 'moment';
 import {
   DislikeOutlined,
@@ -51,7 +51,8 @@ const Reviews = ({ review }) => {
         </div>
         <div className="main">
           <div className="author d-flex">
-            <span>{review.author.name}</span> <span>{moment().fromNow()}</span>
+            <span>{review?.author?.name}</span>{' '}
+            <span>{moment().fromNow()}</span>
           </div>
           <div>
             <span>{review.created}</span>

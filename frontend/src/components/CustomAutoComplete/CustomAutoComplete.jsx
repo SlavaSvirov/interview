@@ -1,11 +1,9 @@
-import { Input, AutoComplete } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getAllFetch } from '../../redux/actions/companyAC';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { Select, Form } from 'antd';
+import { Select } from 'antd';
 
 const { Option } = Select;
 
