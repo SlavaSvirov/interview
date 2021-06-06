@@ -8,6 +8,4 @@ const initState = {
   companys: []
 }
 
-
-
 export default initState
