@@ -14,8 +14,7 @@ const userSignup = async (req, res) => {
     const newUser = await User.create({
       email,
       password,
-      name,
-      telegram
+      name
     })
 
     req.session.user = {
@@ -55,7 +54,8 @@ const userSignout = async (req, res) => {
 const userInfo = async (req, res) => {
   res.json({
     nickname: res.locals.name,
-    email: res.locals.email
+    email: res.locals.email,
+    id: res.locals._id
   })
 }
 

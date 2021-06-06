@@ -47,6 +47,7 @@ app.use(async (req, res, next) => {
       res.locals.password = currentUser.password
       res.locals.name = currentUser.name
       res.locals.email = currentUser.email
+      res.locals.id = currentUser._id
     }
   }
 
