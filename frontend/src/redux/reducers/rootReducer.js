@@ -1,19 +1,18 @@
-// const {combineReducers} = require('redux')
-// const reviewsReducer = require('./reviewsReducer')
-// const companyReducer = require('./companyReducer')
-import {combineReducers} from 'redux'
-import companyReducer from './companyReducer'
+
+import { combineReducers } from 'redux'
 import reviewsReducer from './reviewsReducer'
+import companyReducer from './companyReducer'
 
+import userReducer from "./userReducer";
 
-const rootReducer = combineReducers({
-
-  reviews : reviewsReducer,
-  companys : companyReducer
-
+const appReducer = combineReducers({
+  reviews: reviewsReducer,
+  companys : companyReducer,
+  user: userReducer,
 })
 
-
-
+const rootReducer = (state, action) => {
+  return appReducer(state, action)
+}
 
 export default rootReducer
