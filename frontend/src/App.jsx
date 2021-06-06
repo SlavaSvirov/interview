@@ -21,8 +21,8 @@ const mockData = [
     companyName: 'Yandex',
     direction: 'Frontend',
     position: 'Front-end разработчик',
-    hrName: 'Катя',
-    questions: ' 2+2? Сколько?',
+    interviewee: 'Паша',
+    questions: 'Что такое массив?',
     setteled: true,
     created: 2,
     rating: 4,
@@ -36,8 +36,8 @@ const mockData = [
     companyName: 'Google',
     direction: 'Frontend',
     position: 'Front-end разработчик',
-    interviewee: 'Катя',
-    questions: ' 2+2? Сколько?',
+    interviewee: 'Евгений',
+    questions: 'Что такое объект?',
     hired: true,
     rating: 2,
     created: 1,
@@ -52,7 +52,7 @@ const mockData = [
     direction: 'Frontend',
     position: 'Front-end разработчик',
     interviewee: 'Катя',
-    questions: ' 2+2? Сколько?',
+    questions: 'Чем отличается null и undefined',
     hired: true,
     created: 3,
     rating: 3,
@@ -67,7 +67,7 @@ const mockData = [
     direction: 'Frontend',
     position: 'Front-end разработчик',
     interviewee: 'Коля',
-    questions: '2+2? Сколько?',
+    questions: 'Что такое осень?',
     hired: true,
     created: 4,
     rating: 5,
@@ -92,19 +92,17 @@ function App() {
     setisSorted(!isSorted);
   };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch('http://localhost:3001/user/checkAuth', {
-      credentials: 'include'
-    })
-      .then(res => {
-        if (res.status === 200) {
-          dispatch(registerAC())
-        }
-      })
-  }, [])
-
+      credentials: 'include',
+    }).then((res) => {
+      if (res.status === 200) {
+        dispatch(registerAC());
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -127,18 +125,19 @@ function App() {
           <Route exact path="/">
             <MainPage data={data} onSort={handleSort} />
           </Route>
-          
+
           <PrivateRoute exact path="/profile">
             <PrivateOffice />
-            <ProfileInfo data={data} />
+            <ProfileInfo onSort={handleSort} data={data} />
           </PrivateRoute>
 
           {/* <Route exact path="/profile">
             <PrivateOffice />
-            <ProfileInfo data={data} />
-          </Route> */}
 
-          <Route exact path="/profile/addReview">
+            <ProfileInfo onSort={handleSort} data={data} />
+          </Route>*/}
+
+          <Route exact path="/review/addReview">
             <AddReview />
           </Route>
 

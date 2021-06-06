@@ -1,11 +1,26 @@
 import { Avatar } from 'antd';
 import { AntDesignOutlined } from '@ant-design/icons';
 
-import {Form,Select,InputNumber, Divider, Input,  Switch,Radio,Slider,Button, Upload,Rate,Checkbox,Row, Col, Typography} from 'antd';
+import {
+  Form,
+  Select,
+  InputNumber,
+  Divider,
+  Input,
+  Switch,
+  Radio,
+  Slider,
+  Button,
+  Upload,
+  Rate,
+  Checkbox,
+  Row,
+  Col,
+  Typography,
+} from 'antd';
 import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
-import { FrownOutlined, MehOutlined, SmileOutlined} from '@ant-design/icons';
-
-
+import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
+import axios from 'axios';
 const { Title } = Typography;
 
 const customIcons = {
@@ -27,200 +42,158 @@ const formItemLayout = {
 };
 
 const normFile = (e) => {
-  console.log('Upload event:', e);
+  console.log('Upload event:', e.target.files[0]);
 
-  if (Array.isArray(e)) {
-    return e;
+  if (Array.isArray(e.target.files)) {
+    return e.target.files;
   }
 
-  return e && e.fileList;
+  return e && e.target;
 };
-
-// =================================Для загрузки файлов==================================
-
-const props = {
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  onChange({ file, fileList }) {
-    if (file.status !== 'uploading') {
-      console.log(file, fileList);
-    }
-  },
-  defaultFileList: [
-    {
-      uid: '1',
-      name: 'xxx.png',
-      status: 'done',
-      response: 'Server Error 500', // custom error message to show
-      url: 'http://www.baidu.com/xxx.png',
-    },
-    {
-      uid: '2',
-      name: 'yyy.png',
-      status: 'done',
-      url: 'http://www.baidu.com/yyy.png',
-    },
-    {
-      uid: '3',
-      name: 'zzz.png',
-      status: 'error',
-      response: 'Server Error 500', // custom error message to show
-      url: 'http://www.baidu.com/zzz.png',
-    },
-  ],
-};
-
-// ===================================== Компонент ADDREVIEW =======================================
-
 
 const AddReview = () => {
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+  const onFinish = async (values) => {
+    console.log(values);
+    try {
+      const response = await fetch('http://localhost:3001/review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(values),
+        file: values,
+      });
+      console.log(response);
+      if (response.status === 200) {
+        alert('your review was successly added');
+        // window.location.assign('/profile');
+      }
+      if (response.status === 400) {
+        alert('error in bd');
+        window.location.assign('/404');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <div>
-      
-<Title  level={2}>Создай новый отзыв!</Title>
-<Divider></Divider>
-    <Form
-      name="validate_other"
-      {...formItemLayout}
-      onFinish={onFinish}
-      initialValues={{
-        'input-number': 3,
-        'checkbox-group': ['A', 'B'],
-        rate: 3.5,
-      }}
-    >
-      
-      <Form.Item
-        name="select-multiple"
-        label="Название компании"
-        rules={[
-          {
-            required: true,
-            message: 'Пожалуйста, введи название компании!',
-            type: 'array',
-          },
-        ]}
-      >
-        
-        <Select mode="multiple" placeholder="Введи название компании">
-          <Option value="red">Яндекс</Option>
-          <Option value="green">OZON</Option>
-          <Option value="blue">Стартап</Option>
-        </Select>
-      </Form.Item>
+    <>
+      <Title level={2}>Создай новый отзыв!</Title>
+      <Divider></Divider>
 
-      <Form.Item label="Направление"
-      rules={[
-        {
-          required: true,
-          message: 'Please select your country!',
-        },
-      ]}
-      >
-
-      <Select placeholder="Выбери направление">
-          <Option value="china">Frontend</Option>
-          <Option value="usa">Backend</Option>
-          <Option value="usa">FullStack</Option>
-        </Select>
-        </Form.Item>
-
-        <Form.Item name={['user', 'website']} label="Должность" >
-        <Input placeholder="Введи должность" />
-      </Form.Item>
-
-    
-      <Form.Item name="switch" label="Предоставить контакт" valuePropName="checked">
-        <Switch />
-      </Form.Item>
-
-      <Form.Item name="slider" label="Зарплата (рублей)">
-        <Slider
-        min={0}
-        max={100}
-        step={10}
-          tooltipVisible={false}
-          marks={{
-            0: '<50000',
-            10: '60000',
-            20: '70000',
-            30: '80000',
-            40: '90000',
-            50: '100000',
-            60: '120000',
-            70: '140000',
-            80: '160000',
-            90: '180000',
-            100: 'Читер', 
-          }}
-        />
-      </Form.Item>
-
-      <Form.Item name={['user', 'website']} label="Имя HR">
-        <Input placeholder="Введи имя" />
-      </Form.Item>
-
-      <Form.Item name={['user', 'introduction']} label="Вопросы с собеседования">
-        <Input.TextArea placeholder="Писать сюда" />
-      </Form.Item>
-
-      <Form.Item name={['user', 'introduction']} label="Общее впечатление о собеседовании">
-        <Input.TextArea placeholder="Писать сюда" />
-      </Form.Item>
-
-      <Form.Item name="radio-group" label="Чекни">
-        <Radio.Group>
-          <Radio value="a">Устроился</Radio>
-          <Radio value="b">Не устроился</Radio>
-        </Radio.Group>
-      </Form.Item>
-
-
-      <Form.Item name="rate" label="Общая оценка">
-    <Rate defaultValue={3} character={({ index }) => customIcons[index + 1]} />
-      </Form.Item>
-
-      <Form.Item
-        name="upload"
-        label="Загрузить файлы с собеседования"
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
-
-      >
-        {/* <Upload name="logo" action="/upload.do" listType="picture">
-          <Button icon={<UploadOutlined />}>Click to upload</Button>
-        </Upload> */}
-<Upload {...props}>
-    <Button icon={<UploadOutlined />}>Upload</Button>
-  </Upload>
-
-      </Form.Item>
-
-    
-
-      <Form.Item
-        wrapperCol={{
-          span: 12,
-          offset: 6,
+      <Form
+        name="validate_other"
+        {...formItemLayout}
+        onFinish={onFinish}
+        initialValues={{
+          'input-number': 3,
+          'checkbox-group': ['A', 'B'],
+          rate: 3.5,
         }}
       >
-        <Button type="primary" htmlType="submit">
-          Добавить отзыв
-        </Button>
-      </Form.Item>
-    </Form>
-    <Divider plain></Divider>
+        <Form.Item
+          name="companyName"
+          label="Название компании"
+          rules={[
+            {
+              required: true,
+              message: 'Please select your company!',
+              type: 'string',
+            },
+          ]}
+        >
+          <Input mode="multiple" placeholder="Введи название компании" />
+        </Form.Item>
+        <Form.Item
+          label="Направление"
+          name="direction"
+          rules={[
+            {
+              required: true,
+              message: 'Please select your Direction!',
+            },
+          ]}
+        >
+          <Select placeholder="Выбери направление">
+            <Option value="Frontend">Frontend</Option>
+            <Option value="Backend">Backend</Option>
+            <Option value="FullStack">FullStack</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item name="salary" label="Зарплата (рублей)">
+          <Slider
+            min={50000}
+            max={150000}
+            step={10000}
+            tooltipVisible={false}
+            marks={{
+              50000: 50000,
+              60000: 60000,
+              70000: 70000,
+              80000: 80000,
+              90000: 90000,
+              100000: 100000,
+              110000: 110000,
+              120000: 120000,
+              130000: 130000,
+              140000: 140000,
+              150000: 150000,
+            }}
+          />
+        </Form.Item>
+        <Form.Item name="hrName" label="Имя HR">
+          <Input placeholder="Введи имя" />
+        </Form.Item>
+        <Form.Item name="questions" label="Вопросы с собеседования">
+          <Input.TextArea placeholder="Писать сюда" />
+        </Form.Item>
+        <Form.Item name="codFile" label="Link to see code">
+          <Input.TextArea placeholder="Write here" />
+        </Form.Item>
+        <Form.Item name="impression" label="Общее впечатление о собеседовании">
+          <Input.TextArea placeholder="Писать сюда" />
+        </Form.Item>
+        <Form.Item name="setteled" label="Чекни">
+          <Radio.Group>
+            <Radio value="true">Устроился</Radio>
+            <Radio value="false">Не устроился</Radio>
+          </Radio.Group>
+        </Form.Item>
 
-    </div>
+        <Form.Item name="rating" label="Общая оценка">
+          <Rate
+            defaultValue={3}
+            character={({ index }) => customIcons[index + 1]}
+          />
+        </Form.Item>
+        <Form.Item
+          name="image"
+          label="Загрузить файлы с собеседования"
+          valuePropName="image"
+          getValueFromEvent={normFile}
+        >
+          <input type="file" />
+          {/* <Upload listType="picture" multiple="true">
+            <Button icon={<UploadOutlined />}>Upload</Button>
+          </Upload> */}
+        </Form.Item>
+
+        <Divider plain></Divider>
+        <Form.Item
+          wrapperCol={{
+            span: 12,
+            offset: 6,
+          }}
+        >
+          <Button type="primary" htmlType="submit">
+            Добавить отзыв
+          </Button>
+        </Form.Item>
+      </Form>
+      <Divider></Divider>
+    </>
   );
 };
-
-
-
-
-
-export default AddReview
-
+export default AddReview;

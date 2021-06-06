@@ -1,8 +1,8 @@
-import { combineReducers } from "redux";
-import reviewsReducer from "./reviewsReducer";
-import companyReducer from "./companyReducer";
+import { combineReducers } from 'redux';
+import reviewsReducer from './reviewsReducer';
+import companyReducer from './companyReducer';
 
-import userReducer from "./userReducer";
+import userReducer from './userReducer';
 
 const appReducer = combineReducers({
   user: userReducer,

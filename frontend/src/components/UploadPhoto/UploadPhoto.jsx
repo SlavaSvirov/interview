@@ -12,14 +12,21 @@ const UploadPhoto = () => {
     },
   ]);
 
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+  const onChange = (e) => {
+    console.log(e);
+    // {
+    //   fileList: newFileList;
+    // }
+    // let formData = new FormData();
+    // formData.append('avatar', e.file.originFileObj);
+    // axios.post('/image');
+    // setFileList(newFileList);
   };
 
-  const onPreview = async file => {
+  const onPreview = async (file) => {
     let src = file.url;
     if (!src) {
-      src = await new Promise(resolve => {
+      src = await new Promise((resolve) => {
         const reader = new FileReader();
         reader.readAsDataURL(file.originFileObj);
         reader.onload = () => resolve(reader.result);
@@ -34,7 +41,8 @@ const UploadPhoto = () => {
   return (
     <div>
       <Upload
-    // <ImgCrop rotate>
+        // <ImgCrop rotate>
+        name="image"
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
         fileList={fileList}
@@ -43,13 +51,9 @@ const UploadPhoto = () => {
       >
         {fileList.length < 5 && '+ Upload'}
       </Upload>
-
-      </div>
-      // </ImgCrop>
+    </div>
+    // </ImgCrop>
   );
 };
 
-
-
-
-export default UploadPhoto
+export default UploadPhoto;
