@@ -1,19 +1,10 @@
-
 const initState = {
-
-
   reviews: [],
   user: {
     name: '',
-    isAuth: false
+    isAuth: false,
   },
-  companys: []
+  companys: [],
+};
 
-
-}
-
-
-
-
-export default initState
-
+export default initState;

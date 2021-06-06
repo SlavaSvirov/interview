@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation, Link } from 'react-router-dom'
 import { sagaRegisterAC } from '../../../redux/actionCreators/userAC'
+import style from './register.module.css'
 
 function Register() {
 
@@ -35,28 +36,27 @@ function Register() {
 
 
   return (
-    <section>
-      <form ref={formRef} onSubmit={submitHandler}>
-        <div>
-          <p>Registration</p>
-          <div>
-            <label>Name</label>
-            <input type='text' name='name' />
+    <section className={style.registerSection}>
+      <form ref={formRef} onSubmit={submitHandler} className={style.registerForm}>
+        <div className={style.registerDiv}>
+          <p className={style.logo}>Interv<span>/eW</span>.com</p>
+          <p className={style.registerText}>Sign up and start shortening</p>
+          <div className={style.registerInputs}>
+            <label>Name</label><br />
+            <input type='text' name='name' /><br />
 
-            <label>Surname</label>
-            <input type='text' name='surname' />
+            <label>Surname</label><br />
+            <input type='text' name='surname' /><br />
 
-            <label>Telegram</label>
-            <input type='text' name='telegram' />
+            <label>Email</label><br />
+            <input type='email' name='email' /><br />
 
-            <label>Email</label>
-            <input type='email' name='email' />
-
-            <label>Password</label>
+            <label>Password</label><br />
             <input type='password' name='password' />
 
-            <button type='submit'>Register</button>
+            <button type='submit' className={style.registerBtn}>Sign Up</button>
           </div>
+          <p className={style.login}>Already have an account? <Link to='/login'>Log In</Link></p>
         </div>
       </form>
     </section>

@@ -12,7 +12,7 @@ import rootSaga from './redux/saga/rootSaga';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://localhost:3001';
 
 const sagaMiddleware = createSagaMiddleware();
 
