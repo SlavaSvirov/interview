@@ -128,7 +128,7 @@ function App() {
 
           <PrivateRoute exact path="/profile">
             <PrivateOffice />
-            <ProfileInfo data={data} />
+            <ProfileInfo onSort={handleSort} data={data} />
           </PrivateRoute>
 
           {/* <Route exact path="/profile">

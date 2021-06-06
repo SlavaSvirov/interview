@@ -20,7 +20,7 @@ import {
 } from 'antd';
 import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
-
+import axios from 'axios';
 const { Title } = Typography;
 
 const customIcons = {
@@ -87,8 +87,13 @@ const normFile = (e) => {
 // ===================================== Компонент ADDREVIEW =======================================
 
 const AddReview = () => {
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log('Received values of form: ', values);
+    const dataReview = await axios.post('/review/newReview', {
+      body: { ...values },
+    });
+    const newReview = dataReview.json();
+    console.log(newReview);
   };
 
   return (
@@ -106,51 +111,25 @@ const AddReview = () => {
         }}
       >
         <Form.Item
-          name="select-multiple"
+          name="companyName"
           label="Название компании"
           rules={[
             {
               required: true,
               message: 'Пожалуйста, введи название компании!',
-              type: 'array',
+              type: 'string',
             },
           ]}
         >
-          <Select mode="multiple" placeholder="Введи название компании">
-            <Option value="red">Яндекс</Option>
-            <Option value="green">OZON</Option>
-            <Option value="blue">Стартап</Option>
+          <Select placeholder="Введи название компании">
+            <Option value="Яндекс">Яндекс</Option>
+            <Option value="OZON">OZON</Option>
+            <Option value="Стартап">Стартап</Option>
           </Select>
         </Form.Item>
 
         <Form.Item
-          label="Направление"
-          rules={[
-            {
-              required: true,
-              message: 'Please select your country!',
-            },
-          ]}
-        ></Form.Item>
-        <Form.Item
-          name="select-multiple"
-          label="Название компании"
-          rules={[
-            {
-              required: true,
-              message: 'Please select your favourite colors!',
-              type: 'array',
-            },
-          ]}
-        >
-          <Select mode="multiple" placeholder="Введи название компании">
-            <Option value="red">Яндекс</Option>
-            <Option value="green">OZON</Option>
-            <Option value="blue">Стартап</Option>
-          </Select>
-        </Form.Item>
-
-        <Form.Item
+          name="direction"
           label="Направление"
           rules={[
             {
@@ -170,15 +149,7 @@ const AddReview = () => {
           <Input placeholder="Введи должность" />
         </Form.Item>
 
-        <Form.Item
-          name="switch"
-          label="Предоставить контакт"
-          valuePropName="checked"
-        >
-          <Switch />
-        </Form.Item>
-
-        <Form.Item name="slider" label="Зарплата (рублей)">
+        <Form.Item name="salary" label="Зарплата (рублей)">
           <Slider
             min={0}
             max={100}
@@ -200,7 +171,7 @@ const AddReview = () => {
           />
         </Form.Item>
 
-        <Form.Item name="HRname" label="Имя HR">
+        <Form.Item name="hrName" label="Имя HR">
           <Input placeholder="Введи имя" />
         </Form.Item>
 
@@ -208,18 +179,18 @@ const AddReview = () => {
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
 
-        <Form.Item name="opinion" label="Общее впечатление о собеседовании">
+        <Form.Item name="impression" label="Общее впечатление о собеседовании">
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
 
-        <Form.Item name="radio-group" label="Чекни">
+        <Form.Item name="setteled" label="Чекни">
           <Radio.Group>
             <Radio value="a">Устроился</Radio>
             <Radio value="b">Не устроился</Radio>
           </Radio.Group>
         </Form.Item>
 
-        <Form.Item name="rate" label="Общая оценка">
+        <Form.Item name="rating" label="Общая оценка">
           <Rate
             defaultValue={3}
             character={({ index }) => customIcons[index + 1]}
@@ -229,7 +200,7 @@ const AddReview = () => {
         <Form.Item
           name="image"
           label="Загрузить файлы с собеседования"
-          valuePropName="fileList"
+          valuePropName="image"
           getValueFromEvent={normFile}
         >
           {/* <Upload name="logo" action="/upload.do" listType="picture">
