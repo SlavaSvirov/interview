@@ -6,7 +6,7 @@ import App from './App.jsx';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './redux/reducers/rootReducer';
-import initState from './redux/initState';
+import initState from './redux/actions/initState';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootSaga from './redux/saga/rootSaga';
 import { Provider } from 'react-redux';

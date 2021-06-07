@@ -36,7 +36,7 @@ const CustomAutoComplete = () => {
       {companies.length ? (
         companies.map((sel, indx) => (
           <Option key={indx} value={sel._id}>
-            {sel.company}
+            {sel.companyName}
           </Option>
         ))
       ) : (

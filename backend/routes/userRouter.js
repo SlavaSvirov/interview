@@ -15,27 +15,27 @@ userRouter
   res.json(currentCompanyFromServer);
 })
 
-// userRouter
-//   .route('/signup')
-//   // .get(userSignupRender)
-//   .post(userSignup)
+userRouter
+  .route('/signup')
+  // .get(userSignupRender)
+  .post(userSignup)
 
-// userRouter
-//   .route('/signin')
-//   .get(userSigninRender)
-//   .post(userSignin)
+userRouter
+  .route('/signin')
+  .get(userSigninRender)
+  .post(userSignin)
 
-// userRouter
-//   .route('/logout')
-//   .get(userSignout)
+userRouter
+  .route('/logout')
+  .get(userSignout)
 
-// userRouter
-//   .route('/checkAuth')
-//   .get(checkUser)
+userRouter
+  .route('/checkAuth')
+  .get(checkUser)
 
-// userRouter
-//   .route('/getInfo')
-//   .get(checkAuth, userInfo)
+userRouter
+  .route('/getInfo')
+  .get(checkAuth, userInfo)
 
 
 
