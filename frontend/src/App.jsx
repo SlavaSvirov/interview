@@ -23,7 +23,12 @@ function App() {
       credentials: 'include',
     }).then((res) => {
       if (res.status === 200) {
-        dispatch(registerAC());
+        return res.json()
+        
+      }
+    }).then(user => {
+      if (user) {
+        dispatch(registerAC(user));
       }
     });
   }, []);
