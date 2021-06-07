@@ -12,7 +12,7 @@ function ProfileInfo() {
 
   useEffect(() => {
     (async () => {
-      const newUser = await fetch('http://localhost:3001/user/getInfo');
+      const newUser = await fetch('http://localhost:3001/user/getInfo', {credentials: 'include'});
       const myUser = await newUser.json();
       console.log(myUser);
       setInfoFromUser(myUser);

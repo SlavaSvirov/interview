@@ -19,6 +19,7 @@ const userSignup = async (req, res) => {
 
     req.session.user = {
       id: newUser._id,
+      name: newUser.name
     };
 
     return res.sendStatus(200);
@@ -58,8 +59,14 @@ const userInfo = async (req, res) => {
   res.json(user);
 };
 
-const checkUser = (req, res) =>
-  req.session?.user?.id ? res.sendStatus(200) : res.sendStatus(401);
+const checkUser = async (req, res) => {
+  if (req.session.user?.id) {
+    const currentUser = await User.findById(req.session.user.id, {password: 0})
+    return res.json(currentUser)
+  }
+  return res.sendStatus(401)
+}
+  
 
 module.exports = {
   userSigninRender,
