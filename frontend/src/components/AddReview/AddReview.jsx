@@ -1,3 +1,9 @@
+// import { Avatar } from 'antd';
+// import { AntDesignOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
+import axios from 'axios';
+import querystring from 'querystring';
 import {
   Form,
   Select,
@@ -9,8 +15,10 @@ import {
   Rate,
   Typography,
 } from 'antd';
-import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
+
 const { Title } = Typography;
+
+//import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 
 const customIcons = {
   1: <FrownOutlined />,
@@ -54,7 +62,7 @@ const AddReview = () => {
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
     formData.append('image', values.image.files[0]);
-
+    console.log(values);
     try {
       const response = await fetch('http://localhost:3001/review', {
         method: 'POST',
@@ -73,6 +81,72 @@ const AddReview = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const { Option } = Select;
+  const noLogo = '../../../public/imgLogo/1.jpg';
+  let timeout;
+  let currentValue;
+
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState(undefined);
+
+  function fetch(value, callback) {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+    currentValue = value;
+
+    function fake() {
+      const str = querystring.encode({
+        code: 'utf-8',
+        q: value,
+      });
+      console.log(str);
+      axios
+        .post('/word', { str })
+        .then((response) => response.data)
+        .then((d) => {
+          console.log(d);
+          if (currentValue === value) {
+            const result = d;
+            const data = [];
+            result?.map((elem) => {
+              let logoValid;
+              if (elem.companyLogo) {
+                let arrFromObjLogo = Object.values(elem.companyLogo);
+                let logoValidArr = arrFromObjLogo.filter(
+                  (elem) => elem !== 'null'
+                );
+                logoValid = logoValidArr[0];
+              } else {
+                logoValid = noLogo;
+              }
+              console.log(logoValid);
+              data.push({
+                value: elem.companyId,
+                logo: logoValid,
+                text: elem.companyName,
+              });
+            });
+            callback(data);
+          }
+        });
+    }
+    timeout = setTimeout(fake, 300);
+  }
+
+  const handleSearch = (value) => {
+    if (value) {
+      fetch(value, (data) => setData(data));
+    } else {
+      setData([]);
+    }
+  };
+
+  const handleChange = (value) => {
+    setValue(value);
   };
 
   return (
@@ -101,7 +175,27 @@ const AddReview = () => {
             },
           ]}
         >
-          <Input mode="multiple" placeholder="Введи название компании" />
+          <Select
+            showSearch
+            value={value}
+            placeholder="input search text"
+            style={{ width: 200 }}
+            defaultActiveFirstOption={false}
+            showArrow={false}
+            filterOption={false}
+            onSearch={handleSearch}
+            onChange={handleChange}
+            notFoundContent={null}
+          >
+            {data.map((d) => (
+              <Option key={d.value}>
+                <div>
+                  <img alt={d.value} src={d.logo} width="30px" height="30px" />
+                  {d.text}
+                </div>
+              </Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item
           label="Направление"
