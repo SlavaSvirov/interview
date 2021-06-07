@@ -8,7 +8,7 @@ const userSigninRender = (req, res) => res.render('signin');
 const userSignupRender = (req, res) => res.render('signup');
 
 const userSignup = async (req, res) => {
-  const { email, password: pass, name, telegram } = req.body;
+  const { email, password: pass, name } = req.body;
   if (email && pass && name) {
     const password = await bcrypt.hash(pass, saltRound);
     const newUser = await User.create({
@@ -35,7 +35,6 @@ const userSignin = async (req, res) => {
         id: currentUser._id,
         name: currentUser.name,
       };
-      console.log(req.session);
       return res.sendStatus(200);
     }
     return res.sendStatus(412);
@@ -57,6 +56,7 @@ const userInfo = async (req, res) => {
     nickname: res.locals.name,
     email: res.locals.email,
     id: res.locals._id,
+    rating: res.locals.rating
   });
 };
 

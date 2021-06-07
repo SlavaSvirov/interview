@@ -13,6 +13,7 @@ import Register from './components/User/Register/Register';
 import { useDispatch } from 'react-redux';
 import { registerAC } from './redux/actionCreators/userAC';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Footer from './components/Footer/Footer';
 
 const mockData = [
   {
@@ -145,6 +146,9 @@ function App() {
             <PageNotFound />
           </Route>
         </Switch>
+
+        <Footer />
+
       </Router>
     </div>
   );
