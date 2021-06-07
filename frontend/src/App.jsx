@@ -17,6 +17,8 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import CurrentCompany from './components/CurrentCompany/CurrentCompany';
 
 import Footer from './components/Footer/Footer';
+import Contact from './components/Contact/Contact';
+import About from './components/About/About'
 
 
 function App() {
@@ -28,7 +30,7 @@ function App() {
     }).then((res) => {
       if (res.status === 200) {
         return res.json()
-        
+
       }
     }).then(user => {
       if (user) {
@@ -54,8 +56,16 @@ function App() {
             <Company />
           </Route>
 
+          <Route exact path="/contact">
+            <Contact />
+          </Route>
+
+          <Route exact path="/about">
+            <About />
+          </Route>
+
           <Route exact path="/company/:id">
-            <CurrentCompany/>
+            <CurrentCompany />
           </Route>
 
           

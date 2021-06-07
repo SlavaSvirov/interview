@@ -82,17 +82,17 @@
 // }
 
 // export default function Company() {
-  // const { id } = useParams();
-  //const reviews = useSelector(state => state.reviews);
+// const { id } = useParams();
+//const reviews = useSelector(state => state.reviews);
 
-  // const dispatch = useDispatch();
+// const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(setDataFromApiCompany())
-  // }, []);
+// useEffect(() => {
+//   dispatch(setDataFromApiCompany())
+// }, []);
 
-  // const companysFromSate = useSelector(state => state.companys);
-  //const reviewsForCompany =reviews.filter(elem=>{elem.companys==})
+// const companysFromSate = useSelector(state => state.companys);
+//const reviewsForCompany =reviews.filter(elem=>{elem.companys==})
 
 //   return (
 //     <>
@@ -119,34 +119,37 @@
 //   );
 // }
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import {useSelector, useDispatch} from 'react-redux'
-import {allFetch} from '../../redux/actions/companyAC'
-import './company.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { allFetch } from '../../redux/actions/companyAC'
+import style from './company.module.css'
 
 export default function Company() {
 
-const dispatch = useDispatch()
-const companies = useSelector(state => state.companys)
-console.log(companies);
+  const dispatch = useDispatch()
+  const companies = useSelector(state => state.companys)
+  console.log(companies);
 
-useEffect(() => {
-  dispatch(allFetch())
-},[])
+  useEffect(() => {
+    dispatch(allFetch())
+  }, [])
 
   return (
-   <div className='companyDiv'>
-     <ul>
-
-    {companies.map(comp => 
-<Link to={`company/${comp._id}`}>
-    <li key={comp._id}>
-     Название компании : {comp.companyName}
-    </li>
-</Link>
-    )}
-     </ul>
-   </div>
+    <div className='container container-main'>
+      <div className={style.company}>
+        {
+          companies.map(el =>
+            <div className={style.wrap} key={el._id}>
+              <div className={style.wrapper}>
+                <span className={style.rating}>10</span>
+              </div>
+              <p className={style.location}>{el.companyName}, {el.area}</p>
+              <Link className={style.link} to={`company/${el._id}`}>Read More</Link>
+            </div>
+          )
+        }
+      </div>
+    </div>
   )
 }

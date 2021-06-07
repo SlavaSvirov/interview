@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import { sagaRegisterAC } from '../../../redux/actions/userAC';
+import GoogleB from '../../GoogleB/GoogleB';
 import style from './register.module.css';
 
 function Register() {
@@ -49,6 +50,11 @@ function Register() {
             Interv<span>/eW</span>.com
           </p>
           <p className={style.registerText}>Sign up and start shortening</p>
+          <div className={style.authWithGoogle}>
+            <span className={style.socialNetwork}>with your social network</span>
+            <span className={style.google}><GoogleB /></span>
+          </div>
+          <span className={style.or}>or</span>
           <div className={style.registerInputs}>
             <label>Name</label>
             <br />
