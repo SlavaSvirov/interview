@@ -130,7 +130,7 @@ const AddReview = () => {
                 text: elem.companyName,
               });
             });
-            callback(data);
+            setData(data);
           }
         });
     }
