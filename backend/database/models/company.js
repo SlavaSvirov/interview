@@ -8,6 +8,7 @@ const companySchema = Schema({
   logo: Object,
   description: String,
   area: String,
+  rating: { type: Number, default: 10 },
 });
 
 module.exports = model('Company', companySchema);
