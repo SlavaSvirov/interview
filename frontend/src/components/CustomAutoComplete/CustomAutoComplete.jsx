@@ -22,7 +22,10 @@ const CustomAutoComplete = () => {
   }, [input]);
 //================================================================
   function onSearch(val) {
-    dispatch(getAllFetch(val));
+    if (val.trim()){
+
+      dispatch(getAllFetch(val));
+    }
   }
 
   return (
