@@ -24,7 +24,7 @@ const MainPage = () => {
             ipsa praesentium, veniam facere quas labore?
           </p>
           <div className={styles.mainPageBtn}>
-          <a href="">Get Started</a>
+            <a href="">Get Started</a>
           </div>
         </div>
 
@@ -63,17 +63,19 @@ const MainPage = () => {
         </div>
 
         <div className={styles.secondMainPage}>
-          <div className={styles.secondTitle} >
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam, eveniet.</p>
+          <div className={styles.secondTitle}>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam,
+              eveniet.
+            </p>
             <AutoComplete />
           </div>
           <div className={styles.sortWrapper}>
             <Sort />
           </div>
-          {/* {data?.map((review) => { */}
-            {/* return <Reviews key={review.author} review={review} />; */}
-            <Reviews />
-          {/* })} */}
+          {data.map((review) => {
+            return <Reviews key={review._id} review={review} />;
+          })}
         </div>
       </div>
     </main>
