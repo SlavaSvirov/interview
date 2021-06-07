@@ -18,7 +18,7 @@ const Reviews = ({ review }) => {
     <section>
       <div className='container container-main'>
         <div className='row'>
-          <div className='post col-lg-4 col-md-6 col-sm-12'>
+          <div className='post'>
 
             <div className='wrap'>
               <div className='block-img'>

@@ -26,6 +26,7 @@ font-family: 'Montserrat', sans-serif; */
   color: rgb(48, 56, 65);
   font-size: 40px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .sectionLogin .login .loginInputs {
@@ -66,3 +67,27 @@ font-family: 'Montserrat', sans-serif; */
   margin-bottom: 10px;
 }
 
+
+.sectionLogin .authWithGoogle .socialNetwork {
+  font-family: 'Comfortaa', cursive;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.sectionLogin .authWithGoogle .google {
+  display: flex;
+  justify-content: center;
+}
+
+.sectionLogin .login .or {
+  padding: 15px 0;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Comfortaa', cursive;
+  font-size: 18px;
+}

@@ -52,9 +52,6 @@ function Header() {
                   <li>
                     <Link to="/login">Log In</Link>
                   </li>
-                  <li>
-                    <GoogleB />
-                  </li>
                 </ul>
               )}
           </div>
