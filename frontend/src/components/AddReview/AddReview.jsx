@@ -61,20 +61,24 @@ const AddReview = () => {
     formData.append('questions', values.questions);
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
-    formData.append('image', values.image.files[0]);
-    console.log(values);
+    if (values.image) {
+      formData.append('image', values.image.files[0]);
+    }
+
     try {
       const response = await fetch('http://localhost:3001/review', {
         method: 'POST',
         credentials: 'include',
         body: formData,
       });
-      console.log(response);
-      if (response.status === 200) {
+      console.log('onFinish');
+      const dataFromServer = response.json();
+      console.log(dataFromServer);
+      if (dataFromServer.status === 200) {
         alert('your review was successly added');
         // window.location.assign('/profile');
       }
-      if (response.status === 400) {
+      if (dataFromServer.status === 400) {
         alert('error in bd');
         window.location.assign('/404');
       }
@@ -91,7 +95,7 @@ const AddReview = () => {
   const [data, setData] = useState([]);
   const [value, setValue] = useState(undefined);
 
-  function fetch(value, callback) {
+  function fetch(value) {
     if (timeout) {
       clearTimeout(timeout);
       timeout = null;
@@ -130,7 +134,7 @@ const AddReview = () => {
                 text: elem.companyName,
               });
             });
-            callback(data);
+            setData(data);
           }
         });
     }
@@ -139,7 +143,7 @@ const AddReview = () => {
 
   const handleSearch = (value) => {
     if (value) {
-      fetch(value, (data) => setData(data));
+      fetch(value);
     } else {
       setData([]);
     }
@@ -190,7 +194,7 @@ const AddReview = () => {
             {data.map((d) => (
               <Option key={d.value}>
                 <div>
-                  <img alt={d.value} src={d.logo} width="30px" height="30px" />
+                  <img alt="No logo" src={d.logo} width="30px" height="30px" />
                   {d.text}
                 </div>
               </Option>
