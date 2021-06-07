@@ -8,7 +8,7 @@ const userSigninRender = (req, res) => res.render('signin');
 const userSignupRender = (req, res) => res.render('signup');
 
 const userSignup = async (req, res) => {
-  const { email, password: pass, name, telegram } = req.body;
+  const { email, password: pass, name } = req.body;
   if (email && pass && name) {
     const password = await bcrypt.hash(pass, saltRound);
     const newUser = await User.create({
@@ -19,6 +19,7 @@ const userSignup = async (req, res) => {
 
     req.session.user = {
       id: newUser._id,
+      name: newUser.name
     };
 
     return res.sendStatus(200);
@@ -35,7 +36,6 @@ const userSignin = async (req, res) => {
         id: currentUser._id,
         name: currentUser.name,
       };
-      console.log(req.session);
       return res.sendStatus(200);
     }
     return res.sendStatus(412);
@@ -53,15 +53,20 @@ const userSignout = async (req, res) => {
 };
 
 const userInfo = async (req, res) => {
-  res.json({
-    nickname: res.locals.name,
-    email: res.locals.email,
-    id: res.locals._id,
-  });
+  console.log(req.session);
+  const user = await User.findById(req.session.user.id);
+  console.log(user);
+  res.json(user);
 };
 
-const checkUser = (req, res) =>
-  req.session?.user?.id ? res.sendStatus(200) : res.sendStatus(401);
+const checkUser = async (req, res) => {
+  if (req.session.user?.id) {
+    const currentUser = await User.findById(req.session.user.id, {password: 0})
+    return res.json(currentUser)
+  }
+  return res.sendStatus(401)
+}
+  
 
 module.exports = {
   userSigninRender,

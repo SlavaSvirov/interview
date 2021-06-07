@@ -37,7 +37,7 @@ app.use(express.static(path.join(process.env.PWD, 'public')));
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: true,
     credentials: true,
   })
 );
@@ -46,13 +46,14 @@ app.use(
   sessions({
     name: app.get('cookieName'),
     secret: secretKey,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: dbConnectionURL,
     }),
     cookie: {
       httpOnly: true,
+      maxAge: 1e3 * 86400 * 7
     },
   })
 );

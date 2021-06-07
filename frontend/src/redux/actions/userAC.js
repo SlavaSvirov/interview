@@ -12,11 +12,11 @@ export const sagaRegisterAC = ({ email, password, name, surname }) => {
   };
 };
 
-export const registerAC = (name = '') => {
+export const registerAC = (user) => {
   return {
     type: AUTH,
     payload: {
-      name,
+      ...user,
       isAuth: true,
     },
   };

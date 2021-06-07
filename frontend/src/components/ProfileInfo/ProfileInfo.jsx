@@ -12,7 +12,9 @@ function ProfileInfo() {
 
   useEffect(() => {
     (async () => {
-      const newUser = await fetch('http://localhost:3001/user/getInfo');
+      const newUser = await fetch('http://localhost:3001/user/getInfo', {
+        credentials: 'include',
+      });
       const myUser = await newUser.json();
       console.log(myUser);
       setInfoFromUser(myUser);
@@ -29,7 +31,7 @@ function ProfileInfo() {
           <span>Дата регистрации : 01.01.2000г.</span>
           <span>Какую группу закончил : Бобры</span>
           <span>Написал отзывов : 10</span>
-          <span>Рейтинг : ОверТоп</span>
+          <span>Рейтинг : {infoFromUser.rating}</span>
           <button>Редактировать профиль</button>
         </form>
       </div>
