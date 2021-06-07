@@ -11,6 +11,7 @@ router
     console.log(dbData);
     res.json(dbData);
   })
+  
   .post('/', async (req, res) => {
     console.log('gdfsgsdgsdgsdgf');
     const file = req.file

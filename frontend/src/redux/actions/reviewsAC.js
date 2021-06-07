@@ -1,5 +1,6 @@
 import { GET_ALL, SORT_REVIEWS } from '../types/types';
 import axios from 'axios';
+
 export const setAll = (reviews) => {
   return {
     type: GET_ALL,

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './header.module.css';
 import { logoutAC } from '../../redux/actions/userAC';
+import GoogleB from '../GoogleB/GoogleB';
 import { useState } from 'react';
 
 function Header() {
@@ -41,18 +42,21 @@ function Header() {
                 </li>
               </ul>
             ) : (
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/company">Company</Link>
-                </li>
-                <li>
-                  <Link to="/login">Log In</Link>
-                </li>
-              </ul>
-            )}
+                <ul>
+                  <li>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/company">Company</Link>
+                  </li>
+                  <li>
+                    <Link to="/login">Log In</Link>
+                  </li>
+                  <li>
+                    <GoogleB />
+                  </li>
+                </ul>
+              )}
           </div>
         </nav>
       </div>
