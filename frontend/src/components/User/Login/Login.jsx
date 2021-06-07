@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { sagaLoginAC } from '../../../redux/actions/userAC';
+import GoogleB from '../../GoogleB/GoogleB';
 import style from './login.module.css';
 
 function Login() {
@@ -45,6 +46,11 @@ function Login() {
             Interv<span>/eW</span>.com
           </p>
           <p className={style.logoTagline}>Log in and start sharing</p>
+          <div className={style.authWithGoogle}>
+            <span className={style.socialNetwork}>with your social network</span>
+            <span className={style.google}><GoogleB /></span>
+          </div>
+          <span className={style.or}>or</span>
           <div className={style.loginInputs}>
             <label>Email address</label>
             <br />

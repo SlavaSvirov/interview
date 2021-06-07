@@ -1,4 +1,4 @@
-import { GET_ALL_FROM_SERVER, GET_ALL_COMPANYS } from "../types/types"
+import { GET_ALL_FROM_SERVER, GET_ALL_COMPANYS, GET_CURRENT_COMPANY } from "../types/types"
 
 
 export const setAll = (companys)  => {
@@ -12,6 +12,14 @@ export const all = (companies) => {
   return  {
     type : GET_ALL_FROM_SERVER,
     payload : companies
+  }
+}
+
+export const setCurrentCompany = (id) => {
+  return {
+    type : GET_CURRENT_COMPANY,
+    payload : id
+
   }
 }
 
@@ -35,3 +43,18 @@ const allFSearchromServer = await result.json()
 
 dispatch(setAll(allFSearchromServer));
 }
+
+export const currentFetch = (id) => async (dispatch) => {
+
+  const result = await fetch(`http://localhost:3001/company/${id}`)
+  //  {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify( {id} ),
+  // })
+  // console.log('result',result);
+  const currentSearchromServer = await result.json()
+  
+
+  dispatch(setCurrentCompany(currentSearchromServer));
+  }
