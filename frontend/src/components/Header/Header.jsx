@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux'
-import style from './header.module.css'
-import { logoutAC } from '../../redux/actionCreators/userAC';
+import { useDispatch, useSelector } from 'react-redux';
+import style from './header.module.css';
+import { logoutAC } from '../../redux/actions/userAC';
 
 function Header() {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const logOutHandler = () => {
-    dispatch(logoutAC())
-  }
+    dispatch(logoutAC());
+  };
 
-  const isAuth = useSelector(state => state.user.isAuth)
+  const isAuth = useSelector((state) => state.user.isAuth);
   console.log(isAuth);
 
   return (
@@ -19,38 +18,41 @@ function Header() {
       <div className="container">
         <nav className={style.burger}>
           <Link to="/">
-            <span className={style.logo}>Interv<span>/eW</span></span>
+            <span className={style.logo}>
+              Interv<span>/eW</span>
+            </span>
           </Link>
           <div className={style.secondBurger}>
-            {
-              isAuth ?
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/company">Company</Link>
-                  </li>
-                  <li>
-                    <Link to="/profile">Profile</Link>
-                  </li>
-                  <li>
-                    <Link to='/' onClick={() => logOutHandler()}>Log Out</Link>
-                  </li>
-                </ul>
-                :
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/company">Company</Link>
-                  </li>
-                  <li>
-                    <Link to="/login">Log In</Link>
-                  </li>
-                </ul>
-            }
+            {isAuth ? (
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/company">Company</Link>
+                </li>
+                <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <Link to="/" onClick={() => logOutHandler()}>
+                    Log Out
+                  </Link>
+                </li>
+              </ul>
+            ) : (
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/company">Company</Link>
+                </li>
+                <li>
+                  <Link to="/login">Log In</Link>
+                </li>
+              </ul>
+            )}
           </div>
         </nav>
       </div>

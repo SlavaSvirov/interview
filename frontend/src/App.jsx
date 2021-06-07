@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PageNotFound from './components/404/404';
@@ -10,31 +10,12 @@ import PrivateOffice from './components/PrivateOffice/PrivateOffice';
 import ProfileInfo from './components/ProfileInfo/ProfileInfo';
 import Company from './components/Company/Company';
 import Register from './components/User/Register/Register';
-import { useDispatch, useSelector } from 'react-redux';
-import { registerAC } from './redux/actionCreators/userAC';
+import { useDispatch } from 'react-redux';
+import { registerAC } from './redux/actions/userAC';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import { getAllFetch } from './redux/actions/reviewsAC';
 
 function App() {
-  const data = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllFetch());
-  }, []);
-
-  const [isSorted, setisSorted] = useState(false);
-
-  const handleSort = (e) => {
-    const field = e.target.dataset.name;
-    const direction = isSorted ? -1 : 1;
-    const sortedData = data.sort((a, b) => {
-      if (a[field] === b[field]) return 0;
-      return a[field] > b[field] ? direction : -direction;
-    });
-    // setData([...sortedData]);
-    setisSorted(!isSorted);
-  };
 
   useEffect(() => {
     fetch('http://localhost:3001/user/checkAuth', {
@@ -65,19 +46,13 @@ function App() {
           </Route>
 
           <Route exact path="/">
-            <MainPage data={data} onSort={handleSort} />
+            <MainPage />
           </Route>
 
           <PrivateRoute exact path="/profile">
             <PrivateOffice />
-            <ProfileInfo onSort={handleSort} data={data} />
+            <ProfileInfo />
           </PrivateRoute>
-
-          {/* <Route exact path="/profile">
-            <PrivateOffice />
-
-            <ProfileInfo onSort={handleSort} data={data} />
-          </Route>*/}
 
           <Route exact path="/review/addReview">
             <AddReview />

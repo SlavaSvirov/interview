@@ -1,29 +1,25 @@
 // import { Avatar } from 'antd';
 // import { AntDesignOutlined } from '@ant-design/icons';
-import {
-  Form,
-  Select,
-  InputNumber,
-  Divider,
-  Input,
-  Switch,
-  Radio,
-  Slider,
-  Button,
-  Upload,
-  Rate,
-  Checkbox,
-  Row,
-  Col,
-  Typography,
-} from 'antd';
-//import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import querystring from 'querystring';
-import React, { useState } from "react";
+import {
+  Form,
+  Select,
+  Divider,
+  Input,
+  Radio,
+  Slider,
+  Button,
+  Rate,
+  Typography,
+} from 'antd';
 
 const { Title } = Typography;
+
+//import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+
 const customIcons = {
   1: <FrownOutlined />,
   2: <FrownOutlined />,
@@ -54,8 +50,6 @@ const normFile = (e) => {
 
 const AddReview = () => {
   const onFinish = async (values) => {
-    console.log(values.image.files[0]);
-    console.log(values);
     const formData = new FormData();
 
     formData.append('companyName', values.companyName);
@@ -68,7 +62,7 @@ const AddReview = () => {
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
     formData.append('image', values.image.files[0]);
-
+    console.log(values);
     try {
       const response = await fetch('http://localhost:3001/review', {
         method: 'POST',
@@ -89,10 +83,8 @@ const AddReview = () => {
     }
   };
 
-
-
   const { Option } = Select;
-  const noLogo = "../../../public/imgLogo/1.jpg"
+  const noLogo = '../../../public/imgLogo/1.jpg';
   let timeout;
   let currentValue;
 
@@ -112,9 +104,10 @@ const AddReview = () => {
         q: value,
       });
       console.log(str);
-      axios.post("/word", { str })
-        .then(response => response.data)
-        .then(d => {
+      axios
+        .post('/word', { str })
+        .then((response) => response.data)
+        .then((d) => {
           console.log(d);
           if (currentValue === value) {
             const result = d;
@@ -123,10 +116,13 @@ const AddReview = () => {
               let logoValid;
               if (elem.companyLogo) {
                 let arrFromObjLogo = Object.values(elem.companyLogo);
-                let logoValidArr = arrFromObjLogo.filter(elem => elem !== "null");
-                logoValid = logoValidArr[0]
+                let logoValidArr = arrFromObjLogo.filter(
+                  (elem) => elem !== 'null'
+                );
+                logoValid = logoValidArr[0];
+              } else {
+                logoValid = noLogo;
               }
-              else { logoValid = noLogo }
               console.log(logoValid);
               data.push({
                 value: elem.companyId,
@@ -143,7 +139,7 @@ const AddReview = () => {
 
   const handleSearch = (value) => {
     if (value) {
-      fetch(value, data => setData(data));
+      fetch(value, (data) => setData(data));
     } else {
       setData([]);
     }
@@ -153,33 +149,11 @@ const AddReview = () => {
     setValue(value);
   };
 
-
   return (
     <>
       <Title level={2}>Создай новый отзыв!</Title>
       <Divider></Divider>
-      <Select
-        showSearch
-        value={value}
-        placeholder="input search text"
-        style={{ width: 200 }}
-        defaultActiveFirstOption={false}
-        showArrow={false}
-        filterOption={false}
-        onSearch={handleSearch}
-        onChange={handleChange}
-        notFoundContent={null}
-      >
-        {data.map(d => <Option key={d.value}>
-          <div>
-            <img alt={d.value}
-              src={d.logo}
-              width="30px" height="30px" />
-            {d.text}
-          </div>
-        </Option>)
-        }
-      </Select>
+
       <Form
         name="validate_other"
         {...formItemLayout}
@@ -201,7 +175,27 @@ const AddReview = () => {
             },
           ]}
         >
-          <Input mode="multiple" placeholder="Введи название компании" />
+          <Select
+            showSearch
+            value={value}
+            placeholder="input search text"
+            style={{ width: 200 }}
+            defaultActiveFirstOption={false}
+            showArrow={false}
+            filterOption={false}
+            onSearch={handleSearch}
+            onChange={handleChange}
+            notFoundContent={null}
+          >
+            {data.map((d) => (
+              <Option key={d.value}>
+                <div>
+                  <img alt={d.value} src={d.logo} width="30px" height="30px" />
+                  {d.text}
+                </div>
+              </Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item
           label="Направление"
