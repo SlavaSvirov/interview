@@ -54,7 +54,7 @@ app.use(async (req, res, next) => {
   next()
 })
 
-app.use('/user', userRouter)
+app.use('/company', userRouter)
 
 app.listen(PORT, () => {
   console.log('NI');

@@ -10,14 +10,14 @@ export const setAll = (companys)  => {
 
 export const getAllFetch = (text) => async (dispatch) => {
 
-const result = await fetch("http://localhost:3001", {
+const result = await fetch("http://localhost:3001/company", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify( {text} ),
 })
-const allFromServer = await result.json()
+const allFSearchromServer = await result.json()
 
-// console.log(allFromServer);
+console.log(allFSearchromServer);
 
-dispatch(setAll(allFromServer));
+dispatch(setAll(allFSearchromServer));
 }

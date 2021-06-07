@@ -21,7 +21,7 @@ const MainPage = ({ data, onSort }) => {
           <h1>Lorem ipsum dolor sit amet.</h1>
           <p className={styles.mainPageTitle}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae ipsa praesentium, veniam facere quas labore?</p>
           <div className={styles.mainPageBtn}>
-            <button><a href="#secondPage">Get Started</a></button>
+            <button><a href="">Get Started</a></button>
           </div>
         </div>
 
@@ -61,11 +61,11 @@ const MainPage = ({ data, onSort }) => {
         </div>
 
         <div className={styles.secondMainPage}>
-          <div className={styles.secondTitle} id='secondPage'>
+          <div className={styles.secondTitle}>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam, eveniet.</p>
             <AutoComplete />
           </div>
-          <div className={styles.sortWrapper} id='sortWrapper'>
+          <div className={styles.sortWrapper}>
             <Sort onSort={onSort} />
           </div>
           {data?.map((review) => {
