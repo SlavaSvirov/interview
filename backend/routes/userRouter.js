@@ -14,19 +14,21 @@ const CompanyModel = require('../database/models/company');
 
 const userRouter = Router();
 
-userRouter.post('/', async (req, res) => {
-  console.log(req.body.text);
-  const currentCompanyFromServer = await CompanyModel.find({
-    companyName: { $regex: req.body.text },
-  });
-  console.log(currentCompanyFromServer);
-  res.json(currentCompanyFromServer);
-});
-userRouter.get('/', async (req, res) => {
-  const allCompanyFromServer = await CompanyModel.find();
-  console.log('allCompanyFromServer======', allCompanyFromServer);
-  res.json(allCompanyFromServer);
-});
+// userRouter.post('/', async (req, res) => {
+//   console.log(req.body.text);
+//   const currentCompanyFromServer = await CompanyModel.find({
+//     companyName: { $regex: req.body.text },
+//   });
+//   console.log(currentCompanyFromServer);
+//   res.json(currentCompanyFromServer);
+// });
+// userRouter.get('/', async (req, res) => {
+//   const allCompanyFromServer = await CompanyModel.find();
+//   console.log('allCompanyFromServer======', allCompanyFromServer);
+//   res.json(allCompanyFromServer);
+// });
+
+// userRouter.get('/')
 
 userRouter.route('/signup').get(userSignupRender).post(userSignup);
 

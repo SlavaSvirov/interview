@@ -58,6 +58,7 @@ function App() {
             <CurrentCompany/>
           </Route>
 
+          
           <Route exact path="/">
             <MainPage />
           </Route>
