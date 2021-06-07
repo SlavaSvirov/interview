@@ -22,15 +22,21 @@ userRouter.post('/', async (req, res) => {
   console.log(currentCompanyFromServer);
   res.json(currentCompanyFromServer);
 });
+userRouter.get('/', async (req, res) => {
+  const allCompanyFromServer = await CompanyModel.find();
+  console.log('allCompanyFromServer======', allCompanyFromServer);
+  res.json(allCompanyFromServer);
+});
 
-userRouter
-  .route('/signup')
-  // .get(userSignupRender)
-  .post(userSignup);
+userRouter.route('/signup').get(userSignupRender).post(userSignup);
 
 userRouter.route('/signin').get(userSigninRender).post(userSignin);
 
 userRouter.route('/logout').get(userSignout);
+
+userRouter.route('/checkAuth').get(checkUser);
+
+userRouter.route('/getInfo').get(checkAuth, userInfo);
 
 userRouter.route('/checkAuth').get(checkUser);
 

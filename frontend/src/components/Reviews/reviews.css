@@ -1,0 +1,115 @@
+/* font-family: 'Comfortaa', cursive;
+font-family: 'Montserrat', sans-serif; */
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.wrap {
+  width: 300px;
+  transition: 0.2s;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 5px;
+}
+
+.wrap:hover {
+  box-shadow: 0 0 4px;
+}
+
+.wrap .block-img {
+  background-image: url(https://images.unsplash.com/photo-1622952736534-4ca61f7992fb?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 190px;
+  width: 300px;
+  border-radius: 4px 4px 0 0;
+}
+
+.wrap .block-title {
+  border-radius: 0 0 4px 4px;
+  background-color: #efefef;
+  width: 100%;
+  padding: 15px;
+}
+
+.wrap .block-title .user-name {
+  font-size: 15px;
+  font-family: 'Comfortaa', cursive;
+  margin: 0 10px 0 0;
+  line-height: 25px;
+}
+
+.wrap .block-title .salary {
+  border: 1px solid;
+  padding: 0 5px;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: 'Odibee Sans', cursive;
+  background: #007cea;
+  color: white;
+}
+
+.wrap .block-title .company-location {
+  font-size: 18px;
+  line-height: 21px;
+  font-family: 'Comfortaa', cursive;
+  margin: 7px 0 0 0;
+}
+
+
+.wrap .block-title a {
+  font-size: 15px;
+  border: 1px solid rgb(48, 56, 65);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: 'Comfortaa', cursive;
+  color: rgb(48, 56, 65);
+  cursor: pointer;
+}
+
+.wrap .block-title a:hover {
+  color: white;
+  background: rgb(48, 56, 65);
+  transition: all .6s;
+}
+
+.post {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: -5px;
+}
+
+.wrap .block-img .rating {
+  border: 1px solid #27af27;
+  padding: 2px 12px;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  background-color: #27af27;
+  border-radius: 4px;
+  margin: 0 0 0 -5px;
+  position: relative;
+  top: 5px;
+}
+
+.wrap-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrap .wrapper-user-position {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 7px 0 0 0;
+}
+
+.wrap .user-working-pasition {
+  font-size: 19px;
+  font-family: 'Comfortaa', cursive;
+}

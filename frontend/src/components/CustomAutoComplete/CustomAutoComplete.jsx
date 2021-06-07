@@ -13,13 +13,14 @@ const CustomAutoComplete = () => {
   const dispatch = useDispatch();
   const companies = useSelector((state) => state.companys);
 
+  // ================================= ищем конкретную компанию =====
   useEffect(() => {
     const foundedCompany = companies?.find((x) => x._id === input);
     if (foundedCompany) {
       history.push(`/company`);
     }
   }, [input]);
-
+//================================================================
   function onSearch(val) {
     dispatch(getAllFetch(val));
   }
@@ -27,7 +28,7 @@ const CustomAutoComplete = () => {
   return (
     <Select
       showSearch
-      style={{ width: 500 }}
+      style={{ width: 500, position: 'absolute', outline: 'none' }}
       placeholder="Select company"
       optionFilterProp="children"
       onChange={(value) => setInput(value)}
@@ -36,7 +37,7 @@ const CustomAutoComplete = () => {
       {companies.length ? (
         companies.map((sel, indx) => (
           <Option key={indx} value={sel._id}>
-            {sel.company}
+            {sel.companyName}
           </Option>
         ))
       ) : (

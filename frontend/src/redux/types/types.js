@@ -7,3 +7,4 @@ export const LOG_OUT = 'LOG_OUT';
 export const SAGA_LOGIN = 'SAGA_LOGIN';
 export const SORT_REVIEWS = 'SORT_REVIEWS';
 export const GET_USER = 'GET_USER';
+export const GET_ALL_FROM_SERVER = 'GET_ALL_FROM_SERVER'

@@ -13,6 +13,7 @@ import Register from './components/User/Register/Register';
 import { useDispatch } from 'react-redux';
 import { registerAC } from './redux/actions/userAC';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,10 +29,9 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <Router>
+    <Router>
+      <div className="wrapper-body">
         <Header />
-
         <Switch>
           <Route exact path="/login">
             <Login />
@@ -62,8 +62,10 @@ function App() {
             <PageNotFound />
           </Route>
         </Switch>
-      </Router>
-    </div>
+      </div>
+
+      <Footer />
+    </Router>
   );
 }
 
