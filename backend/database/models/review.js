@@ -5,6 +5,7 @@ const reviewSchema = Schema({
   employment: { type: Boolean, default: false },
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   created: { type: Date, default: Date.now },
+  companyName: String,
   likes: Number,
   rating: Number,
   setteled: Boolean,

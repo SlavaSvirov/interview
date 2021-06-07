@@ -22,7 +22,6 @@ router
     const companyName = await axios(
       `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
     );
-    console.log(companyName);
     let review = await reviewModel.create({
       author: req.session.user.id,
       companyName: companyName.data.name,
@@ -40,10 +39,20 @@ router
     });
     const company = await Company.findOne({
       companyIdHH: req.body.companyName,
-    });
+    }).populate('reviews');
     if (company) {
       company.reviews.push(review._id);
       await company.save();
+      const reduceCompany = await Company.findOne({
+        companyIdHH: req.body.companyName,
+      }).populate('reviews');
+      reduceCompany.rating = Math.round(
+        reduceCompany.reviews?.reduce((acc, review) => {
+          return (acc += +review.rating);
+        }, 0) / reduceCompany.reviews.length
+      );
+
+      await reduceCompany.save();
     } else {
       const newCompany = await Company.create({
         companyName: companyName.data.name,
@@ -54,6 +63,18 @@ router
         description: companyName.data.description,
         area: companyName.data.area.name,
       });
+
+      const populateCompany = await Company.findById(newCompany._id).populate(
+        'reviews'
+      );
+
+      populateCompany.rating = populateCompany.reviews?.reduce(
+        (acc, review) => {
+          return (acc += +review.rating);
+        },
+        0
+      );
+      await populateCompany.save();
     }
     return res.sendStatus(200);
 
