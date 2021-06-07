@@ -7,11 +7,11 @@ const options = {
   bufferMaxEntries: 0,
 }
 
-const DB_HOST = 'localhost'
-const DB_NAME = 'interview'
-const DB_PORT = 27017
+// const DB_HOST = 'localhost'
+// const DB_NAME = 'interview'
+// const DB_PORT = 27017
 
-const dbConnectionURL = `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`
+const dbConnectionURL = 'mongodb+srv://admin:admin@cluster0.or3fk.mongodb.net/interview?retryWrites=true&w=majority'
 
 const serverURL = 'http://localhost:3001'
 

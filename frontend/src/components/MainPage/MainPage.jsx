@@ -25,7 +25,7 @@ const MainPage = () => {
           </p>
           <div className={styles.mainPageBtn}>
             <button>
-              <a href="#secondPage">Get Started</a>
+              <a href="">Get Started</a>
             </button>
           </div>
         </div>

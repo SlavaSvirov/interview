@@ -81,8 +81,10 @@ app.post('public/img', function (req, res, next) {
   else res.send('Файл загружен');
 });
 
+app.use('/company', userRouter);
+
 app.use('/user', userRouter);
-app.use('/word',wordRouter)
+app.use('/word', wordRouter);
 app.use('/review', reviewRouter);
 
 app.listen(PORT, () => {
