@@ -45,7 +45,7 @@ app.use(
   sessions({
     name: app.get('cookieName'),
     secret: secretKey,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: dbConnectionURL,

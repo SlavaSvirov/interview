@@ -38,12 +38,9 @@ function App() {
   }, []);
 
   return (
-
     <Router>
-          <div className="wrapper-body">
-
+      <div className="wrapper-body">
         <Header />
-
         <Switch>
           <Route exact path="/login">
             <Login />
@@ -81,7 +78,6 @@ function App() {
       </div>
 
       <Footer />
-
     </Router>
   );
 }

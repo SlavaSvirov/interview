@@ -53,12 +53,10 @@ const userSignout = async (req, res) => {
 };
 
 const userInfo = async (req, res) => {
-  res.json({
-    nickname: res.locals.name,
-    email: res.locals.email,
-    id: res.locals._id,
-    rating: res.locals.rating
-  });
+  console.log(req.session);
+  const user = await User.findById(req.session.user.id);
+  console.log(user);
+  res.json(user);
 };
 
 const checkUser = async (req, res) => {

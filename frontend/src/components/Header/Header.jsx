@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './header.module.css';
 import { logoutAC } from '../../redux/actions/userAC';
+import { useState } from 'react';
 
 function Header() {
   const dispatch = useDispatch();
@@ -11,7 +12,6 @@ function Header() {
   };
 
   const isAuth = useSelector((state) => state.user.isAuth);
-  console.log(isAuth);
 
   return (
     <header className={style.header}>
