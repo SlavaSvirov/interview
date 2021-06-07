@@ -42,34 +42,6 @@ const Reviews = ({ review }) => {
       </div>
     </section>
   );
-  /* return (
-    <>
-      <div className="d-flex">
-        <div className="avatar">
-          <Avatar src={`http://localhost:3001/${review.image}`} size={64} />
-        </div>
-        <div className="main">
-          <div className="author d-flex">
-            <span>{review?.author?.name}</span>{' '}
-            <span>{moment().fromNow()}</span>
-          </div>
-          <div>
-            <span>{review.created}</span>
-          </div>
-          <span>{review.rating}</span>
-          <div className="companyName">
-            Название компании: {review.companyName}
-          </div>
-          <div>ЗП: {review.salary}</div>
-          <div>Собеседовал: {review.interviewee}</div>
-          <div>Вопросы на собеседовании: {review.questions}</div>
-          <div className="content">
-            <p>{review.review}</p>
-          </div>
-        </div>
-      </div>
-    </>
-  ); */
 };
 
 export default Reviews;
