@@ -1,4 +1,4 @@
-import { GET_ALL_COMPANYS } from "../types/types"
+import { GET_ALL_FROM_SERVER, GET_ALL_COMPANYS } from "../types/types"
 
 
 export const setAll = (companys)  => {
@@ -6,6 +6,21 @@ export const setAll = (companys)  => {
     type : GET_ALL_COMPANYS,
     payload : companys
   }
+}
+
+export const all = (companies) => {
+  return  {
+    type : GET_ALL_FROM_SERVER,
+    payload : companies
+  }
+}
+
+
+export const allFetch = () => async (dispatch) => {
+  const com = await fetch("http://localhost:3001/company")
+const allCompanies = await com.json()
+
+dispatch(all(allCompanies))
 }
 
 export const getAllFetch = (text) => async (dispatch) => {
@@ -17,7 +32,6 @@ const result = await fetch("http://localhost:3001/company", {
 })
 const allFSearchromServer = await result.json()
 
-console.log(allFSearchromServer);
 
 dispatch(setAll(allFSearchromServer));
 }
