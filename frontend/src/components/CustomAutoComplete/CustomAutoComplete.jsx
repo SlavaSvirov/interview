@@ -28,7 +28,7 @@ const CustomAutoComplete = () => {
   return (
     <Select
       showSearch
-      style={{ width: 500 }}
+      style={{ width: 500, position: 'absolute', outline: 'none' }}
       placeholder="Select company"
       optionFilterProp="children"
       onChange={(value) => setInput(value)}
