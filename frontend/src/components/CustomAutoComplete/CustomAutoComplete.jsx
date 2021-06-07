@@ -1,45 +1,29 @@
-import { Input, AutoComplete } from 'antd';
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { getAllFetch } from '../../redux/actions/companyAC'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import { Select, Form } from 'antd';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getAllFetch } from '../../redux/actions/companyAC';
+import { useHistory } from 'react-router-dom';
+import { Select } from 'antd';
 
 const { Option } = Select;
 
-
-
 const CustomAutoComplete = () => {
   let history = useHistory();
-  const [input, setInput] = useState('')
-  console.log(input);
-  const dispatch = useDispatch()
-  const companies = useSelector(state => state.companys)
-  console.log(companies);
+  const [input, setInput] = useState('');
+  const dispatch = useDispatch();
+  const companies = useSelector((state) => state.companys);
 
-
+  // ================================= ищем конкретную компанию =====
   useEffect(() => {
-    const foundedCompany = companies?.find(x => x._id === input)
+    const foundedCompany = companies?.find((x) => x._id === input);
     if (foundedCompany) {
-
       history.push(`/company`);
     }
-    console.log(companies)
-    console.log(input);
-  }, [input])
-
-
-
-
-
+  }, [input]);
+//================================================================
   function onSearch(val) {
-    console.log('search:', val);
-    dispatch(getAllFetch(val))
-
+    dispatch(getAllFetch(val));
   }
-
 
   return (
     <Select
@@ -49,14 +33,17 @@ const CustomAutoComplete = () => {
       optionFilterProp="children"
       onChange={(value) => setInput(value)}
       onSearch={onSearch}
-
     >
-      {companies.length ? companies.map((sel, indx) => <Option key={indx} value={sel._id}>{sel.company}</Option>) : <Option value="jack">Ничего не найдено</Option>}
-
-
-
+      {companies.length ? (
+        companies.map((sel, indx) => (
+          <Option key={indx} value={sel._id}>
+            {sel.companyName}
+          </Option>
+        ))
+      ) : (
+        <Option value="jack">Ничего не найдено</Option>
+      )}
     </Select>
-  )
-
-}
+  );
+};
 export default CustomAutoComplete;

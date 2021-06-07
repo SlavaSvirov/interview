@@ -1,25 +1,28 @@
 import styles from './MainPage.module.css';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import AutoComplete from '../CustomAutoComplete/CustomAutoComplete';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllFetch } from '../../redux/actions/reviewsAC';
 
+const MainPage = () => {
+  const data = useSelector((state) => state.reviews);
+  const dispatch = useDispatch();
 
-
-const MainPage = ({ data, onSort }) => {
-
- 
-
-
-
+  useEffect(() => {
+    dispatch(getAllFetch());
+  }, []);
 
   return (
     <main className={styles.mainPageDiv}>
       <div className="container container-main">
-
         <div className={styles.mainPageText}>
           <h1>Lorem ipsum dolor sit amet.</h1>
-          <p className={styles.mainPageTitle}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae ipsa praesentium, veniam facere quas labore?</p>
+          <p className={styles.mainPageTitle}>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae
+            ipsa praesentium, veniam facere quas labore?
+          </p>
           <div className={styles.mainPageBtn}>
           <a href="">Get Started</a>
           </div>
@@ -57,7 +60,6 @@ const MainPage = ({ data, onSort }) => {
               </div>
             </div>
           </div>
-
         </div>
 
         <div className={styles.secondMainPage}>
@@ -66,7 +68,7 @@ const MainPage = ({ data, onSort }) => {
             <AutoComplete />
           </div>
           <div className={styles.sortWrapper}>
-            <Sort onSort={onSort} />
+            <Sort />
           </div>
           {/* {data?.map((review) => { */}
             {/* return <Reviews key={review.author} review={review} />; */}

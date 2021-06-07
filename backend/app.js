@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const path = require('path');
 const sessions = require('express-session');
 const MongoStore = require('connect-mongo');
 const dbConnect = require('./config/dbCOnnect');
@@ -10,6 +11,7 @@ const multer = require('multer');
 const moment = require('moment');
 const userRouter = require('./routes/userRouter');
 const reviewRouter = require('./routes/reviewRouter');
+const wordRouter = require('./routes/wordRouter');
 
 const app = express();
 const PORT = 3001;
@@ -29,6 +31,8 @@ const storageConfig = multer.diskStorage({
 
 app.set('view engine', 'hbs');
 app.set('cookieName', 'connect-sid');
+
+app.use(express.static(path.join(process.env.PWD, 'public')));
 
 app.use(
   cors({
@@ -72,13 +76,15 @@ app.use(async (req, res, next) => {
 
 app.use(multer({ storage: storageConfig }).single('image'));
 app.post('public/img', function (req, res, next) {
-  console.log(req.file);
   let filedata = req.file;
   if (!filedata) res.send('Ошибка при загрузке файла');
   else res.send('Файл загружен');
 });
 
+app.use('/company', userRouter);
+
 app.use('/user', userRouter);
+app.use('/word', wordRouter);
 app.use('/review', reviewRouter);
 
 app.listen(PORT, () => {

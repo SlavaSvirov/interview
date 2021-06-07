@@ -16,3 +16,13 @@
 .container-main{
   padding-top: 30px;
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.wrapper-body {
+  flex-grow: 1;
+}

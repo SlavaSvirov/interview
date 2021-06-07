@@ -1,27 +1,24 @@
-import { Avatar } from 'antd';
-import { AntDesignOutlined } from '@ant-design/icons';
-
+// import { Avatar } from 'antd';
+// import { AntDesignOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
+import axios from 'axios';
+import querystring from 'querystring';
 import {
   Form,
   Select,
-  InputNumber,
   Divider,
   Input,
-  Switch,
   Radio,
   Slider,
   Button,
-  Upload,
   Rate,
-  Checkbox,
-  Row,
-  Col,
   Typography,
 } from 'antd';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
-import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
-import axios from 'axios';
+
 const { Title } = Typography;
+
+//import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 
 const customIcons = {
   1: <FrownOutlined />,
@@ -53,29 +50,107 @@ const normFile = (e) => {
 
 const AddReview = () => {
   const onFinish = async (values) => {
-    console.log(values);
+    const formData = new FormData();
+
+    formData.append('companyName', values.companyName);
+    formData.append('direction', values.direction);
+    formData.append('position', values.position);
+    formData.append('salary', values.salary);
+    formData.append('setteled', values.setteled);
+    formData.append('rating', values.rating);
+    formData.append('questions', values.questions);
+    formData.append('hrName', values.hrName);
+    formData.append('impression', values.impression);
+    if (values.image) {
+      formData.append('image', values.image.files[0]);
+    }
+
     try {
       const response = await fetch('http://localhost:3001/review', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         credentials: 'include',
-        body: JSON.stringify(values),
-        file: values,
+        body: formData,
       });
-      console.log(response);
-      if (response.status === 200) {
+      console.log('onFinish');
+      const dataFromServer = response.json();
+      console.log(dataFromServer);
+      if (dataFromServer.status === 200) {
         alert('your review was successly added');
         // window.location.assign('/profile');
       }
-      if (response.status === 400) {
+      if (dataFromServer.status === 400) {
         alert('error in bd');
         window.location.assign('/404');
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const { Option } = Select;
+  const noLogo = '../../../public/imgLogo/1.jpg';
+  let timeout;
+  let currentValue;
+
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState(undefined);
+
+  function fetch(value) {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+    currentValue = value;
+
+    function fake() {
+      const str = querystring.encode({
+        code: 'utf-8',
+        q: value,
+      });
+      console.log(str);
+      axios
+        .post('/word', { str })
+        .then((response) => response.data)
+        .then((d) => {
+          console.log(d);
+          if (currentValue === value) {
+            const result = d;
+            const data = [];
+            result?.map((elem) => {
+              let logoValid;
+              if (elem.companyLogo) {
+                let arrFromObjLogo = Object.values(elem.companyLogo);
+                let logoValidArr = arrFromObjLogo.filter(
+                  (elem) => elem !== 'null'
+                );
+                logoValid = logoValidArr[0];
+              } else {
+                logoValid = noLogo;
+              }
+              console.log(logoValid);
+              data.push({
+                value: elem.companyId,
+                logo: logoValid,
+                text: elem.companyName,
+              });
+            });
+            setData(data);
+          }
+        });
+    }
+    timeout = setTimeout(fake, 300);
+  }
+
+  const handleSearch = (value) => {
+    if (value) {
+      fetch(value);
+    } else {
+      setData([]);
+    }
+  };
+
+  const handleChange = (value) => {
+    setValue(value);
   };
 
   return (
@@ -86,7 +161,7 @@ const AddReview = () => {
       <Form
         name="validate_other"
         {...formItemLayout}
-        onFinish={onFinish}
+        onFinish={(e) => onFinish(e)}
         initialValues={{
           'input-number': 3,
           'checkbox-group': ['A', 'B'],
@@ -104,7 +179,27 @@ const AddReview = () => {
             },
           ]}
         >
-          <Input mode="multiple" placeholder="Введи название компании" />
+          <Select
+            showSearch
+            value={value}
+            placeholder="input search text"
+            style={{ width: 200 }}
+            defaultActiveFirstOption={false}
+            showArrow={false}
+            filterOption={false}
+            onSearch={handleSearch}
+            onChange={handleChange}
+            notFoundContent={null}
+          >
+            {data.map((d) => (
+              <Option key={d.value}>
+                <div>
+                  <img alt="No logo" src={d.logo} width="30px" height="30px" />
+                  {d.text}
+                </div>
+              </Option>
+            ))}
+          </Select>
         </Form.Item>
         <Form.Item
           label="Направление"
@@ -121,6 +216,9 @@ const AddReview = () => {
             <Option value="Backend">Backend</Option>
             <Option value="FullStack">FullStack</Option>
           </Select>
+        </Form.Item>
+        <Form.Item name="position" label="Должность">
+          <Input placeholder="Писать сюда" />
         </Form.Item>
         <Form.Item name="salary" label="Зарплата (рублей)">
           <Slider
@@ -146,6 +244,7 @@ const AddReview = () => {
         <Form.Item name="hrName" label="Имя HR">
           <Input placeholder="Введи имя" />
         </Form.Item>
+
         <Form.Item name="questions" label="Вопросы с собеседования">
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
@@ -155,6 +254,7 @@ const AddReview = () => {
         <Form.Item name="impression" label="Общее впечатление о собеседовании">
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
+
         <Form.Item name="setteled" label="Чекни">
           <Radio.Group>
             <Radio value="true">Устроился</Radio>

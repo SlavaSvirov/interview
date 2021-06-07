@@ -1,35 +1,25 @@
-import React from 'react';
-import { Select } from 'antd';
+import React, { useState } from 'react';
 import './Sort.css';
+import { useDispatch } from 'react-redux';
+import { sortReviews } from '../../redux/actions/reviewsAC';
 
-const { Option } = Select;
+const Sort = () => {
+  const dispatch = useDispatch();
+  const [isSorted, setisSorted] = useState(false);
 
-function onChange(value) {
-  console.log(`selected ${value}`);
-}
-
-function onBlur() {
-  console.log('blur');
-}
-
-function onFocus() {
-  console.log('focus');
-}
-
-function onSearch(val) {
-  console.log('search:', val);
-}
-
-const Sort = ({ onSort }) => {
+  const handleSort = (e, isSorted) => {
+    dispatch(sortReviews({ e, isSorted }));
+    setisSorted(!isSorted);
+  };
   return (
     <div className="sort d-flex justify-content-between">
-      <button className="sort-item" data-name="created" onClick={(e) => onSort(e)}>
+      <button className="sort-item" data-name="created" onClick={(e) => handleSort(e,isSorted)}>
         Дата создания
       </button>
-      <button className="sort-item" data-name="salary" onClick={(e) => onSort(e)}>
+      <button className="sort-item" data-name="salary" onClick={(e) => handleSort(e,isSorted)}>
         Зарплата
       </button>
-      <button className="sort-item" data-name="rating" onClick={(e) => onSort(e)}>
+      <button className="sort-item" data-name="rating" onClick={(e) => handleSort(e,isSorted)}>
         Рейтинг
       </button>
       {/* <div>

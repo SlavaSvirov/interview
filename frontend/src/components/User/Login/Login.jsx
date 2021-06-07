@@ -1,67 +1,71 @@
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import { sagaLoginAC } from "../../../redux/actionCreators/userAC";
-import style from './login.module.css'
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { sagaLoginAC } from '../../../redux/actions/userAC';
+import style from './login.module.css';
 
 function Login() {
+  const formRef = useRef(null);
 
-  const formRef = useRef(null)
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let history = useHistory();
   let location = useLocation();
 
-  let { from } = location.state || { from: { pathname: "/" } };
+  let { from } = location.state || { from: { pathname: '/' } };
 
-  const isAuth = useSelector(state => state.user.isAuth)
+  const isAuth = useSelector((state) => state.user.isAuth);
 
   useEffect(() => {
     if (isAuth) {
-      history.replace(from)
+      history.replace(from);
     }
-  }, [isAuth])
-
+  }, [isAuth]);
 
   const loginHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const valuesOfFields = Object.fromEntries(new FormData(formRef.current).entries())
+    const valuesOfFields = Object.fromEntries(
+      new FormData(formRef.current).entries()
+    );
 
-    if (Object.keys(valuesOfFields).every(key => valuesOfFields[key].trim())) {
-      dispatch(sagaLoginAC(valuesOfFields))
-      formRef.current.reset()
+    if (
+      Object.keys(valuesOfFields).every((key) => valuesOfFields[key].trim())
+    ) {
+      dispatch(sagaLoginAC(valuesOfFields));
+      formRef.current.reset();
     }
-
-  }
+  };
 
   return (
     <section className={style.sectionLogin}>
       <form ref={formRef} onSubmit={loginHandler}>
         <div className={style.login}>
-          <p className={style.logo}>Interv<span>/eW</span>.com</p>
+          <p className={style.logo}>
+            Interv<span>/eW</span>.com
+          </p>
           <p className={style.logoTagline}>Log in and start sharing</p>
           <div className={style.loginInputs}>
             <label>Email address</label>
             <br />
-            <input type='text' name='email' />
+            <input type="text" name="email" />
 
             <br />
             <label>Password</label>
             <br />
-            <input type='password' name='password' />
+            <input type="password" name="password" />
 
             <button className={style.button}>Log In</button>
           </div>
           <div>
-            <p className={style.loginText}>Don't have an account? <Link to='/register'>Sign Up</Link>
+            <p className={style.loginText}>
+              Don't have an account? <Link to="/register">Sign Up</Link>
             </p>
           </div>
         </div>
       </form>
     </section>
-  )
+  );
 }
 
-export default Login
+export default Login;
