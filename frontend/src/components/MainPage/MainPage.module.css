@@ -4,6 +4,7 @@ font-family: 'Montserrat', sans-serif; */
 .sortWrapper {
   display: flex;
   justify-content: center;
+  margin: 50px 0;
 }
 
 .mainPageDiv {
@@ -81,7 +82,7 @@ font-family: 'Montserrat', sans-serif; */
   margin-bottom: 60px;
 }
 
-.mainPageText button {
+.mainPageText a {
   padding: 16px 50px;
   outline: none;
   border-radius: 5px;
@@ -89,6 +90,14 @@ font-family: 'Montserrat', sans-serif; */
   margin-top: 60px;
   font-size: 20px;
   background: white; 
+  color: rgb(48, 56, 65);
+  cursor: pointer;
+}
+
+.mainPageText a:hover {
+  background: rgb(48, 56, 65);
+  color: white;
+  transition: all .6s;
 }
 
 .mainPageText button a {
@@ -104,7 +113,7 @@ font-family: 'Montserrat', sans-serif; */
   font-family: 'Comfortaa', cursive;
   color: rgb(48, 56, 65);
   background: url(https://images.unsplash.com/photo-1543196614-e046c7d3d82e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1198&q=80);
-  height: 550px;
+  height: 500px;
   width: 100%;
 }
 
@@ -114,8 +123,4 @@ font-family: 'Montserrat', sans-serif; */
   margin-bottom: 130px;
 }
 
-.ant-select.ant-select-auto-complete.ant-select-single.ant-select-customize-input.ant-select-show-search{
-  position: absolute !important;
-  margin-top: 80px !important;
-  width: 40% !important;
-}
+

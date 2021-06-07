@@ -13,7 +13,11 @@ import Register from './components/User/Register/Register';
 import { useDispatch } from 'react-redux';
 import { registerAC } from './redux/actions/userAC';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
 import CurrentCompany from './components/CurrentCompany/CurrentCompany';
+
+import Footer from './components/Footer/Footer';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -23,14 +27,21 @@ function App() {
       credentials: 'include',
     }).then((res) => {
       if (res.status === 200) {
-        dispatch(registerAC());
+        return res.json()
+        
+      }
+    }).then(user => {
+      if (user) {
+        dispatch(registerAC(user));
       }
     });
   }, []);
 
   return (
-    <div>
-      <Router>
+
+    <Router>
+          <div className="wrapper-body">
+
         <Header />
 
         <Switch>
@@ -67,8 +78,11 @@ function App() {
             <PageNotFound />
           </Route>
         </Switch>
-      </Router>
-    </div>
+      </div>
+
+      <Footer />
+
+    </Router>
   );
 }
 

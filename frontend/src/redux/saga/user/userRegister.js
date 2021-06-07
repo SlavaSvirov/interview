@@ -16,7 +16,7 @@ function registerFetch(action) {
 function* registerWorker(action) {
   try {
     const registerStatus = yield call(registerFetch, action);
-    if (registerStatus === 200) yield put(registerAC(action.payload.name));
+    if (registerStatus === 200) yield put(registerAC(action.payload));
   } catch (e) {
     yield put({ type: 'USER_FETCH_FAILED', message: e.message });
   }
