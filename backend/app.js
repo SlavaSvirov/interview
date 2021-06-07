@@ -13,6 +13,7 @@ const userRouter = require('./routes/userRouter');
 const reviewRouter = require('./routes/reviewRouter');
 const wordRouter = require('./routes/wordRouter');
 const googleRouter=require('./routes/googleRouter')
+const companyRouter = require('./routes/companyRouter')
 
 const app = express();
 const PORT = 3001;
@@ -77,13 +78,14 @@ app.use(async (req, res, next) => {
 });
 
 app.use(multer({ storage: storageConfig }).single('image'));
+
 app.post('public/img', function (req, res, next) {
   let filedata = req.file;
   if (!filedata) res.send('Ошибка при загрузке файла');
   else res.send('Файл загружен');
 });
 
-app.use('/company', userRouter);
+app.use('/company', companyRouter);
 app.use('/google', googleRouter)
 app.use('/user', userRouter);
 app.use('/word', wordRouter);
