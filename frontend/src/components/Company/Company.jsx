@@ -119,7 +119,7 @@
 //   );
 // }
 import React from 'react';
-
+import {Link} from 'react-router-dom'
 import { useEffect, useState } from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import {allFetch} from '../../redux/actions/companyAC'
@@ -139,10 +139,13 @@ useEffect(() => {
    <div className='companyDiv'>
      <ul>
 
-    {companies.map(comp => <li>
+    {companies.map(comp => 
+<Link to={`company/${comp._id}`}>
+    <li key={comp._id}>
      Название компании : {comp.companyName}
-     Адрес : {comp.companyUrl}
-    </li>)}
+    </li>
+</Link>
+    )}
      </ul>
    </div>
   )

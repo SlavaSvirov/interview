@@ -13,7 +13,11 @@ import Register from './components/User/Register/Register';
 import { useDispatch } from 'react-redux';
 import { registerAC } from './redux/actions/userAC';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
+import CurrentCompany from './components/CurrentCompany/CurrentCompany';
+
 import Footer from './components/Footer/Footer';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +55,10 @@ function App() {
 
           <Route exact path="/company">
             <Company />
+          </Route>
+
+          <Route exact path="/company/:id">
+            <CurrentCompany/>
           </Route>
 
           <Route exact path="/">
