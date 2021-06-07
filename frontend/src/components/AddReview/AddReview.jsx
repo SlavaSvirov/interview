@@ -50,8 +50,8 @@ const normFile = (e) => {
 
 const AddReview = () => {
   const onFinish = async (values) => {
+    console.log(values);
     const formData = new FormData();
-
     formData.append('companyName', values.companyName);
     formData.append('direction', values.direction);
     formData.append('position', values.position);
@@ -61,30 +61,31 @@ const AddReview = () => {
     formData.append('questions', values.questions);
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
-    if (values.image) {
-      formData.append('image', values.image.files[0]);
-    }
+    formData.append('image', values.image.files[0]);
+    // try{
+    const response = await axios({
+      method: 'POST',
+      url: '/review',
+      withCredentials: true,
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
-    try {
-      const response = await fetch('http://localhost:3001/review', {
-        method: 'POST',
-        credentials: 'include',
-        body: formData,
-      });
-      console.log('onFinish');
-      const dataFromServer = response.json();
-      console.log(dataFromServer);
-      if (dataFromServer.status === 200) {
-        alert('your review was successly added');
-        // window.location.assign('/profile');
-      }
-      if (dataFromServer.status === 400) {
-        alert('error in bd');
-        window.location.assign('/404');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    // const data = await response.json();
+
+    // if (dataFromServer.status === 200) {
+    //   alert('your review was successly added');
+    //   // window.location.assign('/profile');
+    // }
+    // if (dataFromServer.status === 400) {
+    //   alert('error in bd');
+    //   window.location.assign('/404');
+    // }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const { Option } = Select;
@@ -162,11 +163,6 @@ const AddReview = () => {
         name="validate_other"
         {...formItemLayout}
         onFinish={(e) => onFinish(e)}
-        initialValues={{
-          'input-number': 3,
-          'checkbox-group': ['A', 'B'],
-          rate: 3.5,
-        }}
       >
         <Form.Item
           name="companyName"
