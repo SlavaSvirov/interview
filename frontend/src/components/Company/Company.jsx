@@ -54,6 +54,26 @@ export default function Company() {
   const dispatch = useDispatch();
   const companies = useSelector((state) => state.companys);
 
+//================================тесты, можно удалять
+  // const scrollHandler = (e) => {
+    
+    // if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100)
+
+    // // console.log('scrollHeigth', e.target.documentElement.scrollHeight);
+    // // console.log('scrollTop', e.target.documentElement.scrollTop);
+    // // console.log('innerHeight', window.innerHeight);
+    // console.log('scroll');
+    
+    //   }
+    
+    //   useEffect(() => {
+    // document.addEventListener('scroll',scrollHandler )
+    // return function () {
+    //   document.removeEventListener('scroll', scrollHandler)
+    // }
+    //   },[])
+  //=====================================================================
+
   useEffect(() => {
     dispatch(allFetch());
   }, []);
