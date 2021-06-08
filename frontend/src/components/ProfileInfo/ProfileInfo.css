@@ -42,7 +42,7 @@ font-family: 'Montserrat', sans-serif; */
   text-decoration: underline;
 }
 
-.main  .user{
+.main .user {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,4 +78,7 @@ font-family: 'Montserrat', sans-serif; */
   background: darkblue;
   color: white;
   border-color: rgb(34 60 80 / 17%);
+}
+.input {
+  display: none;
 }

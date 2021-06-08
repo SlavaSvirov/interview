@@ -9,12 +9,15 @@ import { getAllFetch } from '../../redux/actions/reviewsAC';
 const MainPage = () => {
   const data = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const [featching, setFeatching] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [featching, setFeatching] = useState(true);
 
   const scrollHandler = (e) => {
-    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
       console.log('scroll');
     }
 
@@ -22,15 +25,15 @@ const MainPage = () => {
     // console.log('scrollHeigth', e.target.documentElement.scrollHeight);
     // console.log('scrollTop', e.target.documentElement.scrollTop);
     // console.log('innerHeight', window.innerHeight);
-
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener('scroll', scrollHandler)
+    document.addEventListener('scroll', scrollHandler);
+
     return function () {
-      document.removeEventListener('scroll', scrollHandler)
-    }
-  }, [])
+      document.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
 
   useEffect(() => {
     if (featching) {
