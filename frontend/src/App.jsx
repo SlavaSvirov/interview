@@ -18,6 +18,7 @@ import CurrentCompany from './components/CurrentCompany/CurrentCompany';
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
 import About from './components/About/About'
+import OneReview from './components/OneReview/OneReview';
 
 
 function App() {
@@ -67,7 +68,14 @@ function App() {
             <CurrentCompany />
           </Route>
 
-          
+          <Route exact path="/review/addReview">
+            <AddReview />
+          </Route>
+
+          <Route exact path="/review/:id">
+            <OneReview />
+          </Route>
+
           <Route exact path="/">
             <MainPage />
           </Route>
@@ -75,10 +83,6 @@ function App() {
           <PrivateRoute exact path="/profile">
             <ProfileInfo />
           </PrivateRoute>
-
-          <Route exact path="/review/addReview">
-            <AddReview />
-          </Route>
 
           <Route>
             <PageNotFound />

@@ -1,4 +1,5 @@
 import { GET_ALL, SORT_REVIEWS } from '../types/types';
+import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
 import axios from 'axios';
 
 export const setAll = (reviews) => {
@@ -15,6 +16,13 @@ export const sortReviews = (reviews) => {
   };
 };
 
+export const changeLikeReviews = (oneReview) => {
+  return {
+    type: CHANGE_LIKE_REVIEW,
+    payload: oneReview
+  };
+};
+
 export const getAllFetch = () => async (dispatch) => {
   const result = await axios('http://localhost:3001/review');
 
@@ -28,3 +36,8 @@ export const getCurrentReviews = (id) => async (dispatch) => {
   // console.log(allFromServer);
   dispatch(setAll(result.data));
 };
+
+export const changeLikeFetch = (id) => async (dispatch) => {
+  const result = await axios.post(`http://localhost:3001/review/${id}`);
+  dispatch(setAll(result.data));
+}
