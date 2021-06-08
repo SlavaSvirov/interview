@@ -9,6 +9,7 @@ const UploadPhoto = ({ avatar }) => {
 
   return (
     <div>
+
       <img src={avatar} alt="avatar" />
       <input
         className="input"

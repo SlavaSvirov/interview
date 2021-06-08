@@ -22,12 +22,13 @@ export default function Company() {
               <span className={style.rating}>10</span>
             </div>
             <p className={style.location}>
-              <div
-                style={{
-                  background: `url(${el.logo['240']}) no-repeat center`,
-                  height: '150px',
-                }}
-              ></div>
+              <div style={{
+                background: `url(${el.logo['240']}) no-repeat center`,
+                height: '150px',
+              }}>
+
+              </div>
+
               {el.companyName}, {el.area}
             </p>
             <Link className={style.link} to={`company/${el._id}`}>

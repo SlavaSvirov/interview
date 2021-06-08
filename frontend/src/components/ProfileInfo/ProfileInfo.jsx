@@ -36,7 +36,13 @@ function ProfileInfo() {
       <div className="main">
         <div className="profile">
           <form className="profileForm">
-            <UploadPhoto avatar={infoFromUser.avatar} />
+            <div className='user'>
+              <div className='userPhoto'>
+              <UploadPhoto />
+              </div>
+              <span className='addImg'><i className='fa fa-plus'></i></span>
+            </div>
+
             <span>Имя : {infoFromUser.name}</span>
             <span>Email : {infoFromUser.email}</span>
             <span>Дата регистрации : 01.01.2000г.</span>
@@ -50,8 +56,9 @@ function ProfileInfo() {
           <div className="sortWrap">
             <Sort />
           </div>
-          <p>Мои последние отзывы :</p>
-          <div className="wrapper">
+          <p className='myReviews'>Мои последние отзывы :</p>
+          <div className='wrapper'>
+
             {currentUserReview.map((review) => {
               return <Reviews key={review._id} review={review} />;
             })}
