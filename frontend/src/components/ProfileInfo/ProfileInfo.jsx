@@ -36,7 +36,7 @@ function ProfileInfo() {
       <div className="main">
         <div className="profile">
           <form className="profileForm">
-            <UploadPhoto />
+            <UploadPhoto avatar={infoFromUser.avatar} />
             <span>Имя : {infoFromUser.name}</span>
             <span>Email : {infoFromUser.email}</span>
             <span>Дата регистрации : 01.01.2000г.</span>
