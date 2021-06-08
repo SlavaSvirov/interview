@@ -68,6 +68,10 @@ function App() {
             <CurrentCompany />
           </Route>
 
+          <Route exact path="/review/addReview">
+            <AddReview />
+          </Route>
+
           <Route exact path="/review/:id">
             <OneReview />
           </Route>
@@ -79,10 +83,6 @@ function App() {
           <PrivateRoute exact path="/profile">
             <ProfileInfo />
           </PrivateRoute>
-
-          <Route exact path="/review/addReview">
-            <AddReview />
-          </Route>
 
           <Route>
             <PageNotFound />

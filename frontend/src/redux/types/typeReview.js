@@ -1,0 +1,1 @@
+export const CHANGE_LIKE_REVIEW = 'CHANGE_LIKE_REVIEW';

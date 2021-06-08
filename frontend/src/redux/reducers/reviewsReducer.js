@@ -1,3 +1,5 @@
+import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
+
 const { GET_ALL, ADD_REVIEW, SORT_REVIEWS } = require('../types/types');
 
 function reviewsReducer(state = [], action) {
@@ -16,6 +18,9 @@ function reviewsReducer(state = [], action) {
         return a[field] > b[field] ? direction : -direction;
       });
       return [...sortedData];
+
+    case CHANGE_LIKE_REVIEW:
+      return [...state, action.payload];
 
     default:
       return state;
