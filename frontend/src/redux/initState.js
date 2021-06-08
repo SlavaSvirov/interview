@@ -1,3 +1,4 @@
+
 const initState = {
   reviews: [],
   user: { isAuth: false },
@@ -6,3 +7,4 @@ const initState = {
 };
 
 export default initState;
+
