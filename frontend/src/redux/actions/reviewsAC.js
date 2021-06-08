@@ -15,7 +15,14 @@ export const sortReviews = (reviews) => {
   };
 };
 
-export const getAllFetch = (text) => async (dispatch) => {
+export const getAllFetch = () => async (dispatch) => {
+  const result = await axios('http://localhost:3001/review');
+
+  // console.log(allFromServer);
+  dispatch(setAll(result.data));
+};
+
+export const getCurrentReviews = (id) => async (dispatch) => {
   const result = await axios('http://localhost:3001/review');
 
   // console.log(allFromServer);

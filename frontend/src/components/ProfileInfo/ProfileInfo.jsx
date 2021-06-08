@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllFetch } from '../../redux/actions/reviewsAC';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 import UploadPhoto from '../UploadPhoto/UploadPhoto';
 import './ProfileInfo.css';
 
 function ProfileInfo() {
-  const data = useSelector((state) => state.reviews);
+  const reviews = useSelector((state) => state.reviews);
+  const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,10 +19,17 @@ function ProfileInfo() {
         credentials: 'include',
       });
       const myUser = await newUser.json();
-      console.log(myUser);
+      dispatch(getAllFetch());
       setInfoFromUser(myUser);
     })();
   }, []);
+
+  useEffect(() => {
+    const filteredReviews = [...reviews].filter((review) => {
+      return review.author._id == infoFromUser._id;
+    });
+    setCurrentUserReview(filteredReviews);
+  }, [reviews]);
 
   return (
     <div className='container container-main'>
@@ -47,6 +57,7 @@ function ProfileInfo() {
             })}
           </div>
         </div>
+
       </div>
     </div>
   );

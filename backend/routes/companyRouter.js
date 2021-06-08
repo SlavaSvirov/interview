@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const CompanyModel = require('../database/models/company')
-
-
-
+const CompanyModel = require('../database/models/company');
 
 router.get('/', async (req, res) => {
   const allCompanyFromServer = await CompanyModel.find();
@@ -21,11 +18,15 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-console.log('================================',req.params.id);
-const currentCompany =  await CompanyModel.findById(req.params.id)
-console.log('currentCompany',currentCompany);
-res.json(currentCompany)
-})
+  const currentCompany = await CompanyModel.findById(req.params.id).populate({
+    path: 'reviews',
+    populate: {
+      path: 'author',
+    },
+  });
 
+  console.log('currentCompany', currentCompany);
+  res.json(currentCompany);
+});
 
-module.exports = router
+module.exports = router;
