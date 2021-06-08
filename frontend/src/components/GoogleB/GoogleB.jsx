@@ -33,7 +33,7 @@ export default function GoogleB() {
     })
 
     const data = await res.json()
-    if (data._id) { dispatch(registerAC({name:data.name,id:data._id})}
+    if (data._id) {dispatch(registerAC({name:data.name,id:data._id}))}
     else console.log("error");
   }
   return (
