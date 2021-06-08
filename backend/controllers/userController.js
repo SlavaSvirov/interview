@@ -36,7 +36,11 @@ const userSignin = async (req, res) => {
         id: currentUser._id,
         name: currentUser.name,
       };
-      return res.json({name: currentUser.name, id: currentUser._id, email: currentUser.email});
+      return res.json({
+        name: currentUser.name,
+        id: currentUser._id,
+        email: currentUser.email,
+      });
     }
     return res.sendStatus(412);
   }
@@ -58,6 +62,18 @@ const userInfo = async (req, res) => {
   res.json(user);
 };
 
+const changeAvatarBack = async (req, res) => {
+  const { id } = req.body;
+  const { image } = req.file;
+  console.log(id);
+  console.log(image);
+  const user = await User.findByIdAndUpdate(id, {
+    avatar: `http://localhost:3001/public/img/${image.originalname}`,
+  });
+  console.log(user);
+  res.json(user);
+};
+
 const checkUser = async (req, res) => {
   if (req.session.user?.id) {
     const currentUser = await User.findById(req.session.user.id, {
@@ -76,4 +92,5 @@ module.exports = {
   userSignout,
   userInfo,
   checkUser,
+  changeAvatarBack,
 };

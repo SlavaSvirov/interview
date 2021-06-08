@@ -1,4 +1,10 @@
-import { AUTH, LOG_OUT, SAGA_LOGIN, SAGA_REGISTER } from '../types/types';
+import {
+  AUTH,
+  LOG_OUT,
+  SAGA_LOGIN,
+  SAGA_REGISTER,
+  SET_USER,
+} from '../types/types';
 
 export const sagaRegisterAC = ({ email, password, name, surname }) => {
   return {
@@ -26,7 +32,7 @@ export const sagaLoginAC = (user) => {
   return {
     type: SAGA_LOGIN,
     payload: {
-      ...user
+      ...user,
     },
   };
 };
@@ -55,4 +61,28 @@ export const logout = () => {
       isAuth: false,
     },
   };
+};
+
+export const changeAvatar = (user) => {
+  return {
+    type: SET_USER,
+    payload: user,
+  };
+};
+
+export const changeAvatarFetch = (file, id) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append('image', file);
+  formData.append('id', id);
+
+  const response = await fetch('http://localhost:3001/user/changeAvatar', {
+    method: 'PATCH',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    body: formData,
+  });
+  const newUser = await response.json();
+  dispatch(changeAvatar(newUser));
 };
