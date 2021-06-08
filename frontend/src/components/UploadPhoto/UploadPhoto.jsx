@@ -40,7 +40,7 @@ const UploadPhoto = () => {
 
   return (
     <div>
-      <Upload
+      {/* <Upload
         // <ImgCrop rotate>
         name="image"
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -49,8 +49,8 @@ const UploadPhoto = () => {
         onChange={onChange}
         onPreview={onPreview}
       >
-        {fileList.length < 5 && '+ Upload'}
-      </Upload>
+        {fileList.length < 5 && '+'}
+      </Upload> */}
     </div>
     // </ImgCrop>
   );
