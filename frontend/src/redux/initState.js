@@ -1,7 +1,7 @@
-const initState = {
+const State = {
   reviews: [],
   user: { isAuth: false },
   companys: [],
 };
 
-export default initState;
+export default State;
