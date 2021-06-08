@@ -16,7 +16,6 @@ function ProfileInfo() {
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     (async () => {
       const newUser = await fetch('http://localhost:3001/user/getInfo', {
@@ -45,9 +44,15 @@ function ProfileInfo() {
       <div className="main">
         <div className="profile">
           <form className="profileForm">
-
             <div className="user">
-              <div className="userPhoto"></div>
+              <img src={avatar} alt="#" />
+              {/* <div
+                className="userPhoto"
+                style={{
+                  background: `url(${avatar}) no-repeat contain`,
+                  height: '150px',
+                }}
+              ></div> */}
               <span
                 className="addImg"
                 onClick={() => {

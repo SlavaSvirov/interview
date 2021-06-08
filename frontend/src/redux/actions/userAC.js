@@ -78,11 +78,9 @@ export const changeAvatarFetch = (file, id) => async (dispatch) => {
   const response = await fetch('http://localhost:3001/user/changeAvatar', {
     method: 'PATCH',
     credentials: 'include',
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
     body: formData,
   });
+
   const newUser = await response.json();
   dispatch(changeAvatar(newUser));
 };
