@@ -46,7 +46,6 @@ function CurrentCompany() {
           </a>
         </div>
         <div dangerouslySetInnerHTML={createMarkup()} />
-        {/* <h2>REVIEWS</h2> */}
 
         {currentCompany?.reviews?.map((review) => {
           return <Reviews review={review} />;
