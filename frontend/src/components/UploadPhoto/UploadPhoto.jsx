@@ -14,13 +14,6 @@ const UploadPhoto = () => {
 
   const onChange = (e) => {
     console.log(e);
-    // {
-    //   fileList: newFileList;
-    // }
-    // let formData = new FormData();
-    // formData.append('avatar', e.file.originFileObj);
-    // axios.post('/image');
-    // setFileList(newFileList);
   };
 
   const onPreview = async (file) => {
@@ -41,7 +34,6 @@ const UploadPhoto = () => {
   return (
     <div>
       <Upload
-        // <ImgCrop rotate>
         name="image"
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
