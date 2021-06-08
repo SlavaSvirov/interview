@@ -10,7 +10,6 @@ router
     // все последние отзывы юзера
     // Reviews.find()
     let dbData = await reviewModel.find().populate('author');
-    console.log(dbData);
     res.json(dbData);
   })
 

@@ -32,25 +32,32 @@ function ProfileInfo() {
   }, [reviews]);
 
   return (
-    <div className="main">
-      <div>
-        <form className="profileForm">
-          <UploadPhoto />
-          <span>Имя : {infoFromUser.name}</span>
-          <span>Email : qwe@qwe.ru</span>
-          <span>Дата регистрации : 01.01.2000г.</span>
-          <span>Какую группу закончил : Бобры</span>
-          <span>Написал отзывов : 10</span>
-          <span>Рейтинг : {infoFromUser.rating}</span>
-          <button>Редактировать профиль</button>
-        </form>
-      </div>
-      <div className="reviews">
-        <Sort />
-        Мои последние отзывы :
-        {currentUserReview.map((review) => {
-          return <Reviews key={review._id} review={review} />;
-        })}
+    <div className='container container-main'>
+      <div className="main">
+        <div className='profile'>
+          <form className="profileForm">
+            <UploadPhoto />
+            <span>Имя : {infoFromUser.name}</span>
+            <span>Email : qwe@qwe.ru</span>
+            <span>Дата регистрации : 01.01.2000г.</span>
+            <span>Какую группу закончил : Бобры</span>
+            <span>Написал отзывов : 10</span>
+            <span>Рейтинг : {infoFromUser.rating}</span>
+            <button>Редактировать профиль</button>
+          </form>
+        </div>
+        <div className="reviews">
+          <div className='sortWrap'>
+            <Sort />
+          </div>
+            <p>Мои последние отзывы :</p>
+          <div className='wrapper'>
+            {data.map((review) => {
+              return <Reviews key={review._id} review={review} />;
+            })}
+          </div>
+        </div>
+
       </div>
     </div>
   );
