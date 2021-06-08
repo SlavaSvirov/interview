@@ -54,3 +54,7 @@ font-family: 'Montserrat', sans-serif; */
   font-size: 20px;
   margin: 22px 0 22px;
 }
+
+.companyLogo {
+  border-radius: 50%;
+}
