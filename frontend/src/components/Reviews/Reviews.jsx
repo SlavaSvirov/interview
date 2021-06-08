@@ -28,7 +28,7 @@ const Reviews = ({ review }) => {
           <p className="company-location">{review.companyName}, Москва</p>
           <div className="wrapper-user-position">
             <span className="user-name">{review.author.name}</span>
-            <Link to={`review/${review._id}`}>More Info</Link>
+            <Link to={`/review/${review._id}`}>More Info</Link>
             {/* <a href="">Read More</a> */}
           </div>
         </div>
