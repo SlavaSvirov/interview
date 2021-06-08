@@ -22,7 +22,7 @@ router
     const companyName = await axios(
       `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
     );
-    let review = await reviewModel.create({
+    const review = await reviewModel.create({
       author: req.session.user.id,
       companyName: companyName.data.name,
       direction: req.body.direction,
@@ -53,6 +53,8 @@ router
       );
 
       await reduceCompany.save();
+      review.company = company._id;
+      await review.save();
     } else {
       const newCompany = await Company.create({
         companyName: companyName.data.name,
@@ -68,14 +70,12 @@ router
         'reviews'
       );
 
-      populateCompany.rating = populateCompany.reviews?.reduce(
-        (acc, review) => {
-          return (acc += +review.rating);
-        },
-        0
-      );
+      populateCompany.rating = review.rating;
       await populateCompany.save();
+      review.company = populateCompany._id;
+      await review.save();
     }
+
     return res.sendStatus(200);
 
     // console.log(dbData);
@@ -83,4 +83,5 @@ router
   .delete('/profile', (req, res) => {
     // Reviews.FindByIdAndDelete
   });
+
 module.exports = router;

@@ -6,7 +6,9 @@ import UploadPhoto from '../UploadPhoto/UploadPhoto';
 import './ProfileInfo.css';
 
 function ProfileInfo() {
-  const data = useSelector((state) => state.reviews);
+  const reviews = useSelector((state) => state.reviews);
+
+  const [currentUserReview, setCurrentUserReview] = useState([]);
   const [infoFromUser, setInfoFromUser] = useState({});
   const dispatch = useDispatch();
 
@@ -16,8 +18,12 @@ function ProfileInfo() {
         credentials: 'include',
       });
       const myUser = await newUser.json();
-      console.log(myUser);
+
       setInfoFromUser(myUser);
+      const filteredReviews = reviews.filter((review) => {
+        return review.author._id == infoFromUser._id;
+      });
+      setCurrentUserReview(filteredReviews);
     })();
   }, []);
 
@@ -38,7 +44,7 @@ function ProfileInfo() {
       <div className="reviews">
         <Sort />
         Мои последние отзывы :
-        {data.map((review) => {
+        {currentUserReview?.map((review) => {
           return <Reviews key={review._id} review={review} />;
         })}
       </div>
