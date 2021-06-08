@@ -10,13 +10,8 @@ import {
 import './reviews.css';
 
 const Reviews = ({ review }) => {
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
-  const [action, setAction] = useState(null);
-  console.log(review.companyName);
   return (
     <section>
-
       <div className="container container-main">
         <div className="row">
           <div className="post col-lg-4 col-md-6 col-sm-12">
