@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getAllFetch } from '../../redux/actions/companyAC';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Select } from 'antd';
+
+
 
 const { Option } = Select;
 
 const CustomAutoComplete = () => {
+ const {id} = useParams()
+//  console.log('currentID', id);
   let history = useHistory();
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
@@ -17,7 +21,7 @@ const CustomAutoComplete = () => {
   useEffect(() => {
     const foundedCompany = companies?.find((x) => x._id === input);
     if (foundedCompany) {
-      history.push(`/company`);
+      history.push(`/company/${input}`);
     }
   }, [input]);
 //================================================================

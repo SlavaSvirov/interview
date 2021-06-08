@@ -1,22 +1,27 @@
 import {useParams} from "react-router-dom"
 import './currentCompany.css'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from "react";
+import {currentFetch} from '../../redux/actions/companyAC'
+
 
 
 
 
 function CurrentCompany () {
-const companies = useSelector(state => state.companys)
+const currentCompany = useSelector(state => state.companys)
+// console.log('zxaafdsdfdfbhdfg',currentCompany);
+const dispatch = useDispatch()
 
   const {id} = useParams()
+  // console.log('//////////', id);
   
-  // console.log(currentCompany);
   
-  const currentCompany = companies.find(com => com._id === id)
+  
+  // const currentCompany = companies.find(com => com._id === id)
   useEffect(() => {
-  
-})
+  dispatch(currentFetch(id))
+},[])
 
   return (
 <div className='currentCompany'>
