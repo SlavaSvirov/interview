@@ -13,6 +13,7 @@ function ProfileInfo() {
 
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     (async () => {
       const newUser = await fetch('http://localhost:3001/user/getInfo', {
@@ -38,7 +39,7 @@ function ProfileInfo() {
           <form className="profileForm">
             <div className='user'>
               <div className='userPhoto'>
-              <UploadPhoto />
+                <UploadPhoto />
               </div>
               <span className='addImg'><i className='fa fa-plus'></i></span>
             </div>
@@ -62,7 +63,6 @@ function ProfileInfo() {
             })}
           </div>
         </div>
-
       </div>
     </div>
   );

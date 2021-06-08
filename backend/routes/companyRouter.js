@@ -4,7 +4,6 @@ const CompanyModel = require('../database/models/company');
 
 router.get('/', async (req, res) => {
   const allCompanyFromServer = await CompanyModel.find();
-  // console.log('allCompanyFromServer======', allCompanyFromServer);
   res.json(allCompanyFromServer);
 });
 
@@ -25,7 +24,6 @@ router.get('/:id', async (req, res) => {
     },
   });
 
-  console.log('currentCompany', currentCompany);
   res.json(currentCompany);
 });
 
