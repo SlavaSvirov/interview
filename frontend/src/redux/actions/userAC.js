@@ -22,20 +22,20 @@ export const registerAC = (user) => {
   };
 };
 
-export const sagaLoginAC = ({ email, password }) => {
+export const sagaLoginAC = (user) => {
   return {
     type: SAGA_LOGIN,
     payload: {
-      email,
-      password,
+      ...user
     },
   };
 };
 
-export const loginAC = () => {
+export const loginAC = (user) => {
   return {
     type: AUTH,
     payload: {
+      ...user,
       isAuth: true,
     },
   };

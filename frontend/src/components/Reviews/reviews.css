@@ -76,13 +76,6 @@ font-family: 'Montserrat', sans-serif; */
   transition: all .6s;
 }
 
-.post {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: -5px;
-}
-
 .wrap .block-img .rating {
   border: 1px solid #27af27;
   padding: 2px 12px;
@@ -113,3 +106,4 @@ font-family: 'Montserrat', sans-serif; */
   font-size: 19px;
   font-family: 'Comfortaa', cursive;
 }
+

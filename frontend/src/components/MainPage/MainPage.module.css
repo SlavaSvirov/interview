@@ -124,3 +124,9 @@ font-family: 'Montserrat', sans-serif; */
 }
 
 
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: -5px;
+}

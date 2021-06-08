@@ -6,6 +6,19 @@
   box-sizing: border-box;
 }
 
+body::-webkit-scrollbar{
+  width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+  background: orange;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(39, 86, 214);
+  border-radius: 20px;
+  border: 20px solid orange;
+}
 
 .container {
   max-width: 1200px;
@@ -26,3 +39,4 @@
 .wrapper-body {
   flex-grow: 1;
 }
+

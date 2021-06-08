@@ -1,5 +1,5 @@
 import styles from './MainPage.module.css';
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import AutoComplete from '../CustomAutoComplete/CustomAutoComplete';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
@@ -10,9 +10,35 @@ const MainPage = () => {
   const data = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const [featching, setFeatching] = useState(true)
+
+  const scrollHandler = (e) => {
+    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+      console.log('scroll');
+    }
+
+
+// console.log('scrollHeigth', e.target.documentElement.scrollHeight);
+// console.log('scrollTop', e.target.documentElement.scrollTop);
+// console.log('innerHeight', window.innerHeight);
+
+  }
+
   useEffect(() => {
-    dispatch(getAllFetch());
-  }, []);
+document.addEventListener('scroll',scrollHandler )
+return function () {
+  document.removeEventListener('scroll', scrollHandler)
+}
+  },[])
+
+  useEffect(() => {
+
+    if (featching) {
+
+      dispatch(getAllFetch());
+    }
+  }, [featching]);
 
   return (
     <main className={styles.mainPageDiv}>
@@ -73,9 +99,11 @@ const MainPage = () => {
           <div className={styles.sortWrapper}>
             <Sort />
           </div>
+          <div className={styles.wrapper}>
           {data.map((review) => {
-            return <Reviews key={review._id} review={review} />;
+            return  <Reviews key={review._id} review={review} />;
           })}
+          </div>
         </div>
       </div>
     </main>

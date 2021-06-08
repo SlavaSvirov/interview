@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './Sort.css';
 import { useDispatch } from 'react-redux';
 import { sortReviews } from '../../redux/actions/reviewsAC';
+import { Link } from 'react-router-dom';
+
 
 const Sort = () => {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const Sort = () => {
       <button className="sort-item" data-name="rating" onClick={(e) => handleSort(e,isSorted)}>
         Рейтинг
       </button>
+      <Link className='add-item' to="/review/addReview"> Добавить отзыв</Link>
       {/* <div>
         <Select
           showSearch

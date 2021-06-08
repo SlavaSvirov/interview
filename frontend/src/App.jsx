@@ -6,7 +6,6 @@ import AddReview from './components/AddReview/AddReview';
 import Header from './components/Header/Header';
 import Login from './components/User/Login/Login';
 import MainPage from './components/MainPage/MainPage';
-import PrivateOffice from './components/PrivateOffice/PrivateOffice';
 import ProfileInfo from './components/ProfileInfo/ProfileInfo';
 import Company from './components/Company/Company';
 import Register from './components/User/Register/Register';
@@ -78,7 +77,6 @@ function App() {
           </Route>
 
           <PrivateRoute exact path="/profile">
-            <PrivateOffice />
             <ProfileInfo />
           </PrivateRoute>
 
