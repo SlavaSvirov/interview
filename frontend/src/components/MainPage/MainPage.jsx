@@ -21,6 +21,7 @@ const MainPage = () => {
       console.log('scroll');
     }
 
+
     // console.log('scrollHeigth', e.target.documentElement.scrollHeight);
     // console.log('scrollTop', e.target.documentElement.scrollTop);
     // console.log('innerHeight', window.innerHeight);
