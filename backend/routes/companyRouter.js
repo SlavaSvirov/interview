@@ -8,11 +8,9 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  console.log(req.body.text);
   const currentCompanyFromServer = await CompanyModel.find({
-    companyName: { $regex: req.body.text },
+    companyName: { $regex: new RegExp('^' + req.body.text.toLowerCase(), 'i') },
   });
-  console.log(currentCompanyFromServer);
   res.json(currentCompanyFromServer);
 });
 
