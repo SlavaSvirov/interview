@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFetch } from '../../redux/actions/reviewsAC';
+import { changeAvatarFetch } from '../../redux/actions/userAC';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 import UploadPhoto from '../UploadPhoto/UploadPhoto';
@@ -10,6 +11,8 @@ function ProfileInfo() {
   const reviews = useSelector((state) => state.reviews);
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
+  const inputFile = useRef(null);
+  const avatar = useSelector((state) => state.user.avatar);
 
   const dispatch = useDispatch();
 
@@ -31,16 +34,35 @@ function ProfileInfo() {
     setCurrentUserReview(filteredReviews);
   }, [reviews]);
 
+  const avatarChange = (e) => {
+    console.log(e.target.files[0]);
+    dispatch(changeAvatarFetch(e.target.files[0], infoFromUser._id));
+  };
+
   return (
     <div className="container container-main">
       <div className="main">
         <div className="profile">
           <form className="profileForm">
-            <div className='user'>
-              <div className='userPhoto'>
-              <UploadPhoto />
-              </div>
-              <span className='addImg'><i className='fa fa-plus'></i></span>
+            <div className="user">
+              <div className="userPhoto"></div>
+              <span
+                className="addImg"
+                onClick={() => {
+                  inputFile.current.click();
+                }}
+              >
+                <i className="fa fa-plus"></i>
+              </span>
+              <input
+                name="image"
+                className="input"
+                type="file"
+                ref={inputFile}
+                onChange={(e) => {
+                  avatarChange(e);
+                }}
+              />
             </div>
 
             <span>Имя : {infoFromUser.name}</span>
@@ -56,9 +78,8 @@ function ProfileInfo() {
           <div className="sortWrap">
             <Sort />
           </div>
-          <p className='myReviews'>Мои последние отзывы :</p>
-          <div className='wrapper'>
-
+          <p className="myReviews">Мои последние отзывы :</p>
+          <div className="wrapper">
             {currentUserReview.map((review) => {
               return <Reviews key={review._id} review={review} />;
             })}
