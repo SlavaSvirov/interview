@@ -36,7 +36,7 @@ const userSignin = async (req, res) => {
         id: currentUser._id,
         name: currentUser.name,
       };
-      return res.sendStatus(200);
+      return res.json({name: currentUser.name, id: currentUser._id, email: currentUser.email});
     }
     return res.sendStatus(412);
   }

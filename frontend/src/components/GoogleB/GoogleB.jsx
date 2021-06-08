@@ -21,7 +21,7 @@ function GoogleB() {
   }
 
   return (
-    <div class="g-signin2" data-onsuccess="onSignIn">
+    <div className="g-signin2" data-onsuccess="onSignIn">
       <GoogleLogin
         clientId="1074219333942-jlp6l6mu4i6p8ofasch5vkpsb0n20uo5.apps.googleusercontent.com"
         buttonText="Log In with Google"
