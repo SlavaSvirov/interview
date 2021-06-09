@@ -19,6 +19,7 @@ import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
 import About from './components/About/About'
 import OneReview from './components/OneReview/OneReview';
+import EditReview from './components/EditReview/EditReview';
 
 
 function App() {

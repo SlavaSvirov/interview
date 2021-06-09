@@ -45,7 +45,7 @@ export default function OneReview() {
       <div>Общее впечатление о собеседовании: {onePost.impression}</div>
       <div>Файлы с собеседования: <img src={onePost.image} alt="Файлы с собеседования" /></div>
       <div> {onePost.setteled ? "Усторился" : "Не устроился"}</div>
-      <div> {(onePost.author._id === user.id) ?
+      <div> {(onePost.author._id === user._id) ?
         <button><Link to={`/review/edit/${id}`}>Редактировать</Link></button> : <button onClick={e => changeLike(id)}>Like</button>
       }
 
