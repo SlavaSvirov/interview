@@ -30,7 +30,12 @@ function reviewsReducer(state = initState.reviews, action) {
       return [...state, ...action.payload];
 
     case CHANGE_LIKE_REVIEW:
-      return [...state, action.payload];
+      return state.map(el=>{
+        if(el._id ===action.payload._id){
+          return {...el,...action.payload}
+        }
+        return el
+      })
 
     case LOG_OUT:
       return initState.reviews;

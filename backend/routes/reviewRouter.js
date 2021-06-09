@@ -15,10 +15,27 @@ router
     let dbPost = await reviewModel.findById(req.params.id);
     dbPost.likes += 1;
     await dbPost.save();
+    console.log(dbPost);
     res.json(dbPost);
   })
 
-  .post('/', async (req, res) => {
+  .patch('/:id', async (req, res) => {
+    console.log(req.body);
+    const reviewForUpdate = await reviewModel.findById(req.params.id)
+    const file = req.file ? `/img/${req.file.filename}` : '';
+    // const companyName = await axios(
+    //   `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
+    // );
+    Object.keys(req.body).forEach(key => {
+      reviewForUpdate[key] = req.body[key]
+    })
+    await reviewForUpdate.save();
+    return res.json(reviewForUpdate);
+
+  })
+
+      .post('/', async (req, res) => {
+    console.log(req.body);
     const file = req.file ? `/img/${req.file.filename}` : '';
 
     const companyName = await axios(
@@ -80,8 +97,8 @@ router
 
     return res.sendStatus(200);
   })
-  .delete('/profile', (req, res) => {
-    // Reviews.FindByIdAndDelete
-  });
+      .delete('/profile', (req, res) => {
+        // Reviews.FindByIdAndDelete
+      });
 
 module.exports = router;

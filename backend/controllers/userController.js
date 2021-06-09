@@ -98,6 +98,7 @@ const checkUser = async (req, res) => {
     const currentUser = await User.findById(req.session.user.id, {
       password: 0,
     });
+    console.log(currentUser);
     return res.json(currentUser);
   }
   return res.sendStatus(401);
