@@ -7,23 +7,18 @@ const Company = require('../database/models/company');
 
 router
   .get('/', async (req, res) => {
-    // все последние отзывы юзера
-    // Reviews.find()
     let dbData = await reviewModel.find().populate('author');
-    // console.log('------>>>>>>>>',dbData);
     res.json(dbData);
   })
 
   .post('/:id', async (req, res) => {
     let dbPost = await reviewModel.findById(req.params.id);
-    console.log(dbPost);
     dbPost.likes += 1;
     await dbPost.save();
     res.json(dbPost);
   })
 
   .post('/', async (req, res) => {
-    console.log(req.body);
     const file = req.file ? `/img/${req.file.filename}` : '';
 
     const companyName = await axios(
