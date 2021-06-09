@@ -6,6 +6,7 @@ const {
   SORT_REVIEWS,
   PROGINATION_REVIEWS,
   LOG_OUT,
+  CLEAR_ALL,
 } = require('../types/types');
 
 function reviewsReducer(state = initState.reviews, action) {
@@ -27,11 +28,15 @@ function reviewsReducer(state = initState.reviews, action) {
 
     case PROGINATION_REVIEWS:
       return [...state, ...action.payload];
+
     case CHANGE_LIKE_REVIEW:
       return [...state, action.payload];
 
-      case LOG_OUT :
-      return initState.reviews
+    case LOG_OUT:
+      return initState.reviews;
+
+    case CLEAR_ALL:
+      return initState.reviews;
 
     default:
       return state;
