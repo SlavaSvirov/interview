@@ -1,17 +1,19 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const reviewModel = require('../database/models/review');
-const userModel = require('../database/models/user');
-const axios = require('axios');
-const Company = require('../database/models/company');
+const reviewModel = require("../database/models/review");
+const userModel = require("../database/models/user");
+const axios = require("axios");
+const Company = require("../database/models/company");
 
 router
-  .get('/', async (req, res) => {
+  .get("/", async (req, res) => {
     // все последние отзывы юзера
     // Reviews.find()
-    let dbData = await reviewModel.find().populate('author');
+    let dbData = await reviewModel.find().populate("author");
+    // console.log('------>>>>>>>>',dbData);
     res.json(dbData);
   })
+
 
   .post('/:id', async (req, res) => {
     let dbPost = await reviewModel.findById(req.params.id);
@@ -24,7 +26,7 @@ router
   .post('/', async (req, res) => {
     const file = req.file
       ? `http://localhost:3001/public/img/${req.file.filename}`
-      : '';
+      : "";
 
     const companyName = await axios(
       `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
@@ -46,13 +48,13 @@ router
     });
     const company = await Company.findOne({
       companyIdHH: req.body.companyName,
-    }).populate('reviews');
+    }).populate("reviews");
     if (company) {
       company.reviews.push(review._id);
       await company.save();
       const reduceCompany = await Company.findOne({
         companyIdHH: req.body.companyName,
-      }).populate('reviews');
+      }).populate("reviews");
       reduceCompany.rating = Math.round(
         reduceCompany.reviews?.reduce((acc, review) => {
           return (acc += +review.rating);
@@ -74,7 +76,7 @@ router
       });
 
       const populateCompany = await Company.findById(newCompany._id).populate(
-        'reviews'
+        "reviews"
       );
 
       populateCompany.rating = review.rating;
@@ -87,7 +89,7 @@ router
 
     // console.log(dbData);
   })
-  .delete('/profile', (req, res) => {
+  .delete("/profile", (req, res) => {
     // Reviews.FindByIdAndDelete
   });
 

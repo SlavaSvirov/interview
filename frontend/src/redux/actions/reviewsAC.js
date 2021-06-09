@@ -1,4 +1,5 @@
-import { GET_ALL, SORT_REVIEWS } from '../types/types';
+import { GET_ALL, PROGINATION_REVIEWS, SORT_REVIEWS } from "../types/types";
+import axios from "axios";
 import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
 import axios from 'axios';
 
@@ -16,6 +17,17 @@ export const sortReviews = (reviews) => {
   };
 };
 
+export const pogination = (litleReview) => {
+ 
+  
+  return {
+    type: PROGINATION_REVIEWS,
+    payload: litleReview,
+  };
+};
+
+export const getAllFetch = (index) => async (dispatch) => {
+  const result = await axios("http://localhost:3001/review");
 export const changeLikeReviews = (oneReview) => {
   return {
     type: CHANGE_LIKE_REVIEW,
@@ -26,17 +38,23 @@ export const changeLikeReviews = (oneReview) => {
 export const getAllFetch = () => async (dispatch) => {
   const result = await axios('http://localhost:3001/review');
 
-  // console.log(allFromServer);
   dispatch(setAll(result.data));
 };
 
 export const getCurrentReviews = (id) => async (dispatch) => {
-  const result = await axios('http://localhost:3001/review');
+  const result = await axios("http://localhost:3001/review");
 
-  // console.log(allFromServer);
   dispatch(setAll(result.data));
 };
 
+export const getLitle = (index) => async (dispatch) => {
+  const result = await axios("http://localhost:3001/review");
+
+  const litle = result.data.slice(index, index+6);
+  
+  
+  dispatch(pogination(litle));
+};
 export const changeLikeFetch = (id) => async (dispatch) => {
   const result = await axios.post(`http://localhost:3001/review/${id}`);
   dispatch(setAll(result.data));
