@@ -1,3 +1,10 @@
 .currentCompany {
   margin-top: 120px;
 }
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: -5px;
+}

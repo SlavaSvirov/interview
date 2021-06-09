@@ -64,7 +64,9 @@ const AddReview = () => {
     formData.append('questions', values.questions);
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
-    formData.append('image', values.image.files[0]);
+    if (values.image) {
+      formData.append('image', values.image.files[0]);
+    }
     // try{
     const response = await axios({
       method: 'POST',
@@ -75,20 +77,6 @@ const AddReview = () => {
         'Content-Type': 'multipart/form-data',
       },
     });
-
-    // const data = await response.json();
-
-    // if (dataFromServer.status === 200) {
-    //   alert('your review was successly added');
-    //   // window.location.assign('/profile');
-    // }
-    // if (dataFromServer.status === 400) {
-    //   alert('error in bd');
-    //   window.location.assign('/404');
-    // }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const { Option } = Select;
@@ -111,12 +99,10 @@ const AddReview = () => {
         code: 'utf-8',
         q: value,
       });
-      console.log(str);
       axios
         .post('/word', { str })
         .then((response) => response.data)
         .then((d) => {
-          console.log(d);
           if (currentValue === value) {
             const result = d;
             const data = [];
@@ -131,7 +117,6 @@ const AddReview = () => {
               } else {
                 logoValid = noLogo;
               }
-              console.log(logoValid);
               data.push({
                 value: elem.companyId,
                 logo: logoValid,
@@ -211,9 +196,9 @@ const AddReview = () => {
           ]}
         >
           <Select placeholder="Выбери направление">
-            <Option value="Frontend">Frontend</Option>
-            <Option value="Backend">Backend</Option>
-            <Option value="FullStack">FullStack</Option>
+            <Option value="Frontend">Front End</Option>
+            <Option value="Backend">Back End</Option>
+            <Option value="FullStack">Full Stack</Option>
           </Select>
         </Form.Item>
         <Form.Item name="position" label="Должность">

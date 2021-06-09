@@ -56,7 +56,7 @@ const EditReview = () => {
   const {id} = useParams()
   const reviews = useSelector((state) => state.reviews);
   let history = useHistory();
-  let formData=reviews.find((elem) => elem._id == id)
+  let formData=reviews.find((elem) => toString(elem._id) === toString(id))
   
   const onFinish = async (values) => {
     console.log(values);
@@ -80,7 +80,8 @@ const EditReview = () => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    });
+    })
+    console.log(response.data);
 
     // const data = await response.json();
 
@@ -126,7 +127,7 @@ const EditReview = () => {
           if (currentValue === value) {
             const result = d;
             const data = [];
-            result?.map((elem) => {
+            result?.map(elem => {
               let logoValid;
               if (elem.companyLogo) {
                 let arrFromObjLogo = Object.values(elem.companyLogo);

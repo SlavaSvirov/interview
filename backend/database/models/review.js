@@ -5,7 +5,10 @@ const reviewSchema = Schema({
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   created: { type: Date, default: Date.now },
   companyName: String,
-  likes: { type: Number, default: 0 },
+  likes: {
+    type: Number,
+    default: 0
+  },
   rating: Number,
   setteled: Boolean,
   image: { type: String, default: '' },
