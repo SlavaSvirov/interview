@@ -34,8 +34,8 @@ function ProfileInfo() {
   }, [id]);
 
   useEffect(() => {
-    const filteredReviews = reviews.filter((review) => {
-      return review.author._id == id;
+    const filteredReviews = reviews?.filter((review) => {
+      return review?.author?._id == id;
     });
     setCurrentUserReview(filteredReviews);
   }, [reviews]);
@@ -53,7 +53,7 @@ function ProfileInfo() {
               <div
                 className="userPhoto"
                 style={{
-                  background: `url('http://localhost:3001/${avatar}) 100%/100% no-repeat `,
+                  background: `url('${avatar}') 100%/100% no-repeat `,
                 }}
               ></div>
               {user._id == id && (

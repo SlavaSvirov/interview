@@ -12,11 +12,13 @@ const MainPage = () => {
   const data = useSelector((state) => state.reviews);
   const [featching, setFeatching] = useState(false);
   const [index, setIndex] = useState(0);
+
   const scrollHandler = (e) => {
     const loc =
       e.target.documentElement.scrollHeight -
       (e.target.documentElement.scrollTop + window.innerHeight);
-    if (loc <= 100 && 85 <= loc) {
+    // console.log({ loc });
+    if (loc <= 100 && 98 <= loc) {
       console.log({ featching });
       setFeatching((prev) => !prev);
       console.log(e.target.documentElement.scrollHeight);
