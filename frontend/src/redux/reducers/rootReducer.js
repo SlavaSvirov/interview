@@ -12,6 +12,7 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
+  
   return appReducer(state, action);
 };
 
