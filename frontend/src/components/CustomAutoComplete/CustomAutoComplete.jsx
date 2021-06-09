@@ -12,6 +12,7 @@ const { Option } = Select;
 const CustomAutoComplete = () => {
  const {id} = useParams()
 //  console.log('currentID', id);
+
   let history = useHistory();
   const [input, setInput] = useState('');
   const dispatch = useDispatch();

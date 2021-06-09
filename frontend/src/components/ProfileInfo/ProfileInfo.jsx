@@ -8,6 +8,7 @@ import './ProfileInfo.css';
 
 function ProfileInfo() {
   const reviews = useSelector((state) => state.reviews);
+  console.log('reviews', reviews);
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
 
@@ -52,7 +53,7 @@ function ProfileInfo() {
           </div>
             <p>Мои последние отзывы :</p>
           <div className='wrapper'>
-            {data.map((review) => {
+            {currentUserReview.map((review) => {
               return <Reviews key={review._id} review={review} />;
             })}
           </div>
