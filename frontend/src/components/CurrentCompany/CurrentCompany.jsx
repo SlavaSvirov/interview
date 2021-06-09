@@ -6,6 +6,8 @@ import { currentFetch } from '../../redux/actions/currentCompanyAC.js';
 import nologo from '../../img/nologo.svg';
 import { getAllFetch } from '../../redux/actions/companyAC';
 import Reviews from '../Reviews/Reviews';
+import { useLoaderContext } from '../../context/LoaderContext';
+import Loader from '../Loader/Loader';
 
 function CurrentCompany() {
   const { id } = useParams();
@@ -26,31 +28,40 @@ function CurrentCompany() {
     return logoValid;
   };
 
+  const { loader, showLoader, hideLoader } = useLoaderContext()
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(currentFetch(id));
+    showLoader()
+    dispatch(currentFetch(id)).then(() => hideLoader());
   }, []);
 
   return (
-    <div className="currentCompany">
-      <h1>{currentCompany.companyName} </h1>
-      <div>
-        <div>
-          <img
-            src={checkLogo(currentCompany.logo)}
-            alt={currentCompany.name}
-          ></img>
-          <a href={currentCompany.companyUrl} alt={currentCompany.companyUrl}>
-            {currentCompany.companyUrl}
-          </a>
-        </div>
-        <div dangerouslySetInnerHTML={createMarkup()} />
-
-        {currentCompany?.reviews?.map((review) => {
-          return <Reviews review={review} />;
-        })}
-      </div>
+    <div className='container container-main'>
+      {
+        loader ? <Loader /> :
+          <div className="currentCompany">
+            <h1>{currentCompany.companyName} </h1>
+            <div>
+              <div>
+                <img
+                  src={checkLogo(currentCompany.logo)}
+                  alt={currentCompany.name}
+                ></img>
+                <a href={currentCompany.companyUrl} alt={currentCompany.companyUrl}>
+                  {currentCompany.companyUrl}
+                </a>
+              </div>
+              <div dangerouslySetInnerHTML={createMarkup()} />
+              <div className='wrapper'>
+                {currentCompany?.reviews?.map((review) => {
+                  return <Reviews review={review} />;
+                })}
+              </div>
+            </div>
+          </div>
+      }
     </div>
   );
 }

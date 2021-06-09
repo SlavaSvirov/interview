@@ -3,10 +3,6 @@ const bcrypt = require('bcrypt');
 
 const saltRound = 10;
 
-const userSigninRender = (req, res) => res.render('signin');
-
-const userSignupRender = (req, res) => res.render('signup');
-
 const userSignup = async (req, res) => {
   const { email, password: pass, name } = req.body;
   if (email && pass && name) {
@@ -100,9 +96,7 @@ const checkUser = async (req, res) => {
 };
 
 module.exports = {
-  userSigninRender,
   userSignup,
-  userSignupRender,
   userSignin,
   userSignout,
   userInfo,

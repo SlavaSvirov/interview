@@ -12,6 +12,7 @@ font-family: 'Montserrat', sans-serif; */
   cursor: pointer;
   border-radius: 4px;
   margin: 5px;
+  position: relative;
 }
 
 .wrap:hover {
@@ -26,6 +27,8 @@ font-family: 'Montserrat', sans-serif; */
   height: 190px;
   width: 300px;
   border-radius: 4px 4px 0 0;
+  border: 1px solid;
+  border-bottom: white;
 }
 
 .wrap .block-title {
@@ -42,14 +45,18 @@ font-family: 'Montserrat', sans-serif; */
   line-height: 25px;
 }
 
-.wrap .block-title .salary {
-  border: 1px solid;
-  padding: 0 5px;
-  font-size: 16px;
+.wrap .salary {
+  border: 1px solid #007cea;
+  padding: 2px 10px;
+  font-size: 20px;
   border-radius: 4px;
-  font-family: 'Odibee Sans', cursive;
+  font-family: system-ui;
   background: #007cea;
+  font-weight: 900;
   color: white;
+  position: absolute;
+  right: -6px;
+  top: 148px;
 }
 
 .wrap .block-title .company-location {
@@ -78,15 +85,15 @@ font-family: 'Montserrat', sans-serif; */
 
 .wrap .block-img .rating {
   border: 1px solid #27af27;
-  padding: 2px 12px;
+  padding: 0 18px;
   font-size: 20px;
   font-weight: 900;
   color: white;
   background-color: #27af27;
   border-radius: 4px;
-  margin: 0 0 0 -5px;
-  position: relative;
+  position: absolute;
   top: 5px;
+  left: -6px;
 }
 
 .wrap-rating {
@@ -105,5 +112,6 @@ font-family: 'Montserrat', sans-serif; */
 .wrap .user-working-pasition {
   font-size: 19px;
   font-family: 'Comfortaa', cursive;
+  font-weight: 900;
 }
 
