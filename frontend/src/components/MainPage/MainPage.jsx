@@ -1,44 +1,45 @@
-import styles from './MainPage.module.css';
-import React, { useState, useEffect } from 'react';
-import AutoComplete from '../CustomAutoComplete/CustomAutoComplete';
-import Reviews from '../Reviews/Reviews';
-import Sort from '../Sort/Sort';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllFetch } from '../../redux/actions/reviewsAC';
+import styles from "./MainPage.module.css";
+import React, { useState, useEffect } from "react";
+import AutoComplete from "../CustomAutoComplete/CustomAutoComplete";
+import Reviews from "../Reviews/Reviews";
+import Sort from "../Sort/Sort";
+import { useDispatch, useSelector } from "react-redux";
+// import { getAllFetch } from '../../redux/actions/reviewsAC';
+import { getLitle } from "../../redux/actions/reviewsAC";
+
 
 const MainPage = () => {
-  const data = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.reviews);
   const [currentPage, setCurrentPage] = useState(1);
-  const [featching, setFeatching] = useState(true);
+  const [featching, setFeatching] = useState(false);
+  const [index, setIndex] = useState(0);
 
   const scrollHandler = (e) => {
-    if (
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight) <
-      100
-    ) {
-      console.log('scroll');
+    const loc = e.target.documentElement.scrollHeight -(e.target.documentElement.scrollTop + window.innerHeight)
+    if (loc <= 100 && 85 <= loc) {
+      setFeatching((prev) => !prev);
+      console.log("scroll");
+      console.log(e.target.documentElement.scrollHeight);
+
     }
-
-
-    // console.log('scrollHeigth', e.target.documentElement.scrollHeight);
-    // console.log('scrollTop', e.target.documentElement.scrollTop);
-    // console.log('innerHeight', window.innerHeight);
   };
 
   useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
-
+    console.log("featching");
+    document.addEventListener("scroll", scrollHandler);
     return function () {
-      document.removeEventListener('scroll', scrollHandler);
+      document.removeEventListener("scroll", scrollHandler);
     };
   }, []);
 
   useEffect(() => {
-    if (featching) {
-      dispatch(getAllFetch());
-    }
+    console.log({ featching });
+
+    dispatch(getLitle(index));
+
+    setIndex((prev) => prev + 6);
+
   }, [featching]);
 
   return (
@@ -101,6 +102,7 @@ const MainPage = () => {
             <Sort />
           </div>
           <div className={styles.wrapper}>
+
             {data.map((review) => {
               return <Reviews key={review._id} review={review} />;
             })}

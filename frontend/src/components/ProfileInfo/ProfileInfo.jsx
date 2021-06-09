@@ -4,11 +4,11 @@ import { getAllFetch } from '../../redux/actions/reviewsAC';
 import { changeAvatarFetch } from '../../redux/actions/userAC';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
-import UploadPhoto from '../UploadPhoto/UploadPhoto';
 import './ProfileInfo.css';
 
 function ProfileInfo() {
   const reviews = useSelector((state) => state.reviews);
+  console.log('reviews', reviews);
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
   const inputFile = useRef(null);
@@ -45,14 +45,14 @@ function ProfileInfo() {
         <div className="profile">
           <form className="profileForm">
             <div className="user">
-              <img src={avatar} alt="#" />
-              {/* <div
+              {/* <img src={`http://localhost:3001/${avatar}`} alt="#" /> */}
+              <div
                 className="userPhoto"
                 style={{
-                  background: `url(${avatar}) no-repeat contain`,
-                  height: '150px',
+                  background: `url('http://localhost:3001/${avatar}') no-repeat`,
+                  'background-size': 'contain',
                 }}
-              ></div> */}
+              ></div>
               <span
                 className="addImg"
                 onClick={() => {
@@ -85,6 +85,7 @@ function ProfileInfo() {
           <div className="sortWrap">
             <Sort />
           </div>
+
           <p className="myReviews">Мои последние отзывы :</p>
           <div className="wrapper">
             {currentUserReview.map((review) => {
