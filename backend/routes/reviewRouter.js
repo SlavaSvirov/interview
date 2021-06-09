@@ -7,19 +7,30 @@ const Company = require('../database/models/company');
 
 router
   .get('/', async (req, res) => {
-    // все последние отзывы юзера
-    // Reviews.find()
     let dbData = await reviewModel.find().populate('author');
-    // console.log('------>>>>>>>>',dbData);
     res.json(dbData);
   })
 
   .post('/:id', async (req, res) => {
     let dbPost = await reviewModel.findById(req.params.id);
-    console.log(dbPost);
     dbPost.likes += 1;
     await dbPost.save();
+    console.log(dbPost);
     res.json(dbPost);
+  })
+
+  .patch('/:id', async (req, res) => {
+    console.log(req.body);
+    const reviewForUpdate = await reviewModel.findById(req.params.id);
+    const file = req.file ? `/img/${req.file.filename}` : '';
+    // const companyName = await axios(
+    //   `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
+    // );
+    Object.keys(req.body).forEach((key) => {
+      reviewForUpdate[key] = req.body[key];
+    });
+    await reviewForUpdate.save();
+    return res.json(reviewForUpdate);
   })
 
   .post('/', async (req, res) => {
@@ -83,7 +94,7 @@ router
       await review.save();
     }
 
-    return res.sendStatus(200);
+    return res.json(review);
   })
   .delete('/profile', (req, res) => {
     // Reviews.FindByIdAndDelete

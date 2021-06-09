@@ -9,7 +9,8 @@ import './onereview.css'
 export default function OneReview() {
   const reviews = useSelector((state) => state.reviews);
   const user = useSelector((state) => state.user);
-  const {id} = useParams();
+
+  const { id } = useParams();
   const [onePost, setOnePost] = useState(null);
   const dispatch = useDispatch();
 
@@ -17,7 +18,12 @@ export default function OneReview() {
 
   useEffect(() => {
     if (reviews.length) {
-      setOnePost(reviews.find((elem) => elem._id == id));
+
+      setOnePost(
+        reviews.find((elem) => {
+          return String(elem._id) === String(id);
+        })
+      );
     } else {
       showLoader();
       dispatch(getAllFetch()).then(() => hideLoader());
@@ -32,6 +38,7 @@ export default function OneReview() {
   return (
     onePost && (
       <div className="container container-main">
+        {console.log(onePost)}
         {loader ? (
           <Loader />
         ) : (
@@ -67,8 +74,11 @@ export default function OneReview() {
             </div>
             <div> {onePost.setteled ? 'Усторился' : 'Не устроился'}</div>
             <div>
-              {onePost.author._id == user._id ? (
-                <button>Редактировать</button>
+
+              {onePost.author._id === user._id ? (
+                <button>
+                  <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
+                </button>
               ) : (
                 <button onClick={changeLike}>Like</button>
               )}

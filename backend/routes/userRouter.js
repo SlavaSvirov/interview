@@ -23,11 +23,11 @@ userRouter.route('/logout').get(userSignout);
 
 userRouter.route('/checkAuth').get(checkUser);
 
-userRouter.route('/getInfo').get(checkAuth, userInfo);
+userRouter.route('/:id/getInfo').get(checkAuth, userInfo);
 
 userRouter.route('/checkAuth').get(checkUser);
 
-userRouter.route('/getInfo').get(userInfo);
+// userRouter.route('/getInfo').get(userInfo);
 
 userRouter.route('/changeAvatar').patch(changeAvatarBack);
 

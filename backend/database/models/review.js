@@ -2,7 +2,6 @@ const { Schema, model } = require('mongoose');
 
 const reviewSchema = Schema({
   company: { type: Schema.Types.ObjectId, ref: 'Company' },
-  employment: { type: Boolean, default: false },
   author: { type: Schema.Types.ObjectId, ref: 'User' },
   created: { type: Date, default: Date.now },
   companyName: String,

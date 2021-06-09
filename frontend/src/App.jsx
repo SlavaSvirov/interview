@@ -17,9 +17,9 @@ import CurrentCompany from './components/CurrentCompany/CurrentCompany';
 
 import Footer from './components/Footer/Footer';
 import Contact from './components/Contact/Contact';
-import About from './components/About/About'
+import About from './components/About/About';
 import OneReview from './components/OneReview/OneReview';
-
+import EditReview from './components/EditReview/EditReview';
 
 function App() {
   const dispatch = useDispatch();
@@ -27,16 +27,17 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:3001/user/checkAuth', {
       credentials: 'include',
-    }).then((res) => {
-      if (res.status === 200) {
-        return res.json()
-
-      }
-    }).then(user => {
-      if (user) {
-        dispatch(registerAC(user));
-      }
-    });
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+      })
+      .then((user) => {
+        if (user) {
+          dispatch(registerAC(user));
+        }
+      });
   }, []);
 
   return (
@@ -76,11 +77,15 @@ function App() {
             <OneReview />
           </Route>
 
+          <Route exact path="/review/edit/:id">
+            <EditReview />
+          </Route>
+
           <Route exact path="/">
             <MainPage />
           </Route>
 
-          <PrivateRoute exact path="/profile">
+          <PrivateRoute exact path="/user/:id">
             <ProfileInfo />
           </PrivateRoute>
 
