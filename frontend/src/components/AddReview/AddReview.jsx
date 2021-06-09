@@ -208,9 +208,9 @@ const AddReview = () => {
           ]}
         >
           <Select placeholder="Выбери направление">
-            <Option value="Frontend">Frontend</Option>
-            <Option value="Backend">Backend</Option>
-            <Option value="FullStack">FullStack</Option>
+            <Option value="Frontend">Front End</Option>
+            <Option value="Backend">Back End</Option>
+            <Option value="FullStack">Full Stack</Option>
           </Select>
         </Form.Item>
         <Form.Item name="position" label="Должность">

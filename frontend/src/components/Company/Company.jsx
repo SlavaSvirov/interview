@@ -23,7 +23,8 @@ export default function Company() {
       {
         loader ? <Loader /> :
           <div className={style.company}>
-            {companies?.map((el) => (
+            {
+            companies.length ? companies?.map((el) => (
               <div className={style.wrap} key={el._id}>
                 <div className={style.wrapper}>
                   <span className={style.rating}>10</span>
@@ -41,7 +42,10 @@ export default function Company() {
                   Read More
             </Link>
               </div>
-            ))}
+            ))
+            :
+            <h1 className={style.info}>NO companies</h1>
+          }
           </div>
       }
     </div>

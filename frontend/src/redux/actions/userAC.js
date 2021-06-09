@@ -38,6 +38,7 @@ export const sagaLoginAC = (user) => {
 };
 
 export const loginAC = (user) => {
+  console.log(user);
   return {
     type: AUTH,
     payload: {

@@ -58,3 +58,11 @@ font-family: 'Montserrat', sans-serif; */
 .companyLogo {
   border-radius: 50%;
 }
+
+.company .info {
+  font-family: 'Comfortaa', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

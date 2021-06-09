@@ -51,7 +51,7 @@ const MainPage = () => {
             ipsa praesentium, veniam facere quas labore?
           </p>
           <div className={styles.mainPageBtn}>
-            <a href="">Get Started</a>
+            <a href="#secondPage">Get Started</a>
           </div>
         </div>
 
@@ -90,6 +90,7 @@ const MainPage = () => {
         </div>
 
         <div className={styles.secondMainPage}>
+          <a name='secondPage'></a>
           <div className={styles.secondTitle}>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam,

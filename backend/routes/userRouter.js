@@ -1,8 +1,6 @@
 const { Router } = require('express');
 const {
-  userSignupRender,
   userSignup,
-  userSigninRender,
   userSignin,
   userSignout,
   userInfo,
@@ -15,9 +13,9 @@ const CompanyModel = require('../database/models/company');
 
 const userRouter = Router();
 
-userRouter.route('/signup').get(userSignupRender).post(userSignup);
+userRouter.route('/signup').post(userSignup);
 
-userRouter.route('/signin').get(userSigninRender).post(userSignin);
+userRouter.route('/signin').post(userSignin);
 
 userRouter.route('/logout').get(userSignout);
 
