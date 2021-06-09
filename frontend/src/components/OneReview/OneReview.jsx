@@ -4,10 +4,12 @@ import { Link, useParams } from 'react-router-dom';
 import { useLoaderContext } from '../../context/LoaderContext';
 import { changeLikeFetch, getAllFetch } from '../../redux/actions/reviewsAC';
 import Loader from '../Loader/Loader';
+import './onereview.css'
 
 export default function OneReview() {
   const reviews = useSelector((state) => state.reviews);
   const user = useSelector((state) => state.user);
+
   const { id } = useParams();
   const [onePost, setOnePost] = useState(null);
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ export default function OneReview() {
 
   useEffect(() => {
     if (reviews.length) {
+
       setOnePost(
         reviews.find((elem) => {
           return String(elem._id) === String(id);
@@ -71,6 +74,7 @@ export default function OneReview() {
             </div>
             <div> {onePost.setteled ? 'Усторился' : 'Не устроился'}</div>
             <div>
+
               {onePost.author._id === user._id ? (
                 <button>
                   <Link to={`/review/edit/${onePost._id}`}>Edit</Link>

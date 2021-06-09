@@ -78,13 +78,13 @@ function ProfileInfo() {
               />
             </div>
 
-            <span>Имя : {infoFromUser.name}</span>
-            <span>Email : {infoFromUser.email}</span>
-            <span>Дата регистрации : 01.01.2000г.</span>
-            <span>Какую группу закончил : Бобры</span>
-            <span>Написал отзывов : 10</span>
-            <span>Рейтинг : {infoFromUser.rating}</span>
-            {user._id == id && <button>Редактировать профиль</button>}
+            <div className='userInfo'>
+              <span className='name'>{user.name}</span>
+              <span className='rating'>{user.rating}</span>
+              {user._id == id && <button className='btn'>Редактировать профиль</button>}
+            </div>
+
+
           </form>
         </div>
         <div className="reviews">
