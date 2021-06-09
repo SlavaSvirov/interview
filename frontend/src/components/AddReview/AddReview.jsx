@@ -77,6 +77,8 @@ const AddReview = () => {
         'Content-Type': 'multipart/form-data',
       },
     });
+    console.log(response.data);
+    history.push(`/review/${response.data._id}`);
   };
 
   const { Option } = Select;
@@ -259,9 +261,6 @@ const AddReview = () => {
           getValueFromEvent={normFile}
         >
           <input type="file" />
-          {/* <Upload listType="picture" multiple="true">
-            <Button icon={<UploadOutlined />}>Upload</Button>
-          </Upload> */}
         </Form.Item>
 
         <Divider plain></Divider>
