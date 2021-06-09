@@ -9,7 +9,9 @@ import Loader from '../Loader/Loader';
 
 export default function Company() {
   const dispatch = useDispatch();
+ 
   const companies = useSelector((state) => state.companys);
+  console.log(companies);
 
   const { loader, showLoader, hideLoader } = useLoaderContext();
 
@@ -17,6 +19,8 @@ export default function Company() {
     showLoader();
     dispatch(allFetch()).then(() => hideLoader());
   }, []);
+
+
 
   return (
     <div className="container container-main">
@@ -27,6 +31,7 @@ export default function Company() {
           {companies.length ? (
             companies?.map((el) => (
               <div className={style.wrap} key={el._id}>
+                
                 <div className={style.wrapper}>
                   <span className={style.rating}>{el.rating}</span>
                 </div>
@@ -41,6 +46,7 @@ export default function Company() {
                 </p>
                 <Link className={style.link} to={`company/${el._id}`}>
                   Read More
+
                 </Link>
               </div>
             ))
