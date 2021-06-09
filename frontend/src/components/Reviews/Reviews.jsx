@@ -4,8 +4,9 @@ import './reviews.css';
 import { Link, useHistory } from 'react-router-dom';
 
 const Reviews = ({ review }) => {
+  console.log(review._id);
   return (
-    <div className="container container-main">
+    <div className="container container-main" key={review._id}>
       <div className="wrap">
         <div className="block-img">
           <span className="rating">{review.rating}</span>

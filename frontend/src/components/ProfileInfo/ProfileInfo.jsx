@@ -79,7 +79,7 @@ function ProfileInfo() {
           <p className="myReviews">Мои последние отзывы :</p>
           <div className="wrapper">
             {currentUserReview.map((review) => {
-              return <Reviews key={review._id} review={review} />;
+              return <Reviews review={review} />;
             })}
           </div>
         </div>
