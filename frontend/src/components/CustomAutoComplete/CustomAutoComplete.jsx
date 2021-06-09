@@ -5,13 +5,9 @@ import { getAllFetch } from '../../redux/actions/companyAC';
 import { useHistory, useParams } from 'react-router-dom';
 import { Select } from 'antd';
 
-
-
 const { Option } = Select;
 
 const CustomAutoComplete = () => {
- const {id} = useParams()
-//  console.log('currentID', id);
   let history = useHistory();
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
@@ -24,10 +20,9 @@ const CustomAutoComplete = () => {
       history.push(`/company/${input}`);
     }
   }, [input]);
-//================================================================
+  //================================================================
   function onSearch(val) {
-    if (val.trim()){
-
+    if (val.trim()) {
       dispatch(getAllFetch(val));
     }
   }

@@ -16,8 +16,9 @@ router
   .post('/:id', async (req, res) => {
     let dbPost = await reviewModel.findById(req.params.id);
     console.log(dbPost);
-    // dbPost.likes+=1;
-    // await dbPost.save();
+    dbPost.likes += 1;
+    await dbPost.save();
+    console.log(dbPost);
     res.json(dbPost);
   })
 

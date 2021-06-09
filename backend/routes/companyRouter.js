@@ -4,16 +4,13 @@ const CompanyModel = require('../database/models/company');
 
 router.get('/', async (req, res) => {
   const allCompanyFromServer = await CompanyModel.find();
-  // console.log('allCompanyFromServer======', allCompanyFromServer);
   res.json(allCompanyFromServer);
 });
 
 router.post('/', async (req, res) => {
-  console.log(req.body.text);
   const currentCompanyFromServer = await CompanyModel.find({
-    companyName: { $regex: req.body.text },
+    companyName: { $regex: new RegExp('^' + req.body.text.toLowerCase(), 'i') },
   });
-  console.log(currentCompanyFromServer);
   res.json(currentCompanyFromServer);
 });
 
@@ -25,7 +22,6 @@ router.get('/:id', async (req, res) => {
     },
   });
 
-  console.log('currentCompany', currentCompany);
   res.json(currentCompany);
 });
 

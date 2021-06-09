@@ -8,7 +8,7 @@ import {
   LikeFilled,
 } from '@ant-design/icons';
 import './reviews.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Reviews = ({ review }) => {
   return (
@@ -19,10 +19,7 @@ const Reviews = ({ review }) => {
         </div>
         <div className="block-title">
           <div className="wrap-rating">
-            <span className="user-working-pasition">
-              Front End Engineer
-
-                  </span>
+            <span className="user-working-pasition">Front End Engineer</span>
             <span className="salary">{review.salary}Р</span>
           </div>
           <p className="company-location">{review.companyName}, Москва</p>

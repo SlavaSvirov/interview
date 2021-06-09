@@ -1,5 +1,5 @@
 import initState from '../initState';
-import { AUTH, LOG_OUT } from '../types/types';
+import { AUTH, LOG_OUT, SET_USER } from '../types/types';
 
 function userReducer(state = initState.user, action) {
   switch (action.type) {
@@ -7,6 +7,9 @@ function userReducer(state = initState.user, action) {
       return action.payload;
 
     case LOG_OUT:
+      return action.payload;
+
+    case SET_USER:
       return action.payload;
 
     default:

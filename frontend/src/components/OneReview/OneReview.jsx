@@ -7,13 +7,13 @@ import { changeLikeFetch, getAllFetch } from "../../redux/actions/reviewsAC";
 export default function OneReview() {
   const reviews = useSelector(state => state.reviews)
   const user = useSelector(state => state.user)
-  const id = useParams();
+  const { id } = useParams();
   const [onePost, setOnePost] = useState(null);
   const dispatch = useDispatch()
-
+  console.log(id);
   useEffect(() => {
     if (reviews.length) {
-      setOnePost(reviews.find(elem => elem._id == id.id))
+      setOnePost(reviews.find(elem => elem._id == id))
     } else {
       dispatch(getAllFetch())
     }
@@ -21,6 +21,9 @@ export default function OneReview() {
 
   const changeLike = () => {
     dispatch(changeLikeFetch(id))
+  }
+  const editPost = () => {
+    dispatch(editPost())
   }
 
 
@@ -43,7 +46,7 @@ export default function OneReview() {
       <div>Файлы с собеседования: <img src={onePost.image} alt="Файлы с собеседования" /></div>
       <div> {onePost.setteled ? "Усторился" : "Не устроился"}</div>
       <div> {(onePost.author._id == user.id) ?
-        <button>Редактировать</button> : <button onClick={changeLike}>Like</button>
+        <button onClick={e => editPost(id)}>Редактировать</button> : <button onClick={e => changeLike(id)}>Like</button>
       }
 
       </div>

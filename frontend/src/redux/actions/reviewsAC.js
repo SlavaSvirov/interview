@@ -39,5 +39,5 @@ export const getCurrentReviews = (id) => async (dispatch) => {
 
 export const changeLikeFetch = (id) => async (dispatch) => {
   const result = await axios.post(`http://localhost:3001/review/${id}`);
-  dispatch(setAll(result.data));
+  dispatch(changeLikeReviews(result.data));
 }

@@ -22,7 +22,7 @@ function reviewsReducer(state = [], action) {
     case CHANGE_LIKE_REVIEW:
       return state.map(el=>{
         if(el._id ===action.payload._id){
-          return {...el,...action.payload.likes}
+          return {...el,...action.payload}
         }
         return el
       })
