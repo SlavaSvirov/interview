@@ -78,13 +78,13 @@ function ProfileInfo() {
               />
             </div>
 
-            <div className='userInfo'>
-              <span className='name'>{user.name}</span>
-              <span className='rating'>{user.rating}</span>
-              {user._id == id && <button className='btn'>Редактировать профиль</button>}
+            <div className="userInfo">
+              <span className="name">{infoFromUser.name}</span>
+              <span className="rating">{infoFromUser.rating}</span>
+              {user._id == id && (
+                <button className="btn">Редактировать профиль</button>
+              )}
             </div>
-
-
           </form>
         </div>
         <div className="reviews">
