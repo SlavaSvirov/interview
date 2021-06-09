@@ -6,15 +6,12 @@ import Sort from '../Sort/Sort';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getAllFetch } from '../../redux/actions/reviewsAC';
 import { getLitle } from '../../redux/actions/reviewsAC';
-import ColumnGroup from 'antd/lib/table/ColumnGroup';
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.reviews);
-  const [currentPage, setCurrentPage] = useState(1);
   const [featching, setFeatching] = useState(false);
   const [index, setIndex] = useState(0);
-
   const scrollHandler = (e) => {
     const loc =
       e.target.documentElement.scrollHeight -
@@ -35,10 +32,7 @@ const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log({ featching });
-
     dispatch(getLitle(index));
-
     setIndex((prev) => prev + 6);
   }, [featching]);
 
@@ -52,7 +46,7 @@ const MainPage = () => {
             ipsa praesentium, veniam facere quas labore?
           </p>
           <div className={styles.mainPageBtn}>
-            <a href="">Get Started</a>
+            <a href="#secondPage">Get Started</a>
           </div>
         </div>
 
@@ -91,6 +85,7 @@ const MainPage = () => {
         </div>
 
         <div className={styles.secondMainPage}>
+          <a name="secondPage"></a>
           <div className={styles.secondTitle}>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam,

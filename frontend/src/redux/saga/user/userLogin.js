@@ -10,14 +10,16 @@ function loginFetch(action) {
     },
     credentials: 'include',
     body: JSON.stringify(action.payload),
-  }).then((response) => response.status);
+  }).then((response) => {
+    if (response.status === 200) return response.json()
+    return {}
+  });
 }
 
 function* loginWorker(action) {
   try {
-    console.log(action);
-    const loginStatus = yield call(loginFetch, action);
-    if (loginStatus === 200) yield put(loginAC(action.payload));
+    const userFromServer = yield call(loginFetch, action);
+    yield put(loginAC(userFromServer));
   } catch (e) {
     yield put({ type: 'USER_FETCH_FAILED', message: e.message });
   }

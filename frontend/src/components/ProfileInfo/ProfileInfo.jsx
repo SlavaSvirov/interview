@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLoaderContext } from '../../context/LoaderContext';
 import { getAllFetch } from '../../redux/actions/reviewsAC';
 import { changeAvatarFetch } from '../../redux/actions/userAC';
+import Loader from '../Loader/Loader';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 import './ProfileInfo.css';
@@ -16,8 +18,18 @@ function ProfileInfo() {
 
   const dispatch = useDispatch();
 
+  const { loader, showLoader, hideLoader } = useLoaderContext();
+
   useEffect(() => {
-    dispatch(getAllFetch());
+    (async () => {
+      const newUser = await fetch('http://localhost:3001/user/getInfo', {
+        credentials: 'include',
+      });
+      showLoader();
+      const myUser = await newUser.json();
+      dispatch(getAllFetch()).then(() => hideLoader());
+      setInfoFromUser(myUser);
+    })();
   }, []);
 
   useEffect(() => {
@@ -77,11 +89,15 @@ function ProfileInfo() {
           </div>
 
           <p className="myReviews">Мои последние отзывы :</p>
-          <div className="wrapper">
-            {currentUserReview.map((review) => {
-              return <Reviews review={review} />;
-            })}
-          </div>
+          {loader ? (
+            <Loader />
+          ) : (
+            <div className="wrapper">
+              {currentUserReview.map((review) => {
+                return <Reviews key={review._id} review={review} />;
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>
