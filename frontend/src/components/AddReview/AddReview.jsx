@@ -42,16 +42,15 @@ const formItemLayout = {
 
 const normFile = (e) => {
   console.log('Upload event:', e.target.files[0]);
-  
+
   if (Array.isArray(e.target.files)) {
     return e.target.files;
   }
-  
+
   return e && e.target;
 };
 
 const AddReview = () => {
-  const {id} = useParams()
   let history = useHistory();
   const onFinish = async (values) => {
     console.log(values);
@@ -67,14 +66,14 @@ const AddReview = () => {
     formData.append('impression', values.impression);
     formData.append('image', values.image.files[0]);
     // try{
-      const response = await axios({
-        method: 'POST',
-        url: '/review',
-        withCredentials: true,
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+    const response = await axios({
+      method: 'POST',
+      url: '/review',
+      withCredentials: true,
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
 
     // const data = await response.json();
@@ -287,7 +286,7 @@ const AddReview = () => {
             offset: 6,
           }}
         >
-          <Button type="primary" htmlType="submit" onClick={() =>  history.push('/profile')}>
+          <Button type="primary" htmlType="submit">
             Добавить отзыв
           </Button>
         </Form.Item>
