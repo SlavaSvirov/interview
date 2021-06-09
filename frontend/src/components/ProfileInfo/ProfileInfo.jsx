@@ -8,6 +8,7 @@ import './ProfileInfo.css';
 
 function ProfileInfo() {
   const reviews = useSelector((state) => state.reviews);
+  console.log('reviews', reviews);
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
   const inputFile = useRef(null);
@@ -84,6 +85,7 @@ function ProfileInfo() {
           <div className="sortWrap">
             <Sort />
           </div>
+
           <p className="myReviews">Мои последние отзывы :</p>
           <div className="wrapper">
             {currentUserReview.map((review) => {

@@ -1,17 +1,19 @@
-import React, { createElement, useState } from 'react';
-import { Tooltip, Avatar } from 'antd';
-import moment from 'moment';
+import React, { createElement, useState } from "react";
+import { Tooltip, Avatar } from "antd";
+import moment from "moment";
 import {
   DislikeOutlined,
   LikeOutlined,
   DislikeFilled,
   LikeFilled,
+
 } from '@ant-design/icons';
 import './reviews.css';
 import { Link, useHistory } from 'react-router-dom';
 
-const Reviews = ({ review }) => {
+const Reviews = (props) => {
   return (
+
     <div className="container container-main">
       <div className="wrap">
         <div className="block-img">
@@ -28,8 +30,8 @@ const Reviews = ({ review }) => {
             <Link to={`/review/${review._id}`}>More Info</Link>
           </div>
         </div>
-      </div>
-    </div>
+      ) : null}
+    </>
   );
 };
 
