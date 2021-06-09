@@ -98,7 +98,12 @@ function ProfileInfo() {
           ) : (
             <div className="wrapper">
               {currentUserReview.map((review) => {
-                return <Reviews key={review._id} review={review} />;
+                return (
+                  <div>
+                <Reviews key={review._id} review={review} />
+                
+                </div>
+                )
               })}
             </div>
           )}
