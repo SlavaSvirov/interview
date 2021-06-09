@@ -11,7 +11,6 @@ import { getLitle } from "../../redux/actions/reviewsAC";
 const MainPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.reviews);
-  const [currentPage, setCurrentPage] = useState(1);
   const [featching, setFeatching] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -103,7 +102,7 @@ const MainPage = () => {
           </div>
           <div className={styles.wrapper}>
 
-            {data.map((review) => {
+            {data.map((review, i) => {
               return <Reviews key={review._id} review={review} />;
             })}
           </div>
