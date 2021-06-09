@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFetch } from '../../redux/actions/reviewsAC';
+import { changeAvatarFetch } from '../../redux/actions/userAC';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 import UploadPhoto from '../UploadPhoto/UploadPhoto';
@@ -11,6 +12,8 @@ function ProfileInfo() {
   console.log('reviews', reviews);
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
+  const inputFile = useRef(null);
+  const avatar = useSelector((state) => state.user.avatar);
 
   const dispatch = useDispatch();
 
@@ -32,14 +35,46 @@ function ProfileInfo() {
     setCurrentUserReview(filteredReviews);
   }, [reviews]);
 
+  const avatarChange = (e) => {
+    console.log(e.target.files[0]);
+    dispatch(changeAvatarFetch(e.target.files[0], infoFromUser._id));
+  };
+
   return (
-    <div className='container container-main'>
+    <div className="container container-main">
       <div className="main">
-        <div className='profile'>
+        <div className="profile">
           <form className="profileForm">
-            <UploadPhoto />
+            <div className="user">
+              <img src={avatar} alt="#" />
+              {/* <div
+                className="userPhoto"
+                style={{
+                  background: `url(${avatar}) no-repeat contain`,
+                  height: '150px',
+                }}
+              ></div> */}
+              <span
+                className="addImg"
+                onClick={() => {
+                  inputFile.current.click();
+                }}
+              >
+                <i className="fa fa-plus"></i>
+              </span>
+              <input
+                name="image"
+                className="input"
+                type="file"
+                ref={inputFile}
+                onChange={(e) => {
+                  avatarChange(e);
+                }}
+              />
+            </div>
+
             <span>Имя : {infoFromUser.name}</span>
-            <span>Email : qwe@qwe.ru</span>
+            <span>Email : {infoFromUser.email}</span>
             <span>Дата регистрации : 01.01.2000г.</span>
             <span>Какую группу закончил : Бобры</span>
             <span>Написал отзывов : 10</span>
@@ -48,17 +83,17 @@ function ProfileInfo() {
           </form>
         </div>
         <div className="reviews">
-          <div className='sortWrap'>
+          <div className="sortWrap">
             <Sort />
           </div>
-            <p>Мои последние отзывы :</p>
-          <div className='wrapper'>
+
+          <p className="myReviews">Мои последние отзывы :</p>
+          <div className="wrapper">
             {currentUserReview.map((review) => {
               return <Reviews key={review._id} review={review} />;
             })}
           </div>
         </div>
-
       </div>
     </div>
   );

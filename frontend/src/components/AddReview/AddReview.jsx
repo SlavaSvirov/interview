@@ -248,7 +248,7 @@ const AddReview = () => {
         <Form.Item name="questions" label="Вопросы с собеседования">
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
-        <Form.Item name="codFile" label="Link to see code">
+        <Form.Item name="codFile" label="Ссылка на код">
           <Input.TextArea placeholder="Write here" />
         </Form.Item>
         <Form.Item name="impression" label="Общее впечатление о собеседовании">

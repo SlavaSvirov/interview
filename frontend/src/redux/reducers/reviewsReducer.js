@@ -5,6 +5,8 @@ const {
   SORT_REVIEWS,
   PROGINATION_REVIEWS,
 } = require("../types/types");
+import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
+
 
 function reviewsReducer(state = initState.reviews, action) {
   switch (action.type) {
@@ -27,6 +29,8 @@ function reviewsReducer(state = initState.reviews, action) {
       
       
       return [...state,...action.payload]
+    case CHANGE_LIKE_REVIEW:
+      return [...state, action.payload];
 
     default:
       return state;

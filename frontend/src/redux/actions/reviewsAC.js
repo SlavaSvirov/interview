@@ -1,6 +1,7 @@
 import { GET_ALL, PROGINATION_REVIEWS, SORT_REVIEWS } from "../types/types";
 import axios from "axios";
-import ColumnGroup from "antd/lib/table/ColumnGroup";
+import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
+import axios from 'axios';
 
 export const setAll = (reviews) => {
   return {
@@ -27,6 +28,15 @@ export const pogination = (litleReview) => {
 
 export const getAllFetch = (index) => async (dispatch) => {
   const result = await axios("http://localhost:3001/review");
+export const changeLikeReviews = (oneReview) => {
+  return {
+    type: CHANGE_LIKE_REVIEW,
+    payload: oneReview
+  };
+};
+
+export const getAllFetch = () => async (dispatch) => {
+  const result = await axios('http://localhost:3001/review');
 
   dispatch(setAll(result.data));
 };
@@ -45,3 +55,7 @@ export const getLitle = (index) => async (dispatch) => {
   
   dispatch(pogination(litle));
 };
+export const changeLikeFetch = (id) => async (dispatch) => {
+  const result = await axios.post(`http://localhost:3001/review/${id}`);
+  dispatch(setAll(result.data));
+}

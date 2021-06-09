@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { getAllFetch } from '../../redux/actions/reviewsAC';
 import { getLitle } from "../../redux/actions/reviewsAC";
 
+
 const MainPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.reviews);
@@ -38,6 +39,7 @@ const MainPage = () => {
     dispatch(getLitle(index));
 
     setIndex((prev) => prev + 6);
+
   }, [featching]);
 
   return (
@@ -100,13 +102,10 @@ const MainPage = () => {
             <Sort />
           </div>
           <div className={styles.wrapper}>
-            {/* {data.length ? <Reviews id={data[0]._id} /> : null} */}
-            {data.length
-              ? data.map((el) => (
-                  <Reviews key={el._id} id={el._id} review={el} />
-                ))
-              : null}
-            {/* {data.length ? data.map((el) => <li>{el.companyName}</li>) : null} */}
+
+            {data.map((review) => {
+              return <Reviews key={review._id} review={review} />;
+            })}
           </div>
         </div>
       </div>

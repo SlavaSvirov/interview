@@ -14,7 +14,16 @@ router
     res.json(dbData);
   })
 
-  .post("/", async (req, res) => {
+
+  .post('/:id', async (req, res) => {
+    let dbPost = await reviewModel.findById(req.params.id);
+    console.log(dbPost);
+    dbPost.likes+=1;
+    await dbPost.save();
+    res.json(dbPost);
+  })
+
+  .post('/', async (req, res) => {
     const file = req.file
       ? `http://localhost:3001/public/img/${req.file.filename}`
       : "";
