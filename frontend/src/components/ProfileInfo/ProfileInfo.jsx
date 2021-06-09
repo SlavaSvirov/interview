@@ -6,11 +6,11 @@ import { changeAvatarFetch } from '../../redux/actions/userAC';
 import Loader from '../Loader/Loader';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
-import UploadPhoto from '../UploadPhoto/UploadPhoto';
 import './ProfileInfo.css';
 
 function ProfileInfo() {
   const reviews = useSelector((state) => state.reviews);
+  const user = useSelector((state) => state.user);
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
   const inputFile = useRef(null);
@@ -31,18 +31,18 @@ function ProfileInfo() {
       dispatch(getAllFetch()).then(() => hideLoader());
       setInfoFromUser(myUser);
     })();
+
   }, []);
 
   useEffect(() => {
-    const filteredReviews = [...reviews].filter((review) => {
-      return review.author._id == infoFromUser._id;
+    const filteredReviews = reviews.filter((review) => {
+      return review.author._id == user._id;
     });
     setCurrentUserReview(filteredReviews);
   }, [reviews]);
 
   const avatarChange = (e) => {
-    console.log(e.target.files[0]);
-    dispatch(changeAvatarFetch(e.target.files[0], infoFromUser._id));
+    dispatch(changeAvatarFetch(e.target.files[0], user._id));
   };
 
   return (
@@ -51,7 +51,12 @@ function ProfileInfo() {
         <div className="profile">
           <form className="profileForm">
             <div className="user">
-              <div className="userPhoto"></div>
+              <div
+                className="userPhoto"
+                style={{
+                  background: `url('http://localhost:3001/${avatar}') 100%/100% no-repeat `,
+                }}
+              ></div>
               <span
                 className="addImg"
                 onClick={() => {
@@ -71,12 +76,12 @@ function ProfileInfo() {
               />
             </div>
 
-            <span>Имя : {infoFromUser.name}</span>
-            <span>Email : {infoFromUser.email}</span>
+            <span>Имя : {user.name}</span>
+            <span>Email : {user.email}</span>
             <span>Дата регистрации : 01.01.2000г.</span>
             <span>Какую группу закончил : Бобры</span>
             <span>Написал отзывов : 10</span>
-            <span>Рейтинг : {infoFromUser.rating}</span>
+            <span>Рейтинг : {user.rating}</span>
             <button>Редактировать профиль</button>
           </form>
         </div>
@@ -84,6 +89,7 @@ function ProfileInfo() {
           <div className="sortWrap">
             <Sort />
           </div>
+
           <p className="myReviews">Мои последние отзывы :</p>
           {
             loader ? <Loader /> :

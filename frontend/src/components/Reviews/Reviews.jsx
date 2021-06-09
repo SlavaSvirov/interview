@@ -1,15 +1,9 @@
 import React, { createElement, useState } from 'react';
-import { Tooltip, Avatar } from 'antd';
-import moment from 'moment';
-import {
-  DislikeOutlined,
-  LikeOutlined,
-  DislikeFilled,
-  LikeFilled,
-} from '@ant-design/icons';
+
 import './reviews.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 
 const Reviews = ({ review }) => {
 
@@ -43,6 +37,7 @@ const Reviews = ({ review }) => {
             </>
           ))
         }
+
       </div>
     </div>
   );

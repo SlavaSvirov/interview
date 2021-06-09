@@ -1,5 +1,6 @@
 import {
   AUTH,
+  GET_USER,
   LOG_OUT,
   SAGA_LOGIN,
   SAGA_REGISTER,
@@ -70,6 +71,12 @@ export const changeAvatar = (user) => {
     payload: user,
   };
 };
+export const getUser = (user) => {
+  return {
+    type: GET_USER,
+    payload: user,
+  };
+};
 
 export const changeAvatarFetch = (file, id) => async (dispatch) => {
   const formData = new FormData();
@@ -79,11 +86,18 @@ export const changeAvatarFetch = (file, id) => async (dispatch) => {
   const response = await fetch('http://localhost:3001/user/changeAvatar', {
     method: 'PATCH',
     credentials: 'include',
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
     body: formData,
   });
+
   const newUser = await response.json();
   dispatch(changeAvatar(newUser));
+};
+
+export const getUserFetch = (id) => async (dispatch) => {
+  const newUser = await fetch('http://localhost:3001/user', {
+    method: 'GET',
+    credentials: 'include',
+  });
+
+  dispatch(getUser(newUser.data));
 };

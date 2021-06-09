@@ -10,21 +10,21 @@ router
     // все последние отзывы юзера
     // Reviews.find()
     let dbData = await reviewModel.find().populate('author');
+    // console.log('------>>>>>>>>',dbData);
     res.json(dbData);
   })
 
   .post('/:id', async (req, res) => {
     let dbPost = await reviewModel.findById(req.params.id);
     console.log(dbPost);
-    dbPost.likes+=1;
+    dbPost.likes += 1;
     await dbPost.save();
     res.json(dbPost);
   })
 
   .post('/', async (req, res) => {
-    const file = req.file
-      ? `http://localhost:3001/public/img/${req.file.filename}`
-      : '';
+    console.log(req.body);
+    const file = req.file ? `/img/${req.file.filename}` : '';
 
     const companyName = await axios(
       `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
@@ -84,8 +84,6 @@ router
     }
 
     return res.sendStatus(200);
-
-    // console.log(dbData);
   })
   .delete('/profile', (req, res) => {
     // Reviews.FindByIdAndDelete

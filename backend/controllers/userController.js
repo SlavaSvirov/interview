@@ -27,6 +27,7 @@ const userSignin = async (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
     const currentUser = await User.findOne({ email });
+    console.log(currentUser);
     if (currentUser && (await bcrypt.compare(password, currentUser.password))) {
       req.session.user = {
         id: currentUser._id,
@@ -41,6 +42,11 @@ const userSignin = async (req, res) => {
     return res.sendStatus(412);
   }
   return res.sendStatus(412);
+};
+
+const getUser = async (req, res) => {
+  const user = await User.find;
+  res.json(user);
 };
 
 const userSignout = async (req, res) => {
@@ -60,14 +66,23 @@ const userInfo = async (req, res) => {
 
 const changeAvatarBack = async (req, res) => {
   const { id } = req.body;
-  const { image } = req.file;
-  console.log(id);
-  console.log(image);
-  const user = await User.findByIdAndUpdate(id, {
-    avatar: `http://localhost:3001/public/img/${image.originalname}`,
+
+  const user = await User.findByIdAndUpdate(
+    id,
+    {
+      avatar: `/img/${req.file.filename}`,
+    },
+    { new: true }
+  );
+
+  return res.json({
+    _id: user._id,
+    status: user.status,
+    email: user.email,
+    rating: user.rating,
+    name: user.name,
+    avatar: user.avatar,
   });
-  console.log(user);
-  res.json(user);
 };
 
 const checkUser = async (req, res) => {
@@ -87,4 +102,5 @@ module.exports = {
   userInfo,
   checkUser,
   changeAvatarBack,
+  getUser,
 };

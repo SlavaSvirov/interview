@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import querystring from 'querystring';
+import { useHistory, useParams } from 'react-router-dom';
+
 import {
   Form,
   Select,
@@ -49,6 +51,7 @@ const normFile = (e) => {
 };
 
 const AddReview = () => {
+  let history = useHistory();
   const onFinish = async (values) => {
     console.log(values);
     const formData = new FormData();
@@ -293,3 +296,4 @@ const AddReview = () => {
   );
 };
 export default AddReview;
+// history.push(`/company/${input}`);

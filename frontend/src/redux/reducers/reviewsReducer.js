@@ -1,8 +1,13 @@
+import initState from '../initState';
 import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
+const {
+  GET_ALL,
+  ADD_REVIEW,
+  SORT_REVIEWS,
+  PROGINATION_REVIEWS,
+} = require('../types/types');
 
-const { GET_ALL, ADD_REVIEW, SORT_REVIEWS } = require('../types/types');
-
-function reviewsReducer(state = [], action) {
+function reviewsReducer(state = initState.reviews, action) {
   switch (action.type) {
     case GET_ALL:
       return action.payload;
@@ -19,6 +24,8 @@ function reviewsReducer(state = [], action) {
       });
       return [...sortedData];
 
+    case PROGINATION_REVIEWS:
+      return [...state, ...action.payload];
     case CHANGE_LIKE_REVIEW:
       return [...state, action.payload];
 

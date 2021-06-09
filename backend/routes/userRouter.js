@@ -6,12 +6,14 @@ const {
   userInfo,
   checkUser,
   changeAvatarBack,
+  getUser,
 } = require('../controllers/userController');
 const user = require('../database/models/user');
 const { checkAuth } = require('../middleware/checkAuth');
 const CompanyModel = require('../database/models/company');
 
 const userRouter = Router();
+userRouter.route('/').get(getUser);
 
 userRouter.route('/signup').post(userSignup);
 

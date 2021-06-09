@@ -6,21 +6,23 @@ import { changeLikeFetch, getAllFetch } from "../../redux/actions/reviewsAC";
 import Loader from "../Loader/Loader";
 
 
+
 export default function OneReview() {
-  const reviews = useSelector(state => state.reviews)
-  const user = useSelector(state => state.user)
+  const reviews = useSelector((state) => state.reviews);
+  const user = useSelector((state) => state.user);
   const id = useParams();
   const [onePost, setOnePost] = useState(null);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { loader, showLoader, hideLoader } = useLoaderContext()
 
   useEffect(() => {
     if (reviews.length) {
-      setOnePost(reviews.find(elem => elem._id == id.id))
+      setOnePost(reviews.find((elem) => elem._id == id.id));
     } else {
       showLoader()
       dispatch(getAllFetch()).then(() => hideLoader())
+
     }
   }, [reviews]);
 
@@ -59,6 +61,5 @@ export default function OneReview() {
       }
     </div>
   )
+
 }
-
-

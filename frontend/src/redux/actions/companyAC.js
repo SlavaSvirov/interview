@@ -22,6 +22,7 @@ export const allFetch = () => async (dispatch) => {
 };
 
 export const getAllFetch = (text) => async (dispatch) => {
+  const myText = text.toLowerCase();
   const result = await fetch('http://localhost:3001/company', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
