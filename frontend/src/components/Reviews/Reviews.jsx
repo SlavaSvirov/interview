@@ -1,12 +1,5 @@
 import React, { createElement, useState } from 'react';
-import { Tooltip, Avatar } from 'antd';
-import moment from 'moment';
-import {
-  DislikeOutlined,
-  LikeOutlined,
-  DislikeFilled,
-  LikeFilled,
-} from '@ant-design/icons';
+
 import './reviews.css';
 import { Link, useHistory } from 'react-router-dom';
 

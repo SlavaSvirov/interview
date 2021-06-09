@@ -47,6 +47,11 @@ const userSignin = async (req, res) => {
   return res.sendStatus(412);
 };
 
+const getUser = async (req, res) => {
+  const user = await User.find;
+  res.json(user);
+};
+
 const userSignout = async (req, res) => {
   req.session.destroy(function (err) {
     if (err) return res.sendStatus(401);
@@ -65,11 +70,22 @@ const userInfo = async (req, res) => {
 const changeAvatarBack = async (req, res) => {
   const { id } = req.body;
 
-  const user = await User.findByIdAndUpdate(id, {
-    avatar: `/img/${req.file.filename}`,
+  const user = await User.findByIdAndUpdate(
+    id,
+    {
+      avatar: `/img/${req.file.filename}`,
+    },
+    { new: true }
+  );
+
+  return res.json({
+    _id: user._id,
+    status: user.status,
+    email: user.email,
+    rating: user.rating,
+    name: user.name,
+    avatar: user.avatar,
   });
-  console.log(user);
-  res.json(user);
 };
 
 const checkUser = async (req, res) => {
@@ -91,4 +107,5 @@ module.exports = {
   userInfo,
   checkUser,
   changeAvatarBack,
+  getUser,
 };
