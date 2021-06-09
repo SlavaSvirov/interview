@@ -1,4 +1,9 @@
-import { GET_ALL, PROGINATION_REVIEWS, SORT_REVIEWS } from '../types/types';
+import {
+  CLEAR_ALL,
+  GET_ALL,
+  PROGINATION_REVIEWS,
+  SORT_REVIEWS,
+} from '../types/types';
 import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
 import axios from 'axios';
 
@@ -6,6 +11,12 @@ export const setAll = (reviews) => {
   return {
     type: GET_ALL,
     payload: reviews,
+  };
+};
+
+export const clear = () => {
+  return {
+    type: CLEAR_ALL,
   };
 };
 

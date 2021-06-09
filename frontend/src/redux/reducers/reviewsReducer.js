@@ -6,6 +6,7 @@ const {
   SORT_REVIEWS,
   PROGINATION_REVIEWS,
   LOG_OUT,
+  CLEAR_ALL,
 } = require('../types/types');
 
 function reviewsReducer(state = initState.reviews, action) {
@@ -27,6 +28,7 @@ function reviewsReducer(state = initState.reviews, action) {
 
     case PROGINATION_REVIEWS:
       return [...state, ...action.payload];
+
     case CHANGE_LIKE_REVIEW:
       return state.map(el=>{
         if(el._id ===action.payload._id){
@@ -35,8 +37,11 @@ function reviewsReducer(state = initState.reviews, action) {
         return el
       })
 
-      case LOG_OUT :
-      return initState.reviews
+    case LOG_OUT:
+      return initState.reviews;
+
+    case CLEAR_ALL:
+      return initState.reviews;
 
     default:
       return state;

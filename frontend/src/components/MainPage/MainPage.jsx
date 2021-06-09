@@ -5,7 +5,7 @@ import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getAllFetch } from '../../redux/actions/reviewsAC';
-import { getLitle } from '../../redux/actions/reviewsAC';
+import { clear, getLitle } from '../../redux/actions/reviewsAC';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -17,16 +17,16 @@ const MainPage = () => {
       e.target.documentElement.scrollHeight -
       (e.target.documentElement.scrollTop + window.innerHeight);
     if (loc <= 100 && 85 <= loc) {
+      console.log({ featching });
       setFeatching((prev) => !prev);
-      console.log('scroll');
       console.log(e.target.documentElement.scrollHeight);
     }
   };
 
   useEffect(() => {
-    console.log('featching');
     document.addEventListener('scroll', scrollHandler);
-    return function () {
+    return () => {
+      dispatch(clear());
       document.removeEventListener('scroll', scrollHandler);
     };
   }, []);
@@ -97,7 +97,6 @@ const MainPage = () => {
             <Sort />
           </div>
           <div className={styles.wrapper}>
-
             {data.map((review) => {
               return <Reviews key={review._id} review={review} />;
             })}
