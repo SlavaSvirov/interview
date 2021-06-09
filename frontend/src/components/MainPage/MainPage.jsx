@@ -1,45 +1,39 @@
-import styles from "./MainPage.module.css";
-import React, { useState, useEffect } from "react";
-import AutoComplete from "../CustomAutoComplete/CustomAutoComplete";
-import Reviews from "../Reviews/Reviews";
-import Sort from "../Sort/Sort";
-import { useDispatch, useSelector } from "react-redux";
+import styles from './MainPage.module.css';
+import React, { useState, useEffect } from 'react';
+import AutoComplete from '../CustomAutoComplete/CustomAutoComplete';
+import Reviews from '../Reviews/Reviews';
+import Sort from '../Sort/Sort';
+import { useDispatch, useSelector } from 'react-redux';
 // import { getAllFetch } from '../../redux/actions/reviewsAC';
-import { getLitle } from "../../redux/actions/reviewsAC";
-
+import { getLitle } from '../../redux/actions/reviewsAC';
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.reviews);
-  const [currentPage, setCurrentPage] = useState(1);
   const [featching, setFeatching] = useState(false);
   const [index, setIndex] = useState(0);
-
   const scrollHandler = (e) => {
-    const loc = e.target.documentElement.scrollHeight -(e.target.documentElement.scrollTop + window.innerHeight)
+    const loc =
+      e.target.documentElement.scrollHeight -
+      (e.target.documentElement.scrollTop + window.innerHeight);
     if (loc <= 100 && 85 <= loc) {
       setFeatching((prev) => !prev);
-      console.log("scroll");
+      console.log('scroll');
       console.log(e.target.documentElement.scrollHeight);
-
     }
   };
 
   useEffect(() => {
-    console.log("featching");
-    document.addEventListener("scroll", scrollHandler);
+    console.log('featching');
+    document.addEventListener('scroll', scrollHandler);
     return function () {
-      document.removeEventListener("scroll", scrollHandler);
+      document.removeEventListener('scroll', scrollHandler);
     };
   }, []);
 
   useEffect(() => {
-    console.log({ featching });
-
     dispatch(getLitle(index));
-
     setIndex((prev) => prev + 6);
-
   }, [featching]);
 
   return (
@@ -91,7 +85,7 @@ const MainPage = () => {
         </div>
 
         <div className={styles.secondMainPage}>
-          <a name='secondPage'></a>
+          <a name="secondPage"></a>
           <div className={styles.secondTitle}>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam,
@@ -103,7 +97,6 @@ const MainPage = () => {
             <Sort />
           </div>
           <div className={styles.wrapper}>
-
             {data.map((review) => {
               return <Reviews key={review._id} review={review} />;
             })}

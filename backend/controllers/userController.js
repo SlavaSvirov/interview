@@ -4,13 +4,14 @@ const bcrypt = require('bcrypt');
 const saltRound = 10;
 
 const userSignup = async (req, res) => {
-  const { email, password: pass, name } = req.body;
-  if (email && pass && name) {
+  const { email, password: pass, name, surname } = req.body;
+  if (email && pass && name && surname) {
     const password = await bcrypt.hash(pass, saltRound);
     const newUser = await User.create({
       email,
       password,
       name,
+      surname,
     });
 
     req.session.user = {
@@ -18,7 +19,13 @@ const userSignup = async (req, res) => {
       name: newUser.name,
     };
 
-    return res.sendStatus(200);
+    return res.json({
+      name: newUser.name,
+      _id: newUser._id,
+      email: newUser.email,
+      status: newUser.status,
+      avatar: newUser.avatar,
+    });
   }
   return res.statuStatus(418);
 };
@@ -27,7 +34,6 @@ const userSignin = async (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
     const currentUser = await User.findOne({ email });
-    console.log(currentUser);
     if (currentUser && (await bcrypt.compare(password, currentUser.password))) {
       req.session.user = {
         id: currentUser._id,
@@ -35,8 +41,10 @@ const userSignin = async (req, res) => {
       };
       return res.json({
         name: currentUser.name,
-        id: currentUser._id,
+        _id: currentUser._id,
         email: currentUser.email,
+        status: currentUser.status,
+        avatar: currentUser.avatar,
       });
     }
     return res.sendStatus(412);

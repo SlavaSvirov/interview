@@ -18,20 +18,18 @@ function ProfileInfo() {
 
   const dispatch = useDispatch();
 
-  const { loader, showLoader, hideLoader } = useLoaderContext()
-
+  const { loader, showLoader, hideLoader } = useLoaderContext();
 
   useEffect(() => {
     (async () => {
       const newUser = await fetch('http://localhost:3001/user/getInfo', {
         credentials: 'include',
       });
-      showLoader()
+      showLoader();
       const myUser = await newUser.json();
       dispatch(getAllFetch()).then(() => hideLoader());
       setInfoFromUser(myUser);
     })();
-
   }, []);
 
   useEffect(() => {
@@ -91,14 +89,15 @@ function ProfileInfo() {
           </div>
 
           <p className="myReviews">Мои последние отзывы :</p>
-          {
-            loader ? <Loader /> :
-              <div className="wrapper">
-                {currentUserReview.map((review) => {
-                  return <Reviews key={review._id} review={review} />;
-                })}
-              </div>
-          }
+          {loader ? (
+            <Loader />
+          ) : (
+            <div className="wrapper">
+              {currentUserReview.map((review) => {
+                return <Reviews key={review._id} review={review} />;
+              })}
+            </div>
+          )}
         </div>
       </div>
     </div>
