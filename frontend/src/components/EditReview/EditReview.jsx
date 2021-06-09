@@ -1,4 +1,3 @@
-
 // import { Avatar } from 'antd';
 // import { AntDesignOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
@@ -53,11 +52,11 @@ const normFile = (e) => {
 };
 
 const EditReview = () => {
-  const {id} = useParams()
+  const { id } = useParams();
   const reviews = useSelector((state) => state.reviews);
   let history = useHistory();
-  let formData=reviews.find((elem) => toString(elem._id) === toString(id))
-  
+  let formDat = reviews.find((elem) => elem._id == id);
+
   const onFinish = async (values) => {
     console.log(values);
     const formData = new FormData();
@@ -70,32 +69,18 @@ const EditReview = () => {
     formData.append('questions', values.questions);
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
-    formData.append('image', values.image.files[0]);
-    // try{
-    const response = await axios({
-      method: 'PATCH',
-      url: `/review/${id}`,
+    if (values.image) {
+      formData.append('image', values.image.files[0]);
+    }
+
+    const response = await axios.patch(`http://localhost:3001/review/${id}`, {
       withCredentials: true,
       data: formData,
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    })
+    });
     console.log(response.data);
-
-    // const data = await response.json();
-
-    // if (dataFromServer.status === 200) {
-    //   alert('your review was successly added');
-    //   // window.location.assign('/profile');
-    // }
-    // if (dataFromServer.status === 400) {
-    //   alert('error in bd');
-    //   window.location.assign('/404');
-    // }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const { Option } = Select;
@@ -127,7 +112,7 @@ const EditReview = () => {
           if (currentValue === value) {
             const result = d;
             const data = [];
-            result?.map(elem => {
+            result?.map((elem) => {
               let logoValid;
               if (elem.companyLogo) {
                 let arrFromObjLogo = Object.values(elem.companyLogo);
@@ -172,7 +157,7 @@ const EditReview = () => {
       <Form
         name="validate_other"
         {...formItemLayout}
-        initialValues={formData} 
+        initialValues={formDat}
         onFinish={(e) => onFinish(e)}
       >
         <Form.Item
@@ -249,14 +234,14 @@ const EditReview = () => {
           />
         </Form.Item>
         <Form.Item name="hrName" label="Имя HR">
-        {/* {getFieldDecorator('name', {
+          {/* {getFieldDecorator('name', {
                         initialValue: formData.hrName || '',
                         Rules: [{required: true, message: 'name cannot be empty'}],
                     })(
 
                       
                     )} */}
-        <Input placeholder="Введи имя" />
+          <Input placeholder="Введи имя" />
         </Form.Item>
 
         <Form.Item name="questions" label="Вопросы с собеседования">
@@ -301,8 +286,12 @@ const EditReview = () => {
             offset: 6,
           }}
         >
-          <Button type="primary" htmlType="submit" onClick={() => history.push('/profile')}>
-            Добавить отзыв
+          <Button
+            type="primary"
+            htmlType="submit"
+            onClick={() => history.push('/profile')}
+          >
+            Изменить отзыв
           </Button>
         </Form.Item>
       </Form>

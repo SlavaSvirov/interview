@@ -67,8 +67,10 @@ const userSignout = async (req, res) => {
 };
 
 const userInfo = async (req, res) => {
-  const user = await User.findById(req.session.user.id);
-
+  const id = req.params.id;
+  console.log({ id });
+  const user = await User.findById(id);
+  console.log(user);
   res.json(user);
 };
 

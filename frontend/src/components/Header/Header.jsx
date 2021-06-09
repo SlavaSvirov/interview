@@ -12,7 +12,7 @@ function Header() {
     dispatch(logoutAC());
   };
 
-  const isAuth = useSelector((state) => state.user.isAuth);
+  const user = useSelector((state) => state.user);
 
   return (
     <header className={style.header}>
@@ -24,7 +24,7 @@ function Header() {
             </span>
           </Link>
           <div className={style.secondBurger}>
-            {isAuth ? (
+            {user.isAuth ? (
               <ul>
                 <li>
                   <Link to="/">Home</Link>
@@ -33,7 +33,7 @@ function Header() {
                   <Link to="/company">Company</Link>
                 </li>
                 <li>
-                  <Link to="/profile">Profile</Link>
+                  <Link to={`/user/${user._id}`}>Profile</Link>
                 </li>
                 <li>
                   <Link to="/" onClick={() => logOutHandler()}>
@@ -42,18 +42,18 @@ function Header() {
                 </li>
               </ul>
             ) : (
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/company">Company</Link>
-                  </li>
-                  <li>
-                    <Link to="/login">Log In</Link>
-                  </li>
-                </ul>
-              )}
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/company">Company</Link>
+                </li>
+                <li>
+                  <Link to="/login">Log In</Link>
+                </li>
+              </ul>
+            )}
           </div>
         </nav>
       </div>
