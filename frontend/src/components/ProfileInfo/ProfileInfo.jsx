@@ -17,13 +17,11 @@ function ProfileInfo() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      dispatch(getAllFetch());
-    })();
+    dispatch(getAllFetch());
   }, []);
 
   useEffect(() => {
-    const filteredReviews = [...reviews].filter((review) => {
+    const filteredReviews = reviews.filter((review) => {
       return review.author._id == user._id;
     });
     setCurrentUserReview(filteredReviews);

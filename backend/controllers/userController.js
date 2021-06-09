@@ -31,6 +31,7 @@ const userSignin = async (req, res) => {
   const { email, password } = req.body;
   if (email && password) {
     const currentUser = await User.findOne({ email });
+    console.log(currentUser);
     if (currentUser && (await bcrypt.compare(password, currentUser.password))) {
       req.session.user = {
         id: currentUser._id,

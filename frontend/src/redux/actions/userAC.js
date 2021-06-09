@@ -20,7 +20,6 @@ export const sagaRegisterAC = ({ email, password, name, surname }) => {
 };
 
 export const registerAC = (user) => {
-  console.log(user);
   return {
     type: AUTH,
     payload: {
@@ -40,6 +39,7 @@ export const sagaLoginAC = (user) => {
 };
 
 export const loginAC = (user) => {
+  console.log(user);
   return {
     type: AUTH,
     payload: {
