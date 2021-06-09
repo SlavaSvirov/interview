@@ -1,14 +1,13 @@
-import React, { createElement, useState } from "react";
+import React, { createElement, useState } from 'react';
 
-import "./reviews.css";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useHistory} from 'react-router-dom';
-
+import './reviews.css';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const Reviews = ({ review }) => {
   let history = useHistory();
-console.log('=========================',history);
+  console.log('=========================', history);
   const companies = useSelector((state) => state.companys);
   const user = useSelector((state) => state.user);
   const reviews = useSelector((state) => state.reviews);
@@ -18,12 +17,12 @@ console.log('=========================',history);
 
   const reviewLogo = (direction) => {
     switch (direction) {
-      case "Frontend":
-        return "http://localhost:3001/img/front.png";
-      case "Backend":
-        return "";
-      case "Fullstack":
-        return "";
+      case 'Frontend':
+        return 'http://localhost:3001/img/front.png';
+      case 'Backend':
+        return '';
+      case 'Fullstack':
+        return '';
       default:
         break;
     }
@@ -39,7 +38,7 @@ console.log('=========================',history);
               background: `url(${reviewLogo(
                 review.direction
               )}) no-repeat center`,
-              height: "190px",
+              height: '190px',
             }}
           >
             <span className="rating">{review.rating}</span>
@@ -50,11 +49,12 @@ console.log('=========================',history);
               <span className="user-working-pasition">
                 {review.direction} Developer
               </span>
-              {review.author._id == user._id && user.isAuth &&  history.location.pathname === '/profile' ? (
+              {review.author._id == user._id &&
+              user.isAuth &&
+              history.location.pathname === `/user/${user._id}` ? (
                 <div>
-                <span>ED</span>
-                <span>DEL</span>
-
+                  <span>ED</span>
+                  <span>DEL</span>
                 </div>
               ) : (
                 <span></span>

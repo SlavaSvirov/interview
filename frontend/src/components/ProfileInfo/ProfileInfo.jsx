@@ -31,7 +31,7 @@ function ProfileInfo() {
       dispatch(getAllFetch()).then(() => hideLoader());
       setInfoFromUser(myUser);
     })();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const filteredReviews = reviews.filter((review) => {
@@ -78,13 +78,13 @@ function ProfileInfo() {
               />
             </div>
 
-            <div className='userInfo'>
-              <span className='name'>{user.name}</span>
-              <span className='rating'>{user.rating}</span>
-              {user._id == id && <button className='btn'>Редактировать профиль</button>}
+            <div className="userInfo">
+              <span className="name">{infoFromUser.name}</span>
+              <span className="rating">{infoFromUser.rating}</span>
+              {user._id == id && (
+                <button className="btn">Редактировать профиль</button>
+              )}
             </div>
-
-
           </form>
         </div>
         <div className="reviews">
@@ -100,10 +100,9 @@ function ProfileInfo() {
               {currentUserReview.map((review) => {
                 return (
                   <div>
-                <Reviews key={review._id} review={review} />
-                
-                </div>
-                )
+                    <Reviews key={review._id} review={review} />
+                  </div>
+                );
               })}
             </div>
           )}
