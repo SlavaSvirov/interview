@@ -31,7 +31,7 @@ function ProfileInfo() {
       dispatch(getAllFetch()).then(() => hideLoader());
       setInfoFromUser(myUser);
     })();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const filteredReviews = reviews.filter((review) => {
@@ -100,10 +100,9 @@ function ProfileInfo() {
               {currentUserReview.map((review) => {
                 return (
                   <div>
-                <Reviews key={review._id} review={review} />
-                
-                </div>
-                )
+                    <Reviews key={review._id} review={review} />
+                  </div>
+                );
               })}
             </div>
           )}
