@@ -76,6 +76,10 @@ function App() {
             <OneReview />
           </Route>
 
+          <Route exact path="/review/edit/:id">
+            <EditReview />
+          </Route>
+
           <Route exact path="/">
             <MainPage />
           </Route>

@@ -22,15 +22,15 @@ export default function OneReview() {
   const changeLike = () => {
     dispatch(changeLikeFetch(id))
   }
-  const editPost = () => {
-    dispatch(editPost())
-  }
+  // const editPost = () => {
+  //   dispatch(editPost())
+  // }
 
 
   return onePost && (
     <div className='container container-main'>
       {/* <div className={style.sectionTitle}> */}
-      <Link to="/company/{onePost.company._id}"> {onePost.companyName}</Link>
+      <Link to={`/company/${onePost.company._id}`}> {onePost.companyName}</Link>
       <div>URL: <a href={onePost.company.companyUrl}> {onePost.company.companyUrl}</a></div>
       <div>автор: {onePost.author.name}</div>
       <div>создан: {onePost.created}</div>
@@ -45,8 +45,8 @@ export default function OneReview() {
       <div>Общее впечатление о собеседовании: {onePost.impression}</div>
       <div>Файлы с собеседования: <img src={onePost.image} alt="Файлы с собеседования" /></div>
       <div> {onePost.setteled ? "Усторился" : "Не устроился"}</div>
-      <div> {(onePost.author._id == user.id) ?
-        <button onClick={e => editPost(id)}>Редактировать</button> : <button onClick={e => changeLike(id)}>Like</button>
+      <div> {(onePost.author._id === user.id) ?
+        <button><Link to={`/review/edit/${id}`}>Редактировать</Link></button> : <button onClick={e => changeLike(id)}>Like</button>
       }
 
       </div>
