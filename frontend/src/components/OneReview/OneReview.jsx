@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom"
-import { changeLikeFetch, getAllFetch } from "../../redux/actions/reviewsAC";
-
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { changeLikeFetch, getAllFetch } from '../../redux/actions/reviewsAC';
 
 export default function OneReview() {
-  const reviews = useSelector(state => state.reviews)
-  const user = useSelector(state => state.user)
+  const reviews = useSelector((state) => state.reviews);
+  const user = useSelector((state) => state.user);
   const { id } = useParams();
   const [onePost, setOnePost] = useState(null);
-  const dispatch = useDispatch()
-  console.log(id);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (reviews.length) {
-      setOnePost(reviews.find(elem => elem._id == id))
+      setOnePost(reviews.find((elem) => elem._id == id));
     } else {
-      dispatch(getAllFetch())
+      dispatch(getAllFetch());
     }
   }, [reviews]);
 
@@ -29,7 +28,7 @@ export default function OneReview() {
 
   return onePost && (
     <div className='container container-main'>
-      {/* <div className={style.sectionTitle}> */}
+      {   console.log(onePost)}
       <Link to={`/company/${onePost.company._id}`}> {onePost.companyName}</Link>
       <div>URL: <a href={onePost.company.companyUrl}> {onePost.company.companyUrl}</a></div>
       <div>автор: {onePost.author.name}</div>
@@ -48,11 +47,7 @@ export default function OneReview() {
       <div> {(onePost.author._id === user._id) ?
         <button><Link to={`/review/edit/${id}`}>Редактировать</Link></button> : <button onClick={e => changeLike(id)}>Like</button>
       }
-
       </div>
-      {/* </div> */}
     </div>
-  )
+  );
 }
-
-

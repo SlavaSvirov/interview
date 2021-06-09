@@ -19,33 +19,33 @@ export default function GoogleB() {
     }
   }, [isAuth]);
 
-  const handleLogin = async googleData => {
+  const handleLogin = async (googleData) => {
     console.log(googleData);
-    const res = await fetch("http://localhost:3001/google", {
-      method: "POST",
+    const res = await fetch('http://localhost:3001/google', {
+      method: 'POST',
       body: JSON.stringify({
-        token: googleData.tokenId
+        token: googleData.tokenId,
       }),
       credentials: 'include',
       headers: {
-        "Content-Type": "application/json",
-      }
-    })
+        'Content-Type': 'application/json',
+      },
+    });
 
-    const data = await res.json()
-    if (data._id) {dispatch(registerAC({name:data.name,id:data._id}))}
-    else console.log("error");
-  }
+    const data = await res.json();
+    if (data._id) {
+      dispatch(registerAC({ name: data.name, _id: data._id }));
+    } else console.log('error');
+  };
   return (
     <div className="g-signin2" data-onsuccess="onSignIn">
       <GoogleLogin
         clientId="1074219333942-jlp6l6mu4i6p8ofasch5vkpsb0n20uo5.apps.googleusercontent.com"
-
         buttonText="Log In with Google"
         onSuccess={handleLogin}
         onFailure={handleLogin}
         cookiePolicy={'single_host_origin'}
       />
     </div>
-  )
+  );
 }

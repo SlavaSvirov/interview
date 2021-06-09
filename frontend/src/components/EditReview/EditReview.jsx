@@ -18,6 +18,7 @@ import {
   Rate,
   Typography,
 } from 'antd';
+import { useSelector } from 'react-redux';
 
 const { Title } = Typography;
 
@@ -52,8 +53,11 @@ const normFile = (e) => {
 };
 
 const EditReview = () => {
-  const { id } = useParams()
+  const {id} = useParams()
+  const reviews = useSelector((state) => state.reviews);
   let history = useHistory();
+  let formData=reviews.find((elem) => elem._id == id)
+  
   const onFinish = async (values) => {
     console.log(values);
     const formData = new FormData();
@@ -69,8 +73,8 @@ const EditReview = () => {
     formData.append('image', values.image.files[0]);
     // try{
     const response = await axios({
-      method: 'POST',
-      url: '/review',
+      method: 'PATCH',
+      url: `/review/${id}`,
       withCredentials: true,
       data: formData,
       headers: {
@@ -167,6 +171,7 @@ const EditReview = () => {
       <Form
         name="validate_other"
         {...formItemLayout}
+        initialValues={formData} 
         onFinish={(e) => onFinish(e)}
       >
         <Form.Item
@@ -243,7 +248,14 @@ const EditReview = () => {
           />
         </Form.Item>
         <Form.Item name="hrName" label="Имя HR">
-          <Input placeholder="Введи имя" />
+        {/* {getFieldDecorator('name', {
+                        initialValue: formData.hrName || '',
+                        Rules: [{required: true, message: 'name cannot be empty'}],
+                    })(
+
+                      
+                    )} */}
+        <Input placeholder="Введи имя" />
         </Form.Item>
 
         <Form.Item name="questions" label="Вопросы с собеседования">

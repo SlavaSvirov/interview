@@ -8,7 +8,7 @@ import './ProfileInfo.css';
 
 function ProfileInfo() {
   const reviews = useSelector((state) => state.reviews);
-  console.log('reviews', reviews);
+  const user = useSelector((state) => state.user);
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
   const inputFile = useRef(null);
@@ -17,26 +17,18 @@ function ProfileInfo() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      const newUser = await fetch('http://localhost:3001/user/getInfo', {
-        credentials: 'include',
-      });
-      const myUser = await newUser.json();
-      dispatch(getAllFetch());
-      setInfoFromUser(myUser);
-    })();
+    dispatch(getAllFetch());
   }, []);
 
   useEffect(() => {
-    const filteredReviews = [...reviews].filter((review) => {
-      return review.author._id == infoFromUser._id;
+    const filteredReviews = reviews.filter((review) => {
+      return review.author._id == user._id;
     });
     setCurrentUserReview(filteredReviews);
   }, [reviews]);
 
   const avatarChange = (e) => {
-    console.log(e.target.files[0]);
-    dispatch(changeAvatarFetch(e.target.files[0], infoFromUser._id));
+    dispatch(changeAvatarFetch(e.target.files[0], user._id));
   };
 
   return (
@@ -45,12 +37,10 @@ function ProfileInfo() {
         <div className="profile">
           <form className="profileForm">
             <div className="user">
-              {/* <img src={`http://localhost:3001/${avatar}`} alt="#" /> */}
               <div
                 className="userPhoto"
                 style={{
-                  background: `url('http://localhost:3001/${avatar}') no-repeat`,
-                  'background-size': 'contain',
+                  background: `url('http://localhost:3001/${avatar}') 100%/100% no-repeat `,
                 }}
               ></div>
               <span
@@ -72,12 +62,12 @@ function ProfileInfo() {
               />
             </div>
 
-            <span>Имя : {infoFromUser.name}</span>
-            <span>Email : {infoFromUser.email}</span>
+            <span>Имя : {user.name}</span>
+            <span>Email : {user.email}</span>
             <span>Дата регистрации : 01.01.2000г.</span>
             <span>Какую группу закончил : Бобры</span>
             <span>Написал отзывов : 10</span>
-            <span>Рейтинг : {infoFromUser.rating}</span>
+            <span>Рейтинг : {user.rating}</span>
             <button>Редактировать профиль</button>
           </form>
         </div>
