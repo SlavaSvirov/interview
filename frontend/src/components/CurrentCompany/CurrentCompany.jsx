@@ -42,18 +42,15 @@ function CurrentCompany() {
       {
         loader ? <Loader /> :
           <div className="currentCompany">
-            <h1>{currentCompany.companyName} </h1>
-            <div>
-              <div>
-                <img
-                  src={checkLogo(currentCompany.logo)}
-                  alt={currentCompany.name}
-                ></img>
-                <a href={currentCompany.companyUrl} alt={currentCompany.companyUrl}>
-                  {currentCompany.companyUrl}
+            <div style={{padding: '15px'}}>
+              <div className='company'>
+                <a href={currentCompany.companyUrl} alt={currentCompany.name}>
+                  <img src={checkLogo(currentCompany.logo)} alt={currentCompany.name}></img>
                 </a>
+                <h1>{currentCompany.companyName} </h1>
               </div>
               <div dangerouslySetInnerHTML={createMarkup()} />
+              <hr />
               <div className='wrapper'>
                 {currentCompany?.reviews?.map((review) => {
                   return <Reviews review={review} />;
