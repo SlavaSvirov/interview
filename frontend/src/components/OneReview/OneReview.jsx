@@ -69,7 +69,7 @@ export default function OneReview() {
                 alt="Файлы с собеседования"
               />
             </div>
-            <div> {onePost.setteled ? 'Усторился' : 'Не устроился'}</div>
+            <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
             <div>
               {onePost.author._id === user._id ? (
                 <button>
