@@ -40,6 +40,7 @@ export default function OneReview() {
         {loader ? (
           <Loader />
         ) : (
+
           <>
             <Link to="/company/{onePost.company._id}">
               {onePost.companyName}
