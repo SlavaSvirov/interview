@@ -1,5 +1,5 @@
 import initState from '../initState';
-import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
+import { CHANGE_LIKE_REVIEW, DELETE_ONE } from '../types/typeReview';
 const {
   GET_ALL,
   ADD_REVIEW,
@@ -30,13 +30,14 @@ function reviewsReducer(state = initState.reviews, action) {
       return [...state, ...action.payload];
 
     case CHANGE_LIKE_REVIEW:
-      return state.map(el=>{
-        if(el._id ===action.payload._id){
-          return {...el,...action.payload}
+      return state.map(el => {
+        if (el._id === action.payload._id) {
+          return { ...el, ...action.payload }
         }
         return el
       })
-
+    case DELETE_ONE:
+      return state.filter(elem => elem._id !== action.payload)
     case LOG_OUT:
       return initState.reviews;
 
