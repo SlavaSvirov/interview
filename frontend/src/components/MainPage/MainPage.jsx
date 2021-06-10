@@ -19,9 +19,7 @@ const MainPage = () => {
       (e.target.documentElement.scrollTop + window.innerHeight);
     // console.log({ loc });
     if (loc <= 100 && 98 <= loc) {
-      console.log({ featching });
       setFeatching((prev) => !prev);
-      console.log(e.target.documentElement.scrollHeight);
     }
   };
 

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useLoaderContext } from '../../context/LoaderContext';
-import { getAllFetch } from '../../redux/actions/reviewsAC';
+import { clear, getAllFetch } from '../../redux/actions/reviewsAC';
 import { changeAvatarFetch } from '../../redux/actions/userAC';
 import Loader from '../Loader/Loader';
 import Reviews from '../Reviews/Reviews';
@@ -20,13 +20,12 @@ function ProfileInfo() {
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
   const inputFile = useRef(null);
-  const avatar = useSelector((state) => state.user.avatar);
+  // const avatar = useSelector((state) => state.user.avatar);
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const { loader, showLoader, hideLoader } = useLoaderContext();
   const [modalActive, setModalActive] = useState(false);
-
   function modalOpen(idUserForUpdate) {
     setModalActive(true);
   }
@@ -41,7 +40,10 @@ function ProfileInfo() {
       dispatch(getAllFetch()).then(() => hideLoader());
       setInfoFromUser(myUser);
     })();
-  }, [id,modalActive]);
+    return () => {
+      dispatch(clear());
+    };
+  }, [id, modalActive, user]);
 
   useEffect(() => {
     const filteredReviews = reviews?.filter((review) => {
@@ -58,12 +60,11 @@ function ProfileInfo() {
     <div className="container container-main">
       <div className="main">
         <div className="profile">
-          {/* <form className="profileForm">  */}
           <div className="user">
             <div
               className="userPhoto"
               style={{
-                background: `url('${avatar}') 100%/100% no-repeat `,
+                background: `url('${infoFromUser.avatar}') 100%/100% no-repeat `,
               }}
             ></div>
             {user._id == id && (
@@ -92,7 +93,9 @@ function ProfileInfo() {
           </div>
 
           <div className="userInfo">
-            <span className="name">{infoFromUser.name}</span>
+            <span className="name">
+              {infoFromUser.name} {infoFromUser.surname}
+            </span>
             <span className="rating">{infoFromUser.rating}</span>
             {user?._id == id && (
               <button
