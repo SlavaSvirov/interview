@@ -11,14 +11,15 @@ const Reviews = ({ review }) => {
   const user = useSelector((state) => state.user);
   const reviews = useSelector((state) => state.reviews);
 
+
   const reviewLogo = (direction) => {
     switch (direction) {
       case 'Frontend':
-        return 'http://localhost:3001/img/front.png';
+        return 'http://localhost:3001/img/frontStack.png';
       case 'Backend':
-        return '';
-      case 'Fullstack':
-        return '';
+        return 'http://localhost:3001/img/backStack.png';
+      case 'FullStack':
+        return 'http://localhost:3001/img/fullStack.png';
       default:
         break;
     }
@@ -35,6 +36,7 @@ const Reviews = ({ review }) => {
                 review.direction
               )}) no-repeat center`,
               height: '190px',
+              'background-size': 'cover'
             }}
           >
             <span className="rating">{review?.rating}</span>
@@ -45,12 +47,13 @@ const Reviews = ({ review }) => {
               <span className="user-working-pasition">
                 {review?.direction} Developer
               </span>
+
               {review?.author?._id == user._id &&
               user.isAuth &&
               history.location.pathname === `/user/${user._id}` ? (
-                <div>
-                  <span>ED</span>
-                  <span>DEL</span>
+               <div className='icons'>
+                  <i className='fa fa-edit'></i>
+                  <i className='fa fa-trash'></i>
                 </div>
               ) : (
                 <span></span>

@@ -12,6 +12,7 @@ const options = {
 // const DB_PORT = 27017
 
 const dbConnectionURL = 'mongodb+srv://admin:admin@cluster0.or3fk.mongodb.net/interview?retryWrites=true&w=majority'
+// const dbConnectionURL = 'mongodb://localhost:27017/interview'
 
 const serverURL = 'http://localhost:3001'
 
