@@ -13,7 +13,6 @@ font-family: 'Montserrat', sans-serif; */
   border-radius: 4px;
   margin: 5px;
   position: relative;
-  z-index: -1;
 }
 
 .wrap:hover {
@@ -65,7 +64,6 @@ font-family: 'Montserrat', sans-serif; */
   margin: 7px 0 0 0;
 }
 
-
 .wrap .block-title a {
   font-size: 15px;
   border: 1px solid rgb(48, 56, 65);
@@ -79,7 +77,7 @@ font-family: 'Montserrat', sans-serif; */
 .wrap .block-title a:hover {
   color: white;
   background: rgb(48, 56, 65);
-  transition: all .6s;
+  transition: all 0.6s;
 }
 
 .wrap .block-img .rating {
@@ -113,7 +111,6 @@ font-family: 'Montserrat', sans-serif; */
   font-family: 'Comfortaa', cursive;
   font-weight: 900;
 }
-
 
 .wrap .icons {
   display: flex;
