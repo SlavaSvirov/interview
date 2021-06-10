@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { deletePostFetch } from '../../redux/actions/reviewsAC';
 
 const Reviews = ({ review }) => {
-  const history = useHistory()
+  const history = useHistory();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(false);
@@ -50,7 +50,9 @@ const Reviews = ({ review }) => {
                 {review?.direction} Developer
               </span>
 
-              {review?.author?._id == user._id && user.isAuth && history.location.pathname === `/user/${user._id}` ? (
+              {review?.author?._id == user._id &&
+              user.isAuth &&
+              history.location.pathname === `/user/${user._id}` ? (
                 <div className="icons">
                   <Link to={`/review/edit/${review._id}`}>
                     <i className="fa fa-edit"></i>
@@ -69,7 +71,8 @@ const Reviews = ({ review }) => {
               )}
             </div>
             <p className="company-location">
-              {review.companyName}<br />
+              {review.companyName}
+              <br />
             </p>
             <div className="wrapper-user-position">
               <Link to={`/user/${review?.author?._id}`}>

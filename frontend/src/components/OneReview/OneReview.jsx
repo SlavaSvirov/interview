@@ -44,7 +44,6 @@ export default function OneReview() {
           <Loader />
         ) : (
           <>
-
             <div className="currentPost">
               <Link className="companyLink" to="/company/{onePost.company._id}">
                 {onePost.companyName}
@@ -96,7 +95,7 @@ export default function OneReview() {
                   ) : (
                     <i
                       onClick={() => changeLike(id, user._id)}
-                      className={`fa fa-heart ${liked ? 'grey' : 'red'} `}
+                      className={`fa fa-heart ${liked ? 'red' : 'grey'} `}
                     ></i>
                   )}
                   <br />
