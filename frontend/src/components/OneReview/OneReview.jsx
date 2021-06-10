@@ -1,3 +1,4 @@
+import { SpaceContext } from 'antd/lib/space';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -12,8 +13,9 @@ export default function OneReview() {
 
   const { id } = useParams();
   const [onePost, setOnePost] = useState(null);
+  const [liked, setLiked] = useState(false);
+
   const dispatch = useDispatch();
-  console.log({ onePost });
   const { loader, showLoader, hideLoader } = useLoaderContext();
 
   useEffect(() => {
@@ -27,11 +29,12 @@ export default function OneReview() {
       showLoader();
       dispatch(getAllFetch()).then(() => hideLoader());
     }
-  }, [reviews]);
+  }, [reviews, liked]);
 
   const changeLike = (id, userId) => {
     showLoader();
     dispatch(changeLikeFetch(id, userId)).then(() => hideLoader());
+    setLiked((prev) => !prev);
   };
 
   return (
@@ -40,7 +43,6 @@ export default function OneReview() {
         {loader ? (
           <Loader />
         ) : (
-
           <>
             <Link to="/company/{onePost.company._id}">
               {onePost.companyName}
@@ -64,11 +66,15 @@ export default function OneReview() {
             <div>Ссылка на код: {onePost.codFile}</div>
             <div>Общее впечатление о собеседовании: {onePost.impression}</div>
             <div>
-              Файлы с собеседования:{' '}
-              <img
-                src={`http://localhost:3001/${onePost.image}`}
-                alt="Файлы с собеседования"
-              />
+              Файлы с собеседования:
+              {onePost.image ? (
+                <img
+                  src={`/img/${onePost.image}`}
+                  alt="Файлы с собеседования"
+                />
+              ) : (
+                <span>В этом отзыве нет файлов</span>
+              )}
             </div>
             <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
             <div>

@@ -15,11 +15,6 @@ const Sort = () => {
 
   return (
     <div className="sort d-flex justify-content-between">
-      <select name="" id="">
-        <option value="Frontend">Front End</option>
-        <option value="Backend">Back End</option>
-        <option value="Fullstack">Full stack</option>
-      </select>
       <button
         className="sort-item"
         data-name="created"
