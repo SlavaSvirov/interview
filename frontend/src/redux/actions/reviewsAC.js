@@ -4,7 +4,7 @@ import {
   PROGINATION_REVIEWS,
   SORT_REVIEWS,
 } from '../types/types';
-import { CHANGE_LIKE_REVIEW } from '../types/typeReview';
+import { CHANGE_LIKE_REVIEW, DELETE_ONE } from '../types/typeReview';
 import axios from 'axios';
 
 export const setAll = (reviews) => {
@@ -19,6 +19,14 @@ export const clear = () => {
     type: CLEAR_ALL,
   };
 };
+
+export const deleteReview = (id) => {
+  return {
+    type:DELETE_ONE,
+    payload: id,
+  };
+};
+
 
 export const sortReviews = (reviews) => {
   return {
@@ -66,3 +74,11 @@ export const changeLikeFetch = (id, userId) => async (dispatch) => {
   });
   dispatch(changeLikeReviews(result.data));
 };
+
+export const deletePostFetch = (id) => async (dispatch) => {
+  const result = await axios.delete(`http://localhost:3001/review/${id}`, {
+  });
+  console.log(result.data);
+  dispatch(deleteReview(id));
+};
+

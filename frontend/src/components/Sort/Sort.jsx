@@ -15,11 +15,6 @@ const Sort = () => {
 
   return (
     <div className="sort d-flex justify-content-between">
-      <select name="" id="">
-        <option value="Frontend">Front End</option>
-        <option value="Backend">Back End</option>
-        <option value="Fullstack">Full stack</option>
-      </select>
       <button
         className="sort-item"
         data-name="created"
@@ -45,25 +40,6 @@ const Sort = () => {
         {' '}
         Добавить отзыв
       </Link>
-      {/* <div>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder="Станция метро"
-          optionFilterProp="children"
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="tom">Tom</Option>
-        </Select>
-      </div> */}
     </div>
   );
 };

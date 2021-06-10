@@ -1,3 +1,4 @@
+import { SpaceContext } from 'antd/lib/space';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -12,8 +13,9 @@ export default function OneReview() {
 
   const { id } = useParams();
   const [onePost, setOnePost] = useState(null);
+  const [liked, setLiked] = useState(false);
+
   const dispatch = useDispatch();
-  console.log({ onePost });
   const { loader, showLoader, hideLoader } = useLoaderContext();
 
   useEffect(() => {
@@ -27,17 +29,17 @@ export default function OneReview() {
       showLoader();
       dispatch(getAllFetch()).then(() => hideLoader());
     }
-  }, []);
+  }, [reviews, liked]);
 
   const changeLike = (id, userId) => {
     showLoader();
     dispatch(changeLikeFetch(id, userId)).then(() => hideLoader());
+    setLiked((prev) => !prev);
   };
 
   return (
     onePost && (
       <div className="container container-main">
-        {console.log(onePost)}
         {loader ? (
           <Loader />
         ) : (
@@ -57,13 +59,17 @@ export default function OneReview() {
                 <span><b>Ссылка на код:                    </b> {onePost.codFile}</span>
                 <span><b>Общее впечатление о собеседовании:</b> {onePost.impression}</span>
                 <div>
-                  Файлы с собеседования:{' '}
-                  <img
-                    src={`http://localhost:3001/${onePost.image}`}
-                    alt="Файлы с собеседования"
-                  />
+                  Файлы с собеседования:
+              {onePost.image ? (
+                <img
+                  src={`/img/${onePost.image}`}
+                  alt="Файлы с собеседования"
+                />
+              ) : (
+                <span>В этом отзыве нет файлов</span>
+              )}
                 </div>
-                <div> {onePost.setteled ? 'Усторился' : 'Не устроился'}</div>
+                <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
                 <div className='reviewIcons'>
                 <hr />
                   {onePost.author._id === user._id ? (
@@ -77,6 +83,7 @@ export default function OneReview() {
                 <span><b>likes:</b> {onePost.likes.length}</span>
                 </div>
               </div>
+
             </div>
           </>
         )}
