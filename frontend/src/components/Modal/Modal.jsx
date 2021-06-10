@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {
   Form,
   Input,
+  Switch
 } from 'antd';
 import {editProfileUser} from '../../redux/actions/userAC'
 
@@ -61,13 +62,17 @@ return (
           <Input placeholder="Введи фамилию" />
         </Form.Item>
 
-        <Form.Item name="phone" label="Phone">
+        <Form.Item name="telegram" label="Telegram">
           <Input placeholder="Введи телефон" />
         </Form.Item>
 
         <Form.Item name="email" label="Email">
           <Input placeholder="Введи электронную почту" />
         </Form.Item>
+
+        <Form.Item name="switch" label="Показать контакты" valuePropName="checked">
+        <Switch />
+      </Form.Item>
         </Form>
   </div>
   <button type="submit" className="btn btn-success">Сохранить изменения</button>

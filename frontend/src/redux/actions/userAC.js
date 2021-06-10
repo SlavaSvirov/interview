@@ -40,6 +40,7 @@ export const sagaLoginAC = (user) => {
 };
 
 export const loginAC = (user) => {
+  console.log(user);
   return {
     type: AUTH,
     payload: {
@@ -78,31 +79,22 @@ export const getUser = (user) => {
   };
 };
 
-export const editProfileUser = (id) => {
+export const editProfileUser = (id, name, surname, phone, email) => {
   return {
 type : EDIT_PROFILE,
-payload : id
+payload : {id, name, surname, phone, email}
   }
 }
 
-// export const editProfileFetch = (id, name, surname, phone, email) => async (dispatch) => {
-//   console.log("id editProfileFetch", id);
-//   const editProfile = await fetch(`http://localhost:3001/user/${id}`, {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ id, name, surname, phone, email }),
-//   })
-//   const edit = await editProfile.json()
-//   dispatch(editProfileUser(edit))
-
-// }
-
-export const editProfileFetch = (id) => async (dispatch) => {
+export const editProfileFetch = (id, name, surname, phone, email) => async (dispatch) => {
   console.log("id editProfileFetch", id);
-  const editProfile = await fetch(`http://localhost:3001/user/${id}`)
-   const edit = editProfile.json()
-   console.log('/////////////////',edit);
-  dispatch(editProfileUser(edit))
+  const editProfile = await fetch(`http://localhost:3001/user/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, name, surname, phone, email }),
+  })
+  const edit = await editProfile.json()
+  dispatch(editProfileUser(id, name, surname, phone, email))
 
 }
 
