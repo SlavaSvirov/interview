@@ -80,7 +80,7 @@ const changeAvatarBack = async (req, res) => {
   const user = await User.findByIdAndUpdate(
     id,
     {
-      avatar: `/img/${req.file.filename}`,
+      avatar: `http://localhost:3001/img/${req.file.filename}`,
     },
     { new: true }
   );
