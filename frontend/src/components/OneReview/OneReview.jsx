@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useLoaderContext } from '../../context/LoaderContext';
 import { changeLikeFetch, getAllFetch } from '../../redux/actions/reviewsAC';
 import Loader from '../Loader/Loader';
-import './onereview.css'
+import './onereview.css';
 
 export default function OneReview() {
   const reviews = useSelector((state) => state.reviews);
@@ -13,26 +13,25 @@ export default function OneReview() {
   const { id } = useParams();
   const [onePost, setOnePost] = useState(null);
   const dispatch = useDispatch();
-
+  console.log({ onePost });
   const { loader, showLoader, hideLoader } = useLoaderContext();
 
   useEffect(() => {
     if (reviews.length) {
-
       setOnePost(
         reviews.find((elem) => {
-          return String(elem._id) === String(id);
+          return elem._id == id;
         })
       );
     } else {
       showLoader();
       dispatch(getAllFetch()).then(() => hideLoader());
     }
-  }, [reviews]);
+  }, []);
 
-  const changeLike = () => {
+  const changeLike = (id, userId) => {
     showLoader();
-    dispatch(changeLikeFetch(id)).then(() => hideLoader());
+    dispatch(changeLikeFetch(id, userId)).then(() => hideLoader());
   };
 
   return (
@@ -44,7 +43,6 @@ export default function OneReview() {
         ) : (
           <>
             <Link to="/company/{onePost.company._id}">
-              {' '}
               {onePost.companyName}
             </Link>
             <div>
@@ -74,13 +72,12 @@ export default function OneReview() {
             </div>
             <div> {onePost.setteled ? 'Усторился' : 'Не устроился'}</div>
             <div>
-
               {onePost.author._id === user._id ? (
                 <button>
                   <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
                 </button>
               ) : (
-                <button onClick={changeLike}>Like</button>
+                <button onClick={changeLike(id, user._id)}>Like</button>
               )}
             </div>
           </>

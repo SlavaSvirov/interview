@@ -16,6 +16,7 @@ import {
   Rate,
   Typography,
 } from 'antd';
+import { useSelector } from 'react-redux';
 
 const { Title } = Typography;
 
@@ -50,6 +51,7 @@ const normFile = (e) => {
 
 const AddReview = () => {
   let history = useHistory();
+  const user = useSelector((state) => state.user);
   const onFinish = async (values) => {
     console.log(values);
     const formData = new FormData();
@@ -75,7 +77,7 @@ const AddReview = () => {
       },
     });
     console.log(response.data);
-    history.push(`/review/${response.data._id}`);
+    history.push(`/user/${user._id}`);
   };
 
   const { Option } = Select;

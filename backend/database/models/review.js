@@ -6,8 +6,8 @@ const reviewSchema = Schema({
   created: { type: Date, default: Date.now },
   companyName: String,
   likes: {
-    type: Number,
-    default: 0
+    type: Array,
+    default: [],
   },
   rating: Number,
   setteled: Boolean,

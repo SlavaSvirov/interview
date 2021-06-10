@@ -60,7 +60,9 @@ export const getLitle = (index) => async (dispatch) => {
 
   dispatch(pogination(litle));
 };
-export const changeLikeFetch = (id) => async (dispatch) => {
-  const result = await axios.post(`http://localhost:3001/review/${id}`);
+export const changeLikeFetch = (id, userId) => async (dispatch) => {
+  const result = await axios.post(`http://localhost:3001/review/${id}`, {
+    userId,
+  });
   dispatch(changeLikeReviews(result.data));
-}
+};
