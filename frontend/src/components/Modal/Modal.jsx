@@ -1,80 +1,105 @@
-
 import "./modal.css";
 import { useEffect, useState } from "react";
-import {useSelector, useDispatch} from 'react-redux'
-import {
-  Form,
-  Input,
-} from 'antd';
-import {editProfileUser} from '../../redux/actions/userAC'
+import { useSelector, useDispatch } from "react-redux";
+import { Form, Input, Switch } from "antd";
+import { editProfileFetch } from "../../redux/actions/userAC";
+import { useHistory } from "react-router";
 
 
 
-
-function Modal ({active, setActive, idUser}) {
-  // const [modalActive, setModalActive] = useState(true)
-  console.log('====>>>>>>>>>>>>>',idUser);
+function Modal({ active, setActive, idUser }) {
+  const history = useHistory()
   
-  const [inputModal, setinputModal] = useState('')
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
-  const onValuesChange = async (values) => {
-    // console.log('======',values.name);
-
-  }
-  useEffect(() => {
-    return() =>{
-    }
-  },[])
+  const [name, setName] = useState(user.name)
+  const [surname, setSurname] = useState(user.surname)
+  const [email, setEmail] = useState(user.email)
+  const [telegram, setTelegram] = useState(user.telegram)
+  const [show, setShow] = useState(false)
 
 
-  function inputHandler () {
-    // setinputModal(e.target.value)
-  dispatch(editProfileUser(idUser))
 
-  }
-
-  function submitForm (e) {
-    e.preventDefault()
-   
-    if (inputModal.trim()) {
-
-      
-      setinputModal('')
-      setActive(false)
-
-    }
-  }
-return (
-  <div className= {active ? 'modal active' : 'modal'} onClick={() => setActive(false)}>
-<div className={active ? 'modal-content active' : 'modal-content'} onClick={e => e.stopPropagation()}>
-  <div className='as'>
-  <div className="form-group">
-    <h3>Редактирование профиля</h3>
-
-    
-    <Form onValuesChange={(e) => onValuesChange(e)}>
-    <Form.Item name="name" label="Name" >
-          <Input placeholder="Введи имя" />
-        </Form.Item>
-        <Form.Item name="surname" label="Surname">
-          <Input placeholder="Введи фамилию" />
-        </Form.Item>
-
-        <Form.Item name="phone" label="Phone">
-          <Input placeholder="Введи телефон" />
-        </Form.Item>
-
-        <Form.Item name="email" label="Email">
-          <Input placeholder="Введи электронную почту" />
-        </Form.Item>
-        </Form>
-  </div>
-  <button type="submit" className="btn btn-success">Сохранить изменения</button>
-</div>
-</div>
-  </div>
-)
+  
+function updateName (e) {
+  console.log(e.target.value);
+  setName(e.target.value)
 }
 
-export default Modal
+function updateSurname (e) {
+  console.log(e.target.value);
+  setSurname(e.target.value)
+}
+
+function updateEmail (e) {
+  console.log(e.target.value);
+  setEmail(e.target.value)
+}
+
+function updateTelegram (e) {
+  console.log(e.target.value);
+  setTelegram(e.target.value)
+}
+
+function check(checked) {
+  console.log(checked);
+  setShow(checked)
+}
+
+useEffect(() => {
+  return() =>{
+  }
+},[])
+  
+
+
+function submitForm (e) {
+  e.preventDefault()
+  
+  if (name.trim() && surname.trim() && email.trim() && telegram.trim()) {
+    
+    dispatch(editProfileFetch(idUser, name, surname, email, telegram))
+    setActive(false)
+  history.push(`/user/${idUser}`)
+      }
+ }
+  
+
+
+  return (
+    <div
+      className={active ? "modal active" : "modal"}
+      onClick={() => setActive(false)}
+    >
+      <div
+        className={active ? "modal-content active" : "modal-content"}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="as">
+          <div className="form-group">
+            <h3>Редактирование профиля</h3>
+
+            <form onSubmit={(e)=>submitForm(e)}>
+              <label htmlFor="">Name</label>
+              <input onChange={(e) => updateName(e)} value={name}/>
+              <label htmlFor="">Surname</label>
+              <input onChange={(e) => updateSurname(e)} value={surname}  type="text"  />
+              <label htmlFor="">Email</label>
+              <input onChange={(e) => updateEmail(e)} value={email}  type="text"  />
+              <label htmlFor="">Telegram</label>
+              <input onChange={(e) => updateTelegram(e)} value={telegram} type="text"/>
+              <label htmlFor="">Показать контакты</label>
+              <Switch onChange={check}/>
+              <button type="submit" className="btn btn-success">
+                Сохранить изменения
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Modal;
