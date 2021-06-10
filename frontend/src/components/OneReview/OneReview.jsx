@@ -95,7 +95,7 @@ export default function OneReview() {
                   ) : (
                     <i
                       onClick={() => changeLike(id, user._id)}
-                      className={`fa fa-heart ${liked ? 'red' : 'grey'} `}
+                      className={`fa fa-heart ${liked ? 'grey' : 'red'} `}
                     ></i>
                   )}
                   <br />

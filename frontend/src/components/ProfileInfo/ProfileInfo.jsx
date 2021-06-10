@@ -19,7 +19,7 @@ function ProfileInfo() {
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
   const inputFile = useRef(null);
-  const avatar = useSelector((state) => state.user.avatar);
+  // const avatar = useSelector((state) => state.user.avatar);
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -39,6 +39,7 @@ function ProfileInfo() {
       const myUser = await newUser.json();
       dispatch(getAllFetch()).then(() => hideLoader());
       setInfoFromUser(myUser);
+      console.log(infoFromUser._id);
     })();
   }, [id]);
 
@@ -62,7 +63,7 @@ function ProfileInfo() {
             <div
               className="userPhoto"
               style={{
-                background: `url('${avatar}') 100%/100% no-repeat `,
+                background: `url('${infoFromUser.avatar}') 100%/100% no-repeat `,
               }}
             ></div>
             {user._id == id && (
