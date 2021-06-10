@@ -13,8 +13,10 @@ router
 
   .post('/:id', async (req, res) => {
     let dbPost = await reviewModel.findById(req.params.id);
-    dbPost.likes += 1;
-    await dbPost.save();
+    if (!dbPost.likes.includes(req.body.userId)) {
+      dbPost.likes.push(req.body.userId);
+      await dbPost.save();
+    }
     console.log(dbPost);
     res.json(dbPost);
   })
@@ -23,9 +25,6 @@ router
     console.log(req.body);
     const reviewForUpdate = await reviewModel.findById(req.params.id);
     const file = req.file ? `/img/${req.file.filename}` : '';
-    // const companyName = await axios(
-    //   `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
-    // );
     Object.keys(req.body).forEach((key) => {
       reviewForUpdate[key] = req.body[key];
     });
