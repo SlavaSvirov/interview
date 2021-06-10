@@ -275,7 +275,7 @@ const AddReview = () => {
           valuePropName="image"
           getValueFromEvent={normFile}
         >
-          <input type="file" />
+          <input type="file" multiple />
         </Form.Item>
 
         <Divider plain></Divider>

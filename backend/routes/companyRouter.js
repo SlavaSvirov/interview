@@ -25,4 +25,18 @@ router.get('/:id', async (req, res) => {
   res.json(currentCompany);
 });
 
+router.patch('/edit/:id', async (req, res) => {
+  const newCompany = await CompanyModel.findById(req.params.id).populate({
+    path: 'reviews',
+    populate: {
+      path: 'author',
+    },
+  });
+  console.log(newCompany);
+  console.log(req.body.userId);
+  newCompany.graduates.push(req.body.userId);
+  await newCompany.save();
+  res.json(newCompany);
+});
+
 module.exports = router;

@@ -46,18 +46,15 @@ function Modal({ active, setActive }) {
     return () => {};
   }, []);
 
-function submitForm (e) {
-  e.preventDefault()
-  
-  if (name.trim() && surname.trim() && email.trim() && telegram.trim()) {
-    
-    dispatch(editProfileFetch(name, surname, email, telegram))
-    setActive(false)
-  history.push(`/user/${idUser}`)
-      }
- }
-  
+  function submitForm(e) {
+    e.preventDefault();
 
+    if (name.trim() && surname.trim() && email.trim() && telegram.trim()) {
+      dispatch(editProfileFetch(user._id, name, surname, email, telegram));
+      setActive(false);
+      history.push(`/user/${user._id}`);
+    }
+  }
 
   return (
     <div

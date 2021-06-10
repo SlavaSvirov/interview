@@ -1,9 +1,12 @@
-import { SpaceContext } from 'antd/lib/space';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useLoaderContext } from '../../context/LoaderContext';
-import { changeLikeFetch, getAllFetch } from '../../redux/actions/reviewsAC';
+import {
+  changeLikeFetch,
+  clear,
+  getAllFetch,
+} from '../../redux/actions/reviewsAC';
 import Loader from '../Loader/Loader';
 import './onereview.css';
 
@@ -31,6 +34,12 @@ export default function OneReview() {
     }
   }, [reviews, liked]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(clear());
+    };
+  }, []);
+
   const changeLike = (id, userId) => {
     showLoader();
     dispatch(changeLikeFetch(id, userId)).then(() => hideLoader());
@@ -45,7 +54,10 @@ export default function OneReview() {
         ) : (
           <>
             <div className="currentPost">
-              <Link className="companyLink" to="/company/{onePost.company._id}">
+              <Link
+                className="companyLink"
+                to={`/company/${onePost.company._id}`}
+              >
                 {onePost.companyName}
               </Link>
               <hr />
@@ -77,10 +89,7 @@ export default function OneReview() {
                 <div>
                   Файлы с собеседования:
                   {onePost.image ? (
-                    <img
-                      src={`/img/${onePost.image}`}
-                      alt="Файлы с собеседования"
-                    />
+                    <img src={`${onePost.image}`} alt="Файлы с собеседования" />
                   ) : (
                     <span>В этом отзыве нет файлов</span>
                   )}
