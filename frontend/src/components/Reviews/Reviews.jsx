@@ -7,11 +7,9 @@ import { useHistory } from 'react-router-dom';
 
 const Reviews = ({ review }) => {
   let history = useHistory();
-  console.log('=========================', history);
   const companies = useSelector((state) => state.companys);
   const user = useSelector((state) => state.user);
   const reviews = useSelector((state) => state.reviews);
-  console.log(reviews);
 
   console.log(user.isAuth);
 

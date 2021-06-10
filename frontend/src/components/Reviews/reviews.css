@@ -13,6 +13,7 @@ font-family: 'Montserrat', sans-serif; */
   border-radius: 4px;
   margin: 5px;
   position: relative;
+  z-index: -1;
 }
 
 .wrap:hover {

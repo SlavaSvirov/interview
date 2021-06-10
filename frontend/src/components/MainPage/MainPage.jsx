@@ -97,7 +97,7 @@ const MainPage = () => {
             <Sort />
           </div>
           <div className={styles.wrapper}>
-            {data.map((review) => {
+            {data?.map((review) => {
               return <Reviews key={review._id} review={review} />;
             })}
           </div>

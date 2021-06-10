@@ -7,6 +7,7 @@ const {
   checkUser,
   changeAvatarBack,
   getUser,
+  updateUserProfile,
 } = require('../controllers/userController');
 const user = require('../database/models/user');
 const { checkAuth } = require('../middleware/checkAuth');
@@ -22,6 +23,8 @@ userRouter.route('/signin').post(userSignin);
 userRouter.route('/logout').get(userSignout);
 
 userRouter.route('/checkAuth').get(checkUser);
+
+userRouter.route('/:id').get(updateUserProfile);// test
 
 userRouter.route('/:id/getInfo').get(checkAuth, userInfo);
 
