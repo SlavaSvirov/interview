@@ -13,8 +13,8 @@ import Loader from '../Loader/Loader';
 
 function CurrentCompany() {
   const { id } = useParams();
-  const currentCompany = useSelector((state) => state.currentCompany);
   const user = useSelector((state) => state.user);
+  const currentCompany = useSelector((state) => state.currentCompany);
   function createMarkup() {
     return { __html: currentCompany.description };
   }

@@ -15,12 +15,15 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+  console.log(req.params.id);
   const currentCompany = await CompanyModel.findById(req.params.id).populate({
     path: 'reviews',
     populate: {
       path: 'author',
     },
   });
+
+  console.log(currentCompany);
 
   res.json(currentCompany);
 });
