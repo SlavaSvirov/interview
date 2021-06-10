@@ -8,6 +8,7 @@ const userSchema = Schema({
   },
   password: String,
   status: { type: Boolean, default: false },
+  showContact : { type: Boolean, default: false },
   telegram: String,
   surname: String,
   avatar: String,

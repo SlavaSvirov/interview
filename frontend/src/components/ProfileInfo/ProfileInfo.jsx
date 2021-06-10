@@ -19,8 +19,10 @@ function ProfileInfo() {
   const idUserForUpdate = user._id;
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
+  const [show, setShow] = useState(false)
+ 
   const inputFile = useRef(null);
-  // const avatar = useSelector((state) => state.user.avatar);
+  
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -55,7 +57,7 @@ function ProfileInfo() {
   const avatarChange = (e) => {
     dispatch(changeAvatarFetch(e.target.files[0], user?._id));
   };
-
+console.log('infoFromUser',infoFromUser.showContact);
   return (
     <div className="container container-main">
       <div className="main">
@@ -96,7 +98,9 @@ function ProfileInfo() {
             <span className="name">
               {infoFromUser.name} {infoFromUser.surname}
             </span>
+            {infoFromUser.showContact  ? <span>{infoFromUser.telegram}</span> : null}
             <span className="rating">{infoFromUser.rating}</span>
+            {/* <span>sdasasd</span>  */}
             {user?._id == id && (
               <button
                 className="btn"
@@ -107,6 +111,7 @@ function ProfileInfo() {
             )}
             {modalActive && (
               <Modal
+             
                 active={modalActive}
                 setActive={setModalActive}
                 idUser={idUserForUpdate}
@@ -114,7 +119,7 @@ function ProfileInfo() {
             )}
           </div>
 
-          {/* </form>  */}
+          
         </div>
         <div className="reviews">
           <div className="sortWrap">

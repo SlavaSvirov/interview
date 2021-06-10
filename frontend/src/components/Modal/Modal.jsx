@@ -5,35 +5,33 @@ import { Form, Input, Switch } from 'antd';
 import { editProfileFetch } from '../../redux/actions/userAC';
 import { useHistory } from 'react-router';
 
-function Modal({ active, setActive }) {
+function Modal({ active, setActive}) {
   const history = useHistory();
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
+  // console.log('user',user);
+  
   const [name, setName] = useState(user.name);
   const [surname, setSurname] = useState(user.surname);
   const [email, setEmail] = useState(user.email);
   const [telegram, setTelegram] = useState(user.telegram);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(user.showContact)
 
   function updateName(e) {
-    console.log(e.target.value);
     setName(e.target.value);
   }
 
   function updateSurname(e) {
-    console.log(e.target.value);
     setSurname(e.target.value);
   }
 
   function updateEmail(e) {
-    console.log(e.target.value);
     setEmail(e.target.value);
   }
 
   function updateTelegram(e) {
-    console.log(e.target.value);
     setTelegram(e.target.value);
   }
 
@@ -49,11 +47,12 @@ function Modal({ active, setActive }) {
 function submitForm (e) {
   e.preventDefault()
   
-  if (name.trim() && surname.trim() && email.trim() && telegram.trim()) {
+  if (name.trim() && surname.trim() && email.trim() && telegram.trim() && show) {
     
-    dispatch(editProfileFetch(name, surname, email, telegram))
+    dispatch(editProfileFetch(user._id,name, surname, email, telegram, show))
     setActive(false)
-  history.push(`/user/${idUser}`)
+    
+  history.push(`/user/${user._id}`)
       }
  }
   
