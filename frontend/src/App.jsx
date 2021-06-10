@@ -20,6 +20,7 @@ import Contact from './components/Contact/Contact';
 import About from './components/About/About';
 import OneReview from './components/OneReview/OneReview';
 import EditReview from './components/EditReview/EditReview';
+import Demo from './components/About/About';
 
 function App() {
   const dispatch = useDispatch();
