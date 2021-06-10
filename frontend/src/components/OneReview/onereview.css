@@ -1,7 +1,6 @@
 /* font-family: 'Comfortaa', cursive;
 font-family: 'Montserrat', sans-serif; */
 
-
 .currentPost {
   margin-top: 120px;
   padding: 15px;
@@ -45,8 +44,12 @@ font-family: 'Montserrat', sans-serif; */
   width: 100%;
 }
 
-.currentPostInfo .reviewIcons .fa-heart {
+.red {
   font-size: 30px;
   color: red;
+  padding: 10px 0;
+}
+.grey {
+  font-size: 30px;
   padding: 10px 0;
 }
