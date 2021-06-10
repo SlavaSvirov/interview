@@ -5,7 +5,6 @@ import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import querystring from 'querystring';
 import { useHistory, useParams } from 'react-router-dom';
-
 import {
   Form,
   Select,
@@ -18,11 +17,8 @@ import {
   Typography,
 } from 'antd';
 import { useSelector } from 'react-redux';
-
 const { Title } = Typography;
-
 //import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
-
 const customIcons = {
   1: <FrownOutlined />,
   2: <FrownOutlined />,
@@ -30,7 +26,6 @@ const customIcons = {
   4: <SmileOutlined />,
   5: <SmileOutlined />,
 };
-
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
@@ -40,24 +35,21 @@ const formItemLayout = {
     span: 14,
   },
 };
-
 const normFile = (e) => {
   console.log('Upload event:', e.target.files[0]);
-
   if (Array.isArray(e.target.files)) {
     return e.target.files;
   }
-
   return e && e.target;
 };
-
 const EditReview = () => {
   const { id } = useParams();
   const reviews = useSelector((state) => state.reviews);
+  const user = useSelector((state) => state.user);
   let history = useHistory();
-  let formDat = reviews.find((elem) => elem._id == id);
-
+  let formData = reviews.find((elem) => elem._id == id);
   const onFinish = async (values) => {
+    //event.preventDefault();
     console.log(values);
     const formData = new FormData();
     formData.append('companyName', values.companyName);
@@ -72,32 +64,43 @@ const EditReview = () => {
     if (values.image) {
       formData.append('image', values.image.files[0]);
     }
-
-    const response = await axios.patch(`http://localhost:3001/review/${id}`, {
-      withCredentials: true,
-      data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    console.log(response.data);
+    try {
+      const response = await axios({
+        method: 'PATCH',
+        url: `/review/edit/${id}`,
+        withCredentials: true,
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(response.data);
+      history.push(`/user/${user._id}`);
+      // const data = await response.json();
+      // if (dataFromServer.status === 200) {
+      //   alert('your review was successly added');
+      //   // window.location.assign('/profile');
+      // }
+      // if (dataFromServer.status === 400) {
+      //   alert('error in bd');
+      //   window.location.assign('/404');
+      // }
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   const { Option } = Select;
   const noLogo = '../../../public/imgLogo/1.jpg';
   let timeout;
   let currentValue;
-
   const [data, setData] = useState([]);
   const [value, setValue] = useState(undefined);
-
   function fetch(value) {
     if (timeout) {
       clearTimeout(timeout);
       timeout = null;
     }
     currentValue = value;
-
     function fake() {
       const str = querystring.encode({
         code: 'utf-8',
@@ -136,7 +139,6 @@ const EditReview = () => {
     }
     timeout = setTimeout(fake, 300);
   }
-
   const handleSearch = (value) => {
     if (value) {
       fetch(value);
@@ -144,20 +146,17 @@ const EditReview = () => {
       setData([]);
     }
   };
-
   const handleChange = (value) => {
     setValue(value);
   };
-
   return (
     <>
       <Title level={2}>Создай новый отзыв!</Title>
       <Divider></Divider>
-
       <Form
         name="validate_other"
         {...formItemLayout}
-        initialValues={formDat}
+        initialValues={formData}
         onFinish={(e) => onFinish(e)}
       >
         <Form.Item
@@ -238,12 +237,9 @@ const EditReview = () => {
                         initialValue: formData.hrName || '',
                         Rules: [{required: true, message: 'name cannot be empty'}],
                     })(
-
-                      
                     )} */}
           <Input placeholder="Введи имя" />
         </Form.Item>
-
         <Form.Item name="questions" label="Вопросы с собеседования">
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
@@ -253,14 +249,12 @@ const EditReview = () => {
         <Form.Item name="impression" label="Общее впечатление о собеседовании">
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
-
         <Form.Item name="setteled" label="Чекни">
           <Radio.Group>
             <Radio value="true">Устроился</Radio>
             <Radio value="false">Не устроился</Radio>
           </Radio.Group>
         </Form.Item>
-
         <Form.Item name="rating" label="Общая оценка">
           <Rate
             defaultValue={3}
@@ -278,7 +272,6 @@ const EditReview = () => {
             <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload> */}
         </Form.Item>
-
         <Divider plain></Divider>
         <Form.Item
           wrapperCol={{
@@ -286,12 +279,8 @@ const EditReview = () => {
             offset: 6,
           }}
         >
-          <Button
-            type="primary"
-            htmlType="submit"
-            onClick={() => history.push('/profile')}
-          >
-            Изменить отзыв
+          <Button type="primary" htmlType="submit">
+            change отзыв
           </Button>
         </Form.Item>
       </Form>
