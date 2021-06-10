@@ -44,29 +44,22 @@ export default function OneReview() {
           <Loader />
         ) : (
           <>
-            <Link to="/company/{onePost.company._id}">
-              {onePost.companyName}
-            </Link>
-            <div>
-              URL:{' '}
-              <a href={onePost.company.companyUrl}>
-                {' '}
-                {onePost.company.companyUrl}
-              </a>
-            </div>
-            <div>автор: {onePost.author.name}</div>
-            <div>создан: {onePost.created}</div>
-            <div>likes: {onePost.likes.length}</div>
-            <div>Общая оценка: {onePost.rating}</div>
-            <div>Направление: {onePost.direction}</div>
-            <div>Должность: {onePost.position}</div>
-            <div>Зарплата: {onePost.salary}</div>
-            <div>Имя HR: {onePost.hrName}</div>
-            <div>Вопросы с собеседования: {onePost.questions}</div>
-            <div>Ссылка на код: {onePost.codFile}</div>
-            <div>Общее впечатление о собеседовании: {onePost.impression}</div>
-            <div>
-              Файлы с собеседования:
+            <div className='currentPost'>
+              <Link className='companyLink' to="/company/{onePost.company._id}">
+                {onePost.companyName}
+              </Link>
+              <hr />
+              <div className='currentPostInfo'>
+                <span className='author'>{onePost.author.name} <span>{onePost.created}</span></span>
+                <span><b>Направление:                      </b> {onePost.direction}</span>
+                <span><b>Должность:                        </b> {onePost.position}</span>
+                <span><b>Зарплата:                         </b> {onePost.salary}</span>
+                <span><b>Имя HR:                           </b> {onePost.hrName}</span>
+                <span><b>Вопросы с собеседования:          </b> {onePost.questions}</span>
+                <span><b>Ссылка на код:                    </b> {onePost.codFile}</span>
+                <span><b>Общее впечатление о собеседовании:</b> {onePost.impression}</span>
+                <div>
+                  Файлы с собеседования:
               {onePost.image ? (
                 <img
                   src={`/img/${onePost.image}`}
@@ -75,16 +68,22 @@ export default function OneReview() {
               ) : (
                 <span>В этом отзыве нет файлов</span>
               )}
-            </div>
-            <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
-            <div>
-              {onePost.author._id === user._id ? (
-                <button>
-                  <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
-                </button>
-              ) : (
-                <button onClick={() => changeLike(id, user._id)}>Like</button>
-              )}
+                </div>
+                <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
+                <div className='reviewIcons'>
+                <hr />
+                  {onePost.author._id === user._id ? (
+                    <button>
+                      <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
+                    </button>
+                  ) : (
+                    <i onClick={() => changeLike(id, user._id)} className='fa fa-heart'></i>
+                  )}
+                  <br />
+                <span><b>likes:</b> {onePost.likes.length}</span>
+                </div>
+              </div>
+
             </div>
           </>
         )}
