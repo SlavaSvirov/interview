@@ -71,7 +71,8 @@ const Reviews = ({ review }) => {
               )}
             </div>
             <p className="company-location">
-              {review.companyName},<br />
+              {review.companyName}
+              <br />
             </p>
             <div className="wrapper-user-position">
               <Link to={`/user/${review?.author?._id}`}>
