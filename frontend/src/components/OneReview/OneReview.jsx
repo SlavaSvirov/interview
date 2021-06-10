@@ -44,46 +44,66 @@ export default function OneReview() {
           <Loader />
         ) : (
           <>
-            <div className='currentPost'>
-              <Link className='companyLink' to="/company/{onePost.company._id}">
+            <div className="currentPost">
+              <Link className="companyLink" to="/company/{onePost.company._id}">
                 {onePost.companyName}
               </Link>
               <hr />
-              <div className='currentPostInfo'>
-                <span className='author'>{onePost.author.name} <span>{onePost.created}</span></span>
-                <span><b>Направление:                      </b> {onePost.direction}</span>
-                <span><b>Должность:                        </b> {onePost.position}</span>
-                <span><b>Зарплата:                         </b> {onePost.salary}</span>
-                <span><b>Имя HR:                           </b> {onePost.hrName}</span>
-                <span><b>Вопросы с собеседования:          </b> {onePost.questions}</span>
-                <span><b>Ссылка на код:                    </b> {onePost.codFile}</span>
-                <span><b>Общее впечатление о собеседовании:</b> {onePost.impression}</span>
+              <div className="currentPostInfo">
+                <span className="author">
+                  {onePost.author.name} <span>{onePost.created}</span>
+                </span>
+                <span>
+                  <b>Направление: </b> {onePost.direction}
+                </span>
+                <span>
+                  <b>Должность: </b> {onePost.position}
+                </span>
+                <span>
+                  <b>Зарплата: </b> {onePost.salary}
+                </span>
+                <span>
+                  <b>Имя HR: </b> {onePost.hrName}
+                </span>
+                <span>
+                  <b>Вопросы с собеседования: </b> {onePost.questions}
+                </span>
+                <span>
+                  <b>Ссылка на код: </b> {onePost.codFile}
+                </span>
+                <span>
+                  <b>Общее впечатление о собеседовании:</b> {onePost.impression}
+                </span>
                 <div>
                   Файлы с собеседования:
-              {onePost.image ? (
-                <img
-                  src={`/img/${onePost.image}`}
-                  alt="Файлы с собеседования"
-                />
-              ) : (
-                <span>В этом отзыве нет файлов</span>
-              )}
+                  {onePost.image ? (
+                    <img
+                      src={`/img/${onePost.image}`}
+                      alt="Файлы с собеседования"
+                    />
+                  ) : (
+                    <span>В этом отзыве нет файлов</span>
+                  )}
                 </div>
                 <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
-                <div className='reviewIcons'>
-                <hr />
+                <div className="reviewIcons">
+                  <hr />
                   {onePost.author._id === user._id ? (
                     <button>
                       <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
                     </button>
                   ) : (
-                    <i onClick={() => changeLike(id, user._id)} className='fa fa-heart'></i>
+                    <i
+                      onClick={() => changeLike(id, user._id)}
+                      className={`fa fa-heart ${liked ? 'red' : 'grey'} `}
+                    ></i>
                   )}
                   <br />
-                <span><b>likes:</b> {onePost.likes.length}</span>
+                  <span>
+                    <b>likes:</b> {onePost.likes.length}
+                  </span>
                 </div>
               </div>
-
             </div>
           </>
         )}
