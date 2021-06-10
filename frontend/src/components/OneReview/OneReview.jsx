@@ -44,6 +44,7 @@ export default function OneReview() {
           <Loader />
         ) : (
           <>
+
             <div className="currentPost">
               <Link className="companyLink" to="/company/{onePost.company._id}">
                 {onePost.companyName}

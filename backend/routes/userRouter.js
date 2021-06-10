@@ -24,7 +24,7 @@ userRouter.route('/logout').get(userSignout);
 
 userRouter.route('/checkAuth').get(checkUser);
 
-userRouter.route('/:id').get(updateUserProfile);// test
+userRouter.route('/:id').put(updateUserProfile);// test
 
 userRouter.route('/:id/getInfo').get(checkAuth, userInfo);
 
