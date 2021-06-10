@@ -47,9 +47,15 @@ function About() {
           </div>
 
         </div>
+
+        <div>
+          <progress max='100' value='50'></progress>
+        </div>
       </div>
     </div>
   )
 }
 
 export default About
+
+

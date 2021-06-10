@@ -9,6 +9,7 @@ import Loader from '../Loader/Loader';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 import './ProfileInfo.css';
+import ProgressBar from '../Progress/Progress'
 
 
 function ProfileInfo() {
@@ -51,6 +52,7 @@ function ProfileInfo() {
     setCurrentUserReview(filteredReviews);
   }, [reviews]);
 
+
   const avatarChange = (e) => {
     dispatch(changeAvatarFetch(e.target.files[0], user?._id));
   };
@@ -64,18 +66,23 @@ function ProfileInfo() {
               <div
                 className="userPhoto"
                 style={{
-                  background: `url('http://localhost:3001/${avatar}') 100%/100% no-repeat `,
+
+
+                  background: `url('${avatar}') 100%/100% no-repeat `,
                 }}
               ></div>
-              {user?._id == id && (
-                <span
-                  className="addImg"
-                  onClick={() => {
-                    inputFile.current.click();
-                  }}
-                >
-                  <i className="fa fa-plus"></i>
-                </span>
+              {user._id == id && (
+                <>
+                  <ProgressBar currentUserReview={currentUserReview}/>
+                  <span
+                    className="addImg"
+                    onClick={() => {
+                      inputFile.current.click();
+                    }}
+                  >
+                    <i className="fa fa-plus"></i>
+                  </span>
+                </>
               )}
 
               <input
