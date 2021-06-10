@@ -27,7 +27,7 @@ export default function OneReview() {
       showLoader();
       dispatch(getAllFetch()).then(() => hideLoader());
     }
-  }, []);
+  }, [reviews]);
 
   const changeLike = (id, userId) => {
     showLoader();
@@ -37,7 +37,6 @@ export default function OneReview() {
   return (
     onePost && (
       <div className="container container-main">
-        {console.log(onePost)}
         {loader ? (
           <Loader />
         ) : (
@@ -54,7 +53,7 @@ export default function OneReview() {
             </div>
             <div>автор: {onePost.author.name}</div>
             <div>создан: {onePost.created}</div>
-            <div>likes: {onePost.likes}</div>
+            <div>likes: {onePost.likes.length}</div>
             <div>Общая оценка: {onePost.rating}</div>
             <div>Направление: {onePost.direction}</div>
             <div>Должность: {onePost.position}</div>
@@ -70,14 +69,14 @@ export default function OneReview() {
                 alt="Файлы с собеседования"
               />
             </div>
-            <div> {onePost.setteled ? 'Усторился' : 'Не устроился'}</div>
+            <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
             <div>
               {onePost.author._id === user._id ? (
                 <button>
                   <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
                 </button>
               ) : (
-                <button onClick={changeLike(id, user._id)}>Like</button>
+                <button onClick={() => changeLike(id, user._id)}>Like</button>
               )}
             </div>
           </>

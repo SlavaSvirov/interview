@@ -64,6 +64,7 @@ const EditReview = () => {
     if (values.image) {
       formData.append('image', values.image.files[0]);
     }
+
     try {
       const response = await axios({
         method: 'PATCH',
@@ -149,6 +150,7 @@ const EditReview = () => {
   const handleChange = (value) => {
     setValue(value);
   };
+
   return (
     <>
       <Title level={2}>Создай новый отзыв!</Title>

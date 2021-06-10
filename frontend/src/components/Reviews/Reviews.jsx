@@ -10,6 +10,7 @@ const Reviews = ({ review }) => {
   const companies = useSelector((state) => state.companys);
   const user = useSelector((state) => state.user);
   const reviews = useSelector((state) => state.reviews);
+  const [isLiked, setIsLiked] = useState(false);
 
   const reviewLogo = (direction) => {
     switch (direction) {
@@ -47,9 +48,7 @@ const Reviews = ({ review }) => {
                 {review?.direction} Developer
               </span>
 
-              {review?.author?._id == user._id &&
-              user.isAuth &&
-              history.location.pathname === `/user/${user._id}` ? (
+              {review?.author?._id == user._id && user.isAuth ? (
                 <div className="icons">
                   <Link to={`/review/edit/${review._id}`}>
                     <i className="fa fa-edit"></i>
