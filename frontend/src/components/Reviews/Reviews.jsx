@@ -11,6 +11,7 @@ const Reviews = ({ review }) => {
   const user = useSelector((state) => state.user);
   const reviews = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
+  const [isLiked, setIsLiked] = useState(false);
 
   const deletePost = () => {
     dispatch(deletePostFetch(review._id))
@@ -51,13 +52,12 @@ const Reviews = ({ review }) => {
                 {review?.direction} Developer
               </span>
 
-              {review?.author?._id == user._id &&
-                user.isAuth &&
-                history.location.pathname === `/user/${user._id}` ? (
-                  <div className="icons">
-                    <Link to={`/review/edit/${review._id}`}>
-                      <i className="fa fa-edit"></i>
-                    </Link>
+
+              {review?.author?._id == user._id && user.isAuth ? (
+                <div className="icons">
+                  <Link to={`/review/edit/${review._id}`}>
+                    <i className="fa fa-edit"></i>
+                  </Link>
 
                   <button onClick={() => { deletePost() }}><i className="fa fa-trash"></i></button>  
                   </div>

@@ -8,7 +8,6 @@ import { Select } from 'antd';
 const { Option } = Select;
 
 const CustomAutoComplete = () => {
-
   let history = useHistory();
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
@@ -38,8 +37,8 @@ const CustomAutoComplete = () => {
       onSearch={onSearch}
     >
       {companies.length ? (
-        companies.map((sel, indx) => (
-          <Option key={indx} value={sel._id}>
+        companies.map((sel) => (
+          <Option key={sel._id} value={sel._id}>
             {sel.companyName}
           </Option>
         ))

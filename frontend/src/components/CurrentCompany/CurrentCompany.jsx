@@ -28,37 +28,41 @@ function CurrentCompany() {
     return logoValid;
   };
 
-  const { loader, showLoader, hideLoader } = useLoaderContext()
+  const { loader, showLoader, hideLoader } = useLoaderContext();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    showLoader()
+    showLoader();
     dispatch(currentFetch(id)).then(() => hideLoader());
   }, []);
 
   return (
-    <div className='container container-main'>
-      {
-        loader ? <Loader /> :
-          <div className="currentCompany">
-            <div style={{padding: '15px'}}>
-              <div className='company'>
-                <a href={currentCompany.companyUrl} alt={currentCompany.name}>
-                  <img src={checkLogo(currentCompany.logo)} alt={currentCompany.name}></img>
-                </a>
-                <h1>{currentCompany.companyName} </h1>
-              </div>
-              <div dangerouslySetInnerHTML={createMarkup()} />
-              <hr />
-              <div className='wrapper'>
-                {currentCompany?.reviews?.map((review) => {
-                  return <Reviews review={review} />;
-                })}
-              </div>
+    <div className="container container-main">
+      {loader ? (
+        <Loader />
+      ) : (
+        <div className="currentCompany">
+          <div style={{ padding: '15px' }}>
+            <div className="company">
+              <a href={currentCompany.companyUrl} alt={currentCompany.name}>
+                <img
+                  src={checkLogo(currentCompany.logo)}
+                  alt={currentCompany.name}
+                ></img>
+              </a>
+              <h1>{currentCompany.companyName} </h1>
+            </div>
+            <div dangerouslySetInnerHTML={createMarkup()} />
+            <hr />
+            <div className="wrapper">
+              {currentCompany?.reviews?.map((review) => {
+                return <Reviews key={review._id} review={review} />;
+              })}
             </div>
           </div>
-      }
+        </div>
+      )}
     </div>
   );
 }

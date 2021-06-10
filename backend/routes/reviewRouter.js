@@ -17,6 +17,10 @@ router
     if (!dbPost.likes.includes(req.body.userId)) {
       dbPost.likes.push(req.body.userId);
       await dbPost.save();
+    } else {
+      console.log('ya tutu');
+      dbPost.likes.splice(dbPost.likes.indexOf(req.body.userId), 1);
+      await dbPost.save();
     }
     console.log(dbPost);
     res.json(dbPost);
