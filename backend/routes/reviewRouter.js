@@ -107,21 +107,22 @@ router
         if (reviewForUpdate.rating !== req.body.rating) {
           //if rating for this company was changed
           let idCompany = reviewForUpdate.company;
-          const companyToChangeRating = await Company.findById(
-            idCompany
-          ).populate('reviews');
-          console.log(companyToChangeRating);
-          companyToChangeRating.rating = Math.round(
-            companyToChangeRating.reviews?.reduce((acc, review) => {
-              //calc rating
-              return (acc += +review.rating);
-            }, 0) / companyToChangeRating.reviews.length
-          );
           Object.keys(req.body).forEach((key) => {
             //changing key
             reviewForUpdate[key] = req.body[key];
           });
-          await companyToChangeRating.save(); //save company
+          await reviewForUpdate.save(); //save review
+          const companyToChangeRating = await Company.findById(
+            idCompany
+          ).populate('reviews');
+          companyToChangeRating.rating = Math.round(
+            companyToChangeRating.reviews?.reduce((acc, review) => {
+              //calc rating
+              return (acc += review.rating);
+            }, 0) / companyToChangeRating.reviews.length
+          );
+          //save company
+          await companyToChangeRating.save();
         }
         await reviewForUpdate.save(); //save review
       }
