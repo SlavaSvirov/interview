@@ -51,11 +51,11 @@ const Reviews = ({ review }) => {
                 {review.direction} Developer
               </span>
               {review.author._id == user._id &&
-              user.isAuth &&
-              history.location.pathname === `/user/${user._id}` ? (
-                <div>
-                  <span>ED</span>
-                  <span>DEL</span>
+                user.isAuth &&
+                history.location.pathname === `/user/${user._id}` ? (
+                <div className='icons'>
+                  <i className='fa fa-edit'></i>
+                  <i className='fa fa-trash'></i>
                 </div>
               ) : (
                 <span></span>

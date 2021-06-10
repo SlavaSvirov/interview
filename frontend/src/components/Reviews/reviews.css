@@ -20,14 +20,12 @@ font-family: 'Montserrat', sans-serif; */
 }
 
 .wrap .block-img {
-  background-image: url(https://images.unsplash.com/photo-1622952736534-4ca61f7992fb?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 190px;
   width: 300px;
   border-radius: 4px 4px 0 0;
-  border: 1px solid;
   border-bottom: white;
 }
 
@@ -115,3 +113,19 @@ font-family: 'Montserrat', sans-serif; */
   font-weight: 900;
 }
 
+
+.wrap .icons {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 20px;
+}
+
+.wrap .icons .fa-edit {
+  margin-bottom: 5px;
+}
+
+.wrap .icons i {
+  padding: 2px;
+}
