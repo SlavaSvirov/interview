@@ -117,9 +117,11 @@ router
             reviewForUpdate[key] = req.body[key];
           });
           await reviewForUpdate.save(); //save review
+          console.log(idCompany);
           const companyToChangeRating = await Company.findById(
             idCompany
           ).populate('reviews');
+          console.log("!!!!!!!!!!!companyToChangeRating",companyToChangeRating);
           companyToChangeRating.rating = Math.round(
             companyToChangeRating.reviews?.reduce((acc, review) => {
               //calc rating
@@ -198,7 +200,9 @@ router
           //changing value of old review
           reviewForUpdate[key] = req.body[key];
         });
-        reviewForUpdate.companyName = companyName.data.name; //saving name company
+        reviewForUpdate.companyName = companyName.data.name;
+        reviewForUpdate.company = newCompany._id;
+         //saving name company
         await reviewForUpdate.save();
       }
     }
