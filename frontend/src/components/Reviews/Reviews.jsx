@@ -11,6 +11,7 @@ const Reviews = ({ review }) => {
   const user = useSelector((state) => state.user);
   const reviews = useSelector((state) => state.reviews);
 
+
   const reviewLogo = (direction) => {
     switch (direction) {
       case 'Frontend':

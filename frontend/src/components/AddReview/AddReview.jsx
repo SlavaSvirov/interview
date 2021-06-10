@@ -1,5 +1,4 @@
-// import { Avatar } from 'antd';
-// import { AntDesignOutlined } from '@ant-design/icons';
+
 import React, { useState } from 'react';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -20,7 +19,6 @@ import {
 
 const { Title } = Typography;
 
-//import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 
 const customIcons = {
   1: <FrownOutlined />,
@@ -67,7 +65,6 @@ const AddReview = () => {
     if (values.image) {
       formData.append('image', values.image.files[0]);
     }
-    // try{
     const response = await axios({
       method: 'POST',
       url: '/review',
@@ -280,4 +277,3 @@ const AddReview = () => {
   );
 };
 export default AddReview;
-// history.push(`/company/${input}`);
