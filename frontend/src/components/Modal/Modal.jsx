@@ -59,7 +59,7 @@ function submitForm (e) {
   
   if (name.trim() && surname.trim() && email.trim() && telegram.trim()) {
     
-    dispatch(editProfileFetch(idUser, name, surname, email, telegram))
+    dispatch(editProfileFetch(name, surname, email, telegram))
     setActive(false)
   history.push(`/user/${idUser}`)
       }

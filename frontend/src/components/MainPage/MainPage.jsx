@@ -42,13 +42,12 @@ const MainPage = () => {
     <main className={styles.mainPageDiv}>
       <div className="container container-main">
         <div className={styles.mainPageText}>
-          <h1>Lorem ipsum dolor sit amet.</h1>
+          <h1>Будь готов к любому собеседованию!</h1>
           <p className={styles.mainPageTitle}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-            ipsa praesentium, veniam facere quas labore?
+            Оставь свой отзыв о прошедшем собеседовании, этим ты поможешь другу, а друг поможет тебе.
           </p>
           <div className={styles.mainPageBtn}>
-            <a href="#secondPage">Get Started</a>
+            <a href="#secondPage">Поухали!</a>
           </div>
         </div>
 
@@ -90,8 +89,7 @@ const MainPage = () => {
           <a name="secondPage"></a>
           <div className={styles.secondTitle}>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam,
-              eveniet.
+              Начни с выбора компании!
             </p>
             <AutoComplete />
           </div>
