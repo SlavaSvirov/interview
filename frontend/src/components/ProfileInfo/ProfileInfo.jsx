@@ -9,28 +9,26 @@ import Loader from '../Loader/Loader';
 import Reviews from '../Reviews/Reviews';
 import Sort from '../Sort/Sort';
 import './ProfileInfo.css';
-import ProgressBar from '../Progress/Progress'
-
+import ProgressBar from '../Progress/Progress';
 
 function ProfileInfo() {
   const reviews = useSelector((state) => state.reviews);
   const user = useSelector((state) => state.user);
   // console.log(user);
-  const idUserForUpdate = user._id
-  // console.log('idUserForUpdate',idUserForUpdate);
+
+  const idUserForUpdate = user._id;
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
   const inputFile = useRef(null);
   const avatar = useSelector((state) => state.user.avatar);
   const { id } = useParams();
   const dispatch = useDispatch();
-  
+
   const { loader, showLoader, hideLoader } = useLoaderContext();
-  const [modalActive, setModalActive] = useState(false)
+  const [modalActive, setModalActive] = useState(false);
 
   function modalOpen(idUserForUpdate) {
-    console.log({idUserForUpdate});
-    setModalActive(true)
+    setModalActive(true);
   }
 
   useEffect(() => {
@@ -52,7 +50,6 @@ function ProfileInfo() {
     setCurrentUserReview(filteredReviews);
   }, [reviews]);
 
-
   const avatarChange = (e) => {
     dispatch(changeAvatarFetch(e.target.files[0], user?._id));
   };
@@ -62,53 +59,59 @@ function ProfileInfo() {
       <div className="main">
         <div className="profile">
           {/* <form className="profileForm">  */}
-            <div className="user">
-              <div
-                className="userPhoto"
-                style={{
+          <div className="user">
+            <div
+              className="userPhoto"
+              style={{
+                background: `url('${avatar}') 100%/100% no-repeat `,
+              }}
+            ></div>
+            {user._id == id && (
+              <>
+                <ProgressBar currentUserReview={currentUserReview} />
+                <span
+                  className="addImg"
+                  onClick={() => {
+                    inputFile.current.click();
+                  }}
+                >
+                  <i className="fa fa-plus"></i>
+                </span>
+              </>
+            )}
 
+            <input
+              name="image"
+              className="input"
+              type="file"
+              ref={inputFile}
+              onChange={(e) => {
+                avatarChange(e);
+              }}
+            />
+          </div>
 
-                  background: `url('${avatar}') 100%/100% no-repeat `,
-                }}
-              ></div>
-              {user._id == id && (
-                <>
-                  <ProgressBar currentUserReview={currentUserReview}/>
-                  <span
-                    className="addImg"
-                    onClick={() => {
-                      inputFile.current.click();
-                    }}
-                  >
-                    <i className="fa fa-plus"></i>
-                  </span>
-                </>
-              )}
-
-              <input
-                name="image"
-                className="input"
-                type="file"
-                ref={inputFile}
-                onChange={(e) => {
-                  avatarChange(e);
-                }}
+          <div className="userInfo">
+            <span className="name">{infoFromUser.name}</span>
+            <span className="rating">{infoFromUser.rating}</span>
+            {user?._id == id && (
+              <button
+                className="btn"
+                onClick={() => modalOpen(idUserForUpdate)}
+              >
+                Редактировать профиль
+              </button>
+            )}
+            {modalActive && (
+              <Modal
+                active={modalActive}
+                setActive={setModalActive}
+                idUser={idUserForUpdate}
               />
-            </div>
+            )}
+          </div>
 
-            
-            <div className="userInfo">
-              <span className="name">{infoFromUser.name}</span>
-              <span className="rating">{infoFromUser.rating}</span>
-              {user?._id == id && (
-                <button className="btn" onClick={() => modalOpen(idUserForUpdate)}>Редактировать профиль</button>
-              )}
-              {modalActive && <Modal active={modalActive} setActive={setModalActive} idUser={idUserForUpdate}/>}
-              
-    
-            </div>
-            
-         {/* </form>  */}
+          {/* </form>  */}
         </div>
         <div className="reviews">
           <div className="sortWrap">
@@ -122,8 +125,8 @@ function ProfileInfo() {
             <div className="wrapper">
               {currentUserReview?.map((review) => {
                 return (
-                  <div>
-                    <Reviews key={review._id} review={review} />
+                  <div key={review._id}>
+                    <Reviews review={review} />
                   </div>
                 );
               })}

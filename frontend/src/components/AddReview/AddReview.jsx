@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -19,7 +18,6 @@ import {
 import { useSelector } from 'react-redux';
 
 const { Title } = Typography;
-
 
 const customIcons = {
   1: <FrownOutlined />,
@@ -53,7 +51,6 @@ const AddReview = () => {
   let history = useHistory();
   const user = useSelector((state) => state.user);
   const onFinish = async (values) => {
-    console.log(values);
     const formData = new FormData();
     formData.append('companyName', values.companyName);
     formData.append('direction', values.direction);
@@ -151,6 +148,7 @@ const AddReview = () => {
       <Form
         name="validate_other"
         {...formItemLayout}
+        initialValues={{ rating: 3 }}
         onFinish={(e) => onFinish(e)}
       >
         <Form.Item
@@ -196,13 +194,29 @@ const AddReview = () => {
             },
           ]}
         >
-          <Select placeholder="Выбери направление">
+          <Select
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            placeholder="Выбери направление"
+          >
             <Option value="Frontend">Front End</Option>
             <Option value="Backend">Back End</Option>
             <Option value="FullStack">Full Stack</Option>
           </Select>
         </Form.Item>
-        <Form.Item name="position" label="Должность">
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              message: 'Пожалуйста введите вакансию, на которую претендовали',
+            },
+          ]}
+          name="position"
+          label="Должность"
+        >
           <Input placeholder="Писать сюда" />
         </Form.Item>
         <Form.Item name="salary" label="Зарплата (рублей)">
@@ -240,10 +254,12 @@ const AddReview = () => {
           <Input.TextArea placeholder="Писать сюда" />
         </Form.Item>
 
-        <Form.Item name="setteled" label="Чекни">
+        <Form.Item name="setteled" label="Результат">
           <Radio.Group>
             <Radio value="true">Устроился</Radio>
-            <Radio value="false">Не устроился</Radio>
+            <Radio selected value="false">
+              Не устроился
+            </Radio>
           </Radio.Group>
         </Form.Item>
 

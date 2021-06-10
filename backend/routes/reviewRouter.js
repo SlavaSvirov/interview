@@ -4,6 +4,7 @@ const reviewModel = require('../database/models/review');
 const userModel = require('../database/models/user');
 const axios = require('axios');
 const Company = require('../database/models/company');
+const { findById } = require('../database/models/review');
 
 router
   .get('/', async (req, res) => {
@@ -12,9 +13,13 @@ router
   })
 
   .post('/:id', async (req, res) => {
-    let dbPost = await reviewModel.findById(req.params.id);
+    let dbPost = await reviewModel.findById(req.params.id).populate('author');
     if (!dbPost.likes.includes(req.body.userId)) {
       dbPost.likes.push(req.body.userId);
+      await dbPost.save();
+    } else {
+      console.log('ya tutu');
+      dbPost.likes.splice(dbPost.likes.indexOf(req.body.userId), 1);
       await dbPost.save();
     }
     console.log(dbPost);
@@ -22,8 +27,8 @@ router
   })
 
   .patch('/:id', async (req, res) => {
-    console.log(req.body);
     const reviewForUpdate = await reviewModel.findById(req.params.id);
+
     const file = req.file ? `/img/${req.file.filename}` : '';
     Object.keys(req.body).forEach((key) => {
       reviewForUpdate[key] = req.body[key];
@@ -200,8 +205,31 @@ router
     console.log({ reviewForUpdate });
     return res.json(reviewForUpdate);
   })
-  .delete('/', (req, res) => {
-    // Reviews.FindByIdAndDelete
+  .delete('/:id', async (req, res) => {
+    const reviewForDelete = await reviewModel.findById(req.params.id);
+    const idOfCompanyWithThisReview = reviewForDelete.company;
+    const CompanyWithThisReview = await Company.findById(
+      idOfCompanyWithThisReview
+    );
+    let indexOfId = CompanyWithThisReview.reviews.indexOf(req.params.id); // find index of id of old review
+    CompanyWithThisReview.reviews.splice(indexOfId, 1); // deleting in array review
+    if (CompanyWithThisReview.reviews.length) {
+      await CompanyWithThisReview.save();
+      let companyPopulated = await Company.findById(
+        idOfCompanyWithThisReview
+      ).populate('reviews');
+      companyPopulated.rating = Math.round(
+        //calc rating and save
+        companyPopulated.reviews?.reduce((acc, review) => {
+          return (acc += +review.rating);
+        }, 0) / companyPopulated.reviews.length
+      );
+      await companyPopulated.save();
+    } else {
+      await CompanyWithThisReview.remove();
+    }
+    await reviewForDelete.remove();
+    res.sendStatus(200);
   });
 
 module.exports = router;
