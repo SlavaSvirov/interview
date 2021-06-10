@@ -51,7 +51,6 @@ const AddReview = () => {
   let history = useHistory();
   const user = useSelector((state) => state.user);
   const onFinish = async (values) => {
-    console.log(values);
     const formData = new FormData();
     formData.append('companyName', values.companyName);
     formData.append('direction', values.direction);
@@ -149,6 +148,7 @@ const AddReview = () => {
       <Form
         name="validate_other"
         {...formItemLayout}
+        initialValues={{ rating: 3 }}
         onFinish={(e) => onFinish(e)}
       >
         <Form.Item
