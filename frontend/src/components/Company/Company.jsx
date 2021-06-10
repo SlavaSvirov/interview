@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { allFetch } from '../../redux/actions/companyAC';
@@ -9,7 +9,7 @@ import Loader from '../Loader/Loader';
 
 export default function Company() {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const companies = useSelector((state) => state.companys);
 
   const { loader, showLoader, hideLoader } = useLoaderContext();
@@ -19,6 +19,10 @@ export default function Company() {
     dispatch(allFetch()).then(() => hideLoader());
   }, []);
 
+  const handleRelocate = (id) => {
+    history.push(`/company/${id}`);
+  };
+
   return (
     <div className="container container-main">
       {loader ? (
@@ -27,7 +31,11 @@ export default function Company() {
         <div className={style.company}>
           {companies.length ? (
             companies?.map((el) => (
-              <div className={style.wrap} key={el._id}>
+              <div
+                onClick={() => handleRelocate(el._id)}
+                className={style.wrap}
+                key={el._id}
+              >
                 <div className={style.wrapper}>
                   <span className={style.rating}>{el.rating}</span>
                 </div>

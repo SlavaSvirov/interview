@@ -2,9 +2,11 @@ import { useParams } from 'react-router-dom';
 import './currentCompany.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { currentFetch } from '../../redux/actions/currentCompanyAC.js';
+import {
+  currentFetch,
+  setCompanyFetch,
+} from '../../redux/actions/currentCompanyAC.js';
 import nologo from '../../img/nologo.svg';
-import { getAllFetch } from '../../redux/actions/companyAC';
 import Reviews from '../Reviews/Reviews';
 import { useLoaderContext } from '../../context/LoaderContext';
 import Loader from '../Loader/Loader';
@@ -12,7 +14,7 @@ import Loader from '../Loader/Loader';
 function CurrentCompany() {
   const { id } = useParams();
   const currentCompany = useSelector((state) => state.currentCompany);
-
+  const user = useSelector((state) => state.user);
   function createMarkup() {
     return { __html: currentCompany.description };
   }
@@ -37,6 +39,10 @@ function CurrentCompany() {
     dispatch(currentFetch(id)).then(() => hideLoader());
   }, []);
 
+  const handleChangeJob = (id, userId) => {
+    dispatch(setCompanyFetch(id, userId));
+  };
+
   return (
     <div className="container container-main">
       {loader ? (
@@ -52,6 +58,24 @@ function CurrentCompany() {
                 ></img>
               </a>
               <h1>{currentCompany.companyName} </h1>
+              <div>
+                {!currentCompany.graduates?.includes(user._id) ? (
+                  <button
+                    onClick={() =>
+                      handleChangeJob(currentCompany._id, user._id)
+                    }
+                    className="btn"
+                  >
+                    Я здесь работаю!
+                  </button>
+                ) : (
+                  'Вы здесь работаете'
+                )}
+                <div>
+                  {currentCompany.graduates?.length} выпускников Elbrus работают
+                  в этой компании!
+                </div>
+              </div>
             </div>
             <div dangerouslySetInnerHTML={createMarkup()} />
             <hr />

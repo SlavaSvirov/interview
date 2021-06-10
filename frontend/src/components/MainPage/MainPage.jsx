@@ -42,10 +42,11 @@ const MainPage = () => {
         <div className={styles.mainPageText}>
           <h1>Будь готов к любому собеседованию!</h1>
           <p className={styles.mainPageTitle}>
-            Оставь свой отзыв о прошедшем собеседовании, этим ты поможешь другу, а друг поможет тебе.
+            Оставь свой отзыв о прошедшем собеседовании, этим ты поможешь другу,
+            а друг поможет тебе.
           </p>
           <div className={styles.mainPageBtn}>
-            <a href="#secondPage">Поухали!</a>
+            <a href="#secondPage">Поехали!</a>
           </div>
         </div>
 
@@ -86,9 +87,7 @@ const MainPage = () => {
         <div className={styles.secondMainPage}>
           <a name="secondPage"></a>
           <div className={styles.secondTitle}>
-            <p>
-              Начни с выбора компании!
-            </p>
+            <p>Начни с выбора компании!</p>
             <AutoComplete />
           </div>
           <div className={styles.sortWrapper}>

@@ -26,20 +26,21 @@ router
     res.json(dbPost);
   })
 
-  .patch('/:id', async (req, res) => {
-    const reviewForUpdate = await reviewModel.findById(req.params.id);
-
-    const file = req.file ? `/img/${req.file.filename}` : '';
-    Object.keys(req.body).forEach((key) => {
-      reviewForUpdate[key] = req.body[key];
-    });
-    await reviewForUpdate.save();
-    return res.json(reviewForUpdate);
-  })
+  // .patch('/:id', async (req, res) => {
+  //   const reviewForUpdate = await reviewModel.findById(req.params.id);
+  //   const file = req.file ? `/img/${req.file.filename}` : '';
+  //   Object.keys(req.body).forEach((key) => {
+  //     reviewForUpdate[key] = req.body[key];
+  //   });
+  //   await reviewForUpdate.save();
+  //   return res.json(reviewForUpdate);
+  // })
 
   .post('/', async (req, res) => {
     console.log(req.body);
-    const file = req.file ? `/img/${req.file.filename}` : '';
+    const file = req.file
+      ? `http://localhost:3001/img/${req.file.filename}`
+      : '';
 
     const companyName = await axios(
       `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
