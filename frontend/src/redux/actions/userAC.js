@@ -79,22 +79,23 @@ export const getUser = (user) => {
   };
 };
 
-export const editProfileUser = (id, name, surname, phone, email) => {
+export const editProfileUser = (user) => {
   return {
 type : EDIT_PROFILE,
-payload : {id, name, surname, phone, email}
+payload : user
   }
 }
 
-export const editProfileFetch = (id, name, surname, phone, email) => async (dispatch) => {
+export const editProfileFetch = (id, name, surname, telegram, email) => async (dispatch) => {
   console.log("id editProfileFetch", id);
   const editProfile = await fetch(`http://localhost:3001/user/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id, name, surname, phone, email }),
+    body: JSON.stringify({ id, name, surname, telegram, email }),
   })
   const edit = await editProfile.json()
-  dispatch(editProfileUser(id, name, surname, phone, email))
+  console.log({edit});
+  dispatch(editProfileUser(edit))
 
 }
 

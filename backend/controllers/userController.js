@@ -105,7 +105,8 @@ const checkUser = async (req, res) => {
 
 const updateUserProfile = async (req, res) => {
   const {name, surname, email, telegram} = req.body
-  const updateUser = await User.findByIdAndUpdate(req.params.id, );
+  const updateUser = await User.findByIdAndUpdate(req.params.id,
+    req.body, {new : true});
   console.log('--------------------->>>>>>>>>',updateUser);
   res.json(updateUser);
 };

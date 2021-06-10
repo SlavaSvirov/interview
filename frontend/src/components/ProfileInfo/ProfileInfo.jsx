@@ -17,7 +17,7 @@ function ProfileInfo() {
   const user = useSelector((state) => state.user);
   // console.log(user);
   const idUserForUpdate = user._id
-  console.log('idUserForUpdate',idUserForUpdate);
+  // console.log('idUserForUpdate',idUserForUpdate);
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
   const inputFile = useRef(null);
@@ -43,7 +43,7 @@ function ProfileInfo() {
       dispatch(getAllFetch()).then(() => hideLoader());
       setInfoFromUser(myUser);
     })();
-  }, [id]);
+  }, [id,modalActive]);
 
   useEffect(() => {
     const filteredReviews = reviews?.filter((review) => {

@@ -77,7 +77,7 @@ export default function OneReview() {
                   <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
                 </button>
               ) : (
-                <button onClick={changeLike(id, user._id)}>Like</button>
+                <button onClick={() =>changeLike(id, user._id)}>Like</button>
               )}
             </div>
           </>
