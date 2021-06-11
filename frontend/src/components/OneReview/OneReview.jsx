@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { useLoaderContext } from '../../context/LoaderContext';
+import { Modal, Button } from 'antd';
 import {
   changeLikeFetch,
   clear,
@@ -9,17 +10,24 @@ import {
 } from '../../redux/actions/reviewsAC';
 import Loader from '../Loader/Loader';
 import './onereview.css';
-
 export default function OneReview() {
   const reviews = useSelector((state) => state.reviews);
   const user = useSelector((state) => state.user);
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { id } = useParams();
   const [onePost, setOnePost] = useState(null);
   const [liked, setLiked] = useState(false);
-
   const dispatch = useDispatch();
   const { loader, showLoader, hideLoader } = useLoaderContext();
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     if (reviews.length) {
@@ -88,20 +96,23 @@ export default function OneReview() {
                 <span>
                   <b>Общее впечатление о собеседовании:</b> {onePost.impression}
                 </span>
-                <div>
+                {/* <div>
                   Файлы с собеседования:
                   {onePost.image ? (
                     <img src={`${onePost.image}`} alt="Файлы с собеседования" />
                   ) : (
                     <span>В этом отзыве нет файлов</span>
                   )}
+                </div> */}
+                <div className="Settled">
+                  {' '}
+                  {onePost.setteled ? 'Устроился' : 'Не устроился'}
                 </div>
-                <div className='Settled'> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
                 <div className="reviewIcons">
                   <hr />
                   {onePost.author._id === user._id ? (
                     <Link to={`/review/edit/${onePost._id}`}>
-                      <i className='fa fa-edit editBtn'></i>
+                      <i className="fa fa-edit editBtn"></i>
                     </Link>
                   ) : (
                     <i
@@ -113,6 +124,30 @@ export default function OneReview() {
                   <span>
                     <b>likes:</b> {onePost.likes.length}
                   </span>
+                  <div>
+                    {' '}
+                    {onePost.image ? (
+                      <>
+                        <Button type="primary" onClick={showModal}>
+                          Файлы с собеседования:
+                        </Button>
+                        <Modal
+                          title="Basic Modal"
+                          visible={isModalVisible}
+                          onOk={handleOk}
+                          onCancel={handleCancel}
+                        >
+                          <p>Файлы с собеседования:</p>
+                          <img
+                            src={`${onePost.image}`}
+                            alt="Файлы с собеседования"
+                          />
+                        </Modal>
+                      </>
+                    ) : (
+                      <span>В этом отзыве нет файлов</span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
