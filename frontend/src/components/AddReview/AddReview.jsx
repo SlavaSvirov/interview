@@ -232,6 +232,7 @@ const AddReview = () => {
           <Input placeholder="Писать сюда" />
         </Form.Item>
         <Form.Item name="salary" label="Зарплата (рублей)">
+
           <Slider
             initialValues={50000}
             defaultlValues={50000}
