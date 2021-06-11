@@ -19,9 +19,7 @@ const MainPage = () => {
       (e.target.documentElement.scrollTop + window.innerHeight);
     // console.log({ loc });
     if (loc <= 100 && 98 <= loc) {
-      console.log({ featching });
       setFeatching((prev) => !prev);
-      console.log(e.target.documentElement.scrollHeight);
     }
   };
 
@@ -40,60 +38,66 @@ const MainPage = () => {
 
   return (
     <main className={styles.mainPageDiv}>
-      <div className="container container-main">
-        <div className={styles.mainPageText}>
-          <h1>Lorem ipsum dolor sit amet.</h1>
-          <p className={styles.mainPageTitle}>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-            ipsa praesentium, veniam facere quas labore?
-          </p>
-          <div className={styles.mainPageBtn}>
-            <a href="#secondPage">Get Started</a>
+      <div className={styles.video}>
+        <div className={styles.mainPageHexagon}>
+          <video autoPlay muted playsInline loop className={styles.cat}>
+            <source src="/imgLOGO/city.mp4" type='video/mp4' />
+          </video>
+          <div className="container container-main">
+            <div className={styles.mainPageText}>
+              <h1>Будь готов к любому собеседованию!</h1>
+              <p className={styles.mainPageTitle}>
+                Оставь свой отзыв о прошедшем собеседовании, этим ты поможешь другу, а друг поможет тебе.
+              </p>
+              <div className={styles.mainPageBtn}>
+                <a href="#secondPage">Поухали!</a>
+
+              </div>
+            </div>
+
+            <div className={styles.wrapperHexagons}>
+              <div className={styles.hexagon}>
+                <div className={styles.layer1}>
+                  <div className={styles.layer2}>
+                    <img src="/imgLOGO/1.jpg" alt="logo" />
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.hexagon}>
+                <div className={styles.layer1}>
+                  <div className={styles.layer2}>
+                    <img src="/imgLOGO/1.jpg" alt="logo" />
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.hexagon}>
+                <div className={styles.layer1}>
+                  <div className={styles.layer2}>
+                    <img src="/imgLOGO/1.jpg" alt="logo" />
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.hexagon}>
+                <div className={styles.layer1}>
+                  <div className={styles.layer2}>
+                    <img src="/imgLOGO/1.jpg" alt="logo" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className={styles.wrapperHexagons}>
-          <div className={styles.hexagon}>
-            <div className={styles.layer1}>
-              <div className={styles.layer2}>
-                <img src="/imgLOGO/1.jpg" alt="logo" />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.hexagon}>
-            <div className={styles.layer1}>
-              <div className={styles.layer2}>
-                <img src="/imgLOGO/1.jpg" alt="logo" />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.hexagon}>
-            <div className={styles.layer1}>
-              <div className={styles.layer2}>
-                <img src="/imgLOGO/1.jpg" alt="logo" />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.hexagon}>
-            <div className={styles.layer1}>
-              <div className={styles.layer2}>
-                <img src="/imgLOGO/1.jpg" alt="logo" />
-              </div>
-            </div>
-          </div>
-        </div>
-
+      </div>
+      <div className='container container-main'>
         <div className={styles.secondMainPage}>
           <a name="secondPage"></a>
           <div className={styles.secondTitle}>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam,
-              eveniet.
-            </p>
+            <p>Начни с выбора компании!</p>
             <AutoComplete />
+            <span>Или посмотри все отзывы, которые у нас есть</span>
           </div>
           <div className={styles.sortWrapper}>
             <Sort />

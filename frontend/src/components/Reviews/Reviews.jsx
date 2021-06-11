@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { deletePostFetch } from '../../redux/actions/reviewsAC';
 
 const Reviews = ({ review }) => {
+  const history = useHistory();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(false);
@@ -13,6 +14,11 @@ const Reviews = ({ review }) => {
   const deletePost = () => {
     dispatch(deletePostFetch(review._id));
   };
+
+  const handleRelocate = (id) => {
+    history.push(`/review/${id}`);
+  };
+
   const reviewLogo = (direction) => {
     switch (direction) {
       case 'Frontend':
@@ -31,6 +37,9 @@ const Reviews = ({ review }) => {
       <div className="wrap">
         <>
           <div
+            onClick={() => {
+              handleRelocate(review._id);
+            }}
             className="block-img"
             style={{
               background: `url(${reviewLogo(
@@ -49,26 +58,30 @@ const Reviews = ({ review }) => {
                 {review?.direction} Developer
               </span>
 
-              {review?.author?._id == user._id && user.isAuth ? (
+              {review?.author?._id == user._id &&
+              user.isAuth &&
+              history.location.pathname === `/user/${user._id}` ? (
                 <div className="icons">
                   <Link to={`/review/edit/${review._id}`}>
                     <i className="fa fa-edit"></i>
                   </Link>
 
-                  <button
+                  <Link
                     onClick={() => {
                       deletePost();
                     }}
+                    className='trashBtn'
                   >
                     <i className="fa fa-trash"></i>
-                  </button>
+                  </Link>
                 </div>
               ) : (
                 <span></span>
               )}
             </div>
             <p className="company-location">
-              {review.companyName},<br />
+              {review.companyName}
+              <br />
             </p>
             <div className="wrapper-user-position">
               <Link to={`/user/${review?.author?._id}`}>

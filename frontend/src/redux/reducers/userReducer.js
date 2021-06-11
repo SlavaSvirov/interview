@@ -1,5 +1,11 @@
-import initState from '../initState';
-import { AUTH, EDIT_PROFILE, GET_USER, LOG_OUT, SET_USER } from '../types/types';
+import initState from "../initState";
+import {
+  AUTH,
+  EDIT_PROFILE,
+  GET_USER,
+  LOG_OUT,
+  SET_USER,
+} from "../types/types";
 
 function userReducer(state = initState.user, action) {
   switch (action.type) {
@@ -15,9 +21,9 @@ function userReducer(state = initState.user, action) {
     case SET_USER:
       return { ...state, ...action.payload };
 
-      case EDIT_PROFILE :
-        console.log('action.payload',action.payload);
-        return action.payload
+    case EDIT_PROFILE:
+      console.log("action.payload", action.payload);
+      return { ...state, ...action.payload };
 
     default:
       return state;

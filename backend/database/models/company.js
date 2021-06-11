@@ -8,6 +8,7 @@ const companySchema = Schema({
   logo: Object,
   description: String,
   area: String,
+  graduates: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   rating: { type: Number, default: 10 },
 });
 
