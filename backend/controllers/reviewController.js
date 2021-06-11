@@ -13,7 +13,9 @@ const getAllReviewPopulated = async (req, res) => {
 
 const changeLikeReview = async (req, res) => {
   let dbPost = await reviewModel.findById(req.params.id).populate('author');
-  if (!dbPost.likes.includes(req.body.userId)) {
+  if (!req.body.userId) {
+    await dbPost.save();
+  } else if (!dbPost.likes.includes(req.body.userId)) {
     dbPost.likes.push(req.body.userId);
     await dbPost.save();
   } else {

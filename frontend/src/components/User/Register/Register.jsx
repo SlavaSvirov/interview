@@ -49,38 +49,42 @@ function Register() {
           <p className={style.logo}>
             Interv<span>/eW</span>.com
           </p>
-          <p className={style.registerText}>Sign up and start sharing</p>
+          <p className={style.registerText}>Зарегистрируйтесь</p>
           <div className={style.authWithGoogle}>
-            <span className={style.socialNetwork}>with your social network</span>
-            <span className={style.google}><GoogleB /></span>
+            <span className={style.socialNetwork}>
+              С помощью социальных сетей
+            </span>
+            <span className={style.google}>
+              <GoogleB />
+            </span>
           </div>
-          <span className={style.or}>or</span>
+          <span className={style.or}>или</span>
           <div className={style.registerInputs}>
-            <label>Name</label>
+            <label>Имя</label>
             <br />
             <input type="text" name="name" />
             <br />
 
-            <label>Surname</label>
+            <label>Фамилия</label>
             <br />
             <input type="text" name="surname" />
             <br />
 
-            <label>Email</label>
+            <label>Электронная почта</label>
             <br />
             <input type="email" name="email" />
             <br />
 
-            <label>Password</label>
+            <label>Пароль </label>
             <br />
             <input type="password" name="password" />
 
             <button type="submit" className={style.registerBtn}>
-              Sign Up
+              Зарегистрироваться
             </button>
           </div>
           <p className={style.login}>
-            Already have an account? <Link to="/login">Log In</Link>
+            Уже есть аккаунт? <Link to="/login">Войти</Link>
           </p>
         </div>
       </form>

@@ -41,7 +41,9 @@ function CurrentCompany() {
   }, []);
 
   const handleChangeJob = (id, userId) => {
-    dispatch(setCompanyFetch(id, userId));
+    if (userId) {
+      dispatch(setCompanyFetch(id, userId));
+    }
   };
 
   return (

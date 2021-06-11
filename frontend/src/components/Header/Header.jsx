@@ -27,30 +27,30 @@ function Header() {
             {user.isAuth ? (
               <ul>
                 <li>
-                  <Link to="/">Home</Link>
+                  <Link to="/">На главную</Link>
                 </li>
                 <li>
-                  <Link to="/company">Company</Link>
+                  <Link to="/company">Компании</Link>
                 </li>
                 <li>
-                  <Link to={`/user/${user._id}`}>Profile</Link>
+                  <Link to={`/user/${user._id}`}>Профиль</Link>
                 </li>
                 <li>
                   <Link to="/" onClick={() => logOutHandler()}>
-                    Log Out
+                    Выйти
                   </Link>
                 </li>
               </ul>
             ) : (
               <ul>
                 <li>
-                  <Link to="/">Home</Link>
+                  <Link to="/">На главную</Link>
                 </li>
                 <li>
-                  <Link to="/company">Company</Link>
+                  <Link to="/company">Компании</Link>
                 </li>
                 <li>
-                  <Link to="/login">Log In</Link>
+                  <Link to="/login">Войти</Link>
                 </li>
               </ul>
             )}
