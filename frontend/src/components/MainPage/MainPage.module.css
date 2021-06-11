@@ -26,6 +26,10 @@ font-family: 'Montserrat', sans-serif; */
   overflow: hidden;
 }
 
+.hexagon img {
+  object-fit: cover;
+}
+
 .hexagon:nth-child(2) {
   margin: -40px 110px 0 0;
   width: 270px;
