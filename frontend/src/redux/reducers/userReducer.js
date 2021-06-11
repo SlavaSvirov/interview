@@ -22,7 +22,6 @@ function userReducer(state = initState.user, action) {
       return { ...state, ...action.payload };
 
     case EDIT_PROFILE:
-      console.log("action.payload", action.payload);
       return { ...state, ...action.payload };
 
     default:

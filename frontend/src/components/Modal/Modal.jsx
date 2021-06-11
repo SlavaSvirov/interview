@@ -1,7 +1,7 @@
 import './modal.css';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Form, Input, Switch } from 'antd';
+import {Switch } from 'antd';
 import { editProfileFetch } from '../../redux/actions/userAC';
 import { useHistory } from 'react-router';
 
@@ -11,7 +11,6 @@ function Modal({ active, setActive}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  // console.log('user',user);
   
   const [name, setName] = useState(user.name);
   const [surname, setSurname] = useState(user.surname);
@@ -36,7 +35,6 @@ function Modal({ active, setActive}) {
   }
 
   function check(checked) {
-    console.log(checked);
     setShow(checked);
   }
 
@@ -47,7 +45,7 @@ function Modal({ active, setActive}) {
 function submitForm (e) {
   e.preventDefault()
   
-  if (name.trim() && surname.trim() && email.trim() && telegram.trim() && show) {
+  if (name.trim() && surname.trim() && email.trim() && telegram.trim()) {
     
     dispatch(editProfileFetch(user._id,name, surname, email, telegram, show))
     setActive(false)
@@ -93,7 +91,7 @@ function submitForm (e) {
                 type="text"
               />
               <label htmlFor="">Показать контакты</label>
-              <Switch onChange={check} />
+              <Switch defaultChecked={show} onChange={check} />
               <button type="submit" className="btn btn-success">
                 Сохранить изменения
               </button>
