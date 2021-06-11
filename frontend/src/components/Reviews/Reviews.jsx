@@ -18,7 +18,10 @@ const Reviews = ({ review }) => {
   const handleRelocate = (id) => {
     history.push(`/review/${id}`);
   };
-
+  const changeTime = (time) => {
+    const newTime = time.match(/\d{4}-\d{2}-\d{2}/g);
+    return newTime[0];
+  };
   const reviewLogo = (direction) => {
     switch (direction) {
       case 'Frontend':
@@ -49,6 +52,7 @@ const Reviews = ({ review }) => {
               'background-size': 'cover',
             }}
           >
+            <div className="date">{changeTime(review.created)}</div>
             <span className="rating">{review?.rating}</span>
             <span className="salary">{review?.salary}</span>
           </div>
@@ -70,7 +74,7 @@ const Reviews = ({ review }) => {
                     onClick={() => {
                       deletePost();
                     }}
-                    className='trashBtn'
+                    className="trashBtn"
                   >
                     <i className="fa fa-trash"></i>
                   </Link>
@@ -87,7 +91,10 @@ const Reviews = ({ review }) => {
               <Link to={`/user/${review?.author?._id}`}>
                 <span className="user-name">{review?.author?.name}</span>
               </Link>
-              <Link to={`/review/${review._id}`}>More Info</Link>
+
+              <Link to={`/review/${review._id}`} title="Подробнее">
+                ...
+              </Link>
             </div>
           </div>
         </>

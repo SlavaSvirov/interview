@@ -49,8 +49,7 @@ const MainPage = () => {
             <div className={styles.mainPageText}>
               <h1>Будь готов к любому собеседованию!</h1>
               <p className={styles.mainPageTitle}>
-                Оставь свой отзыв о прошедшем собеседовании, этим ты поможешь
-                другу, а друг поможет тебе.
+                Сервис по обмену инсайдерской информацией
               </p>
               <div className={styles.mainPageBtn}>
                 <a href="#secondPage">Поехали!</a>
@@ -61,7 +60,10 @@ const MainPage = () => {
               <div className={styles.hexagon}>
                 <div className={styles.layer1}>
                   <div className={styles.layer2}>
-                    <img src="https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="logo" />
+                    <img
+                      src="https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                      alt="logo"
+                    />
                   </div>
                 </div>
               </div>
@@ -77,7 +79,10 @@ const MainPage = () => {
               <div className={styles.hexagon}>
                 <div className={styles.layer1}>
                   <div className={styles.layer2}>
-                    <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fG9mZmljZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="logo" />
+                    <img
+                      src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjl8fG9mZmljZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                      alt="logo"
+                    />
                   </div>
                 </div>
               </div>
@@ -85,7 +90,10 @@ const MainPage = () => {
               <div className={styles.hexagon}>
                 <div className={styles.layer1}>
                   <div className={styles.layer2}>
-                    <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fG9mZmljZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="logo" />
+                    <img
+                      src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fG9mZmljZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                      alt="logo"
+                    />
                   </div>
                 </div>
               </div>
