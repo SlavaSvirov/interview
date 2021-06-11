@@ -18,11 +18,11 @@ function Header() {
     <header className={style.header}>
       <div className="container">
         <nav className={style.burger}>
-          <Link to="/">
+          <span>
             <span className={style.logo}>
               Interv<span>/eW</span>
             </span>
-          </Link>
+          </span>
           <div className={style.secondBurger}>
             {user.isAuth ? (
               <ul>

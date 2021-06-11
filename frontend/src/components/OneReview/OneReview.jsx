@@ -96,13 +96,13 @@ export default function OneReview() {
                     <span>В этом отзыве нет файлов</span>
                   )}
                 </div>
-                <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
+                <div className='Settled'> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
                 <div className="reviewIcons">
                   <hr />
                   {onePost.author._id === user._id ? (
-                    <button>
-                      <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
-                    </button>
+                    <Link to={`/review/edit/${onePost._id}`}>
+                      <i className='fa fa-edit editBtn'></i>
+                    </Link>
                   ) : (
                     <i
                       onClick={() => changeLike(id, user._id)}

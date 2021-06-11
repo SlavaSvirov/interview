@@ -76,3 +76,7 @@ font-family: 'Montserrat', sans-serif; */
 .as .btn-success {
   margin-top: 10px;
 }
+
+.as .checkedBtn {
+  width: 50px !important;
+}
