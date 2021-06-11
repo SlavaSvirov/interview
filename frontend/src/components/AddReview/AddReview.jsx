@@ -63,6 +63,7 @@ const AddReview = () => {
     formData.append('setteled', values.setteled);
     formData.append('rating', values.rating);
     formData.append('questions', values.questions);
+    formData.append('codFile', values.codFile);
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
     if (values.image) {
