@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getAllFetch } from '../../redux/actions/companyAC';
+import { allFetch, getAllFetch } from '../../redux/actions/companyAC';
 import { useHistory, useParams } from 'react-router-dom';
 import { Select } from 'antd';
 
@@ -21,6 +21,10 @@ const CustomAutoComplete = () => {
     }
   }, [input]);
   //================================================================
+  useEffect(() => {
+    dispatch(allFetch());
+  }, []);
+
   function onSearch(val) {
     if (val.trim()) {
       dispatch(getAllFetch(val));
