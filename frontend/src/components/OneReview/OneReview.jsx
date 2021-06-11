@@ -49,8 +49,10 @@ export default function OneReview() {
   }, []);
 
   const changeLike = (id, userId) => {
-    dispatch(changeLikeFetch(id, userId));
-    setLiked((prev) => !prev);
+    if (userId) {
+      dispatch(changeLikeFetch(id, userId));
+      setLiked((prev) => !prev);
+    }
   };
 
   const changeTime = (time) => {

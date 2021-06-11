@@ -45,27 +45,32 @@ function Login() {
           <p className={style.logo}>
             Interv<span>/eW</span>.com
           </p>
-          <p className={style.logoTagline}>Log in and start sharing</p>
+          <p className={style.logoTagline}>Войдите и начните делиться</p>
           <div className={style.authWithGoogle}>
-            <span className={style.socialNetwork}>with your social network</span>
-            <span className={style.google}><GoogleB /></span>
+            <span className={style.socialNetwork}>
+              С помощью социальных сетей
+            </span>
+            <span className={style.google}>
+              <GoogleB />
+            </span>
           </div>
-          <span className={style.or}>or</span>
+          <span className={style.or}>или</span>
           <div className={style.loginInputs}>
-            <label>Email address</label>
+            <label>Электронная почта</label>
             <br />
             <input type="text" name="email" />
 
             <br />
-            <label>Password</label>
+            <label>Пароль</label>
             <br />
             <input type="password" name="password" />
 
-            <button className={style.button}>Log In</button>
+            <button className={style.button}>Войти</button>
           </div>
           <div>
             <p className={style.loginText}>
-              Don't have an account? <Link to="/register">Sign Up</Link>
+              У вас еще нет аккаунта?{' '}
+              <Link to="/register">Зарегистрироваться</Link>
             </p>
           </div>
         </div>

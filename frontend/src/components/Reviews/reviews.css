@@ -135,3 +135,7 @@ font-family: 'Montserrat', sans-serif; */
 .wrap .icons i {
   padding: 2px;
 }
+.wrap .date {
+  width: 100%;
+  text-align: end;
+}
