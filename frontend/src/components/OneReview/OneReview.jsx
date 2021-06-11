@@ -41,8 +41,7 @@ export default function OneReview() {
   }, []);
 
   const changeLike = (id, userId) => {
-    showLoader();
-    dispatch(changeLikeFetch(id, userId)).then(() => hideLoader());
+    dispatch(changeLikeFetch(id, userId));
     setLiked((prev) => !prev);
   };
 
@@ -54,10 +53,7 @@ export default function OneReview() {
         ) : (
           <>
             <div className="currentPost">
-              <Link
-                className="companyLink"
-                to={`/company/${onePost.company._id}`}
-              >
+              <Link className="companyLink" to={`/company/${onePost.company}`}>
                 {onePost.companyName}
               </Link>
               <hr />
