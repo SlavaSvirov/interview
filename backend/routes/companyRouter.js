@@ -1,17 +1,15 @@
-const { Router } = require('express')
-const { getAllCompany, findCompanyByInput, findOneCompanyById } = require('../controllers/companyController')
+const { Router } = require('express');
+const {
+  getAllCompany,
+  findCompanyByInput,
+  findOneCompanyById,
+  setCompanyGraduates,
+} = require('../controllers/companyController');
 
-const companyRouter = Router()
+const companyRouter = Router();
 
-companyRouter
-  .route('/')
-  .get(getAllCompany);
-companyRouter
-  .route('/')
-  .post(findCompanyByInput);
-companyRouter
-  .route('/:id')
-  .get(findOneCompanyById);
-
-module.exports = companyRouter
-
+companyRouter.route('/').get(getAllCompany);
+companyRouter.route('/').post(findCompanyByInput);
+companyRouter.route('/:id').get(findOneCompanyById);
+companyRouter.route('/edit/:id').patch(setCompanyGraduates);
+module.exports = companyRouter;
