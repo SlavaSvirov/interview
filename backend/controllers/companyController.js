@@ -30,9 +30,14 @@ const setCompanyGraduates = async (req, res) => {
       path: 'author',
     },
   });
-  console.log(newCompany);
-  console.log(req.body.userId);
-  newCompany.graduates.push(req.body.userId);
+  if (newCompany.graduates.includes(req.body.userId)) {
+    newCompany.graduates.splice(
+      newCompany.graduates.indexOf(req.body.userId),
+      1
+    );
+  } else {
+    newCompany.graduates.push(req.body.userId);
+  }
   await newCompany.save();
   res.json(newCompany);
 };
