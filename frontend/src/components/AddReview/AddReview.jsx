@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import querystring from 'querystring';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import './addReview.css'
 
 import {
   Form,
@@ -17,7 +18,6 @@ import {
 } from 'antd';
 import { useSelector } from 'react-redux';
 import { useLoaderContext } from '../../context/LoaderContext';
-import Loader from '../Loader/Loader';
 import LoaderForSelect from '../LoaderForSelect/LoaderForSelect';
 
 const { Title } = Typography;
@@ -63,6 +63,7 @@ const AddReview = () => {
     formData.append('setteled', values.setteled);
     formData.append('rating', values.rating);
     formData.append('questions', values.questions);
+    formData.append('codFile', values.codFile);
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
     if (values.image) {
@@ -148,7 +149,9 @@ const AddReview = () => {
 
   return (
     <>
-      <Title level={2}>Создай новый отзыв!</Title>
+    <section className='addReviewsSection'>
+      <div className='container container-main'>
+      <Title level={2} className='addReviewTitle'>Создай новый отзыв!</Title>
       <Divider></Divider>
 
       <Form
@@ -171,19 +174,20 @@ const AddReview = () => {
           <Select
             showSearch
             value={value}
-            placeholder="input search text"
-            style={{ width: '100%' }}
+            placeholder="Название компании"
+            style={{ width: '100%',}}
             defaultActiveFirstOption={false}
             showArrow={false}
             filterOption={false}
             onSearch={handleSearch}
             onChange={handleChange}
             notFoundContent={null}
+            optionLabelProp="label"
           >
             {data.map((d) => (
-              <Option key={d.value}>
+              <Option key={d.value} label={d.text} >
                 <div>
-                  <img alt="No logo" src={d.logo} width="50px" height="30px" />
+                  <img alt="No logo" src={d.logo} width="60px" height="30px" object-flit='cover' />
                   {d.text}
                 </div>
               </Option>
@@ -228,7 +232,10 @@ const AddReview = () => {
           <Input placeholder="Писать сюда" />
         </Form.Item>
         <Form.Item name="salary" label="Зарплата (рублей)">
-          <Slider initialValues={50000}
+
+          <Slider
+            initialValues={50000}
+            defaultlValues={50000}
             min={50000}
             max={150000}
             step={10000}
@@ -273,6 +280,7 @@ const AddReview = () => {
 
         <Form.Item name="rating" label="Общая оценка">
           <Rate
+            initialValues={3}
             defaultValue={3}
             character={({ index }) => customIcons[index + 1]}
           />
@@ -298,7 +306,8 @@ const AddReview = () => {
           </Button>
         </Form.Item>
       </Form>
-      <Divider></Divider>
+      </div>
+    </section>
     </>
   );
 };

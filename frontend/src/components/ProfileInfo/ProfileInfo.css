@@ -127,5 +127,21 @@ font-family: 'Montserrat', sans-serif; */
 .main .userInfo .btn:hover {
   background-color: rgb(48, 56, 65);
   color: white;
-  transition: all .6s;
+  transition: all 0.6s;
+}
+.reviewsNone {
+  font-size: 24px;
+  padding: 20px 0;
+  line-height: 25px;
+  font-family: 'Comfortaa', cursive;
+  font-weight: 500;
+}
+
+.fontFamily {
+  font-family: 'Comfortaa', cursive;
+  padding: 10px 5px;
+}
+
+.fontFamily .fab {
+  font-size: 18px;
 }

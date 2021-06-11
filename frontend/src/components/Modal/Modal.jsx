@@ -92,7 +92,7 @@ function submitForm (e) {
                 type="text"
               />
               <label htmlFor="">Показать контакты</label>
-              <Switch defaultChecked={show} onChange={check} />
+              <Switch defaultChecked={show} onChange={check} className='checkedBtn'/>
               <button type="submit" className="btn btn-success">
                 Сохранить изменения
               </button>

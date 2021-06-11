@@ -53,3 +53,21 @@ font-family: 'Montserrat', sans-serif; */
   font-size: 30px;
   padding: 10px 0;
 }
+
+.editBtn{
+  font-size: 30px;
+  color: black;
+  padding: 10px 0;
+}
+
+.currentPostInfo .reviewIcons  .editBtn:hover {
+  color: rgb(74, 74, 253);
+  transition: all .5s;
+}
+
+.Settled {
+  border: 1px solid;
+  padding: 4px;
+  border-radius: 4px;
+  margin: 5px 0;
+}

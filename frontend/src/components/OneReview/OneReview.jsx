@@ -45,6 +45,11 @@ export default function OneReview() {
     setLiked((prev) => !prev);
   };
 
+  const changeTime = (time) => {
+    const newTime = time.match(/\d{4}-\d{2}-\d{2}/g);
+    return newTime[0];
+  };
+
   return (
     onePost && (
       <div className="container container-main">
@@ -59,7 +64,8 @@ export default function OneReview() {
               <hr />
               <div className="currentPostInfo">
                 <span className="author">
-                  {onePost.author.name} <span>{onePost.created}</span>
+                  {onePost.author.name}{' '}
+                  <span>{changeTime(onePost.created)}</span>
                 </span>
                 <span>
                   <b>Направление: </b> {onePost.direction}
@@ -90,13 +96,13 @@ export default function OneReview() {
                     <span>В этом отзыве нет файлов</span>
                   )}
                 </div>
-                <div> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
+                <div className='Settled'> {onePost.setteled ? 'Устроился' : 'Не устроился'}</div>
                 <div className="reviewIcons">
                   <hr />
                   {onePost.author._id === user._id ? (
-                    <button>
-                      <Link to={`/review/edit/${onePost._id}`}>Edit</Link>
-                    </button>
+                    <Link to={`/review/edit/${onePost._id}`}>
+                      <i className='fa fa-edit editBtn'></i>
+                    </Link>
                   ) : (
                     <i
                       onClick={() => changeLike(id, user._id)}
