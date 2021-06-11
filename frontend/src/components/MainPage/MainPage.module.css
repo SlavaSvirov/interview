@@ -67,37 +67,34 @@ font-family: 'Montserrat', sans-serif; */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  top: 100px;
 }
 .mainPageText .mainPageTitle {
   font-size: 25px;
   width: 560px;
   font-family: 'Comfortaa', cursive;
-  margin-bottom: 60px;
+  margin-bottom: 150px;
+  color: white;
 }
 
 .mainPageText h1 {
-  font-size: 45px;
+  font-size: 42px;
   font-family: 'Comfortaa', cursive;
   font-weight: 500;
-  margin-bottom: 60px;
+  margin-bottom: 150px;
+  color: white;
 }
 
 .mainPageText a {
   padding: 16px 50px;
   outline: none;
   border-radius: 5px;
-  border: solid 1px rgb(48, 56, 65);
+  border: solid 1px white;
   margin-top: 60px;
   font-size: 20px;
   background: white; 
   color: rgb(48, 56, 65);
   cursor: pointer;
-}
-
-.mainPageText a:hover {
-  background: rgb(48, 56, 65);
-  color: white;
-  transition: all .6s;
 }
 
 .mainPageText button a {
@@ -118,17 +115,11 @@ font-family: 'Montserrat', sans-serif; */
   width: 100%;
 }
 
-.mainPageDiv .secondMainPage .secondTitle p {
+.mainPageDiv  .secondTitle .chck {
   color: white;
   font-weight: bold;
   margin-bottom: 130px;
 }
-
-.mainPageDiv .secondMainPage .secondTitle span {
-  color: white;
-  font-weight: bold;
-}
-
 
 .wrapper {
   display: flex;
@@ -153,5 +144,11 @@ font-family: 'Montserrat', sans-serif; */
   position: relative;
   top: 0;
   width: 100%;
-  background-color: rgb(38 37 41 / 88%);
+  background-color: rgb(38 37 41 / 60%);
+}
+
+.allReviewsText {
+  color: white !important;
+  margin-bottom: 0 !important;
+  font-weight: bold;
 }
