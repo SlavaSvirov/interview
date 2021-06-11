@@ -41,17 +41,17 @@ const MainPage = () => {
       <div className={styles.video}>
         <div className={styles.mainPageHexagon}>
           <video autoPlay muted playsInline loop className={styles.cat}>
-            <source src="/imgLOGO/city.mp4" type='video/mp4' />
+            <source src="/imgLOGO/city.mp4" type="video/mp4" />
           </video>
           <div className="container container-main">
             <div className={styles.mainPageText}>
               <h1>Будь готов к любому собеседованию!</h1>
               <p className={styles.mainPageTitle}>
-                Оставь свой отзыв о прошедшем собеседовании, этим ты поможешь другу, а друг поможет тебе.
+                Оставь свой отзыв о прошедшем собеседовании, этим ты поможешь
+                другу, а друг поможет тебе.
               </p>
               <div className={styles.mainPageBtn}>
-                <a href="#secondPage">Поухали!</a>
-
+                <a href="#secondPage">Поехали!</a>
               </div>
             </div>
 
@@ -91,7 +91,7 @@ const MainPage = () => {
           </div>
         </div>
       </div>
-      <div className='container container-main'>
+      <div className="container container-main">
         <div className={styles.secondMainPage}>
           <a name="secondPage"></a>
           <div className={styles.secondTitle}>
