@@ -6,10 +6,12 @@ import Sort from '../Sort/Sort';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getAllFetch } from '../../redux/actions/reviewsAC';
 import { clear, getLitle } from '../../redux/actions/reviewsAC';
+import { allFetch } from '../../redux/actions/companyAC';
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.reviews);
+
   const [featching, setFeatching] = useState(false);
   const [index, setIndex] = useState(0);
 
@@ -97,7 +99,9 @@ const MainPage = () => {
           <div className={styles.secondTitle}>
             <p className={styles.chck}>Начни с выбора компании!</p>
             <AutoComplete />
-            <p className={styles.allReviewsText}>Или посмотри все отзывы, которые у нас есть</p>
+            <p className={styles.allReviewsText}>
+              Или посмотри все отзывы, которые у нас есть
+            </p>
           </div>
           <div className={styles.sortWrapper}>
             <Sort />
