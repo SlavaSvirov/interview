@@ -14,6 +14,11 @@ const Reviews = ({ review }) => {
   const deletePost = () => {
     dispatch(deletePostFetch(review._id));
   };
+
+  const handleRelocate = (id) => {
+    history.push(`/review/${id}`);
+  };
+
   const reviewLogo = (direction) => {
     switch (direction) {
       case 'Frontend':
@@ -32,6 +37,9 @@ const Reviews = ({ review }) => {
       <div className="wrap">
         <>
           <div
+            onClick={() => {
+              handleRelocate(review._id);
+            }}
             className="block-img"
             style={{
               background: `url(${reviewLogo(

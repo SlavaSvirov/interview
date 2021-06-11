@@ -51,6 +51,7 @@ const MainPage = () => {
               </p>
               <div className={styles.mainPageBtn}>
                 <a href="#secondPage">Поухали!</a>
+
               </div>
             </div>
 
@@ -94,9 +95,7 @@ const MainPage = () => {
         <div className={styles.secondMainPage}>
           <a name="secondPage"></a>
           <div className={styles.secondTitle}>
-            <p>
-              Начни с выбора компании!
-            </p>
+            <p>Начни с выбора компании!</p>
             <AutoComplete />
             <span>Или посмотри все отзывы, которые у нас есть</span>
           </div>
