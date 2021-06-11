@@ -9,7 +9,7 @@ const Company = require('../database/models/company');
 const getAllReviewPopulated = async (req, res) => {
   let dbData = await reviewModel.find().populate('author');
   res.json(dbData);
-}
+};
 
 const changeLikeReview = async (req, res) => {
   let dbPost = await reviewModel.findById(req.params.id).populate('author');
@@ -21,10 +21,10 @@ const changeLikeReview = async (req, res) => {
     await dbPost.save();
   }
   res.json(dbPost);
-}
+};
 
 const addNewReview = async (req, res) => {
-  const file = req.file ? `/img/${req.file.filename}` : '';
+  const file = req.file ? `http://localhost:3001/img/${req.file.filename}` : '';
   const companyName = await axios(
     `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
   );
@@ -79,14 +79,16 @@ const addNewReview = async (req, res) => {
     await review.save();
   }
   return res.json(review);
-}
+};
 const editReview = async (req, res) => {
   const reviewForUpdate = await reviewModel.findById(req.params.id); //find review by id in DB
   let regex = /\d*/g;
   let dat = req.body.companyName;
   let regFromInput = dat.replace(regex, '');
   if (regFromInput) {
-    const file = req.file ? `/img/${req.file.filename}` : '';
+    const file = req.file
+      ? `http://localhost:3001/img/${req.file.filename}`
+      : '';
     if (reviewForUpdate.companyName == req.body.companyName) {
       //control if company is the same
       if (reviewForUpdate.rating !== req.body.rating) {
@@ -177,7 +179,7 @@ const editReview = async (req, res) => {
     }
   }
   return res.json(reviewForUpdate);
-}
+};
 const deleteReview = async (req, res) => {
   const reviewForDelete = await reviewModel.findById(req.params.id);
   const idOfCompanyWithThisReview = reviewForDelete.company;
@@ -203,7 +205,7 @@ const deleteReview = async (req, res) => {
   }
   await reviewForDelete.remove();
   res.sendStatus(200);
-}
+};
 
 module.exports = {
   getAllReviewPopulated,
@@ -212,4 +214,3 @@ module.exports = {
   editReview,
   deleteReview,
 };
-

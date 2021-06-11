@@ -108,6 +108,7 @@ function ProfileInfo() {
                   </i> Пользователь скрыл контакты
                 </span>
             }
+
             {user?._id == id && (
               <button
                 className="btn"
@@ -126,25 +127,27 @@ function ProfileInfo() {
             )}
           </div>
 
-
         </div>
         <div className="reviews">
           <div className="sortWrap">
             <Sort />
           </div>
-
           <p className="myReviews">Мои последние отзывы :</p>
           {loader ? (
             <Loader />
           ) : (
             <div className="wrapper">
-              {currentUserReview?.map((review) => {
-                return (
-                  <div key={review._id}>
-                    <Reviews review={review} />
-                  </div>
-                );
-              })}
+              {currentUserReview.length ? (
+                currentUserReview?.map((review) => {
+                  return (
+                    <div key={review._id}>
+                      <Reviews review={review} />
+                    </div>
+                  );
+                })
+              ) : (
+                <span className="reviewsNone">У вас пока нет отзывов</span>
+              )}
             </div>
           )}
         </div>
