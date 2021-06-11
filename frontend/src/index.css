@@ -48,3 +48,6 @@
   flex-grow: 1;
 }
 
+input {
+  padding: 0 4px;
+}

@@ -1,3 +1,7 @@
+/* font-family: 'Comfortaa', cursive;
+font-family: 'Montserrat', sans-serif; */
+
+
 .modal {
   height: 100vh;
   width: 200vh;
@@ -22,15 +26,12 @@
 .modal-content {
   padding: 20px;
   border-radius: 12px;
-
-  height: 400px;
   width: 850px;
-  transform: scale(0.5);
-  transition: 0.4s all;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: large;
+  transition: all .6s;
 }
 
 .modal-content.active {
@@ -38,7 +39,40 @@
   background-color: rgb(246, 246, 246);
 }
 
-/* .as {
-  width : 500px;
-  height: 500px;
-} */
+.form-group h3{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.form-group .modal-form {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.as {
+  font-family: 'Comfortaa', cursive;
+}
+
+.as label {
+  font-family: 'Comfortaa', cursive;
+  color: rgb(48, 56, 65);
+  font-size: 20px;
+}
+
+.as input {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  color: black;
+  border: 1px solid rgb(48, 56, 65);
+  height: 40px;
+  outline: none;
+}
+
+.as .btn-success {
+  margin-top: 10px;
+}
