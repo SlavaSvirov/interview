@@ -52,8 +52,8 @@ const Reviews = ({ review }) => {
               'background-size': 'cover',
             }}
           >
+            <span className="rating">{review?.rating} <i className='fa fa-star'></i> </span>
             <div className="date">{changeTime(review.created)}</div>
-            <span className="rating">{review?.rating}</span>
             <span className="salary">{review?.salary}</span>
           </div>
           <div className="block-title">

@@ -37,7 +37,7 @@ export default function Company() {
                 key={el._id}
               >
                 <div className={style.wrapper}>
-                  <span className={style.rating}>{el.rating}</span>
+                  <span className={style.rating}>{el.rating} <i className='fa fa-star'></i></span>
                 </div>
                 <p className={style.location}>
                   <div

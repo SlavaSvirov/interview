@@ -51,9 +51,6 @@ const MainPage = () => {
               <p className={styles.mainPageTitle}>
                 Сервис по обмену инсайдерской информацией
               </p>
-              <div className={styles.mainPageBtn}>
-                <a href="#secondPage">Поехали!</a>
-              </div>
             </div>
 
             <div className={styles.wrapperHexagons}>
