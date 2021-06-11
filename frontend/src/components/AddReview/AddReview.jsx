@@ -228,7 +228,7 @@ const AddReview = () => {
           <Input placeholder="Писать сюда" />
         </Form.Item>
         <Form.Item name="salary" label="Зарплата (рублей)">
-          <Slider
+          <Slider initialValues={50000}
             min={50000}
             max={150000}
             step={10000}
