@@ -16,6 +16,9 @@ import {
   Typography,
 } from 'antd';
 import { useSelector } from 'react-redux';
+import { useLoaderContext } from '../../context/LoaderContext';
+import Loader from '../Loader/Loader';
+import LoaderForSelect from '../LoaderForSelect/LoaderForSelect';
 
 const { Title } = Typography;
 
@@ -50,6 +53,7 @@ const normFile = (e) => {
 const AddReview = () => {
   let history = useHistory();
   const user = useSelector((state) => state.user);
+  const { loader, showLoader, hideLoader } = useLoaderContext();
   const onFinish = async (values) => {
     const formData = new FormData();
     formData.append('companyName', values.companyName);
@@ -97,6 +101,7 @@ const AddReview = () => {
         code: 'utf-8',
         q: value,
       });
+      showLoader();
       axios
         .post('/word', { str })
         .then((response) => response.data)
@@ -123,7 +128,8 @@ const AddReview = () => {
             });
             setData(data);
           }
-        });
+        })
+        .then(() => hideLoader());
     }
     timeout = setTimeout(fake, 300);
   }
@@ -166,7 +172,7 @@ const AddReview = () => {
             showSearch
             value={value}
             placeholder="input search text"
-            style={{ width: 200 }}
+            style={{ width: '100%' }}
             defaultActiveFirstOption={false}
             showArrow={false}
             filterOption={false}
@@ -177,13 +183,15 @@ const AddReview = () => {
             {data.map((d) => (
               <Option key={d.value}>
                 <div>
-                  <img alt="No logo" src={d.logo} width="30px" height="30px" />
+                  <img alt="No logo" src={d.logo} width="50px" height="30px" />
                   {d.text}
                 </div>
               </Option>
             ))}
+            <span>{loader ? <LoaderForSelect /> : null}</span>
           </Select>
         </Form.Item>
+
         <Form.Item
           label="Направление"
           name="direction"
