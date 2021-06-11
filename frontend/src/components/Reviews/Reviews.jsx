@@ -66,13 +66,14 @@ const Reviews = ({ review }) => {
                     <i className="fa fa-edit"></i>
                   </Link>
 
-                  <button
+                  <Link
                     onClick={() => {
                       deletePost();
                     }}
+                    className='trashBtn'
                   >
                     <i className="fa fa-trash"></i>
-                  </button>
+                  </Link>
                 </div>
               ) : (
                 <span></span>

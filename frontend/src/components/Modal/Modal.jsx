@@ -56,6 +56,7 @@ function submitForm (e) {
   
 
 
+
   return (
     <div
       className={active ? 'modal active' : 'modal'}
@@ -69,7 +70,7 @@ function submitForm (e) {
           <div className="form-group">
             <h3>Редактирование профиля</h3>
 
-            <form onSubmit={(e) => submitForm(e)}>
+            <form onSubmit={(e) => submitForm(e)} className='modal-form'>
               <label htmlFor="">Name</label>
               <input onChange={(e) => updateName(e)} value={name} />
               <label htmlFor="">Surname</label>

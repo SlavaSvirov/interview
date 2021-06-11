@@ -1,42 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const CompanyModel = require('../database/models/company');
+const { Router } = require('express')
+const { getAllCompany, findCompanyByInput, findOneCompanyById } = require('../controllers/companyController')
 
-router.get('/', async (req, res) => {
-  const allCompanyFromServer = await CompanyModel.find();
-  res.json(allCompanyFromServer);
-});
+const companyRouter = Router()
 
-router.post('/', async (req, res) => {
-  const currentCompanyFromServer = await CompanyModel.find({
-    companyName: { $regex: new RegExp('^' + req.body.text.toLowerCase(), 'i') },
-  });
-  res.json(currentCompanyFromServer);
-});
+companyRouter
+  .route('/')
+  .get(getAllCompany);
+companyRouter
+  .route('/')
+  .post(findCompanyByInput);
+companyRouter
+  .route('/:id')
+  .get(findOneCompanyById);
 
-router.get('/:id', async (req, res) => {
-  const currentCompany = await CompanyModel.findById(req.params.id).populate({
-    path: 'reviews',
-    populate: {
-      path: 'author',
-    },
-  });
+module.exports = companyRouter
 
-  res.json(currentCompany);
-});
-
-router.patch('/edit/:id', async (req, res) => {
-  const newCompany = await CompanyModel.findById(req.params.id).populate({
-    path: 'reviews',
-    populate: {
-      path: 'author',
-    },
-  });
-  console.log(newCompany);
-  console.log(req.body.userId);
-  newCompany.graduates.push(req.body.userId);
-  await newCompany.save();
-  res.json(newCompany);
-});
-
-module.exports = router;

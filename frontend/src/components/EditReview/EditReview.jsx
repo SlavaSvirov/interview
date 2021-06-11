@@ -48,7 +48,9 @@ const EditReview = () => {
   const user = useSelector((state) => state.user);
   let history = useHistory();
   let formData = reviews.find((elem) => elem._id == id);
+  console.log("formData ",formData );
   const onFinish = async (values) => {
+    console.log("VVVVVAAAALLLLUUUEEE",values);
     //event.preventDefault();
     console.log(values);
     const formData = new FormData();
