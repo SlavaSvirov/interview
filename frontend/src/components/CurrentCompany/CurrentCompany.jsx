@@ -10,6 +10,7 @@ import nologo from '../../img/nologo.svg';
 import Reviews from '../Reviews/Reviews';
 import { useLoaderContext } from '../../context/LoaderContext';
 import Loader from '../Loader/Loader';
+import { SpaceContext } from 'antd/lib/space';
 
 function CurrentCompany() {
   const { id } = useParams();
@@ -69,7 +70,17 @@ function CurrentCompany() {
                     Я здесь работаю!
                   </button>
                 ) : (
-                  'Вы здесь работаете'
+                  <span
+                    onClick={() =>
+                      handleChangeJob(currentCompany._id, user._id)
+                    }
+                    className="tooltip"
+                  >
+                    <span className="tooltiptext">
+                      Если уже не работаете, нажмите
+                    </span>
+                    Вы здесь работаете
+                  </span>
                 )}
                 <div>
                   {currentCompany.graduates?.length} выпускников Elbrus работают
