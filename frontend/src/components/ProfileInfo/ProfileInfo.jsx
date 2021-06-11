@@ -14,13 +14,13 @@ import ProgressBar from '../Progress/Progress';
 function ProfileInfo() {
   const reviews = useSelector((state) => state.reviews);
   const user = useSelector((state) => state.user);
-  // console.log(user);
 
   const idUserForUpdate = user._id;
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
+ 
   const inputFile = useRef(null);
-  // const avatar = useSelector((state) => state.user.avatar);
+  
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -55,7 +55,6 @@ function ProfileInfo() {
   const avatarChange = (e) => {
     dispatch(changeAvatarFetch(e.target.files[0], user?._id));
   };
-
   return (
     <div className="container container-main">
       <div className="main">
@@ -96,6 +95,7 @@ function ProfileInfo() {
             <span className="name">
               {infoFromUser.name} {infoFromUser.surname}
             </span>
+            {infoFromUser.showContact === true  ? <span>Telegram: {infoFromUser.telegram}</span> : <span>Пользователь предпочел скрыть контакт</span>}
             <span className="rating">{infoFromUser.rating}</span>
             {user?._id == id && (
               <button
@@ -107,6 +107,7 @@ function ProfileInfo() {
             )}
             {modalActive && (
               <Modal
+             
                 active={modalActive}
                 setActive={setModalActive}
                 idUser={idUserForUpdate}
@@ -114,7 +115,7 @@ function ProfileInfo() {
             )}
           </div>
 
-          {/* </form>  */}
+          
         </div>
         <div className="reviews">
           <div className="sortWrap">

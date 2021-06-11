@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import './currentCompany.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   currentFetch,
   setCompanyFetch,

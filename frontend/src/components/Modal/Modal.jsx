@@ -1,44 +1,40 @@
 import './modal.css';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Form, Input, Switch } from 'antd';
+import {Switch } from 'antd';
 import { editProfileFetch } from '../../redux/actions/userAC';
 import { useHistory } from 'react-router';
 
-function Modal({ active, setActive }) {
+function Modal({ active, setActive}) {
   const history = useHistory();
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
+  
   const [name, setName] = useState(user.name);
   const [surname, setSurname] = useState(user.surname);
   const [email, setEmail] = useState(user.email);
   const [telegram, setTelegram] = useState(user.telegram);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(user.showContact)
 
   function updateName(e) {
-    console.log(e.target.value);
     setName(e.target.value);
   }
 
   function updateSurname(e) {
-    console.log(e.target.value);
     setSurname(e.target.value);
   }
 
   function updateEmail(e) {
-    console.log(e.target.value);
     setEmail(e.target.value);
   }
 
   function updateTelegram(e) {
-    console.log(e.target.value);
     setTelegram(e.target.value);
   }
 
   function check(checked) {
-    console.log(checked);
     setShow(checked);
   }
 
@@ -46,16 +42,20 @@ function Modal({ active, setActive }) {
     return () => {};
   }, []);
 
+function submitForm (e) {
+  e.preventDefault()
+  
+  if (name.trim() && surname.trim() && email.trim() && telegram.trim()) {
+    
+    dispatch(editProfileFetch(user._id,name, surname, email, telegram, show))
+    setActive(false)
+    
+  history.push(`/user/${user._id}`)
+      }
+ }
+  
 
-  function submitForm(e) {
-    e.preventDefault();
 
-    if (name.trim() && surname.trim() && email.trim() && telegram.trim()) {
-      dispatch(editProfileFetch(user._id, name, surname, email, telegram));
-      setActive(false);
-      history.push(`/user/${user._id}`);
-    }
-  }
 
   return (
     <div
@@ -92,7 +92,7 @@ function Modal({ active, setActive }) {
                 type="text"
               />
               <label htmlFor="">Показать контакты</label>
-              <Switch onChange={check} />
+              <Switch defaultChecked={show} onChange={check} />
               <button type="submit" className="btn btn-success">
                 Сохранить изменения
               </button>

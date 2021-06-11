@@ -87,15 +87,13 @@ export const editProfileUser = (user) => {
 };
 
 export const editProfileFetch =
-  (id, name, surname, email, telegram) => async (dispatch) => {
-    console.log('id editProfileFetch', id);
+  (id, name, surname, email, telegram, showContact) => async (dispatch) => {
     const editProfile = await fetch(`http://localhost:3001/user/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, surname, telegram, email }),
+      body: JSON.stringify({ name, surname, telegram, email, showContact }),
     });
     const edit = await editProfile.json();
-    console.log({ edit });
     dispatch(editProfileUser(edit));
   };
 
