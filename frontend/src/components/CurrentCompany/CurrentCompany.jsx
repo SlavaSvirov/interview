@@ -24,7 +24,7 @@ function CurrentCompany() {
     if (logoObj) {
       let arrFromObjLogo = Object.values(logoObj);
       let logoValidArr = arrFromObjLogo.filter((elem) => elem !== 'null');
-      logoValid = logoValidArr[0];
+      logoValid = logoValidArr[logoValidArr.length -1];
     } else {
       logoValid = nologo;
     }
@@ -57,9 +57,10 @@ function CurrentCompany() {
                   src={checkLogo(currentCompany.logo)}
                   alt={currentCompany.name}
                 ></img>
-              </a>
+              </a> 
+              <br />
               <h1>{currentCompany.companyName} </h1>
-              <div>
+              <div className='forGraduateStudents'>
                 {!currentCompany.graduates?.includes(user._id) ? (
                   <button
                     onClick={() =>

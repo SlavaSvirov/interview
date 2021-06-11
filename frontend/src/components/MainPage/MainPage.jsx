@@ -50,9 +50,6 @@ const MainPage = () => {
                 Оставь свой отзыв о прошедшем собеседовании, этим ты поможешь
                 другу, а друг поможет тебе.
               </p>
-              <div className={styles.mainPageBtn}>
-                <a href="#secondPage">Поехали!</a>
-              </div>
             </div>
 
             <div className={styles.wrapperHexagons}>

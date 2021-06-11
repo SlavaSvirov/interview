@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './Sort.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sortReviews } from '../../redux/actions/reviewsAC';
 import { Link } from 'react-router-dom';
 
 const Sort = () => {
+
+  const user = useSelector((state) => state.user.isAuth)
   const dispatch = useDispatch();
   const [isSorted, setisSorted] = useState(false);
 
@@ -36,10 +38,15 @@ const Sort = () => {
       >
         Рейтинг
       </button>
-      <Link className="add-item" to="/review/addReview">
-        {' '}
-        Добавить отзыв
-      </Link>
+      {
+        user ?
+          <Link className="add-item" to="/review/addReview">
+            {' '}
+            Добавить отзыв
+          </Link>
+          :
+          ''
+      }
     </div>
   );
 };

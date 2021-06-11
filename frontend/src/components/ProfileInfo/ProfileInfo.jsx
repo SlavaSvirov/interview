@@ -104,7 +104,6 @@ function ProfileInfo() {
                 :
                 <span className='fontFamily'>
                   <i className='fab fa-telegram'>
-                    :
                   </i> Пользователь скрыл контакты
                 </span>
             }

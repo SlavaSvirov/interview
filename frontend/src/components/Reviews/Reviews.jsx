@@ -49,7 +49,7 @@ const Reviews = ({ review }) => {
               'background-size': 'cover',
             }}
           >
-            <span className="rating">{review?.rating}</span>
+            <span className="rating">{review?.rating} <i className='fa fa-star'></i> </span>
             <span className="salary">{review?.salary}</span>
           </div>
           <div className="block-title">

@@ -13,10 +13,10 @@ function Footer() {
           <div className='footerDiv'>
             <ul className='footerNav'>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/about">О Нас</Link>
               </li>
               <li>
-                <Link to="/contact">Contact</Link>
+                <Link to="/contact">Контакты</Link>
               </li>
             </ul>
           </div>

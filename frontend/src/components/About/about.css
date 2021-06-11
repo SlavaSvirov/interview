@@ -10,6 +10,7 @@ font-family: 'Montserrat', sans-serif; */
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 .about .ourTeam {
@@ -17,4 +18,10 @@ font-family: 'Montserrat', sans-serif; */
   justify-content: space-between;
   flex-wrap: wrap;
   margin: -5px;
+}
+
+.about .teem i {
+  font-size: 25px;
+  margin-left: 10px;
+  color: black;
 }

@@ -18,14 +18,21 @@ font-family: 'Montserrat', sans-serif; */
   justify-content: center;
   align-items: center;
   padding: 20px 5px;
+  position: relative;
+  flex-direction: column;
 }
 
 .currentCompany .company a {
   margin-right: 10px;
 }
 
+.currentCompany .company a img {
+  width: 200px;
+}
+
 .currentCompany .company h1 {
   margin: 0;
+  width: 100%;
 }
 .tooltip {
   position: relative;
@@ -50,4 +57,27 @@ font-family: 'Montserrat', sans-serif; */
 }
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.forGraduateStudents {
+  display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+    font-size: 18px;
+    top: -50px;
+    position: absolute;
+}
+
+.forGraduateStudents .btn {
+  padding: 5px;
+  background: white;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+.forGraduateStudents .btn:hover {
+  background: rgb(48, 56, 65);
+  color: white;
+  transition: all .6s;
 }
