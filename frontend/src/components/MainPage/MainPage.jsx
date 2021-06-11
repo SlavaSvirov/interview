@@ -43,7 +43,7 @@ const MainPage = () => {
           <video autoPlay muted playsInline loop className={styles.cat}>
             <source src="/imgLOGO/city.mp4" type="video/mp4" />
           </video>
-          <div className="container container-main">
+          <div className="container container-main mainPageBgVideo">
             <div className={styles.mainPageText}>
               <h1>Будь готов к любому собеседованию!</h1>
               <p className={styles.mainPageTitle}>
@@ -95,9 +95,9 @@ const MainPage = () => {
         <div className={styles.secondMainPage}>
           <a name="secondPage"></a>
           <div className={styles.secondTitle}>
-            <p>Начни с выбора компании!</p>
+            <p className={styles.chck}>Начни с выбора компании!</p>
             <AutoComplete />
-            <span>Или посмотри все отзывы, которые у нас есть</span>
+            <p className={styles.allReviewsText}>Или посмотри все отзывы, которые у нас есть</p>
           </div>
           <div className={styles.sortWrapper}>
             <Sort />

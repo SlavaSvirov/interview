@@ -51,3 +51,9 @@
 input {
   padding: 0 4px;
 }
+
+.mainPageBgVideo {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
