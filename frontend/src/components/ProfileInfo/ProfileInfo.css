@@ -129,3 +129,12 @@ font-family: 'Montserrat', sans-serif; */
   color: white;
   transition: all .6s;
 }
+
+.fontFamily {
+  font-family: 'Comfortaa', cursive;
+  padding: 10px 5px;
+}
+
+.fontFamily .fab {
+  font-size: 18px;
+}

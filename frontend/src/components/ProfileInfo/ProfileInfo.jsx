@@ -18,9 +18,9 @@ function ProfileInfo() {
   const idUserForUpdate = user._id;
   const [currentUserReview, setCurrentUserReview] = useState(reviews);
   const [infoFromUser, setInfoFromUser] = useState({});
- 
+
   const inputFile = useRef(null);
-  
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -95,8 +95,19 @@ function ProfileInfo() {
             <span className="name">
               {infoFromUser.name} {infoFromUser.surname}
             </span>
-            {infoFromUser.showContact === true  ? <span>Telegram: {infoFromUser.telegram}</span> : <span>Пользователь предпочел скрыть контакт</span>}
-            <span className="rating">{infoFromUser.rating}</span>
+            {
+              infoFromUser.showContact === true
+                ?
+                <span className='fontFamily'>
+                  <i className='fab fa-telegram'></i> {infoFromUser.telegram}
+                </span>
+                :
+                <span className='fontFamily'>
+                  <i className='fab fa-telegram'>
+                    :
+                  </i> Пользователь скрыл контакты
+                </span>
+            }
             {user?._id == id && (
               <button
                 className="btn"
@@ -107,7 +118,7 @@ function ProfileInfo() {
             )}
             {modalActive && (
               <Modal
-             
+
                 active={modalActive}
                 setActive={setModalActive}
                 idUser={idUserForUpdate}
@@ -115,7 +126,7 @@ function ProfileInfo() {
             )}
           </div>
 
-          
+
         </div>
         <div className="reviews">
           <div className="sortWrap">

@@ -49,7 +49,7 @@ function Register() {
           <p className={style.logo}>
             Interv<span>/eW</span>.com
           </p>
-          <p className={style.registerText}>Sign up and start shortening</p>
+          <p className={style.registerText}>Sign up and start sharing</p>
           <div className={style.authWithGoogle}>
             <span className={style.socialNetwork}>with your social network</span>
             <span className={style.google}><GoogleB /></span>
