@@ -229,6 +229,8 @@ const AddReview = () => {
         </Form.Item>
         <Form.Item name="salary" label="Зарплата (рублей)">
           <Slider
+            initialValues={50000}
+            defaultlValues={50000}
             min={50000}
             max={150000}
             step={10000}
@@ -273,6 +275,7 @@ const AddReview = () => {
 
         <Form.Item name="rating" label="Общая оценка">
           <Rate
+            initialValues={3}
             defaultValue={3}
             character={({ index }) => customIcons[index + 1]}
           />

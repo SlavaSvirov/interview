@@ -45,6 +45,11 @@ export default function OneReview() {
     setLiked((prev) => !prev);
   };
 
+  const changeTime = (time) => {
+    const newTime = time.match(/\d{4}-\d{2}-\d{2}/g);
+    return newTime[0];
+  };
+
   return (
     onePost && (
       <div className="container container-main">
@@ -59,7 +64,8 @@ export default function OneReview() {
               <hr />
               <div className="currentPostInfo">
                 <span className="author">
-                  {onePost.author.name} <span>{onePost.created}</span>
+                  {onePost.author.name}{' '}
+                  <span>{changeTime(onePost.created)}</span>
                 </span>
                 <span>
                   <b>Направление: </b> {onePost.direction}
