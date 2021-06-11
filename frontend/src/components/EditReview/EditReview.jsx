@@ -48,9 +48,9 @@ const EditReview = () => {
   const user = useSelector((state) => state.user);
   let history = useHistory();
   let formData = reviews.find((elem) => elem._id == id);
-  console.log("formData ",formData );
+  console.log('formData ', formData);
   const onFinish = async (values) => {
-    console.log("VVVVVAAAALLLLUUUEEE",values);
+    console.log('VVVVVAAAALLLLUUUEEE', values);
     //event.preventDefault();
     console.log(values);
     const formData = new FormData();
@@ -61,6 +61,7 @@ const EditReview = () => {
     formData.append('setteled', values.setteled);
     formData.append('rating', values.rating);
     formData.append('questions', values.questions);
+    formData.append('codFile', values.codFile);
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
     if (values.image) {
