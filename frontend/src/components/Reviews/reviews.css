@@ -124,6 +124,14 @@ font-family: 'Montserrat', sans-serif; */
   margin-bottom: 5px;
 }
 
+.wrap .icons .fa-trash {
+  padding: 1px 5px;
+}
+
+.wrap .trashBtn {
+  margin-top: 5px;
+}
+
 .wrap .icons i {
   padding: 2px;
 }

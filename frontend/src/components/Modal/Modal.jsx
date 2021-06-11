@@ -46,6 +46,7 @@ function Modal({ active, setActive }) {
     return () => {};
   }, []);
 
+
   function submitForm(e) {
     e.preventDefault();
 
@@ -69,7 +70,7 @@ function Modal({ active, setActive }) {
           <div className="form-group">
             <h3>Редактирование профиля</h3>
 
-            <form onSubmit={(e) => submitForm(e)}>
+            <form onSubmit={(e) => submitForm(e)} className='modal-form'>
               <label htmlFor="">Name</label>
               <input onChange={(e) => updateName(e)} value={name} />
               <label htmlFor="">Surname</label>
