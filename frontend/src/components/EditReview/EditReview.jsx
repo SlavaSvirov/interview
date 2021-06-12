@@ -64,6 +64,7 @@ const EditReview = () => {
     formData.append('codFile', values.codFile);
     formData.append('hrName', values.hrName);
     formData.append('impression', values.impression);
+    console.log(values.image.files[0]);
     if (values.image) {
       formData.append('image', values.image.files[0]);
     }
@@ -80,19 +81,11 @@ const EditReview = () => {
       });
       console.log(response.data);
       history.push(`/user/${user._id}`);
-      // const data = await response.json();
-      // if (dataFromServer.status === 200) {
-      //   alert('your review was successly added');
-      //   // window.location.assign('/profile');
-      // }
-      // if (dataFromServer.status === 400) {
-      //   alert('error in bd');
-      //   window.location.assign('/404');
-      // }
     } catch (error) {
       console.log(error);
     }
   };
+
   const { Option } = Select;
   const noLogo = '../../../public/imgLogo/1.jpg';
   let timeout;
@@ -272,7 +265,7 @@ const EditReview = () => {
           valuePropName="image"
           getValueFromEvent={normFile}
         >
-          <input type="file" />
+          <input type="file" multiple />
           {/* <Upload listType="picture" multiple="true">
             <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload> */}

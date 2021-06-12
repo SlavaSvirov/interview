@@ -138,11 +138,13 @@ export default function OneReview() {
                           visible={isModalVisible}
                           onOk={handleOk}
                           onCancel={handleCancel}
+                          width="650px"
                         >
                           <p>Файлы с собеседования:</p>
                           <img
                             src={`${onePost.image}`}
                             alt="Файлы с собеседования"
+                            style={{ width: '600px', height: '600px' }}
                           />
                         </Modal>
                       </>
