@@ -99,6 +99,8 @@ const editReview = async (req, res) => {
         Object.keys(req.body).forEach((key) => {
           //changing key
           reviewForUpdate[key] = req.body[key];
+          console.log(file);
+          reviewForUpdate.image = file;
         });
         await reviewForUpdate.save(); //save review
         const companyToChangeRating = await Company.findById(

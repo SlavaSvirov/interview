@@ -37,7 +37,9 @@ export default function Company() {
                 key={el._id}
               >
                 <div className={style.wrapper}>
-                  <span className={style.rating}>{el.rating} <i className='fa fa-star'></i></span>
+                  <span className={style.rating}>
+                    {el.rating} <i className="fa fa-star"></i>
+                  </span>
                 </div>
                 <p className={style.location}>
                   <div
@@ -49,7 +51,7 @@ export default function Company() {
                   {el.companyName}, {el.area}
                 </p>
                 <Link className={style.link} to={`company/${el._id}`}>
-                  Read More
+                  Подробнее
                 </Link>
               </div>
             ))
