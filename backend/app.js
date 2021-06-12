@@ -1,41 +1,96 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const path = require('path');
+const sessions = require('express-session');
+const MongoStore = require('connect-mongo');
+const dbConnect = require('./config/dbCOnnect');
+const { dbConnectionURL } = require('./config/dbConfig');
+const User = require('./database/models/user');
+const multer = require('multer');
+const moment = require('moment');
+const userRouter = require('./routes/userRouter');
+const reviewRouter = require('./routes/reviewRouter');
+const wordRouter = require('./routes/wordRouter');
+const googleRouter=require('./routes/googleRouter')
+const companyRouter = require('./routes/companyRouter')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const app = express();
+const PORT = 3001;
+const secretKey =
+  'f7f5f20ccbe470b80c02610b8c99c44f8ac4cd74abb7ef28ce8d4d2f89713f8b5f1f235f8bb3b7e9d4686f08339b595cdf53eefa77a2520f95331cd6c649589f';
+dbConnect();
 
-var app = express();
+const storageConfig = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/img');
+  },
+  filename: (req, file, cb) => {
+    const date = moment().format('DDMMYYY-HHmmss_SSS');
+    cb(null, `${date}-${file.originalname}`);
+  },
+});
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'hbs');
+app.set('cookieName', 'connect-sid');
 
-app.use(logger('dev'));
+app.use(express.static(path.join(process.env.PWD, 'public')));
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
+
+app.use(
+  sessions({
+    name: app.get('cookieName'),
+    secret: secretKey,
+    resave: true,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: dbConnectionURL,
+    }),
+    cookie: {
+      httpOnly: true,
+      maxAge: 1e3 * 86400 * 7
+    },
+  })
+);
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(async (req, res, next) => {
+  const userID = req.session?.user?.id;
+  if (userID) {
+    const currentUser = await User.findById(userID);
+    if (currentUser) {
+      res.locals.password = currentUser.password;
+      res.locals.name = currentUser.name;
+      res.locals.email = currentUser.email;
+      res.locals.id = currentUser._id;
+    }
+  }
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+  next();
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(multer({ storage: storageConfig }).single('image'));
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.post('public/img', function (req, res, next) {
+  let filedata = req.file;
+  if (!filedata) res.send('Ошибка при загрузке файла');
+  else res.send('Файл загружен');
 });
 
-module.exports = app;
+app.use('/company', companyRouter);
+app.use('/google', googleRouter)
+app.use('/user', userRouter);
+app.use('/word', wordRouter);
+app.use('/review', reviewRouter);
+
+app.listen(PORT, () => {
+  console.log(`сервер запущен на порте  ${PORT}`);
+});
