@@ -61,6 +61,7 @@ app.use(
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.resolve('../frontend/build/')))
 
 app.use(async (req, res, next) => {
   const userID = req.session?.user?.id;
