@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/NurMura88/interview/issues"
   },
-  "homepage": "https://github.com/NurMura88/interview#readme"
+  "homepage": "https://github.com/NurMura88/interview#readme",
+  "engines": {
+    "node": "16.x"
+  }
 }
