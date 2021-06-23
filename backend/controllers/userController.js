@@ -32,8 +32,10 @@ const userSignup = async (req, res) => {
 
 const userSignin = async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   if (email && password) {
     const currentUser = await User.findOne({ email });
+    console.log(currentUser);
     if (currentUser && (await bcrypt.compare(password, currentUser.password))) {
       req.session.user = {
         id: currentUser._id,
@@ -54,6 +56,7 @@ const userSignin = async (req, res) => {
 
 const getUser = async (req, res) => {
   const user = await User.find;
+  console.log(user);
   res.json(user);
 };
 
@@ -78,7 +81,7 @@ const changeAvatarBack = async (req, res) => {
   const user = await User.findByIdAndUpdate(
     id,
     {
-      avatar: `http://localhost:3001/img/${req.file.filename}`,
+      avatar: `/img/${req.file.filename}`,
     },
     { new: true }
   );
@@ -104,9 +107,10 @@ const checkUser = async (req, res) => {
 };
 
 const updateUserProfile = async (req, res) => {
-  const {name, surname, email, telegram, showContact} = req.body
-  const updateUser = await User.findByIdAndUpdate(req.params.id,
-    req.body, {new : true});
+  const { name, surname, email, telegram, showContact } = req.body;
+  const updateUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
   res.json(updateUser);
 };
 
@@ -118,5 +122,5 @@ module.exports = {
   checkUser,
   changeAvatarBack,
   getUser,
-  updateUserProfile
+  updateUserProfile,
 };

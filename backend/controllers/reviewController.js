@@ -26,7 +26,7 @@ const changeLikeReview = async (req, res) => {
 };
 
 const addNewReview = async (req, res) => {
-  const file = req.file ? `http://localhost:3001/img/${req.file.filename}` : '';
+  const file = req.file ? `/img/${req.file.filename}` : '';
   const companyName = await axios(
     `http://api.hh.ru/employers/${req.body.companyName}?User-Agent=api-test-agent`
   );
@@ -89,7 +89,7 @@ const editReview = async (req, res) => {
   let regFromInput = dat.replace(regex, '');
   if (regFromInput) {
     const file = req.file
-      ? `http://localhost:3001/img/${req.file.filename}`
+      ? `/img/${req.file.filename}`
       : '';
     if (reviewForUpdate.companyName == req.body.companyName) {
       //control if company is the same
