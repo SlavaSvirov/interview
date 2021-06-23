@@ -15,8 +15,10 @@ const wordRouter = require('./routes/wordRouter');
 const googleRouter = require('./routes/googleRouter');
 const companyRouter = require('./routes/companyRouter');
 
+require('dotenv').config();
+
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT;
 const secretKey =
   'f7f5f20ccbe470b80c02610b8c99c44f8ac4cd74abb7ef28ce8d4d2f89713f8b5f1f235f8bb3b7e9d4686f08339b595cdf53eefa77a2520f95331cd6c649589f';
 dbConnect();
