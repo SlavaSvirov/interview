@@ -9,7 +9,7 @@ function loginFetch(action) {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
-    body: JSON.stringify(action.payload),
+    body: JSON.stringify(action),
   }).then((response) => {
     if (response.status === 200) return response.json();
     return {};
@@ -18,7 +18,8 @@ function loginFetch(action) {
 
 function* loginWorker(action) {
   try {
-    const userFromServer = yield call(loginFetch, action);
+    const userFromServer = yield call(loginFetch, action.payload);
+    console.log(userFromServer);
     yield put(loginAC(userFromServer));
   } catch (e) {
     yield put({ type: 'USER_FETCH_FAILED', message: e.message });
