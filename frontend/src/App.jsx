@@ -26,7 +26,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('http://localhost:3001/user/checkAuth', {
+    fetch('user/checkAuth', {
       credentials: 'include',
     })
       .then((res) => {

@@ -21,7 +21,7 @@ export default function GoogleB() {
 
   const handleLogin = async (googleData) => {
     console.log(googleData);
-    const res = await fetch('http://localhost:3001/google', {
+    const res = await fetch('google', {
       method: 'POST',
       body: JSON.stringify({
         token: googleData.tokenId,

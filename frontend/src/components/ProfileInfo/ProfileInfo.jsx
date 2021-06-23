@@ -32,7 +32,7 @@ function ProfileInfo() {
 
   useEffect(() => {
     (async () => {
-      const newUser = await fetch(`http://localhost:3001/user/${id}/getInfo`, {
+      const newUser = await fetch(`user/${id}/getInfo`, {
         credentials: 'include',
       });
       showLoader();

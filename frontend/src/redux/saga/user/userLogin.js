@@ -3,7 +3,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { loginAC } from '../../actions/userAC';
 
 function loginFetch(action) {
-  return fetch('http://localhost:3001/user/signin', {
+  return fetch('user/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -11,8 +11,8 @@ function loginFetch(action) {
     credentials: 'include',
     body: JSON.stringify(action.payload),
   }).then((response) => {
-    if (response.status === 200) return response.json()
-    return {}
+    if (response.status === 200) return response.json();
+    return {};
   });
 }
 
@@ -30,4 +30,3 @@ function* loginWatcher() {
 }
 
 export default loginWatcher;
-

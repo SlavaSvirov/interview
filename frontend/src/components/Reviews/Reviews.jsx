@@ -25,11 +25,11 @@ const Reviews = ({ review }) => {
   const reviewLogo = (direction) => {
     switch (direction) {
       case 'Frontend':
-        return 'http://localhost:3001/img/frontStack.png';
+        return 'img/frontStack.png';
       case 'Backend':
-        return 'http://localhost:3001/img/backStack.png';
+        return 'img/backStack.png';
       case 'FullStack':
-        return 'http://localhost:3001/img/fullStack.png';
+        return 'img/fullStack.png';
       default:
         break;
     }
@@ -52,7 +52,9 @@ const Reviews = ({ review }) => {
               'background-size': 'cover',
             }}
           >
-            <span className="rating">{review?.rating} <i className='fa fa-star'></i> </span>
+            <span className="rating">
+              {review?.rating} <i className="fa fa-star"></i>{' '}
+            </span>
             <div className="date">{changeTime(review.created)}</div>
             <span className="salary">{review?.salary}</span>
           </div>
