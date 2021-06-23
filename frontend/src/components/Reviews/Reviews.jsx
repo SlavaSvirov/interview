@@ -55,7 +55,7 @@ const Reviews = ({ review }) => {
             <span className="rating">
               {review?.rating} <i className="fa fa-star"></i>{' '}
             </span>
-            <div className="date">{changeTime(review.created)}</div>
+            <div className="date">{changeTime(review?.created)}</div>
             <span className="salary">{review?.salary}</span>
           </div>
           <div className="block-title">
