@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import LoaderContextProvider from './context/LoaderContext';
-axios.defaults.baseURL = 'http://localhost:3001';
+// axios.defaults.baseURL = 'http://localhost:3001';
 
 const sagaMiddleware = createSagaMiddleware();
 
