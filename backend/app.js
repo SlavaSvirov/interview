@@ -41,7 +41,7 @@ app.use(express.static(path.join(process.env.PWD, 'public')));
 
 app.use(
   cors({
-    origin: true,
+    origin: 'https://interview-react-express.herokuapp.com/',
     credentials: true,
   })
 );
