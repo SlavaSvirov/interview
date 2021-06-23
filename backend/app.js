@@ -84,7 +84,7 @@ app.use(async (req, res, next) => {
 app.use(multer({ storage: storageConfig }).single('image'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.resolve('..frontend/build/index.html'));
+  res.sendFile(path.resolve('../frontend/build/index.html'));
 });
 
 app.post('public/img', function (req, res, next) {
