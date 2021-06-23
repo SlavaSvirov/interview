@@ -22,11 +22,10 @@ export const clear = () => {
 
 export const deleteReview = (id) => {
   return {
-    type:DELETE_ONE,
+    type: DELETE_ONE,
     payload: id,
   };
 };
-
 
 export const sortReviews = (reviews) => {
   return {
@@ -50,35 +49,33 @@ export const changeLikeReviews = (oneReview) => {
 };
 
 export const getAllFetch = () => async (dispatch) => {
-  const result = await axios('http://localhost:3001/review');
+  const result = await axios('review');
 
   dispatch(setAll(result.data));
 };
 
 export const getCurrentReviews = (id) => async (dispatch) => {
-  const result = await axios('http://localhost:3001/review');
+  const result = await axios('review');
 
   dispatch(setAll(result.data));
 };
 
 export const getLitle = (index) => async (dispatch) => {
-  const result = await axios('http://localhost:3001/review');
+  const result = await axios('review');
 
   const litle = result.data.slice(index, index + 6);
 
   dispatch(pogination(litle));
 };
 export const changeLikeFetch = (id, userId) => async (dispatch) => {
-  const result = await axios.post(`http://localhost:3001/review/${id}`, {
+  const result = await axios.post(`review/${id}`, {
     userId,
   });
   dispatch(changeLikeReviews(result.data));
 };
 
 export const deletePostFetch = (id) => async (dispatch) => {
-  const result = await axios.delete(`http://localhost:3001/review/${id}`, {
-  });
+  const result = await axios.delete(`review/${id}`, {});
   console.log(result.data);
   dispatch(deleteReview(id));
 };
-

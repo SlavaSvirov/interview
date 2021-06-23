@@ -51,7 +51,7 @@ export const loginAC = (user) => {
 };
 
 export const logoutAC = () => async (dispatch) => {
-  await fetch('http://localhost:3001/user/logout', {
+  await fetch('user/logout', {
     credentials: 'include',
   });
   dispatch(logout());
@@ -88,7 +88,7 @@ export const editProfileUser = (user) => {
 
 export const editProfileFetch =
   (id, name, surname, email, telegram, showContact) => async (dispatch) => {
-    const editProfile = await fetch(`http://localhost:3001/user/${id}`, {
+    const editProfile = await fetch(`user/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, surname, telegram, email, showContact }),
@@ -102,7 +102,7 @@ export const changeAvatarFetch = (file, id) => async (dispatch) => {
   formData.append('image', file);
   formData.append('id', id);
 
-  const response = await fetch('http://localhost:3001/user/changeAvatar', {
+  const response = await fetch('user/changeAvatar', {
     method: 'PATCH',
     credentials: 'include',
     body: formData,
@@ -113,7 +113,7 @@ export const changeAvatarFetch = (file, id) => async (dispatch) => {
 };
 
 export const getUserFetch = (id) => async (dispatch) => {
-  const newUser = await fetch('http://localhost:3001/user', {
+  const newUser = await fetch('user', {
     method: 'GET',
     credentials: 'include',
   });

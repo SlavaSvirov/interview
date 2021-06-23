@@ -9,7 +9,7 @@ export const getCurrentCompany = (id) => {
 };
 
 export const currentFetch = (id) => async (dispatch) => {
-  const result = await fetch(`http://localhost:3001/company/${id}`);
+  const result = await fetch(`company/${id}`);
 
   const currentSearchromServer = await result.json();
 
@@ -24,7 +24,7 @@ export const setCurrentCompany = (id) => {
 };
 
 export const setCompanyFetch = (id, userId) => async (dispatch) => {
-  const result = await axios.patch(`http://localhost:3001/company/edit/${id}`, {
+  const result = await axios.patch(`edit/${id}`, {
     userId,
   });
 
