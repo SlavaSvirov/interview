@@ -72,7 +72,7 @@ const EditReview = () => {
     try {
       const response = await axios({
         method: 'PATCH',
-        url: `/review/edit/${id}`,
+        url: `/api/review/edit/${id}`,
         withCredentials: true,
         data: formData,
         headers: {

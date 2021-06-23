@@ -3,7 +3,7 @@ import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import querystring from 'querystring';
 import { useHistory } from 'react-router-dom';
-import './addReview.css'
+import './addReview.css';
 
 import {
   Form,
@@ -71,7 +71,7 @@ const AddReview = () => {
     }
     const response = await axios({
       method: 'POST',
-      url: '/review',
+      url: '/api/review',
       withCredentials: true,
       data: formData,
       headers: {
@@ -104,7 +104,7 @@ const AddReview = () => {
       });
       showLoader();
       axios
-        .post('/word', { str })
+        .post('/api/word', { str })
         .then((response) => response.data)
         .then((d) => {
           if (currentValue === value) {
@@ -149,165 +149,176 @@ const AddReview = () => {
 
   return (
     <>
-    <section className='addReviewsSection'>
-      <div className='container container-main'>
-      <Title level={2} className='addReviewTitle'>Создай новый отзыв!</Title>
-      <Divider></Divider>
+      <section className="addReviewsSection">
+        <div className="container container-main">
+          <Title level={2} className="addReviewTitle">
+            Создай новый отзыв!
+          </Title>
+          <Divider></Divider>
 
-      <Form
-        name="validate_other"
-        {...formItemLayout}
-        initialValues={{ rating: 3 }}
-        onFinish={(e) => onFinish(e)}
-      >
-        <Form.Item
-          name="companyName"
-          label="Название компании"
-          rules={[
-            {
-              required: true,
-              message: 'Please select your company!',
-              type: 'string',
-            },
-          ]}
-        >
-          <Select
-            showSearch
-            value={value}
-            placeholder="Название компании"
-            style={{ width: '100%',}}
-            defaultActiveFirstOption={false}
-            showArrow={false}
-            filterOption={false}
-            onSearch={handleSearch}
-            onChange={handleChange}
-            notFoundContent={null}
-            optionLabelProp="label"
+          <Form
+            name="validate_other"
+            {...formItemLayout}
+            initialValues={{ rating: 3 }}
+            onFinish={(e) => onFinish(e)}
           >
-            {data.map((d) => (
-              <Option key={d.value} label={d.text} >
-                <div>
-                  <img alt="No logo" src={d.logo} width="60px" height="30px" object-flit='cover' />
-                  {d.text}
-                </div>
-              </Option>
-            ))}
-            <span>{loader ? <LoaderForSelect /> : null}</span>
-          </Select>
-        </Form.Item>
+            <Form.Item
+              name="companyName"
+              label="Название компании"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select your company!',
+                  type: 'string',
+                },
+              ]}
+            >
+              <Select
+                showSearch
+                value={value}
+                placeholder="Название компании"
+                style={{ width: '100%' }}
+                defaultActiveFirstOption={false}
+                showArrow={false}
+                filterOption={false}
+                onSearch={handleSearch}
+                onChange={handleChange}
+                notFoundContent={null}
+                optionLabelProp="label"
+              >
+                {data.map((d) => (
+                  <Option key={d.value} label={d.text}>
+                    <div>
+                      <img
+                        alt="No logo"
+                        src={d.logo}
+                        width="60px"
+                        height="30px"
+                        object-flit="cover"
+                      />
+                      {d.text}
+                    </div>
+                  </Option>
+                ))}
+                <span>{loader ? <LoaderForSelect /> : null}</span>
+              </Select>
+            </Form.Item>
 
-        <Form.Item
-          label="Направление"
-          name="direction"
-          rules={[
-            {
-              required: true,
-              message: 'Please select your Direction!',
-            },
-          ]}
-        >
-          <Select
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            placeholder="Выбери направление"
-          >
-            <Option value="Frontend">Front End</Option>
-            <Option value="Backend">Back End</Option>
-            <Option value="FullStack">Full Stack</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
-          rules={[
-            {
-              required: true,
-              message: 'Пожалуйста введите вакансию, на которую претендовали',
-            },
-          ]}
-          name="position"
-          label="Должность"
-        >
-          <Input placeholder="Писать сюда" />
-        </Form.Item>
-        <Form.Item name="salary" label="Зарплата (рублей)">
+            <Form.Item
+              label="Направление"
+              name="direction"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select your Direction!',
+                },
+              ]}
+            >
+              <Select
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+                placeholder="Выбери направление"
+              >
+                <Option value="Frontend">Front End</Option>
+                <Option value="Backend">Back End</Option>
+                <Option value="FullStack">Full Stack</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              rules={[
+                {
+                  required: true,
+                  message:
+                    'Пожалуйста введите вакансию, на которую претендовали',
+                },
+              ]}
+              name="position"
+              label="Должность"
+            >
+              <Input placeholder="Писать сюда" />
+            </Form.Item>
+            <Form.Item name="salary" label="Зарплата (рублей)">
+              <Slider
+                initialValues={50000}
+                defaultlValues={50000}
+                min={50000}
+                max={150000}
+                step={10000}
+                tooltipVisible={false}
+                marks={{
+                  50000: 50000,
+                  60000: 60000,
+                  70000: 70000,
+                  80000: 80000,
+                  90000: 90000,
+                  100000: 100000,
+                  110000: 110000,
+                  120000: 120000,
+                  130000: 130000,
+                  140000: 140000,
+                  150000: 150000,
+                }}
+              />
+            </Form.Item>
+            <Form.Item name="hrName" label="Имя HR">
+              <Input placeholder="Введи имя" />
+            </Form.Item>
 
-          <Slider
-            initialValues={50000}
-            defaultlValues={50000}
-            min={50000}
-            max={150000}
-            step={10000}
-            tooltipVisible={false}
-            marks={{
-              50000: 50000,
-              60000: 60000,
-              70000: 70000,
-              80000: 80000,
-              90000: 90000,
-              100000: 100000,
-              110000: 110000,
-              120000: 120000,
-              130000: 130000,
-              140000: 140000,
-              150000: 150000,
-            }}
-          />
-        </Form.Item>
-        <Form.Item name="hrName" label="Имя HR">
-          <Input placeholder="Введи имя" />
-        </Form.Item>
+            <Form.Item name="questions" label="Вопросы с собеседования">
+              <Input.TextArea placeholder="Писать сюда" />
+            </Form.Item>
+            <Form.Item name="codFile" label="Ссылка на код">
+              <Input.TextArea placeholder="Write here" />
+            </Form.Item>
+            <Form.Item
+              name="impression"
+              label="Общее впечатление о собеседовании"
+            >
+              <Input.TextArea placeholder="Писать сюда" />
+            </Form.Item>
 
-        <Form.Item name="questions" label="Вопросы с собеседования">
-          <Input.TextArea placeholder="Писать сюда" />
-        </Form.Item>
-        <Form.Item name="codFile" label="Ссылка на код">
-          <Input.TextArea placeholder="Write here" />
-        </Form.Item>
-        <Form.Item name="impression" label="Общее впечатление о собеседовании">
-          <Input.TextArea placeholder="Писать сюда" />
-        </Form.Item>
+            <Form.Item name="setteled" label="Результат">
+              <Radio.Group>
+                <Radio value="true">Устроился</Radio>
+                <Radio selected value="false">
+                  Не устроился
+                </Radio>
+              </Radio.Group>
+            </Form.Item>
 
-        <Form.Item name="setteled" label="Результат">
-          <Radio.Group>
-            <Radio value="true">Устроился</Radio>
-            <Radio selected value="false">
-              Не устроился
-            </Radio>
-          </Radio.Group>
-        </Form.Item>
+            <Form.Item name="rating" label="Общая оценка">
+              <Rate
+                initialValues={3}
+                defaultValue={3}
+                character={({ index }) => customIcons[index + 1]}
+              />
+            </Form.Item>
+            <Form.Item
+              name="image"
+              label="Загрузить файлы с собеседования"
+              valuePropName="image"
+              getValueFromEvent={normFile}
+            >
+              <input type="file" multiple />
+            </Form.Item>
 
-        <Form.Item name="rating" label="Общая оценка">
-          <Rate
-            initialValues={3}
-            defaultValue={3}
-            character={({ index }) => customIcons[index + 1]}
-          />
-        </Form.Item>
-        <Form.Item
-          name="image"
-          label="Загрузить файлы с собеседования"
-          valuePropName="image"
-          getValueFromEvent={normFile}
-        >
-          <input type="file" multiple />
-        </Form.Item>
-
-        <Divider plain></Divider>
-        <Form.Item
-          wrapperCol={{
-            span: 12,
-            offset: 6,
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            Добавить отзыв
-          </Button>
-        </Form.Item>
-      </Form>
-      </div>
-    </section>
+            <Divider plain></Divider>
+            <Form.Item
+              wrapperCol={{
+                span: 12,
+                offset: 6,
+              }}
+            >
+              <Button type="primary" htmlType="submit">
+                Добавить отзыв
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+      </section>
     </>
   );
 };

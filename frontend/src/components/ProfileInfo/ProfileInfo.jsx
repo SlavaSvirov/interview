@@ -32,7 +32,7 @@ function ProfileInfo() {
 
   useEffect(() => {
     (async () => {
-      const newUser = await fetch(`user/${id}/getInfo`, {
+      const newUser = await fetch(`/api/user/${id}/getInfo`, {
         credentials: 'include',
       });
       showLoader();
@@ -95,18 +95,15 @@ function ProfileInfo() {
             <span className="name">
               {infoFromUser.name} {infoFromUser.surname}
             </span>
-            {
-              infoFromUser.showContact === true
-                ?
-                <span className='fontFamily'>
-                  <i className='fab fa-telegram'></i> {infoFromUser.telegram}
-                </span>
-                :
-                <span className='fontFamily'>
-                  <i className='fab fa-telegram'>
-                  </i> Пользователь скрыл контакты
-                </span>
-            }
+            {infoFromUser.showContact === true ? (
+              <span className="fontFamily">
+                <i className="fab fa-telegram"></i> {infoFromUser.telegram}
+              </span>
+            ) : (
+              <span className="fontFamily">
+                <i className="fab fa-telegram"></i> Пользователь скрыл контакты
+              </span>
+            )}
 
             {user?._id == id && (
               <button
@@ -118,14 +115,12 @@ function ProfileInfo() {
             )}
             {modalActive && (
               <Modal
-
                 active={modalActive}
                 setActive={setModalActive}
                 idUser={idUserForUpdate}
               />
             )}
           </div>
-
         </div>
         <div className="reviews">
           <div className="sortWrap">

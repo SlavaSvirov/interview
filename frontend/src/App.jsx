@@ -26,7 +26,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('user/checkAuth', {
+    fetch('/api/user/checkAuth', {
       credentials: 'include',
     })
       .then((res) => {
