@@ -12,8 +12,8 @@ const moment = require('moment');
 const userRouter = require('./routes/userRouter');
 const reviewRouter = require('./routes/reviewRouter');
 const wordRouter = require('./routes/wordRouter');
-const googleRouter=require('./routes/googleRouter')
-const companyRouter = require('./routes/companyRouter')
+const googleRouter = require('./routes/googleRouter');
+const companyRouter = require('./routes/companyRouter');
 
 const app = express();
 const PORT = 3001;
@@ -34,6 +34,7 @@ const storageConfig = multer.diskStorage({
 app.set('view engine', 'hbs');
 app.set('cookieName', 'connect-sid');
 
+app.use(express.static(path.join('../frontend/build')));
 app.use(express.static(path.join(process.env.PWD, 'public')));
 
 app.use(
@@ -54,14 +55,14 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      maxAge: 1e3 * 86400 * 7
+      maxAge: 1e3 * 86400 * 7,
     },
   })
 );
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.resolve('../frontend/build/')))
+app.use(express.static(path.resolve('../frontend/build/')));
 
 app.use(async (req, res, next) => {
   const userID = req.session?.user?.id;
@@ -81,8 +82,8 @@ app.use(async (req, res, next) => {
 app.use(multer({ storage: storageConfig }).single('image'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve('..frontend/build/index.html'))
-})
+  res.sendFile(path.resolve('..frontend/build/index.html'));
+});
 
 app.post('public/img', function (req, res, next) {
   let filedata = req.file;
@@ -91,7 +92,7 @@ app.post('public/img', function (req, res, next) {
 });
 
 app.use('/company', companyRouter);
-app.use('/google', googleRouter)
+app.use('/google', googleRouter);
 app.use('/user', userRouter);
 app.use('/word', wordRouter);
 app.use('/review', reviewRouter);
