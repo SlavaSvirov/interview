@@ -83,7 +83,7 @@ app.use(async (req, res, next) => {
 
 app.use(multer({ storage: storageConfig }).single('image'));
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.resolve('..frontend/build/index.html'));
 });
 
