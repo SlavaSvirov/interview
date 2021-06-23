@@ -15,7 +15,7 @@ export const all = (companies) => {
 };
 
 export const allFetch = () => async (dispatch) => {
-  const com = await fetch('company');
+  const com = await fetch('/company');
   const allCompanies = await com.json();
 
   dispatch(all(allCompanies));

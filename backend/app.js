@@ -83,7 +83,7 @@ app.use(async (req, res, next) => {
 
 app.use(multer({ storage: storageConfig }).single('image'));
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.resolve('../frontend/build/index.html'));
 });
 
@@ -93,11 +93,11 @@ app.post('public/img', function (req, res, next) {
   else res.send('Файл загружен');
 });
 
-app.use('/company', companyRouter);
-app.use('/google', googleRouter);
-app.use('/user', userRouter);
-app.use('/word', wordRouter);
-app.use('/review', reviewRouter);
+app.use('/api/company', companyRouter);
+app.use('/api/google', googleRouter);
+app.use('/api/user', userRouter);
+app.use('/api/word', wordRouter);
+app.use('/api/review', reviewRouter);
 
 app.listen(PORT, () => {
   console.log(`сервер запущен на порте  ${PORT}`);
