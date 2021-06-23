@@ -15,7 +15,7 @@ export const all = (companies) => {
 };
 
 export const allFetch = () => async (dispatch) => {
-  const com = await fetch('/company');
+  const com = await fetch('/api/company');
   const allCompanies = await com.json();
 
   dispatch(all(allCompanies));
@@ -23,7 +23,7 @@ export const allFetch = () => async (dispatch) => {
 
 export const getAllFetch = (text) => async (dispatch) => {
   const myText = text.toLowerCase();
-  const result = await fetch('/company', {
+  const result = await fetch('/api/company', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text }),

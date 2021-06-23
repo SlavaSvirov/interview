@@ -3,7 +3,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { SAGA_REGISTER } from '../../types/types';
 
 function registerFetch(action) {
-  return fetch('user/signup', {
+  return fetch('/api/user/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { loginAC } from '../../actions/userAC';
 
 function loginFetch(action) {
-  return fetch('user/signin', {
+  return fetch('/api/user/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

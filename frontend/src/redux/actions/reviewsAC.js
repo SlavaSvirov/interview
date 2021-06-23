@@ -49,33 +49,33 @@ export const changeLikeReviews = (oneReview) => {
 };
 
 export const getAllFetch = () => async (dispatch) => {
-  const result = await axios('review');
+  const result = await axios('/api/review');
 
   dispatch(setAll(result.data));
 };
 
 export const getCurrentReviews = (id) => async (dispatch) => {
-  const result = await axios('review');
+  const result = await axios('/api/review');
 
   dispatch(setAll(result.data));
 };
 
 export const getLitle = (index) => async (dispatch) => {
-  const result = await axios('review');
+  const result = await axios('/api/review');
 
   const litle = result.data.slice(index, index + 6);
 
   dispatch(pogination(litle));
 };
 export const changeLikeFetch = (id, userId) => async (dispatch) => {
-  const result = await axios.post(`review/${id}`, {
+  const result = await axios.post(`/api/review/${id}`, {
     userId,
   });
   dispatch(changeLikeReviews(result.data));
 };
 
 export const deletePostFetch = (id) => async (dispatch) => {
-  const result = await axios.delete(`review/${id}`, {});
+  const result = await axios.delete(`/api/review/${id}`, {});
   console.log(result.data);
   dispatch(deleteReview(id));
 };
