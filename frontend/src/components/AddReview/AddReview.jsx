@@ -132,7 +132,7 @@ const AddReview = () => {
         })
         .then(() => hideLoader());
     }
-    timeout = setTimeout(fake, 300);
+    timeout = setTimeout(fake, 100);
   }
 
   const handleSearch = (value) => {
