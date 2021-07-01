@@ -78,7 +78,6 @@ const AddReview = () => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(response.data);
     history.push(`/user/${user._id}`);
   };
 

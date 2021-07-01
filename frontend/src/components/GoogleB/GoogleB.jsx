@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
 import GoogleLogin from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -20,8 +19,7 @@ export default function GoogleB() {
   }, [isAuth]);
 
   const handleLogin = async (googleData) => {
-    console.log(googleData);
-    const res = await fetch('google', {
+    const res = await fetch('/api/google', {
       method: 'POST',
       body: JSON.stringify({
         token: googleData.tokenId,

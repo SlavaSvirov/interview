@@ -38,7 +38,6 @@ app.set('cookieName', 'connect-sid');
 
 app.use(express.static(path.join('../frontend/build')));
 app.use(express.static(path.join(process.env.PWD, 'public')));
-
 app.use(
   cors({
     origin: 'https://interview-react-express.herokuapp.com/',
